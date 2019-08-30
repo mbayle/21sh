@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/08/30 05:34:44 by mabayle          ###   ########.fr        #
+#    Updated: 2019/08/30 05:40:54 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,12 @@ endif
 SRC_PATH	:=	./src/
 OBJ_PATH	:=	./obj/
 
-SRC		:=	main.c \
-			lexer.c \
-			list_utils.c \
-			utils.c \
-			type_token.c \
-			print_debug
+SRC		:=	lexer/main.c \
+			lexer/lexer.c \
+			lexer/list_utils.c \
+			lexer/utils.c \
+			lexer/type_token.c \
+			lexer/print_debug.c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))
