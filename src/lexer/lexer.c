@@ -6,9 +6,92 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/08/21 02:16:23 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/08/30 05:16:40 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lexer.h"
 
+int		find_end(int i, char *input)
+{
+	while (input[i] && input[i] != '\n' && !ft_is_separator(input[i]) && !check_operator(input + i))
+	{
+		if (input[i] == '\\')
+			i++;
+		if (input[i] == '\'' || input[i] == '"')
+			i = quote_case(i, input);
+		if (input[i])
+			i++;
+	}
+	return (i);
+}
+
+int		end_case_index(t_lex *lex, char *input, int *io_nbr)
+{
+	int		i;
+	t_lex	*last;
+
+	i = 0;
+	if (input[i] == '\n')
+		while(input[i] == '\n')
+			i++;
+	else if (ft_isdigit(input[i]) == 1)
+	{
+		while (ft_isdigit(input[i]) == 1)
+			i++;
+		check_redirection(input + i) >= 1 ? *io_nbr = 1 : find_end(i, input);
+	}
+	else if ((i = check_operator(input)))
+		;
+	else if (*input == '-')
+	{
+		last = lex_last(lex);
+		i = last && (last->operator == GREAT_AND || last->operator == LESS_AND) ? 1 :
+			find_end(i, input);
+	}
+	else
+		i = find_end(i, input);
+	return (i);
+}
+
+void	ft_lexer(t_lex **lex, char *input)
+{
+	int		i;
+	int		io_nbr;
+	int		assignword;
+	char	*token;
+	t_lex	*new;
+	
+	if (!lex || !input)
+		return ;
+	assignword = 0;
+	while (*input)
+	{
+		while (ft_is_separator(*input) == 1)
+			input++;
+		io_nbr = 0;
+		i = end_case_index(*lex, input, &io_nbr);
+		if (i != 0)
+		{
+			token = ft_strsub(input, 0 , i);
+			new = list_new(token);
+			token_type(new, io_nbr, &assignword);
+			list_add(lex, new);
+			ft_strdel(&token);
+		}
+		else
+			i++;
+		input = input + i;
+	}
+	/*****  DEBUG *****/
+	while ((*lex))
+	{
+		ft_putendl("[DEBUG][FT_LEXER][VALUE]");
+		ft_putstr("   VALUE DU TOKEN => ");
+		ft_putendl((*lex)->value);
+		ft_putstr("   TYPE DE TOKEN => ");
+		ft_print_debug(lex);
+		(*lex) = (*lex)->next;
+	}
+	/*****  FIN DEBUG ******/
+}

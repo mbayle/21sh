@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabayle <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/08/13 18:54:23 by mabayle          ###   ########.fr        #
+#    Updated: 2019/08/30 05:34:44 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,13 @@ endif
 SRC_PATH	:=	./src/
 OBJ_PATH	:=	./obj/
 
-SRC		:=	
+SRC		:=	main.c \
+			lexer.c \
+			list_utils.c \
+			utils.c \
+			type_token.c \
+			print_debug
+
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))
 
