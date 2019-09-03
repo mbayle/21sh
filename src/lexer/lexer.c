@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/08/30 05:16:40 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/03 05:40:17 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int		find_end(int i, char *input)
 {
-	while (input[i] && input[i] != '\n' && !ft_is_separator(input[i]) && !check_operator(input + i))
+	while (input[i] && input[i] != '\n' && !ft_is_separator(input[i])
+			&& !check_operator(input + i))
 	{
 		if (input[i] == '\\')
 			i++;
@@ -33,7 +34,7 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 
 	i = 0;
 	if (input[i] == '\n')
-		while(input[i] == '\n')
+		while (input[i] == '\n')
 			i++;
 	else if (ft_isdigit(input[i]) == 1)
 	{
@@ -46,8 +47,8 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 	else if (*input == '-')
 	{
 		last = lex_last(lex);
-		i = last && (last->operator == GREAT_AND || last->operator == LESS_AND) ? 1 :
-			find_end(i, input);
+		i = last && (last->operator == GREAT_AND || last->operator == LESS_AND)
+				? 1 : find_end(i, input);
 	}
 	else
 		i = find_end(i, input);
@@ -61,10 +62,10 @@ void	ft_lexer(t_lex **lex, char *input)
 	int		assignword;
 	char	*token;
 	t_lex	*new;
-	
+
+	assignword = 0;
 	if (!lex || !input)
 		return ;
-	assignword = 0;
 	while (*input)
 	{
 		while (ft_is_separator(*input) == 1)
@@ -73,15 +74,13 @@ void	ft_lexer(t_lex **lex, char *input)
 		i = end_case_index(*lex, input, &io_nbr);
 		if (i != 0)
 		{
-			token = ft_strsub(input, 0 , i);
+			token = ft_strsub(input, 0, i);
 			new = list_new(token);
 			token_type(new, io_nbr, &assignword);
 			list_add(lex, new);
 			ft_strdel(&token);
 		}
-		else
-			i++;
-		input = input + i;
+		input = input + i++;
 	}
 	/*****  DEBUG *****/
 	while ((*lex))

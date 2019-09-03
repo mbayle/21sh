@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:17:16 by mabayle           #+#    #+#             */
-/*   Updated: 2019/08/30 05:18:02 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/03 05:25:34 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_lex	*list_new(char *input)
 	t_lex	*new;
 
 	if (!(new = (t_lex *)malloc(sizeof(*new))))
-		return NULL;
+		return (NULL);
 	if (input == NULL)
 		new->value = NULL;
 	else
@@ -30,7 +30,7 @@ t_lex	*list_new(char *input)
 	return (new);
 }
 
-void		list_add(t_lex **alst, t_lex *new)
+void	list_add(t_lex **alst, t_lex *new)
 {
 	t_lex		*tmp;
 

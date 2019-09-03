@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2019/08/30 05:22:04 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/03 05:32:47 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int		check_operator(char *input)
 		|| !ft_strncmp(input, "&&", 2) || !ft_strncmp(input, "<>", 2)
 		|| !ft_strncmp(input, ">|", 2))
 		return (2);
-	else if (*input == '|' || *input == ';' || *input == '>' || *input == '<' || *input == '&')
+	else if (*input == '|' || *input == ';' || *input == '>'
+				|| *input == '<' || *input == '&')
 		return (1);
 	else if (!ft_strncmp(input, "<<-", 3))
 		return (3);
@@ -55,7 +56,7 @@ int		quote_case(int i, char *input)
 		i++;
 		while (input[i] && input[i] != 34)
 		{
-			if (input[i] == 92 && input[i + 1]) // BACKSLASH
+			if (input[i] == 92 && input[i + 1])
 				i = i + 2;
 			else
 				i++;

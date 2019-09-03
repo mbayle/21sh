@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:19:31 by mabayle           #+#    #+#             */
-/*   Updated: 2019/08/30 05:20:31 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/03 05:40:14 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	token_type(t_lex *new, int io_nbr, int *assignword)
 	new->operator = 0;
 	is_operator(new);
 	is_redirection(new);
-	if (*assignword == 0)
+	if (assignword == 0)
 	{
 		is_assignword(new);
 		if (new->token != ASSIGN_WORD)
