@@ -35,18 +35,24 @@ INCS = $(addprefix -I, $(H_PATH))
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@echo ""
+	@echo "\033[0;32m LIBFT BUILD DONE \033[0m"
+	@echo ""
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
 
 $(O_PATH)%.o: $(C_PATH)%.c
-	mkdir -p objs
-	$(CC) $(FLAGS) $(INCS) -o $@ -c $<
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Compiling libft :\033[0m" $<
+	@mkdir -p objs
+	@$(CC) $(FLAGS) $(INCS) -o $@ -c $<
 
 clean :
-	rm -rf $(OBJS)
-	rm -rf $(O_PATH)
+	@rm -rf $(OBJS)
+	@rm -rf $(O_PATH)
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Deleted all .o\033[0m"
 
 fclean : clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Deleted libft.a\033[0m"
 
 re : fclean all
