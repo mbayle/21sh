@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:21:06 by mabayle           #+#    #+#             */
-/*   Updated: 2019/08/30 05:31:52 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/07 05:31:20 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int		main(int argc, char **argv);
 ** LEXER.C
 */
 void	ft_lexer(t_lex **lex, char *input);
+void	valid(t_lex **lex, char *input, int io, int aword, int i);
+void	invalid(t_lex **lex);
 int		end_case_index(t_lex *lex, char *input, int *io_nbr);
 int		find_end(int i, char *input);
 
@@ -109,6 +111,8 @@ int		find_end(int i, char *input);
 t_lex	*list_new(char *input);
 void	list_add(t_lex **alst, t_lex *new);
 t_lex	*lex_last(t_lex *lst);
+void	lexdel(t_lex **alst);
+void	lex_suppr_elem(t_lex **elem);
 
 /*
 ** UTILS.C

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:17:16 by mabayle           #+#    #+#             */
-/*   Updated: 2019/09/03 05:25:34 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/07 05:13:40 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,28 @@ t_lex	*lex_last(t_lex *lst)
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
+}
+
+void	lex_suppr_elem(t_lex **elem)
+{
+	t_lex	*suppr;
+
+	suppr = *elem;
+	*elem = (*elem)->next;
+	ft_strdel(&suppr->value);
+	ft_strdel(&suppr->hdoc);
+	suppr->next = NULL;
+	free(suppr);
+}
+
+void	lexdel(t_lex **alst)
+{
+	t_lex	*current;
+
+	if (!alst)
+		return ;
+	current = *alst;
+	while (current)
+		lex_suppr_elem(&(current));
+	*alst = NULL;
 }

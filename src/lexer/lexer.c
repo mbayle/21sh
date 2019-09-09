@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/09/03 05:40:17 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/09 01:58:08 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int		find_end(int i, char *input)
 		if (input[i] == '\\')
 			i++;
 		if (input[i] == '\'' || input[i] == '"')
+		{
 			i = quote_case(i, input);
+			break;
+		}	
 		if (input[i])
 			i++;
 	}
@@ -55,13 +58,25 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 	return (i);
 }
 
+void	valid(t_lex **lex, char *input, int io, int aword, int i)
+{
+	char	*token;
+	t_lex	*new;
+
+	token = ft_strsub(input, 0, i);
+	new = list_new(token);
+	token_type(new, io, &aword);
+	list_add(lex, new);
+	ft_strdel(&token);
+}
+
+#include <stdio.h>
+
 void	ft_lexer(t_lex **lex, char *input)
 {
 	int		i;
 	int		io_nbr;
 	int		assignword;
-	char	*token;
-	t_lex	*new;
 
 	assignword = 0;
 	if (!lex || !input)
@@ -72,16 +87,17 @@ void	ft_lexer(t_lex **lex, char *input)
 			input++;
 		io_nbr = 0;
 		i = end_case_index(*lex, input, &io_nbr);
-		if (i != 0)
+		if (i != -1)
+			valid(lex, input, io_nbr, assignword, i);
+		else
 		{
-			token = ft_strsub(input, 0, i);
-			new = list_new(token);
-			token_type(new, io_nbr, &assignword);
-			list_add(lex, new);
-			ft_strdel(&token);
+			ft_putendl("Synthax Error");
+			lexdel(lex);
+			break;
 		}
 		input = input + i++;
 	}
+	
 	/*****  DEBUG *****/
 	while ((*lex))
 	{

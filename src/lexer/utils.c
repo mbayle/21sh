@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2019/09/03 05:32:47 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/09 01:57:31 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,23 @@
 
 int		check_redirection(char *input)
 {
-	if (!ft_strncmp(input, ">>", 2) || !ft_strncmp(input, "<<", 2)
+	if (!ft_strncmp(input, "<<-", 3))
+		return (3);
+	else if (!ft_strncmp(input, ">>", 2) || !ft_strncmp(input, "<<", 2)
 		|| !ft_strncmp(input, "<&", 2) || !ft_strncmp(input, ">&", 2)
 		|| !ft_strncmp(input, "<>", 2) || !ft_strncmp(input, ">|", 2))
 		return (2);
 	else if (*input == '>' || *input == '<')
 		return (1);
-	else if (!ft_strncmp(input, "<<-", 3))
-		return (3);
 	else
 		return (0);
 }
 
 int		check_operator(char *input)
 {
-	if (!ft_strncmp(input, ";;", 2) || !ft_strncmp(input, ">>", 2)
+	if (!ft_strncmp(input, "<<-", 3))
+		return (3);
+	else if (!ft_strncmp(input, ";;", 2) || !ft_strncmp(input, ">>", 2)
 		|| !ft_strncmp(input, "<<", 2) || !ft_strncmp(input, ">&", 2)
 		|| !ft_strncmp(input, "<&", 2) || !ft_strncmp(input, "||", 2)
 		|| !ft_strncmp(input, "&&", 2) || !ft_strncmp(input, "<>", 2)
@@ -37,11 +39,11 @@ int		check_operator(char *input)
 	else if (*input == '|' || *input == ';' || *input == '>'
 				|| *input == '<' || *input == '&')
 		return (1);
-	else if (!ft_strncmp(input, "<<-", 3))
-		return (3);
 	else
 		return (0);
 }
+
+#include <stdio.h>
 
 int		quote_case(int i, char *input)
 {
@@ -50,6 +52,7 @@ int		quote_case(int i, char *input)
 		i++;
 		while (input[i] && input[i] != '\'')
 			i++;
+		input[i] != 39 ? i = -1 : i++;
 	}
 	if (input[i] == '"')
 	{
@@ -61,6 +64,7 @@ int		quote_case(int i, char *input)
 			else
 				i++;
 		}
+		input[i] != 34 ? i = -1 : i++;
 	}
 	return (i);
 }
