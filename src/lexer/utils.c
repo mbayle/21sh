@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2019/09/09 01:57:31 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/09 02:13:25 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int		check_operator(char *input)
 	else
 		return (0);
 }
-
-#include <stdio.h>
 
 int		quote_case(int i, char *input)
 {

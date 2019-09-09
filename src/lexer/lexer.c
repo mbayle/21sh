@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/09/09 01:58:08 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/09/09 02:13:18 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	valid(t_lex **lex, char *input, int io, int aword, int i)
 	list_add(lex, new);
 	ft_strdel(&token);
 }
-
-#include <stdio.h>
 
 void	ft_lexer(t_lex **lex, char *input)
 {
