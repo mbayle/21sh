@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/09/03 05:55:43 by mabayle          ###   ########.fr        #
+#    Updated: 2019/10/29 16:45:01 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ ifeq ($(DEBUG), 1)
 endif
 
 SRC_PATH	:=	./src/
-OBJ_PATH	:=	./obj/
+OBJ_PATH	:=	./.obj/
 
 SRC		:=	lexer/main.c \
 			lexer/lexer.c \

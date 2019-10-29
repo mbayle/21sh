@@ -6,7 +6,7 @@ FLAGS = -Wall -Wextra -Werror
 
 C_PATH = ./srcs/
 
-O_PATH = ./objs/
+O_PATH = ./.objs/
 
 H_PATH = ./includes/
 
