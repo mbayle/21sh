@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/10/29 16:45:01 by mabayle          ###   ########.fr        #
+#    Updated: 2019/10/30 03:05:19 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRC		:=	lexer/main.c \
 			lexer/list_utils.c \
 			lexer/utils.c \
 			lexer/type_token.c \
-			lexer/print_debug.c
+			lexer/print_debug.c \
+			parser/parser.c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))
