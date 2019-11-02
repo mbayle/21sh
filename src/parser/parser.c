@@ -6,28 +6,36 @@
 /*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 01:53:33 by mabayle           #+#    #+#             */
-/*   Updated: 2019/10/30 04:16:59 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/11/02 01:32:06 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parser.h"
 
+
+
 int	check_error(t_lex *lex)
 {
-	t_lex *nextok;
-
+	t_lex 	*nextok;
+	int	i;
+	
+	i = 0;
 	if (lex && lex->token == CONTROL_OPE)
-		return (-1);
+		return (i);
 	while (lex)
 	{
 		if (lex->operator == DSEMIC || lex->operator == CLOBBER
 			|| lex->operator == LESS_GREAT 
 			|| lex->operator == DLESS_DASH)
-			return (-1);
+			return (i);
 		if (lex->token == REDIR_OPE && lex->next 
 			&& lex->next->token != WORD)
-			return (-1);
+			return (i);
 		if (lex->token == CONTROL_OPE && )
+		
+
+		lex = lex->next;
+		i++;
 	}
 }
 
