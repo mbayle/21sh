@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:21:06 by mabayle           #+#    #+#             */
-/*   Updated: 2019/09/07 05:31:20 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/11/07 02:45:56 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ typedef struct 			s_lex
 typedef struct 			s_ast
 {
 	struct s_lex		*lex;
-	struct s_21sh		*inputhell;
+	char				*value;
+	int					priority;
 	struct s_ast		*left;
 	struct s_ast		*right;
 }						t_ast;
@@ -82,6 +83,7 @@ typedef struct			s_21sh
 {
 	char				*line;
 	t_lex				*lex;
+	int					lex_size;
 	t_ast				*ast;
 }						t_21sh;
 

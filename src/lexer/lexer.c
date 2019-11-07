@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/09/09 04:27:24 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/11/07 02:39:18 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ void	ft_lexer(t_lex **lex, char *input)
 		io_nbr = 0;
 		i = end_case_index(*lex, input, &io_nbr);
 		if (i != -1)
+		{
 			valid(lex, input, io_nbr, assignword, i);
+			g_shell->lex_size++;
+		}	
 		else
 		{
 			ft_putendl("Synthax Error");
@@ -95,11 +98,11 @@ void	ft_lexer(t_lex **lex, char *input)
 		}
 		input = input + i++;
 	}
-	
+
 	/*****  DEBUG *****/
 	while ((*lex))
 	{
-		ft_putendl("[DEBUG][FT_LEXER][VALUE]");
+		ft_putendl("[DEBUG][LEXER.C][FT_LEXER][VALUE]");
 		ft_putstr("   VALUE DU TOKEN => ");
 		ft_putendl((*lex)->value);
 		ft_putstr("   TYPE DE TOKEN => ");

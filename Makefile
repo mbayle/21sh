@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/10/30 03:05:19 by mabayle          ###   ########.fr        #
+#    Updated: 2019/11/05 01:20:13 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ ifeq ($(DEBUG), 1)
 endif
 
 SRC_PATH	:=	./src/
-OBJ_PATH	:=	./.obj/
+OBJ_PATH	:=	./obj/
 
 SRC		:=	lexer/main.c \
 			lexer/lexer.c \
@@ -40,7 +40,7 @@ SRC		:=	lexer/main.c \
 			lexer/utils.c \
 			lexer/type_token.c \
 			lexer/print_debug.c \
-			parser/parser.c
+			parser/parserV2.c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   grammar.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 01:57:25 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/07 03:06:46 by mabayle          ###   ########.fr       */
+/*   Created: 2019/11/07 04:40:29 by mabayle           #+#    #+#             */
+/*   Updated: 2019/11/07 05:07:31 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef GRAMMAR.H
+# define GRAMMAR.H
 
 #include "lexer.h"
+#include "parser.h"
 
-/*
-** PARSERV2.C
-*/
-
-int	ft_parse(t_lex **lex, t_ast **ast);
+t_ast   *program(t_lex *current);
+t_ast   *program1(void);
+t_ast   *program2(void);
 
 #endif

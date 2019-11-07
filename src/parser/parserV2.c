@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parserV2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/02 05:18:17 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/11/07 05:24:19 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 ** TO DO LIST : - Faire toutes les fonctions selon la gram posix
 */
 
+#include "../../includes/parser.h"
+
+/*
 // Program
 ASTreeNode *program();		// test all posibilities
 ASTreeNode *program1(); 	// linebreak, complete_commands, linebreak
@@ -149,3 +152,15 @@ ASTreeNode *separator2();	// newline_list
 ASTreeNode *sequential_sep();	// test all positibilities
 ASTreeNode *sequential_sep1();	// ';', linebreak
 ASTreeNode *sequential_sep2();	// newline_list
+*/
+
+int	ft_parse(t_lex **lex, t_ast **ast)
+{
+	t_lex	*current;
+
+	current = *lex;
+	*ast = program(current);
+	if (g_shell->lex_size == 0)
+		return (-1);
+	return (1);
+}
