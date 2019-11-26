@@ -141,6 +141,3 @@ separator_op     : '&'
 separator        : separator_op linebreak
                  | newline_list
                  ;
-sequential_sep   : ';' linebreak
-                 | newline_list
-                 ;
