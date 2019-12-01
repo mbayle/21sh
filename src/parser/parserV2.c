@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/26 05:45:08 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/01 05:51:11 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,7 @@ ASTreeNode *pipe_sequence1();	// pipe_sequence, '|', linebreak, command
 ASTreeNode *pipe_sequence2();	// command
 
 // Command
-ASTreeNode *command();		// simple_command
-
-// Name
-ASTreeNode *name();		// NAME [APPLY RULE 5]
-
-// Wordlist
-ASTreeNode *wordlist();		// test all posibilities
-ASTreeNode *wordlist1();	// wordlist, WORD
-ASTreeNode *wordlist2();	// WORD
-
-// Fname (A faire ?)
-ASTreeNode *fname();		// NAME [APPLY RULE 8]
+ASTreeNode *command();			// simple_command
 
 // Simple_command
 ASTreeNode *simple_command();	// test all posibilities
@@ -76,54 +65,42 @@ ASTreeNode *simple_command4();	// cmd_prefix
 ASTreeNode *simple_command5();	// cmd_name
 
 // Cmd_name
-ASTreeNode *cmd_name();		// WORD [APPLY RULE 7a]
+ASTreeNode *cmd_name();		// WORD [APPLY RULE 7a]							DONE
 
 // Cmd_word
-ASTreeNode *cmd_word();		// WORD [APPLY RULE 7b]
+ASTreeNode *cmd_word();		// WORD [APPLY RULE 7b]							DONE
 
 // Cmd_prefix
-ASTreeNode *cmd_prefix();	// test all posibilities
-ASTreeNode *cmd_prefix1();	// cmd_prefix, io_redirect
-ASTreeNode *cmd_prefix2();	// cmd_prefix, ASSIGNEMENT_WORD
-ASTreeNode *cmd_prefix3();	// io_redirect
-ASTreeNode *cmd_prefix4();	// ASSIGNEMENT_WORD
+ASTreeNode *cmd_prefix();	// test all posibilities						DONE
+ASTreeNode *cmd_prefix1();	// cmd_prefix, io_redirect						DONE
+ASTreeNode *cmd_prefix2();	// cmd_prefix, ASSIGNEMENT_WORD					DONE
+ASTreeNode *cmd_prefix3();	// io_redirect									DONE
+ASTreeNode *cmd_prefix4();	// ASSIGNEMENT_WORD								DONE
 
 // Cmd_suffix
-ASTreeNode *cmd_suffix();	// test all posibilities
-ASTreeNode *cmd_suffix1();	// cmd_suffix, io_redirect
-ASTreeNode *cmd_suffix2();	// cmd_suffix, WORD
-ASTreeNode *cmd_suffix3();	// io_redirect
-ASTreeNode *cmd_suffix4();	// WORD
-
-// Redirect_list
-ASTreeNode *redirect_list();	// test all posibilities
-ASTreeNode *redirect_list1();	// redirect_list, io_redirect
-ASTreeNode *redirect_list2();	// redirect_list
+ASTreeNode *cmd_suffix();	// test all posibilities						DONE
+ASTreeNode *cmd_suffix1();	// cmd_suffix, io_redirect						DONE
+ASTreeNode *cmd_suffix2();	// cmd_suffix, WORD								DONE
+ASTreeNode *cmd_suffix3();	// io_redirect									DONE
+ASTreeNode *cmd_suffix4();	// WORD											DONE
 
 // Io_redirect
-ASTreeNode *io_redirect();	// test all posibilities
-ASTreeNode *io_redirect1();	// IO_NUMBER, io_file
-ASTreeNode *io_redirect2();	// IO_NUMBER, io_here
-ASTreeNode *io_redirect3();	// io_file
-ASTreeNode *io_redirect4();	// io_here
+ASTreeNode *io_redirect();	// test all posibilities						DONE
+ASTreeNode *io_redirect1();	// IO_NUMBER, io_file							DONE
+ASTreeNode *io_redirect2();	// IO_NUMBER, io_here							DONE
+ASTreeNode *io_redirect3();	// io_file										DONE
+ASTreeNode *io_redirect4();	// io_here										DONE
 
 // Io_file 
-ASTreeNode *io_file();		// test all posibilities
-ASTreeNode *io_file1();		// '<'
-ASTreeNode *io_file2();		// LESSAND (aka '<&')
-ASTreeNode *io_file3();		// '>'
-ASTreeNode *io_file4();		// GREATAND (aka '>&')
-ASTreeNode *io_file5();		// DGREAT (aka '>>')
-ASTreeNode *io_file6();		// LESSGREAT (aka '<>')
-ASTreeNode *io_file7();		// CLOBBER (aka '>|')
+ASTreeNode *io_file();		// test all posibilities						DONE
 
 // Filename
-ASTreeNode *filename();		// WORD [APPLY RULE 2]
+ASTreeNode *filename();		// WORD [APPLY RULE 2]							DONE
 
 // Io_here
-ASTreeNode *io_here();		// test all posibilities
-ASTreeNode *io_here1();		// DLESS, here_end
-ASTreeNode *io_here2();		// DLESSDASH here_end
+ASTreeNode *io_here();		// test all posibilities						DONE
+ASTreeNode *io_here1();		// DLESS, here_end								DONE
+ASTreeNode *io_here2();		// DLESSDASH here_end							DONE
 
 // Here_end
 ASTreeNode *here_end();		// WORD [APPLY RULE 3]							DONE
