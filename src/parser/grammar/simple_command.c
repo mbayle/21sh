@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 05:50:51 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/01 06:29:33 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/01 06:45:44 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,15 @@ int     simple_command(t_lex *lex)
 */
 int     simple_command1(t_lex *lex)
 {
-    
+    return (cmd_prefix(lex) == 1 && cmd_word(lex) == 1 && cmd_suffix(lex) == 1
+                ? 1 : 0);
+}
+
+/*
+** Objectif de la fonction : check if lex == cmd_prefix + cmd_word
+** Valeur de retour : return 1 if match | else return 0
+*/
+int     simple_command1(t_lex *lex)
+{
+    return (cmd_prefix(lex) == 1 && cmd_word(lex) == 1 ? 1 : 0);
 }
