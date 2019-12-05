@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/11/05 01:20:13 by mabayle          ###   ########.fr        #
+#    Updated: 2019/12/03 07:00:34 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,28 @@ SRC		:=	lexer/main.c \
 			lexer/utils.c \
 			lexer/type_token.c \
 			lexer/print_debug.c \
-			parser/parserV2.c
+			parser/parserV2.c \
+			parser/grammar/and_or.c \
+			parser/grammar/cmd_name.c \
+			parser/grammar/cmd_prefix.c \
+			parser/grammar/cmd_suffix.c \
+			parser/grammar/cmd_word.c \
+			parser/grammar/complete_cmd.c \
+			parser/grammar/complete_cmds.c \
+			parser/grammar/filename.c \
+			parser/grammar/here_end.c \
+			parser/grammar/io_file.c \
+			parser/grammar/io_here.c \
+			parser/grammar/io_redirect.c \
+			parser/grammar/linebreak.c \
+			parser/grammar/list_grammar.c \
+			parser/grammar/newline_list.c \
+			parser/grammar/pipe_sequence.c \
+			parser/grammar/pipeline.c \
+			parser/grammar/program.c \
+			parser/grammar/separator_op.c \
+			parser/grammar/separator.c \
+			parser/grammar/simple_command.c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

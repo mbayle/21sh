@@ -6,11 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 04:53:07 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/07 03:07:49 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/03 07:02:28 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "../../includes/grammar.h"
 #include "../../includes/parser.h"
 
 /*
@@ -46,7 +46,7 @@ int		main(int argc, char **argv)
 		g_shell->line = argv[1];
 		ft_lexer(&g_shell->lex, g_shell->line);
 		printf("[DEBUG][MAIN.C][MAIN] Nombre de token = %d", g_shell->lex_size);
-		ft_parse(&g_shell->lex, &g_shell->ast);
+		//ft_parse(&g_shell->lex, &g_shell->ast);
 	}
 	return (0);
 }

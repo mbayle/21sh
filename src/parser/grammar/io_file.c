@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:27:15 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/29 02:35:12 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/03 06:44:56 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@
 */
 int    io_file(t_lex *lex)
 {
-    if (lex->operator == LESS && filename(lex->next->token) == 1)
+    if (lex->operator == LESS && filename(lex->next) == 1)
         return (1);
-    if (lex->operator == LESS_AND && filename(lex->next->token) == 1)
+    if (lex->operator == LESS_AND && filename(lex->next) == 1)
         return (1);
-    if (lex->operator == GREAT && filename(lex->next->token) == 1)
+    if (lex->operator == GREAT && filename(lex->next) == 1)
         return (1);
-    if (lex->operator == GREAT_AND && filename(lex->next->token) == 1)
+    if (lex->operator == GREAT_AND && filename(lex->next) == 1)
         return (1);
-    if (lex->operator == DGREAT && filename(lex->next->token) == 1)
+    if (lex->operator == DGREAT && filename(lex->next) == 1)
         return (1);
-    if (lex->operator == LESS_GREAT && filename(lex->next->token) == 1)
+    if (lex->operator == LESS_GREAT && filename(lex->next) == 1)
         return (1);
-    if (lex->operator == CLOBBER && filename(lex->next->token) == 1)
+    if (lex->operator == CLOBBER && filename(lex->next) == 1)
         return (1);
     else
         return (0);

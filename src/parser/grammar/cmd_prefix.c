@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 01:14:43 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/01 01:23:20 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/03 06:31:48 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int     cmd_prefix(t_lex *lex)
         return (1);
     if (cmd_prefix2(lex) == 1)
         return (1);
-    if (cmd_preffix3(lex) == 1)
+    if (cmd_prefix3(lex) == 1)
         return (1);
     if (cmd_prefix4(lex) == 1)
         return (1);

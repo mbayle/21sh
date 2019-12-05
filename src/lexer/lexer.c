@@ -6,11 +6,13 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/26 02:08:56 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/05 02:29:31 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "lexer.h"
+#include "../../includes/parser.h"
+
 
 int		find_end(int i, char *input)
 {
@@ -77,6 +79,7 @@ void	ft_lexer(t_lex **lex, char *input)
 	int		assignword;
 
 	assignword = 0;
+	
 	if (!lex || !input)
 		return ;
 	while (*input)
@@ -99,6 +102,8 @@ void	ft_lexer(t_lex **lex, char *input)
 		input = input + i++;
 	}
 
+	t_lex *tmp = (*lex);
+
 	/*****  DEBUG *****/
 	while ((*lex))
 	{
@@ -109,7 +114,10 @@ void	ft_lexer(t_lex **lex, char *input)
 		ft_print_debug(lex);
 		(*lex) = (*lex)->next;
 	}
+
+	(*lex) = tmp;
 	/*****  FIN DEBUG ******/
+	ft_parse(lex, &g_shell->ast);
 	// Fonction add history a rajouter si ft_parser ok
 	lexdel(lex);
 	return ;

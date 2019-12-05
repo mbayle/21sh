@@ -6,15 +6,43 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/07 04:40:29 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/01 05:57:02 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/03 06:05:26 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GRAMMAR.H
-# define GRAMMAR.H
+#ifndef GRAMMAR_H
+# define GRAMMAR_H
 
-#include "lexer.h"
-#include "parser.h"
+# include "lexer.h"
+
+int     program(t_lex *lex);
+int     program1(t_lex *lex);
+int     program2(t_lex *lex);
+
+int     complete_cmds(t_lex *lex);
+int     complete_cmds1(t_lex *lex);
+int     complete_cmds2(t_lex *lex);
+
+int     complete_cmd(t_lex *lex);
+int     complete_cmd1(t_lex *lex);
+int     complete_cmd2(t_lex *lex);
+
+int     list(t_lex *lex);
+int     list1(t_lex *lex);
+int     list2(t_lex *lex);
+
+int     and_or(t_lex *lex);
+int     and_or1(t_lex *lex);
+int     and_or2(t_lex *lex);
+int     and_or3(t_lex *lex);
+
+int     pipeline(t_lex *lex);
+int     pipeline1(t_lex *lex);
+int     pipeline2(t_lex *lex);
+
+int     pipe_sequence(t_lex *lex);
+int     pipe_sequence1(t_lex *lex);
+int     pipe_sequence2(t_lex *lex);
 
 int     simple_command(t_lex *lex);
 int     simple_command1(t_lex *lex);

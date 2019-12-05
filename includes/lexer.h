@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:21:06 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/07 02:45:56 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/05 06:59:35 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ enum			e_tok_type
 	IO_NUMBER,
 	ASSIGN_WORD,
 	NEW_LINE,
+	UNKNOWN,
 };
 
 enum			e_operator
