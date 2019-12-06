@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 02:15:41 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/02 03:36:37 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/06 06:02:11 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 */
 int     pipeline(t_lex *lex)
 {
+    //ft_putendl("                                    pipeline -> ");
     if (pipeline1(lex) == 1)
         return (1);
     if (pipeline2(lex) == 1)
@@ -32,6 +33,7 @@ int     pipeline(t_lex *lex)
 */
 int     pipeline1(t_lex *lex)
 {
+    //ft_putendl("                                        pipeline1 -> ");
     return (lex->value[0] == '!' && pipe_sequence(lex) == 1 ? 1 : 0);
 }
 
@@ -41,5 +43,6 @@ int     pipeline1(t_lex *lex)
 */
 int     pipeline2(t_lex *lex)
 {
+    ////ft_putendl("                                            pipeline2 -> ");
     return (pipe_sequence(lex) == 1 ? 1 : 0);
 }

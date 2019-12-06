@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/12/03 07:00:34 by mabayle          ###   ########.fr        #
+#    Updated: 2019/12/06 03:56:26 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,20 @@ endif
 SRC_PATH	:=	./src/
 OBJ_PATH	:=	./obj/
 
-SRC		:=	lexer/main.c \
+SRC		:=	main.c \
 			lexer/lexer.c \
 			lexer/list_utils.c \
 			lexer/utils.c \
 			lexer/type_token.c \
 			lexer/print_debug.c \
+			edl/edl_assoc.c \
+			edl/edl_controller.c \
+			edl/edl_key_arrow.c \
+			edl/edl_key_cn_arrow.c \
+			edl/edl_key_utils.c \
+			edl/ft_str_in_array.c \
+			edl/sh_cursor_move.c \
+			edl/sh_term_switch.c \
 			parser/parserV2.c \
 			parser/grammar/and_or.c \
 			parser/grammar/cmd_name.c \

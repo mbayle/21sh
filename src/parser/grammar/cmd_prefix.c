@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 01:14:43 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/03 06:31:48 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/06 06:02:11 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,20 @@
 */
 int     cmd_prefix(t_lex *lex)
 {
+    //ft_putendl("                                                        cmd_prefix1 -> ");
     if (cmd_prefix1(lex) == 1)
         return (1);
+    //ft_putendl("                                                        cmd_prefix2 -> ");
     if (cmd_prefix2(lex) == 1)
         return (1);
+    //ft_putendl("                                                        cmd_prefix3 -> ");
     if (cmd_prefix3(lex) == 1)
         return (1);
+    //ft_putendl("                                                        cmd_prefix4 -> ");
     if (cmd_prefix4(lex) == 1)
         return (1);
     else
+        //ft_putendl("                                                        cmd_prefix else -> ");
         return (0);
 }
 
@@ -36,6 +41,7 @@ int     cmd_prefix(t_lex *lex)
 */
 int     cmd_prefix1(t_lex *lex)
 {
+    //ft_putendl("                                                            cmd_prefix1 -> ");
     if ((cmd_prefix3(lex) == 1 || cmd_prefix4(lex) == 1) 
             && io_redirect(lex->next) == 1)
         return (1);
@@ -49,6 +55,7 @@ int     cmd_prefix1(t_lex *lex)
 */
 int     cmd_prefix2(t_lex *lex)
 {
+    //ft_putendl("                                                            cmd_prefix2 -> ");
     if ((cmd_prefix3(lex) == 1 || cmd_prefix4(lex) == 1) 
             && lex->token == ASSIGN_WORD)
         return (1);
@@ -62,6 +69,7 @@ int     cmd_prefix2(t_lex *lex)
 */
 int     cmd_prefix3(t_lex *lex)
 {
+    //ft_putendl("                                                            cmd_prefix3 -> ");
     return (io_redirect(lex) == 1 ? 1 : 0);
 }
 
@@ -71,5 +79,6 @@ int     cmd_prefix3(t_lex *lex)
 */
 int     cmd_prefix4(t_lex *lex)
 {
+    //ft_putendl("                                                            cmd_prefix4 -> ");
     return (lex->token == ASSIGN_WORD ? 1 : 0);
 }

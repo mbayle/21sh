@@ -6,19 +6,20 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2019/09/09 02:13:25 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/06 07:50:40 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "lexer.h"
 
-int		check_redirection(char *input)
+int		check_redir(char *input)
 {
 	if (!ft_strncmp(input, "<<-", 3))
 		return (3);
 	else if (!ft_strncmp(input, ">>", 2) || !ft_strncmp(input, "<<", 2)
 		|| !ft_strncmp(input, "<&", 2) || !ft_strncmp(input, ">&", 2)
-		|| !ft_strncmp(input, "<>", 2) || !ft_strncmp(input, ">|", 2))
+		|| !ft_strncmp(input, "<>", 2) || !ft_strncmp(input, ">|", 2)
+		|| !ft_strncmp(input, "&>", 2))
 		return (2);
 	else if (*input == '>' || *input == '<')
 		return (1);
@@ -34,7 +35,7 @@ int		check_operator(char *input)
 		|| !ft_strncmp(input, "<<", 2) || !ft_strncmp(input, ">&", 2)
 		|| !ft_strncmp(input, "<&", 2) || !ft_strncmp(input, "||", 2)
 		|| !ft_strncmp(input, "&&", 2) || !ft_strncmp(input, "<>", 2)
-		|| !ft_strncmp(input, ">|", 2))
+		|| !ft_strncmp(input, ">|", 2) || !ft_strncmp(input, "&>", 2))
 		return (2);
 	else if (*input == '|' || *input == ';' || *input == '>'
 				|| *input == '<' || *input == '&')

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:19:31 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/05 06:59:55 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/06 07:03:52 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	is_redirection(t_lex *new)
 		new->operator = CLOBBER;
 	else if (ft_strcmp(new->value, "<<-") == 0)
 		new->operator = DLESS_DASH;
+	else if (ft_strcmp(new->value, "&>") == 0)
+		new->operator = GREAT_AND;
 	else
 		new->token = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:21:06 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/05 06:59:35 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/06 07:51:26 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
+#include "sh.h"
 
 /*
 ** ENUM
@@ -51,10 +52,10 @@ enum			e_operator
 	GREAT,
 	DGREAT,
 	LESS_AND,
-	GREAT_AND,
 	LESS_GREAT,
 	DLESS_DASH,
 	CLOBBER,
+	GREAT_AND,
 };
 
 /*
@@ -86,6 +87,7 @@ typedef struct			s_21sh
 	t_lex				*lex;
 	int					lex_size;
 	t_ast				*ast;
+	t_env				*env;
 }						t_21sh;
 
 t_21sh					*g_shell;
@@ -97,7 +99,7 @@ t_21sh					*g_shell;
 /*
 ** MAIN.C
 */
-int		main(int argc, char **argv);
+int		main(void);
 
 /*
 ** LEXER.C
@@ -120,7 +122,7 @@ void	lex_suppr_elem(t_lex **elem);
 /*
 ** UTILS.C
 */
-int		check_redirection(char *input);
+int		check_redir(char *input);
 int		check_operator(char *input);
 int		quote_case(int i, char *input);
 int		ft_is_separator(char c);
@@ -137,5 +139,20 @@ void	is_operator(t_lex *new);
 void	is_redirection(t_lex *new);
 void	is_assignword(t_lex *new);
 void	token_type(t_lex *new, int io_nbr, int *assignword);
+
+
+/*
+ * Color
+ */
+# define BLACK		"\033[0;30m"
+# define RED		"\033[0;31m"
+# define GREEN		"\033[0;32m"
+# define YELLOW		"\033[0;33m"
+# define BLUE		"\033[0;34m"
+# define PURPLE		"\033[0;35m"
+# define CYAN		"\033[0;36m"
+# define L_BLUE		"\033[0;94m"
+# define WHITE		"\033[0;37m"
+# define NC			"\033[0m"
 
 #endif

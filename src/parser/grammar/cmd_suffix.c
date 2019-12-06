@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:17:27 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/01 01:14:07 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/06 06:02:11 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,20 @@
 */
 int     cmd_suffix(t_lex *lex)
 {
+    //ft_putendl("                                                        cmd_suffix1 -> ");
     if (cmd_suffix1(lex) == 1)
         return (1);
+    //ft_putendl("                                                        cmd_suffix2 -> ");
     if (cmd_suffix2(lex) == 1)
         return (1);
+    //ft_putendl("                                                        cmd_suffix3 -> ");
     if (cmd_suffix3(lex) == 1)
         return (1);
+    //ft_putendl("                                                        cmd_suffix4 -> ");
     if (cmd_suffix4(lex) == 1)
         return (1);
     else
+        //ft_putendl("                                                        cmd_suffix else -> ");
         return (0);
 }
 
@@ -36,9 +41,14 @@ int     cmd_suffix(t_lex *lex)
 */
 int     cmd_suffix1(t_lex *lex)
 {
-    if ((cmd_suffix3(lex) == 1 || cmd_suffix4(lex) == 1) 
-            && io_redirect(lex->next) == 1)
-        return (1);
+    //ft_putendl("                                                            cmd_suffix1 -> ");
+    if (cmd_suffix3(lex) == 1 || cmd_suffix4(lex) == 1) 
+    {
+        if (lex->next)
+            return (io_redirect(lex->next) == 1 ? 1 : 0);
+        else
+            return (0);
+    }
     else
         return (0);
 }
@@ -49,6 +59,7 @@ int     cmd_suffix1(t_lex *lex)
 */
 int     cmd_suffix2(t_lex *lex)
 {
+    //ft_putendl("                                                            cmd_suffix2 -> ");
     if ((cmd_suffix3(lex) == 1 || cmd_suffix4(lex) == 1) 
             && lex->token == WORD)
         return (1);
@@ -62,6 +73,7 @@ int     cmd_suffix2(t_lex *lex)
 */
 int     cmd_suffix3(t_lex *lex)
 {
+    //ft_putendl("                                                            cmd_suffix3 -> ");
     return (io_redirect(lex) == 1 ? 1 : 0);
 }
 
@@ -71,5 +83,6 @@ int     cmd_suffix3(t_lex *lex)
 */
 int     cmd_suffix4(t_lex *lex)
 {
+    //ft_putendl("                                                            cmd_suffix4 -> ");
     return (lex->token == WORD ? 1 : 0);
 }

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/05 02:29:31 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/06 07:54:18 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 	{
 		while (ft_isdigit(input[i]) == 1)
 			i++;
-		check_redirection(input + i) >= 1 ? *io_nbr = 1 : find_end(i, input);
+		check_redir(input + i) >= 1 ? *io_nbr = 1 : find_end(i, input);
 	}
 	else if ((i = check_operator(input)))
 		;
@@ -95,9 +95,11 @@ void	ft_lexer(t_lex **lex, char *input)
 		}	
 		else
 		{
-			ft_putendl("Synthax Error");
+			ft_putstr(RED);
+			ft_putendl("42sh: synthax error: missing quote");
+			ft_putstr(NC);
 			lexdel(lex);
-			break;
+			return ;
 		}
 		input = input + i++;
 	}
@@ -105,18 +107,25 @@ void	ft_lexer(t_lex **lex, char *input)
 	t_lex *tmp = (*lex);
 
 	/*****  DEBUG *****/
+	ft_putstr(PURPLE);
+	ft_putendl("Lexer debug :");
+	ft_putstr(NC);
+	ft_putendl(" --------------------------------------------------------------------------------------------------------------");
+	ft_putendl("|             TOKEN            	|	    		VALUE						       |");
+	ft_putendl(" --------------------------------------------------------------------------------------------------------------");
 	while ((*lex))
 	{
-		ft_putendl("[DEBUG][LEXER.C][FT_LEXER][VALUE]");
-		ft_putstr("   VALUE DU TOKEN => ");
-		ft_putendl((*lex)->value);
-		ft_putstr("   TYPE DE TOKEN => ");
+		ft_putstr(CYAN);
 		ft_print_debug(lex);
+		ft_putstr(L_BLUE);
+		ft_putendl((*lex)->value);
 		(*lex) = (*lex)->next;
 	}
-
-	(*lex) = tmp;
+	write(1, "\n", 1);
 	/*****  FIN DEBUG ******/
+	
+	(*lex) = tmp;
+	
 	ft_parse(lex, &g_shell->ast);
 	// Fonction add history a rajouter si ft_parser ok
 	lexdel(lex);
