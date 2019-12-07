@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 04:39:55 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/07 02:12:55 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_parse(t_lex **lex, t_ast **ast)
 	if (program(current) == 0)
 	{
 		ft_putstr(RED);
-		ft_putstr("42sh: parse error");
+		ft_putendl("42sh: parse error");
 		ft_putstr(NC);
 	}
 	else

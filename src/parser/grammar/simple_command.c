@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 05:50:51 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 06:02:11 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/07 06:33:13 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int     simple_command(t_lex *lex)
 */
 int     simple_command1(t_lex *lex)
 {
-    ////ft_putendl("                                                        simple_command1 -> ");
+    //ft_putendl("                                                        simple_command1 -> ");
     return (cmd_prefix(lex) == 1 && cmd_word(lex) == 1 && cmd_suffix(lex) == 1
                 ? 1 : 0);
 }
@@ -52,7 +52,7 @@ int     simple_command1(t_lex *lex)
 */
 int     simple_command2(t_lex *lex)
 {
-    ////ft_putendl("                                                            simple_command2 -> ");
+    //ft_putendl("                                                            simple_command2 -> ");
     return (cmd_prefix(lex) == 1 && cmd_word(lex) == 1 ? 1 : 0);
 }
 
@@ -62,7 +62,7 @@ int     simple_command2(t_lex *lex)
 */
 int     simple_command3(t_lex *lex)
 {
-    ////ft_putendl("                                                            simple_command3 -> ");
+    //ft_putendl("                                                            simple_command3 -> ");
     return (cmd_suffix(lex) == 1 && cmd_suffix(lex) == 1 ? 1 : 0);
 }
 
@@ -72,6 +72,6 @@ int     simple_command3(t_lex *lex)
 */
 int     simple_command4(t_lex *lex)
 {
-    ////ft_putendl("                                                            simple_command4 -> ");
+    //ft_putendl("                                                            simple_command4 -> ");
     return (cmd_prefix(lex) == 1 || cmd_name(lex) ? 1 : 0);
 }

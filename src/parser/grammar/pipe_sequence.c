@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 00:22:25 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 06:02:11 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/07 06:33:13 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int     pipe_sequence1(t_lex *lex)
 */
 int     pipe_sequence2(t_lex *lex)
 {
-    ////ft_putendl("                                                    pipe_sequence2 -> ");
+    //ft_putendl("                                                    pipe_sequence2 -> ");
     return (simple_command(lex) == 1 ? 1 : 0);
 }

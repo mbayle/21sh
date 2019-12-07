@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:19:31 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 07:03:52 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/07 02:27:57 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	is_assignword(t_lex *new)
 	int		i;
 
 	i = 0;
-	if (new->token != 0 || ft_strchr(new->value, '=') != 0
+	if (new->token != 0 || ft_strchr(new->value, '=') == 0
 		|| (new->value[i] >= '0' && new->value[i] <= '9'))
 		return ;
 	while (new->value[i] && new->value[i] != '=')
@@ -84,7 +84,10 @@ void	token_type(t_lex *new, int io_nbr, int *assignword)
 	if (io_nbr != 0)
 		new->token = IO_NUMBER;
 	if (ft_strlen(new->value) == 0)
+	{
 		new->token = UNKNOWN;
+		new->value = ft_strdup("__EOI__");
+	}	
 	if (*new->value == '\n')
 	{
 		new->token = NEW_LINE;

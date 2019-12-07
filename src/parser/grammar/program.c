@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 01:46:22 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 06:02:11 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/07 06:33:13 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int     program(t_lex *lex)
 {
-    //ft_putstr("[DEBUG][PROGRAM] Value de lex : ");
-    ////ft_putendl(lex->value);
     if(lex)
     {
         if (program1(lex) == 1)

@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/12/06 03:56:26 by mabayle          ###   ########.fr        #
+#    Updated: 2019/12/07 00:10:24 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,7 @@ SRC		:=	$(addprefix $(SRC_PATH), $(SRC))
 $(NAME):  $(LIBFT) $(OBJ)
 	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ)
 	@echo ""
-	@echo "\033[0;32m 21_SH BUILD DONE \033[0m"
+	@echo "\033[0;32m 21sh build done \033[0m"
 	@echo ""
 
 all: $(NAME)
@@ -86,7 +86,7 @@ $(LIBFT):	$(dir $(LIBFT))Makefile
 	@make -C $(dir $(LIBFT))
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INCS)
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [21_SH] Compiling 21sh :\033[0m" $<
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [21_SH] Compiling : \033[0m" $<
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

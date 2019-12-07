@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 04:04:22 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 06:02:11 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/07 06:33:13 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ int     list1(t_lex *lex)
 
 int     list2(t_lex *lex)
 {
-    ////ft_putendl("                            list2 -> ");
+    //ft_putendl("                            list2 -> ");
     return (and_or(lex) == 1 ? 1 : 0);
 }

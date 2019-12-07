@@ -36,13 +36,13 @@ all : $(NAME)
 
 $(NAME) : $(OBJS)
 	@echo ""
-	@echo "\033[0;32m LIBFT BUILD DONE \033[0m"
+	@echo "\033[0;32m Libft build done \033[0m"
 	@echo ""
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
 
 $(O_PATH)%.o: $(C_PATH)%.c
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Compiling libft :\033[0m" $<
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Compiling : \033[0m" $<
 	@mkdir -p objs
 	@$(CC) $(FLAGS) $(INCS) -o $@ -c $<
 

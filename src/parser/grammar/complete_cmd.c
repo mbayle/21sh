@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 04:16:16 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 06:02:11 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/07 06:33:13 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int     complete_cmd(t_lex *lex)
 
 int     complete_cmd1(t_lex *lex)
 {
-    ////ft_putendl("                    complete_cmd1 -> ");
+    //ft_putendl("                    complete_cmd1 -> ");
     return (list(lex) == 1 && separator_op(lex) == 1 ? 1 : 0);
 }
 
 int     complete_cmd2(t_lex *lex)
 {
-    ////ft_putendl("                    complete_cmd2 -> ");
+    //ft_putendl("                    complete_cmd2 -> ");
     return (list(lex) == 1 ? 1 : 0);
 }

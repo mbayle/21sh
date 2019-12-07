@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 03:43:06 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 06:02:11 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/07 06:33:13 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 int     linebreak(t_lex *lex)
 {
-    ////ft_putendl("        linebreak -> ");
+    //ft_putendl("        linebreak -> ");
     if (linebreak1(lex) == 1)
         return (1);
     if (linebreak2(lex) == 1)
@@ -33,7 +33,7 @@ int     linebreak(t_lex *lex)
 */
 int     linebreak1(t_lex *lex)
 {
-    ////ft_putendl("            linebreak1 -> ");
+    //ft_putendl("            linebreak1 -> ");
     if (newline_list(lex) == 1)
         return (1);
     else
@@ -46,10 +46,9 @@ int     linebreak1(t_lex *lex)
 */
 int     linebreak2(t_lex *lex)
 {
-    ////ft_putendl("            linebreak2 -> ");
-    /*if (ft_strlen(lex->value) == 0 || lex->token == UNKNOWN)
+    //ft_putendl("            linebreak2 -> ");
+    if (ft_strlen(lex->value) == 0 || lex->token == UNKNOWN)
         return (1);
-    else*/
-    (void) lex;
-        return (1);
+    else
+        return (0);
 }
