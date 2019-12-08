@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 03:43:06 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/07 06:33:13 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/08 11:26:28 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int     linebreak1(t_lex *lex)
 int     linebreak2(t_lex *lex)
 {
     //ft_putendl("            linebreak2 -> ");
-    if (ft_strlen(lex->value) == 0 || lex->token == UNKNOWN)
-        return (1);
-    else
-        return (0);
+    (void) lex;
+    return (1);
 }

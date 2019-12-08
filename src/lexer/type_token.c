@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:19:31 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/07 02:27:57 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/08 12:05:39 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,6 @@ void	token_type(t_lex *new, int io_nbr, int *assignword)
 {
 	if (io_nbr != 0)
 		new->token = IO_NUMBER;
-	if (ft_strlen(new->value) == 0)
-	{
-		new->token = UNKNOWN;
-		new->value = ft_strdup("__EOI__");
-	}	
 	if (*new->value == '\n')
 	{
 		new->token = NEW_LINE;
@@ -105,4 +100,9 @@ void	token_type(t_lex *new, int io_nbr, int *assignword)
 	}
 	if (new->token == CONTROL_OPE)
 		*assignword = 0;
+	if (ft_strlen(new->value) == 0)
+	{
+		new->token = UNKNOWN;
+		new->value = ft_strdup("_EOI_");
+	}
 }

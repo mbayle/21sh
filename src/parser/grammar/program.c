@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 01:46:22 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/07 06:33:13 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/08 11:29:30 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 int     program(t_lex *lex)
 {
-    if(lex)
+    while(lex)
     {
-        if (program1(lex) == 1)
-            return (1);
-        if (program2(lex) == 1)
-            return (1);
-        else
-            return (0);
+        while (lex->token != UNKNOWN && lex->token != SEMIC 
+            && lex->token != AND)
+        {
+            if (program1(lex) == 1)
+                return (1);
+            if (program2(lex) == 1)
+                return (1);
+            lex = lex->next;
+        }
+        lex = lex->next;
     }
-    else
-        return (0);
+    return (0);    
 }
 
 int     program1(t_lex *lex)

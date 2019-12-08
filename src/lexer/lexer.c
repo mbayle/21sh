@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/07 02:25:19 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/08 01:38:26 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,8 @@ void	ft_lexer(t_lex **lex, char *input)
 		}
 		input = input + i++;
 	}
-	valid(lex, "__EOI__", io_nbr, assignword, 0);
-
 	t_lex *tmp = (*lex);
-
+	g_shell->lex_size != 0 && tmp->token != UNKNOWN ? valid(lex, "__EOI__", io_nbr, assignword, 0) : 0;
 	/*****  DEBUG *****/
 	ft_putstr(PURPLE);
 	ft_putendl("Lexer debug :");
