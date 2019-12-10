@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 05:07:46 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/03 06:41:29 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/10 05:50:50 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 /*
 ** Objectif de la fonction : check if lex->next->value == WORD and apply
-                             rule 3 of posix grammar : 
-                             Quote removal shall be applied to the word to 
-                             determine the delimiter that is used to find the 
-                             end of the here-document that begins after the 
-                             next <newline>
+**                           rule 3 of posix grammar : 
+**                           Quote removal shall be applied to the word to 
+**                           determine the delimiter that is used to find the 
+**                           end of the here-document that begins after the 
+**                           next <newline>
 ** Valeur de retour : return 1 if match | else return 0
 */
 int     here_end(t_lex *lex)

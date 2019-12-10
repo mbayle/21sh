@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 01:57:47 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/01 05:47:06 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/10 05:50:20 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,26 @@ int     valid_name(char *str)
 
 /*
 ** Objectif de la fonction : check if lex->next->value == WORD and apply
-                             rule 7b of posix grammar : 
-                             If the TOKEN contains an unquoted (as determined 
-                             while applying rule 4 from Token Recognition) 
-                             <equals-sign> character that is not part of an 
-                             embedded parameter expansion, command 
-                             substitution, or arithmetic expansion construct 
-                             (as determined while applying rule 5 from Token
-                             Recognition):
-                                - If the TOKEN begins with '=', then rule 1 
-                                  shall be applied.
-                                - If all the characters in the TOKEN 
-                                  preceding the first such <equals-sign> 
-                                  form a valid name (see XBD Name), 
-                                  the token ASSIGNMENT_WORD shall be returned.
-                                - Otherwise, it is unspecified whether rule 1
-                                  is applied or ASSIGNMENT_WORD is returned.
-                            Otherwise, rule 1 shall be applied.
-                            Assignment to the name within a returned 
-                            ASSIGNMENT_WORD token shall occur as specified in
-                            Simple Commands.
+**                           rule 7b of posix grammar : 
+**                           If the TOKEN contains an unquoted (as determined 
+**                           while applying rule 4 from Token Recognition) 
+**                           <equals-sign> character that is not part of an 
+**                           embedded parameter expansion, command 
+**                           substitution, or arithmetic expansion construct 
+**                           (as determined while applying rule 5 from Token
+**                           Recognition):
+**                              - If the TOKEN begins with '=', then rule 1 
+**                                shall be applied.
+**                              - If all the characters in the TOKEN 
+**                                preceding the first such <equals-sign> 
+**                                form a valid name (see XBD Name), 
+**                                the token ASSIGNMENT_WORD shall be returned.
+**                              - Otherwise, it is unspecified whether rule 1
+**                                is applied or ASSIGNMENT_WORD is returned.
+**                          Otherwise, rule 1 shall be applied.
+**                          Assignment to the name within a returned 
+**                          ASSIGNMENT_WORD token shall occur as specified in
+**                          Simple Commands.
 ** Valeur de retour : return 1 if match | else return 0
 */
 int     cmd_word(t_lex *lex)

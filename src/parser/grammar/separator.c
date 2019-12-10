@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 04:08:34 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/26 05:01:45 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/10 05:51:18 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int     separator(t_lex *lex)
 
 /*
 ** Objectif de la fonction : check if lex->value = separator_op AND 
-                             linebreak
+**                           linebreak
 ** Valeur de retour : return 1 if match | else return 0
 */
 int     separator1(t_lex *lex)

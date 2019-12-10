@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/08 01:38:26 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/09 23:44:33 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_lexer(t_lex **lex, char *input)
 		{
 			valid(lex, input, io_nbr, assignword, i);
 			g_shell->lex_size++;
-		}	
+		}
 		else
 		{
 			ft_putstr(RED);
@@ -105,23 +105,27 @@ void	ft_lexer(t_lex **lex, char *input)
 		input = input + i++;
 	}
 	t_lex *tmp = (*lex);
-	g_shell->lex_size != 0 && tmp->token != UNKNOWN ? valid(lex, "__EOI__", io_nbr, assignword, 0) : 0;
+	g_shell->lex_size != 0 && tmp && tmp->token != UNKNOWN ? valid(lex, "__EOI__", io_nbr, assignword, 0) : 0;
 	/*****  DEBUG *****/
-	ft_putstr(PURPLE);
-	ft_putendl("Lexer debug :");
-	ft_putstr(NC);
-	ft_putendl(" --------------------------------------------------------------------------------------------------------------");
-	ft_putendl("|             TOKEN            	|	    		VALUE						       |");
-	ft_putendl(" --------------------------------------------------------------------------------------------------------------");
-	while ((*lex))
+	if (tmp)
 	{
-		ft_putstr(CYAN);
-		ft_print_debug(lex);
-		ft_putstr(L_BLUE);
-		ft_putendl((*lex)->value);
-		(*lex) = (*lex)->next;
+		ft_putstr(PURPLE);
+		ft_putendl("Lexer debug :");
+		ft_putstr(NC);
+		ft_putendl(" --------------------------------------------------------------------------------------------------------------");
+		ft_putendl("|             TOKEN            	|	    		VALUE						       |");
+		ft_putendl(" --------------------------------------------------------------------------------------------------------------");
+		while ((*lex))
+		{
+			ft_putstr(CYAN);
+			ft_print_debug(lex);
+			ft_putstr(L_BLUE);
+			ft_putendl((*lex)->value);
+			(*lex) = (*lex)->next;
+		}
+		write(1, "\n", 1);
 	}
-	write(1, "\n", 1);
+	
 	/*****  FIN DEBUG ******/
 	
 	(*lex) = tmp;

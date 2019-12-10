@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/12/07 00:10:24 by mabayle          ###   ########.fr        #
+#    Updated: 2019/12/10 05:52:44 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ SRC		:=	main.c \
 			edl/ft_str_in_array.c \
 			edl/sh_cursor_move.c \
 			edl/sh_term_switch.c \
-			parser/parserV2.c \
+			parser/parser.c \
 			parser/grammar/and_or.c \
 			parser/grammar/cmd_name.c \
 			parser/grammar/cmd_prefix.c \

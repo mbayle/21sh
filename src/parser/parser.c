@@ -3,62 +3,86 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/30 01:53:33 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/02 01:32:06 by mabayle          ###   ########.fr       */
+/*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
+/*   Updated: 2019/12/10 05:52:23 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parser.h"
+#include "parser.h"
+#include "grammar.h"
+#include "lexer.h"
 
-
-
-int	check_error(t_lex *lex)
+t_lex	*next_token(t_lex *lex)
 {
-	t_lex 	*nextok;
-	int	i;
-	
-	i = 0;
+	lex = lex->next;
+	while (lex && lex->token == NEW_LINE)
+		lex = lex->next;
+	return (lex);
+}
+
+char		*check_tokenerror(t_lex *lex)
+{
+	t_lex	*next_tok;
+
 	if (lex && lex->token == CONTROL_OPE)
-		return (i);
+		return (lex->value);
 	while (lex)
 	{
 		if (lex->operator == DSEMIC || lex->operator == CLOBBER
-			|| lex->operator == LESS_GREAT 
-			|| lex->operator == DLESS_DASH)
-			return (i);
-		if (lex->token == REDIR_OPE && lex->next 
-			&& lex->next->token != WORD)
-			return (i);
-		if (lex->token == CONTROL_OPE && )
-		
-
+			|| lex->operator == LESS_GREAT || lex->operator == DLESS_DASH)
+			return (lex->value);
+		if (lex->token == REDIR_OPE && lex->next && lex->next->token != WORD)
+		{
+			if (lex->next->token == UNKNOWN)
+				return (lex->value);
+			else
+				return (lex->next->value);
+		}
+		if (lex->token == CONTROL_OPE && (next_tok = next_token(lex))
+			&& next_tok->token == CONTROL_OPE)
+			return (next_tok->value);
 		lex = lex->next;
-		i++;
 	}
+	return (NULL);
 }
 
-/*
-** Objectif de la fonction : Check les erreurs de syntax et les inhibiteurs
-**                           Supprime les tokens newline inutile
-**                           Recupere les arguments des hdoc si besoin (a basculer dans la partie lexer ?)
-** Valeur de retour : Return -1 si syntax error ou interruption (signal), sinon return 0
-** TO DO LIST : - Fonction de check des erreurs
-**		- Fonction pour la gestion des erreurs (define des messages dans un .h, free, ...)
-**		- Fonction pour clear les newline
-**		- Fonction de print si le flag debug est actif (activation via argv ou en command line ?) 
-*/
 
-int	parser(t_lex **lex)
+int	ft_parse(t_lex **lex, t_ast **ast)
 {
-	int	parse_error;
+	(void) ast;
+	t_lex	*current;
+	char	*error;
 
-	if (!lex)
+	current = *lex;
+	error = NULL;
+	if (g_shell->lex_size == 0)
 		return (0);
-	if ((parse_error = check_error(*lex)) != 0)
+	ft_putstr(PURPLE);
+	ft_putendl("Parser debug :");
+	ft_putstr(NC);
+	if ((error = check_tokenerror(current)) != NULL)
 	{
-		ft_error(parse_error);
-		return (-1);
+		ft_putstr(RED);
+		ft_putstr("42sh: parse error near: '");
+		ft_putstr(error);
+		ft_putendl("'");
+		ft_putstr(NC);
+		return (0);
 	}
+	current = *lex;
+	if (current && current->token != UNKNOWN && program(current) == 0)
+	{
+		ft_putstr(RED);
+		ft_putendl("42sh: parse error");
+		ft_putstr(NC);
+	}
+	else
+	{
+		ft_putstr(GREEN);
+        ft_putendl("No parse error");
+        ft_putstr(NC);
+	}
+	return (1);
 }
