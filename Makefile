@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2019/12/10 05:52:44 by mabayle          ###   ########.fr        #
+#    Updated: 2020/01/20 06:06:18 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,11 @@ SRC		:=	main.c \
 			parser/grammar/program.c \
 			parser/grammar/separator_op.c \
 			parser/grammar/separator.c \
-			parser/grammar/simple_command.c
+			parser/grammar/simple_command.c \
+			ast/ast.c \
+			ast/process_ast.c \
+			ast/print_ast.c \
+			ast/ast_utils.c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

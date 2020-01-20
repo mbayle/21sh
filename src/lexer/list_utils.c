@@ -6,26 +6,29 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:17:16 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/03 03:38:49 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/09 03:29:31 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "projectinclude.h"
+#include "libft.h"
 
 t_lex	*list_new(char *input)
 {
 	t_lex	*new;
 
-	if (!(new = (t_lex *)malloc(sizeof(*new))))
+	if (!(new = ft_memalloc(sizeof(*new))))
 		return (NULL);
 	if (input == NULL)
 		new->value = NULL;
 	else
 		new->value = ft_strdup(input);
 	new->hdoc = NULL;
+	new->pos = g_shell->lex_size;
 	new->token = 0;
 	new->operator = 0;
 	new->hdoc_delim = 0;
+	new->priority = 0;
 	new->next = NULL;
 	return (new);
 }

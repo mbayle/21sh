@@ -5,14 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/30 04:53:07 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 04:37:55 by mabayle          ###   ########.fr       */
+/*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
+/*   Updated: 2020/01/20 06:17:06 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "sh.h"
-#include "libft.h"
+#include "projectinclude.h"
 
 /*
 ** GENERAL NOTE
@@ -88,7 +86,7 @@ void	dbg_core_manager(t_env *env)
 	}
 }
 
-t_21sh	*init_shell(t_env *env)
+t_21sh	*init_shell(t_env *env, int debug)
 {
 	t_21sh		*shell;
 
@@ -97,6 +95,7 @@ t_21sh	*init_shell(t_env *env)
 	shell->lex = NULL;
 	shell->lex_size = 0;
 	shell->ast = NULL;
+	shell->debug = debug;
 	return (shell);
 }
 
@@ -104,14 +103,15 @@ t_21sh	*init_shell(t_env *env)
 ** MAIN AND INSTANTIATION SHITLOAD
 */
 
-int		main(void)
+int		main(int argc, char **argv)
 {
 	t_env	env;
 
 	env.edl.line = NULL;
 	edl_key_assoc(&env.edl);
 	edl_fun_assoc(&env.edl);
-	g_shell = init_shell(&env);
+	argc == 2 && ft_strcmp(argv[1], "DEBUG") == 0 
+		? (g_shell = init_shell(&env, 1)) : (g_shell = init_shell(&env, 0));
 	if (tcgetattr(0, &env.term) == 0)
 	{
 		sh_term_switch(env.term, 1);

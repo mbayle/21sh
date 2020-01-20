@@ -6,13 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/13 00:41:08 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/20 06:27:04 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
-#include "grammar.h"
-#include "lexer.h"
+#include "projectinclude.h"
 
 t_lex	*next_token(t_lex *lex)
 {
@@ -80,8 +78,9 @@ int	ft_parse(t_lex **lex)
 	else
 	{
 		ft_putstr(GREEN);
-        ft_putendl("No parse error");
+        ft_putendl("No parse error\n");
         ft_putstr(NC);
+		build_ast(g_shell->lex, &g_shell->ast);
 	}
 	return (1);
 }

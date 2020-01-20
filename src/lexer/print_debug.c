@@ -6,64 +6,113 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:22:48 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/06 07:36:21 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/19 23:07:03 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/lexer.h"
+#include "projectinclude.h"
 
-void	ft_print_debug(t_lex **lex)
+void	ft_print_header(t_lex **lex)
+{
+	ft_putstr(PURPLE);
+	ft_putendl("Lexer debug :");
+	ft_putstr(NC);
+	ft_putstr(" -----------------------------------------------------------");
+	ft_putendl("----------------------");
+	ft_putstr("|             TOKEN            	 | PRIORITY | POSITION |");
+	ft_putendl("    	VALUE		  |");
+	ft_putstr(" -----------------------------------------------------------");
+	ft_putendl("----------------------");
+	ft_print_debug(lex);
+}
+
+void	ft_print_control_op(enum e_operator op)
+{
+	ft_putstr("   CONTROL_OPE = ");
+	if (op == OTHER)
+		ft_putstr("   NOT A CONTROL_OPE                          ");
+	else if (op == SEMIC)
+		ft_putstr("SEMIC           ");
+	else if (op == DSEMIC)
+		ft_putstr("DSEMIC          ");
+	else if (op == PIPE)
+		ft_putstr("PIPE            ");
+	else if (op == DPIPE)
+		ft_putstr("DPIPE           ");
+	else if (op == AND)
+		ft_putstr("AND             ");
+	else if (op == DAND)
+		ft_putstr("DAND            ");
+}
+
+void	ft_print_redir_op(enum e_operator op)
+{
+	ft_putstr("   REDIR_OPE = ");
+	if (op == OTHER)
+		ft_putstr("   NOT A REDIR_OPE                            ");
+	else if (op == LESS)
+		ft_putstr("LESS              ");
+	else if (op == DLESS)
+		ft_putstr("DLESS             ");
+	else if (op == GREAT)
+		ft_putstr("GREAT             ");
+	else if (op == DGREAT)
+		ft_putstr("DGREAT            ");
+	else if (op == LESS_AND)
+		ft_putstr("LESS_AND          ");
+	else if (op == GREAT_AND)
+		ft_putstr("GREAT_AND         ");
+	else if (op == LESS_GREAT)
+		ft_putstr("LESS_GREAT        ");
+	else if (op == DLESS_DASH)
+		ft_putstr("DLESS_DASH        ");
+	else if (op == CLOBBER)
+		ft_putstr("CLOBBER           ");
+}
+
+void	ft_print_token(t_lex **lex)
 {
 	if ((*lex)->token == WORD)
 		ft_putstr("   WORD                          ");
 	else if ((*lex)->token == CONTROL_OPE)
-	{
-		ft_putstr("   CONTROL_OPE = ");
-		if ((*lex)->operator == OTHER)
-			ft_putstr("   NOT A CONTROL_OPE                          ");
-		else if ((*lex)->operator == SEMIC)
-			ft_putstr("SEMIC           ");
-		else if ((*lex)->operator == DSEMIC)
-			ft_putstr("DSEMIC          ");
-		else if ((*lex)->operator == PIPE)
-			ft_putstr("PIPE            ");
-		else if ((*lex)->operator == DPIPE)
-			ft_putstr("DPIPE           ");
-		else if ((*lex)->operator == AND)
-			ft_putstr("AND             ");
-		else if ((*lex)->operator == DAND)
-			ft_putstr("DAND            ");
-	}
+		ft_print_control_op((*lex)->operator);
 	else if ((*lex)->token == REDIR_OPE)
-	{
-		ft_putstr("   REDIR_OPE = ");
-		if ((*lex)->operator == OTHER)
-			ft_putstr("   NOT A REDIR_OPE                            ");
-		else if ((*lex)->operator == LESS)
-			ft_putstr("LESS              ");
-		else if ((*lex)->operator == DLESS)
-			ft_putstr("DLESS             ");
-		else if ((*lex)->operator == GREAT)
-			ft_putstr("GREAT             ");
-		else if ((*lex)->operator == DGREAT)
-			ft_putstr("DGREAT            ");
-		else if ((*lex)->operator == LESS_AND)
-			ft_putstr("LESS_AND          ");
-		else if ((*lex)->operator == GREAT_AND)
-			ft_putstr("GREAT_AND         ");
-		else if ((*lex)->operator == LESS_GREAT)
-			ft_putstr("LESS_GREAT        ");
-		else if ((*lex)->operator == DLESS_DASH)
-			ft_putstr("DLESS_DASH        ");
-		else if ((*lex)->operator == CLOBBER)
-			ft_putstr("CLOBBER           ");
-	}
+		ft_print_redir_op((*lex)->operator);
 	else if ((*lex)->token == IO_NUMBER)
 		ft_putstr("   IO_NUMBER                     ");
 	else if ((*lex)->token == ASSIGN_WORD)
 		ft_putstr("   ASSIGN_WORD                   ");
 	else if ((*lex)->token == NEW_LINE)
 		ft_putstr("   NEW_LINE                      ");
-	else if((*lex)->token == UNKNOWN)
+	else if ((*lex)->token == UNKNOWN)
 		ft_putstr("   UNKNOWN                       ");
+}
+
+void	ft_print_debug(t_lex **lex)
+{
+	t_lex *tmp;
+
+	tmp = (*lex);
+	(*lex) = tmp;
+	init_priority(*lex);
+	while ((*lex))
+	{
+		ft_putstr(CYAN);
+		ft_print_token(lex);
+		ft_putstr(NC);
+		write(1, "|     ", 6);
+		ft_putstr(RED);
+		ft_putnbr((*lex)->priority);
+		ft_putstr(NC);
+		write(1, "    |    ", 9);
+		ft_putnbr((*lex)->pos);
+		(*lex)->pos <= 9 ? write(1, "     |    ", 10)
+			: write(1, "    |     ", 9);
+		ft_putstr(L_BLUE);
+		ft_putendl((*lex)->value);
+		(*lex) = (*lex)->next;
+	}
+	ft_putstr(NC);
+	write(1, "\n", 1);
+	(*lex) = tmp;
 }

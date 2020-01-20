@@ -6,11 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/25 23:45:56 by mabayle           #+#    #+#             */
-/*   Updated: 2019/11/26 02:33:57 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/20 06:23:16 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "grammar.h"
+#include "projectinclude.h"
 
 /*
 ** Objectif de la fonction : balancing function for all case (separator_op)

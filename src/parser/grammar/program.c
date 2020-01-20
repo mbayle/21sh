@@ -6,11 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 01:46:22 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/09 23:42:05 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/20 06:23:16 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "grammar.h"
+#include "projectinclude.h"
 
 int     program(t_lex *lex)
 {

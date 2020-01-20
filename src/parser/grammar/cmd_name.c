@@ -6,11 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 01:24:10 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/10 05:43:06 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/20 06:23:16 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "grammar.h"
+#include "projectinclude.h"
 
 /*
 ** Objectif de la fonction : check if lex->next->value == WORD and apply

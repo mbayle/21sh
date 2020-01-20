@@ -6,11 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 01:57:47 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/10 05:50:20 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/20 06:23:16 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "grammar.h"
+#include "projectinclude.h"
 
 /*
 ** Objectif de a fonction : check if str is a valid name (posix grammar)
