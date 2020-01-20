@@ -6,7 +6,7 @@
 /*   By: alalonzo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/12 12:12:26 by alalonzo          #+#    #+#             */
-/*   Updated: 2020/01/20 02:57:22 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/02/04 18:32:40 by alalonzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
-void				ft_putendl_col(char *str, char *color, char *reset);
-void				ft_padding(int padd);
 
 int					ft_isspace(int c);
 int					ft_isblank(int c);

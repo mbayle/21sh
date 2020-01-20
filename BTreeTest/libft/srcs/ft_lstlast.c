@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alalonzo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:24:35 by alalonzo          #+#    #+#             */
-/*   Updated: 2020/01/06 05:11:53 by mabayle          ###   ########.fr       */
+/*   Created: 2016/12/03 17:57:30 by alalonzo          #+#    #+#             */
+/*   Updated: 2017/03/20 16:15:18 by alalonzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memalloc(size_t size)
+t_list	*ft_lstlast(t_list *lst)
 {
-	char	*mem;
-
-	if (!(mem = (char *)malloc(sizeof(*mem) * size)))
-		ft_putendl_fd("malloc error", 1);
-	while (size--)
-		mem[size] = 0;
-	return ((void *)mem);
+	if (!lst)
+	{
+		return (NULL);
+	}
+	while (lst->next != NULL)
+	{
+		lst = lst->next;
+	}
+	return (lst);
 }

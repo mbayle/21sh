@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alalonzo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:24:35 by alalonzo          #+#    #+#             */
-/*   Updated: 2020/01/06 05:11:53 by mabayle          ###   ########.fr       */
+/*   Created: 2016/11/12 12:55:05 by alalonzo          #+#    #+#             */
+/*   Updated: 2017/04/02 19:03:24 by alalonzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memalloc(size_t size)
+void	ft_putnbr_fd(int nb, int fd)
 {
-	char	*mem;
+	long int nbr;
 
-	if (!(mem = (char *)malloc(sizeof(*mem) * size)))
-		ft_putendl_fd("malloc error", 1);
-	while (size--)
-		mem[size] = 0;
-	return ((void *)mem);
+	nbr = (long int)nb;
+	if (nbr < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nbr = nbr * -1;
+	}
+	if (nbr > 9)
+	{
+		ft_putnbr_fd(nbr / 10, fd);
+		ft_putnbr_fd(nbr % 10, fd);
+	}
+	else
+	{
+		ft_putchar_fd(nbr + '0', fd);
+	}
 }

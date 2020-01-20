@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 01:57:25 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/10 05:53:06 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/13 00:41:18 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@
 ** PARSER.C
 */
 
-int	ft_parse(t_lex **lex, t_ast **ast);
+int	ft_parse(t_lex **lex);
 
 #endif

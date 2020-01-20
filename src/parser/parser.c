@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/10 05:52:23 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/13 00:41:08 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ char		*check_tokenerror(t_lex *lex)
 }
 
 
-int	ft_parse(t_lex **lex, t_ast **ast)
+int	ft_parse(t_lex **lex)
 {
-	(void) ast;
 	t_lex	*current;
 	char	*error;
 

@@ -6,13 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/13 00:40:43 by mabayle          ###   ########.fr       */
+/*   Updated: 2019/12/17 04:22:59 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "../../includes/parser.h"
-
+#include "projectinclude.h"
 
 int		find_end(int i, char *input)
 {
@@ -105,32 +103,40 @@ void	ft_lexer(t_lex **lex, char *input)
 		input = input + i++;
 	}
 	t_lex *tmp = (*lex);
-	g_shell->lex_size != 0 && tmp && tmp->token != UNKNOWN ? valid(lex, "__EOI__", io_nbr, assignword, 0) : 0;
+	(g_shell->lex_size != 0 && tmp && tmp->token != UNKNOWN) ? valid(lex, "__EOI__", io_nbr, assignword, 0) : 0;
+		
 	/*****  DEBUG *****/
+	
+	(*lex) = tmp;
+	init_priority(*lex);
+	(*lex) = tmp;
 	if (tmp)
 	{
 		ft_putstr(PURPLE);
 		ft_putendl("Lexer debug :");
 		ft_putstr(NC);
-		ft_putendl(" --------------------------------------------------------------------------------------------------------------");
-		ft_putendl("|             TOKEN            	|	    		VALUE						       |");
-		ft_putendl(" --------------------------------------------------------------------------------------------------------------");
+		ft_putendl(" ---------------------------------------------------------------------------------------------------------");
+		ft_putendl("|             TOKEN            	| PRIORITY |				VALUE	     			  |");
+		ft_putendl(" ---------------------------------------------------------------------------------------------------------");
 		while ((*lex))
 		{
 			ft_putstr(CYAN);
 			ft_print_debug(lex);
+			ft_putstr(RED);
+			write(1,"  ", 2);
+			ft_putnbr((*lex)->priority);
+			write(1,"         ", 9);
 			ft_putstr(L_BLUE);
 			ft_putendl((*lex)->value);
 			(*lex) = (*lex)->next;
 		}
+		ft_putstr(NC);
 		write(1, "\n", 1);
 	}
-	
+
 	/*****  FIN DEBUG ******/
-	
 	(*lex) = tmp;
-	
-	ft_parse(lex);
+	build_ast(g_shell->lex, g_shell->ast);
 	// Fonction add history a rajouter si ft_parser ok
 	lexdel(lex);
 	return ;

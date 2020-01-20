@@ -2,8 +2,6 @@ NAME = libft.a
 
 CC = gcc
 
-DEBUG := 0
-
 FLAGS = -Wall -Wextra -Werror
 
 C_PATH = ./srcs/
@@ -26,8 +24,7 @@ SRCS_F = ft_bzero.c ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c \
 		 ft_toupper.c ft_tolower.c ft_strtolower.c \
 		 ft_atoi.c ft_itoa.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 		 ft_isblank.c ft_iscntrl.c ft_isdigit.c ft_islower.c ft_isprint.c \
-		 ft_ispunct.c ft_isspace.c ft_isupper.c get_next_line.c ft_padding.c \
-		 ft_putendl_col.c
+		 ft_ispunct.c ft_isspace.c ft_isupper.c get_next_line.c
 
 OBJS_F = $(SRCS_F:.c=.o)
 

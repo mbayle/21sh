@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alalonzo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 17:24:35 by alalonzo          #+#    #+#             */
-/*   Updated: 2020/01/06 05:11:53 by mabayle          ###   ########.fr       */
+/*   Created: 2016/12/03 18:22:01 by alalonzo          #+#    #+#             */
+/*   Updated: 2017/03/20 16:12:41 by alalonzo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memalloc(size_t size)
+void	ft_lstadd_back(t_list **alst, void *data)
 {
-	char	*mem;
+	size_t	data_size;
+	t_list	*new;
+	t_list	*last;
 
-	if (!(mem = (char *)malloc(sizeof(*mem) * size)))
-		ft_putendl_fd("malloc error", 1);
-	while (size--)
-		mem[size] = 0;
-	return ((void *)mem);
+	data_size = ft_strlen((char *)data);
+	if (!alst || !(new = ft_lstnew(data, data_size)))
+	{
+		return ;
+	}
+	last = ft_lstlast(*alst);
+	last->next = new;
 }
