@@ -1,9 +1,0 @@
-Etat du travail
-- linebreak2 = /* empty */
-    verifier si '\n' avant '\0'
-        Si jamais oui ==> EOI
-Linebreak fait une fin de commande
-
-- Parfois 2 token EOI successif sont creer
-
-- pleins de LEAK...... (while 1 ....)
