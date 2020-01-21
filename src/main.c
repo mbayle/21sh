@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/20 06:17:06 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 02:51:40 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,14 @@ t_21sh	*init_shell(t_env *env, int debug)
 int		main(int argc, char **argv)
 {
 	t_env	env;
+	int		debug;
 
 	env.edl.line = NULL;
+	debug = 0;
 	edl_key_assoc(&env.edl);
 	edl_fun_assoc(&env.edl);
-	argc == 2 && ft_strcmp(argv[1], "DEBUG") == 0 
-		? (g_shell = init_shell(&env, 1)) : (g_shell = init_shell(&env, 0));
+	argc == 2 && ft_strcmp(argv[1], "DEBUG") == 0 ? debug++ : 0;
+	g_shell = init_shell(&env, debug);
 	if (tcgetattr(0, &env.term) == 0)
 	{
 		sh_term_switch(env.term, 1);

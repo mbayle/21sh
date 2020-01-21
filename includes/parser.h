@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/30 01:57:25 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/13 00:41:18 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 02:44:49 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
 
-#include "lexer.h"
+# include "lexer.h"
 
 /*
 ** PARSER.C

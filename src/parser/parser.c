@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/20 06:27:04 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 00:26:34 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_lex	*next_token(t_lex *lex)
 	return (lex);
 }
 
-char		*check_tokenerror(t_lex *lex)
+char	*check_tokenerror(t_lex *lex)
 {
 	t_lex	*next_tok;
 
@@ -29,7 +29,7 @@ char		*check_tokenerror(t_lex *lex)
 	while (lex)
 	{
 		if (lex->operator == DSEMIC || lex->operator == CLOBBER
-			|| lex->operator == LESS_GREAT || lex->operator == DLESS_DASH)
+				|| lex->operator == LESS_GREAT || lex->operator == DLESS_DASH)
 			return (lex->value);
 		if (lex->token == REDIR_OPE && lex->next && lex->next->token != WORD)
 		{
@@ -39,15 +39,14 @@ char		*check_tokenerror(t_lex *lex)
 				return (lex->next->value);
 		}
 		if (lex->token == CONTROL_OPE && (next_tok = next_token(lex))
-			&& next_tok->token == CONTROL_OPE)
+				&& next_tok->token == CONTROL_OPE)
 			return (next_tok->value);
 		lex = lex->next;
 	}
 	return (NULL);
 }
 
-
-int	ft_parse(t_lex **lex)
+int		ft_parse(t_lex **lex)
 {
 	t_lex	*current;
 	char	*error;
@@ -78,8 +77,8 @@ int	ft_parse(t_lex **lex)
 	else
 	{
 		ft_putstr(GREEN);
-        ft_putendl("No parse error\n");
-        ft_putstr(NC);
+		ft_putendl("No parse error\n");
+		ft_putstr(NC);
 		build_ast(g_shell->lex, &g_shell->ast);
 	}
 	return (1);
