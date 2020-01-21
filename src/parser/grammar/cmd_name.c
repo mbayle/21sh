@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 01:24:10 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:07:04 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : check if lex->next->value == WORD and apply
+** Purpose of the function : check if lex->next->value == WORD and apply
 **							rule 7a of posix grammar :
 **							If the TOKEN does not contain the character '=',
 **							rule 1 is applied. Otherwise, 7b shall be applied.

@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 02:38:23 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:27:23 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : balancing function for all case (io_redirect)
+** Purpose of the function : balancing function for all case (io_redirect)
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -32,7 +32,7 @@ int		io_redirect(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex->token == IO_NUMBER et io_file ok
+** Purpose of the function : check if lex->token == IO_NUMBER et io_file ok
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -42,7 +42,7 @@ int		io_redirect1(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex->token == IO_NUMBER et io_here ok
+** Purpose of the function : check if lex->token == IO_NUMBER et io_here ok
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -52,7 +52,7 @@ int		io_redirect2(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if io_file is ok
+** Purpose of the function : check if io_file is ok
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -62,7 +62,7 @@ int		io_redirect3(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if io_here is ok
+** Purpose of the function : check if io_here is ok
 ** Valeur de retour : return 1 if match | else return 0
 */
 

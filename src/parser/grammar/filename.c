@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 00:07:35 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:18:37 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : check if lex->next->value == WORD
+** Purpose of the function : check if lex->next->value == WORD
 ** Valeur de retour : return 1 if match | else return 0
 */
 

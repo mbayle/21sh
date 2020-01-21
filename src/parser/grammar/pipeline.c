@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 02:15:41 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:37:08 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : balancing function for all case (pipeline)
+** Purpose of the function : balancing function for all case (pipeline)
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -28,7 +28,7 @@ int		pipeline(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if first char is "!" + pipe_sequence
+** Purpose of the function : check if first char is "!" + pipe_sequence
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -38,7 +38,7 @@ int		pipeline1(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == pipe_sequence
+** Purpose of the function : check if lex == pipe_sequence
 ** Valeur de retour : return 1 if match | else return 0
 */
 

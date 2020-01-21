@@ -6,11 +6,17 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:19:31 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/18 04:11:51 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:50:14 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+/*
+** Purpose of the function : Use ft_strcmp(<token_value>, <SEARCH>) and if
+**							function return 0 assigns a new type to my token
+** Return value : no return
+*/
 
 void	is_operator(t_lex *new)
 {
@@ -32,6 +38,12 @@ void	is_operator(t_lex *new)
 	else
 		new->token = 0;
 }
+
+/*
+** Purpose of the function : Use ft_strcmp(<token_value>, <SEARCH>) and if
+**							function return 0 assigns a new type to my token
+** Return value : no return
+*/
 
 void	is_redirection(t_lex *new)
 {
@@ -62,6 +74,15 @@ void	is_redirection(t_lex *new)
 		new->token = 0;
 }
 
+/*
+** Purpose of the function : Check if my token is an assignment_word
+** Steps  : 1 - Check error case (no "=" inside new->value or start with a
+**				digit)
+**			2 - Default : If all characters before '=' form a valid name
+**				token ASSIGN_WORD shall be returned
+** Return value : no return
+*/
+
 void	is_assignword(t_lex *new)
 {
 	int		i;
@@ -78,6 +99,16 @@ void	is_assignword(t_lex *new)
 	}
 	new->token = ASSIGN_WORD;
 }
+
+/*
+** Purpose of the function : Assigns a type
+** Steps  : 1 - First check IO_NUMBER value
+**			2 - Newline case : set token type and change new->value
+**			3 - Test control and redirection operator
+**			4 - Special case for ASSIGN_WORD (posix grammar)
+**			5 - Terminal token case (UNKNOWN type)
+** Return value : no return
+*/
 
 void	token_type(t_lex *new, int io_nbr, int assignword)
 {

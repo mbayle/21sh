@@ -6,11 +6,16 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:22:48 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/19 23:07:03 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 07:04:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+/*
+** Purpose of the function : Print header
+** Return value : no return
+*/
 
 void	ft_print_header(t_lex **lex)
 {
@@ -25,6 +30,11 @@ void	ft_print_header(t_lex **lex)
 	ft_putendl("----------------------");
 	ft_print_debug(lex);
 }
+
+/*
+** Purpose of the function : Special case for control operator
+** Return value : no return
+*/
 
 void	ft_print_control_op(enum e_operator op)
 {
@@ -44,6 +54,11 @@ void	ft_print_control_op(enum e_operator op)
 	else if (op == DAND)
 		ft_putstr("DAND            ");
 }
+
+/*
+** Purpose of the function : Special case for redirection operator
+** Return value : no return
+*/
 
 void	ft_print_redir_op(enum e_operator op)
 {
@@ -70,6 +85,12 @@ void	ft_print_redir_op(enum e_operator op)
 		ft_putstr("CLOBBER           ");
 }
 
+/*
+** Purpose of the function : Default print type of token (except for control
+**							and redirection operator)
+** Return value : no return
+*/
+
 void	ft_print_token(t_lex **lex)
 {
 	if ((*lex)->token == WORD)
@@ -87,6 +108,12 @@ void	ft_print_token(t_lex **lex)
 	else if ((*lex)->token == UNKNOWN)
 		ft_putstr("   UNKNOWN                       ");
 }
+
+/*
+** Purpose of the function : Loop all over my list and print detailled view of
+**							my list
+** Return value : no return
+*/
 
 void	ft_print_debug(t_lex **lex)
 {

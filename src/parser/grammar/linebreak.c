@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 03:43:06 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:29:09 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : balancing function for all case (linebreak)
+** Purpose of the function : balancing function for all case (linebreak)
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -28,7 +28,7 @@ int		linebreak(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex->value = newline_list
+** Purpose of the function : check if lex->value = newline_list
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -41,7 +41,7 @@ int		linebreak1(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex->value exist ??
+** Purpose of the function : check if lex->value exist ??
 ** Valeur de retour : return 1 if match | else return 0
 */
 

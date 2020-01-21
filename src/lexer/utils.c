@@ -6,11 +6,17 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2019/12/17 00:22:29 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 07:03:22 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+/*
+** Purpose of the function : Search the next characters match with a redirection
+**							operator
+** Return value : if match return size of the operator | else return 0
+*/
 
 int		check_redir(char *input)
 {
@@ -26,6 +32,11 @@ int		check_redir(char *input)
 	else
 		return (0);
 }
+
+/*
+** Purpose of the function : Search the next characters match with an operator
+** Return value : if match return size of the operator | else return 0
+*/
 
 int		check_operator(char *input)
 {
@@ -43,6 +54,11 @@ int		check_operator(char *input)
 	else
 		return (0);
 }
+
+/*
+** Purpose of the function : Looking for final quote
+** Return value : return index of last quote (if match) else return -1 (error)
+*/
 
 int		quote_case(int i, char *input)
 {
@@ -67,6 +83,11 @@ int		quote_case(int i, char *input)
 	}
 	return (i);
 }
+
+/*
+** Purpose of the function : Check function
+** Return value : return 1 if it's a space or a tab | else return 0
+*/
 
 int		ft_is_separator(char c)
 {

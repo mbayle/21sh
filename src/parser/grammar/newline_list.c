@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 00:57:02 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:33:58 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : balancing function for all case (newline_list)
+** Purpose of the function : balancing function for all case (newline_list)
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -28,7 +28,7 @@ int		newline_list(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex->value == newline_list AND
+** Purpose of the function : check if lex->value == newline_list AND
 **							lex->next->value == NEW_LINE
 ** Valeur de retour : return 1 if match | else return 0
 */
@@ -45,7 +45,7 @@ int		newline_list1(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex->value == NEW_LINE
+** Purpose of the function : check if lex->value == NEW_LINE
 ** Valeur de retour : return 1 if match | else return 0
 */
 

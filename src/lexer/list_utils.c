@@ -6,12 +6,18 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:17:16 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/09 03:29:31 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 07:04:02 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 #include "libft.h"
+
+/*
+** Purpose of the function : Create new node
+**							Initialize all variables and set name and position
+** Return value : New node
+*/
 
 t_lex	*list_new(char *input)
 {
@@ -33,6 +39,11 @@ t_lex	*list_new(char *input)
 	return (new);
 }
 
+/*
+** Purpose of the function : Add to the end of list
+** Return value : no return
+*/
+
 void	list_add(t_lex **alst, t_lex *new)
 {
 	t_lex		*tmp;
@@ -50,6 +61,11 @@ void	list_add(t_lex **alst, t_lex *new)
 	}
 }
 
+/*
+** Purpose of the function : Find next element of my list
+** Return value : Return the last element
+*/
+
 t_lex	*lex_last(t_lex *lst)
 {
 	if (lst == NULL)
@@ -58,6 +74,11 @@ t_lex	*lex_last(t_lex *lst)
 		lst = lst->next;
 	return (lst);
 }
+
+/*
+** Purpose of the function : Free variables in node
+** Return value : no return
+*/
 
 void	lex_suppr_elem(t_lex **elem)
 {
@@ -70,6 +91,12 @@ void	lex_suppr_elem(t_lex **elem)
 	suppr->next = NULL;
 	free(suppr);
 }
+
+/*
+** Purpose of the function : loop on my entire list and call anathor function
+**							for free each node
+** Return value : no return
+*/
 
 void	lexdel(t_lex **alst)
 {

@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 01:14:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:06:37 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : balancing function for all case (cmd_prefix)
+** Purpose of the function : balancing function for all case (cmd_prefix)
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -32,7 +32,7 @@ int		cmd_prefix(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == cmd_prefix + io_redirect
+** Purpose of the function : check if lex == cmd_prefix + io_redirect
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -46,7 +46,7 @@ int		cmd_prefix1(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == cmd_prefix + ASSIGNEMENT_WORD
+** Purpose of the function : check if lex == cmd_prefix + ASSIGNEMENT_WORD
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -60,7 +60,7 @@ int		cmd_prefix2(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == io_redirec ok
+** Purpose of the function : check if lex == io_redirec ok
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -70,7 +70,7 @@ int		cmd_prefix3(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == ASSIGNEMENT_WORDß
+** Purpose of the function : check if lex == ASSIGNEMENT_WORDß
 ** Valeur de retour : return 1 if match | else return 0
 */
 

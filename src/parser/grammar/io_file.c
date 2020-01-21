@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 01:27:15 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:23:29 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : test all cases (io_file)
+** Purpose of the function : test all cases (io_file)
 ** Valeur de retour : return 1 if match | else return 0
 */
 

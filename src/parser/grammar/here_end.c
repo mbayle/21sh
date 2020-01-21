@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 05:07:46 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:22:41 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : check if lex->next->value == WORD and apply
+** Purpose of the function : check if lex->next->value == WORD and apply
 **							rule 3 of posix grammar :
 **							Quote removal shall be applied to the word to
 **							determine the delimiter that is used to find the

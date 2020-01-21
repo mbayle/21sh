@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 23:49:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:25:14 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : balancing function for all case (io_here)
+** Purpose of the function : balancing function for all case (io_here)
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -28,7 +28,7 @@ int		io_here(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex->value = << + here_end
+** Purpose of the function : check if lex->value = << + here_end
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -41,7 +41,7 @@ int		io_here1(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex->value = newline_list
+** Purpose of the function : check if lex->value = newline_list
 ** Valeur de retour : return 1 if match | else return 0
 */
 

@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 00:22:25 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:35:57 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : balancing function for all case (pipe_sequence)
+** Purpose of the function : balancing function for all case (pipe_sequence)
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -28,7 +28,7 @@ int		pipe_sequence(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == simple_command + '|' +
+** Purpose of the function : check if lex == simple_command + '|' +
 **                           linebreak + simple_command
 ** Valeur de retour : return 1 if match | else return 0
 */
@@ -48,7 +48,7 @@ int		pipe_sequence1(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == simple_command
+** Purpose of the function : check if lex == simple_command
 ** Valeur de retour : return 1 if match | else return 0
 */
 

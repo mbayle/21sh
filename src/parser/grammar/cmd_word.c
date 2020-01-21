@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 01:57:47 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:15:27 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : check if str is a valid name (posix grammar)
+** Purpose of the function : check if str is a valid name (posix grammar)
 **							Definition :
 **							In the shell command language, a word consisting
 **							solely of underscores, digits, and alphabetics
@@ -41,7 +41,7 @@ int		valid_name(char *str)
 }
 
 /*
-** Objectif de la fonction : check if lex->next->value == WORD and apply
+** Purpose of the function : check if lex->next->value == WORD and apply
 **							rule 7b of posix grammar :
 **							If the TOKEN contains an unquoted (as determined
 **							while applying rule 4 from Token Recognition)

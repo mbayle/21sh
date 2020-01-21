@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 05:17:27 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:09:37 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : balancing function for all case (cmd_suffix)
+** Purpose of the function : balancing function for all case (cmd_suffix)
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -32,7 +32,7 @@ int		cmd_suffix(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == cmd_suffix + io_redirect
+** Purpose of the function : check if lex == cmd_suffix + io_redirect
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -50,7 +50,7 @@ int		cmd_suffix1(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == cmd_suffix + WORD
+** Purpose of the function : check if lex == cmd_suffix + WORD
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -64,7 +64,7 @@ int		cmd_suffix2(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == io_redirec ok
+** Purpose of the function : check if lex == io_redirec ok
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -74,7 +74,7 @@ int		cmd_suffix3(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == WORDß
+** Purpose of the function : check if lex == WORDß
 ** Valeur de retour : return 1 if match | else return 0
 */
 

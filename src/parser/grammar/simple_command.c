@@ -6,14 +6,14 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 05:50:51 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:42:53 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
 /*
-** Objectif de la fonction : balancing function for all case (simple_command)
+** Purpose of the function : balancing function for all case (simple_command)
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -32,7 +32,7 @@ int		simple_command(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == cmd_prefix + cmd_word + cmd_suffix
+** Purpose of the function : check if lex == cmd_prefix + cmd_word + cmd_suffix
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -43,7 +43,7 @@ int		simple_command1(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == cmd_prefix + cmd_word
+** Purpose of the function : check if lex == cmd_prefix + cmd_word
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -53,7 +53,7 @@ int		simple_command2(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == cmd_name + cmd_suffix
+** Purpose of the function : check if lex == cmd_name + cmd_suffix
 ** Valeur de retour : return 1 if match | else return 0
 */
 
@@ -63,7 +63,7 @@ int		simple_command3(t_lex *lex)
 }
 
 /*
-** Objectif de la fonction : check if lex == cmd_prefix OR lex == cmd_name
+** Purpose of the function : check if lex == cmd_prefix OR lex == cmd_name
 ** Valeur de retour : return 1 if match | else return 0
 */
 
