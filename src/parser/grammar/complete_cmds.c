@@ -6,11 +6,16 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 01:38:07 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:17:58 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/23 05:00:48 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+/*
+** Purpose of the function : balancing function for all case (complete_cmds)
+** Valeur de retour : return 1 if match | else return 0
+*/
 
 int		complete_cmds(t_lex *lex)
 {
@@ -21,6 +26,12 @@ int		complete_cmds(t_lex *lex)
 	else
 		return (0);
 }
+
+/*
+** Purpose of the function : check if lex == complete_cmd + newline_list +
+**							complete_cmd
+** Valeur de retour : return 1 if match | else return 0
+*/
 
 int		complete_cmds1(t_lex *lex)
 {
@@ -35,6 +46,11 @@ int		complete_cmds1(t_lex *lex)
 	else
 		return (0);
 }
+
+/*
+** Purpose of the function : check if lex == complete_cmd
+** Valeur de retour : return 1 if match | else return 0
+*/
 
 int		complete_cmds2(t_lex *lex)
 {

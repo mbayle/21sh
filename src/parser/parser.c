@@ -6,11 +6,16 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 00:26:34 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/22 23:42:51 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+/*
+** Purpose of the function : Find next token (skip newline)
+** Return value : return lexeme
+*/
 
 t_lex	*next_token(t_lex *lex)
 {
@@ -19,6 +24,12 @@ t_lex	*next_token(t_lex *lex)
 		lex = lex->next;
 	return (lex);
 }
+
+/*
+** Purpose of the function : Check obvious error case
+** Return value : if an error is found return  lex->value (error message)
+**				if no error return NULL
+*/
 
 char	*check_tokenerror(t_lex *lex)
 {
@@ -45,6 +56,12 @@ char	*check_tokenerror(t_lex *lex)
 	}
 	return (NULL);
 }
+
+/*
+** Purpose of the function : Check error and after check posix grammar. If
+**							everything is ok call build_ast
+** Return value : If an error is found return 0, else return 1
+*/
 
 int		ft_parse(t_lex **lex)
 {

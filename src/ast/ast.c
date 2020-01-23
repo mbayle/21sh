@@ -6,11 +6,16 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 01:20:24 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/20 03:06:31 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/23 06:05:57 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+/*
+** Purpose of the function : Find next priority and split my tree
+** Return value : return ast
+*/
 
 t_ast	*sub_split(t_ast *ast, int find, int priority)
 {
@@ -41,19 +46,10 @@ t_ast	*sub_split(t_ast *ast, int find, int priority)
 	return (ast);
 }
 
-t_ast	*browse_ast(t_ast *ast, int find, int priority)
-{
-	if ((ast->right || ast->left) && ast->lex->pos < find)
-	{
-		if (ast->lex->pos > find)
-			browse_ast(ast->right, find, priority);
-		if (ast->lex->pos < find)
-			browse_ast(ast->left, find, priority);
-	}
-	else
-		ast = sub_split(ast, find, priority);
-	return (ast);
-}
+/*
+** Purpose of the function : Found next priority and call sub_split
+** Return value : SUCCESS (or no new priority) = return 1 | else return 0
+*/
 
 int		find_priority(t_ast *ast, int priority)
 {
@@ -74,6 +70,12 @@ int		find_priority(t_ast *ast, int priority)
 	}
 	return (1);
 }
+
+/*
+** Purpose of the function : Calculate depth of my tree and find future
+**							priority
+** Return value : return depth of my tree
+*/
 
 int		max_depth(t_ast *ast, int left_depth, int right_depth)
 {
@@ -100,6 +102,16 @@ int		max_depth(t_ast *ast, int left_depth, int right_depth)
 			return (right_depth + 1);
 	}
 }
+
+/*
+** Purpose of the function : Create my AST
+** Steps  : 1 - Get priority for all token
+**			2 - Init root node and build AST with max priority
+**			3 - Split my tree with other priority
+**			4 - Special case = edit value for root node
+**			5 - If debug active -> print AST
+** Return value : return ast
+*/
 
 int		build_ast(t_lex *lex, t_ast **ast)
 {

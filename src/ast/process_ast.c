@@ -6,12 +6,17 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 01:37:00 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/20 00:22:47 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/23 06:18:31 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 #include "lexer.h"
+
+/*
+** Purpose of the function : Saves the right side of my lexer
+** Return value : return only right side
+*/
 
 t_lex	*split_lex2(t_lex *lex, int stop)
 {
@@ -27,6 +32,11 @@ t_lex	*split_lex2(t_lex *lex, int stop)
 	return (new);
 }
 
+/*
+** Purpose of the function : Saves the right left of my lexer
+** Return value : return only left side
+*/
+
 t_lex	*split_lex3(t_lex *lex, int start)
 {
 	t_lex *new;
@@ -38,6 +48,11 @@ t_lex	*split_lex3(t_lex *lex, int start)
 	return (new);
 }
 
+/*
+** Purpose of the function : Change value of lex (for left et right)
+** Return value : return ast
+*/
+
 t_ast	*create_ast2(t_ast *ast, t_lex *current, t_lex *right, t_lex *left)
 {
 	right = split_lex3(g_shell->lex, current->next->pos);
@@ -47,6 +62,11 @@ t_ast	*create_ast2(t_ast *ast, t_lex *current, t_lex *right, t_lex *left)
 	g_shell->lex = right;
 	return (ast);
 }
+
+/*
+** Purpose of the function : Generate my tree with hight priority
+** Return value : return ast
+*/
 
 t_ast	*create_ast(t_ast *ast, int priority)
 {

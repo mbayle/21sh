@@ -6,11 +6,16 @@
 /*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 02:44:00 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/20 02:46:42 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/23 06:11:03 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+/*
+** Purpose of the function : Initialize a new node
+** Return value : return new node
+*/
 
 t_ast	*init_node(t_lex *lex, char *root)
 {
@@ -24,6 +29,11 @@ t_ast	*init_node(t_lex *lex, char *root)
 	new_node->right = NULL;
 	return (new_node);
 }
+
+/*
+** Purpose of the function : Loop and set priority (for each lexeme)
+** Return value : no return
+*/
 
 void	init_priority(t_lex *lex)
 {
@@ -44,6 +54,11 @@ void	init_priority(t_lex *lex)
 		lex = lex->next;
 	}
 }
+
+/*
+** Purpose of the function : Special case, input is a simple command
+** Return value : return AST (with only root node)
+*/
 
 t_ast	*no_root(t_lex *lex, t_ast *ast)
 {

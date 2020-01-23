@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:17:16 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 07:04:02 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/22 23:55:59 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,5 @@ void	lexdel(t_lex **alst)
 	while (current)
 		lex_suppr_elem(&(current));
 	*alst = NULL;
+	g_shell->lex_size = 0;
 }
