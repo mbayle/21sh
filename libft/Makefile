@@ -1,61 +1,125 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
+#    Updated: 2020/01/24 03:13:51 by mabayle          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+.PHONY: all clean fclean re
+
 NAME = libft.a
 
 CC = gcc
+CFLAGS = -Wall -Werror -Wextra -I$(INC_PATH)
 
-DEBUG := 0
+SRC_PATH = ./src/
+SRCS = $(addprefix $(SRC_PATH), $(SRC))
 
-FLAGS = -Wall -Wextra -Werror
+SRC = ft_memset.c \
+	  ft_bzero.c \
+	  ft_memcpy.c \
+	  ft_memccpy.c \
+	  ft_memmove.c \
+	  ft_memchr.c \
+	  ft_memcmp.c \
+	  ft_strlen.c \
+	  ft_strdup.c \
+	  ft_strcpy.c \
+	  ft_strncpy.c \
+	  ft_strcat.c \
+	  ft_strncat.c \
+	  ft_strlcat.c \
+	  ft_strchr.c \
+	  ft_strstr.c \
+	  ft_strnstr.c \
+	  ft_strcmp.c \
+	  ft_strncmp.c \
+	  ft_strrchr.c \
+	  ft_atoi.c \
+	  ft_isalpha.c \
+	  ft_isdigit.c \
+	  ft_isalnum.c \
+	  ft_isascii.c \
+	  ft_isprint.c \
+	  ft_isspace.c \
+	  ft_toupper.c \
+	  ft_tolower.c \
+	  ft_memalloc.c \
+	  ft_memdel.c \
+	  ft_strnew.c \
+	  ft_strdel.c \
+	  ft_strclr.c \
+	  ft_striter.c \
+	  ft_striteri.c \
+	  ft_strmap.c \
+	  ft_strmapi.c \
+	  ft_strequ.c \
+	  ft_strnequ.c \
+	  ft_strsub.c \
+	  ft_strjoin.c \
+	  ft_strjoin_free.c \
+	  ft_strjoin_one.c \
+	  ft_strjoin_onef.c \
+	  ft_strtrim.c \
+	  ft_strsplit.c \
+	  ft_itoa.c \
+	  ft_putchar.c \
+	  ft_putstr.c \
+	  ft_putendl.c \
+	  ft_putnbr.c \
+	  ft_putchar_fd.c \
+	  ft_putstr_fd.c \
+	  ft_putendl_fd.c \
+	  ft_putnbr_fd.c \
+	  ft_tablen.c \
+	  ft_lstnew.c \
+	  ft_lstdelone.c \
+	  ft_lstdel.c \
+	  ft_lstadd.c \
+	  ft_lstiter.c \
+	  ft_lstmap.c \
+	  get_next_line.c \
+	  ft_dlstnew.c \
+	  ft_add_str_to_board.c \
+	  ft_free_array.c \
+	  ft_split_whitespaces.c \
+	  ft_putendl_col.c \
+	  ft_padding.c \
+	  ft_strrev.c
 
-C_PATH = ./srcs/
+OBJ_PATH = ./.obj/
+OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
+OBJ = $(SRC:.c=.o)
 
-O_PATH = ./objs/
+INC_PATH = ./includes/
+INCS = $(addprefix $(INC_PATH), $(INC))
+INC = libft.h
 
-H_PATH = ./includes/
+all: $(NAME)
 
-SRCS_F = ft_bzero.c ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c \
-		 ft_memcpy.c ft_memdel.c ft_memmove.c ft_memreplace.c ft_memrev.c \
-		 ft_memset.c \
-		 ft_putchar.c ft_putchar_fd.c ft_putendl.c ft_putendl_fd.c \
-		 ft_putnbr.c ft_putnbr_fd.c ft_putstr.c ft_putstr_fd.c \
-		 ft_strcat.c ft_strchr.c ft_strchrnul.c ft_strclr.c ft_strcmp.c \
-		 ft_strcpy.c ft_strdel.c ft_strdup.c ft_strequ.c ft_striter.c \
-		 ft_striteri.c ft_strjoin.c ft_strlcat.c ft_strlen.c ft_strmap.c \
-		 ft_strmapi.c ft_strncat.c ft_strncmp.c ft_strncpy.c ft_strnequ.c \
-		 ft_strnew.c ft_strnstr.c ft_strrchr.c ft_strreplace.c ft_strrev.c \
-		 ft_strsplit.c ft_strstr.c ft_strsub.c ft_strtrim.c \
-		 ft_toupper.c ft_tolower.c ft_strtolower.c \
-		 ft_atoi.c ft_itoa.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
-		 ft_isblank.c ft_iscntrl.c ft_isdigit.c ft_islower.c ft_isprint.c \
-		 ft_ispunct.c ft_isspace.c ft_isupper.c get_next_line.c ft_padding.c \
-		 ft_putendl_col.c
-
-OBJS_F = $(SRCS_F:.c=.o)
-
-SRCS = $(addprefix $(C_PATH),$(SRCS_F))
-OBJS = $(addprefix $(O_PATH),$(OBJS_F))
-INCS = $(addprefix -I, $(H_PATH))
-
-all : $(NAME)
-
-$(NAME) : $(OBJS)
-	@echo ""
-	@echo "\033[0;32m Libft build done \033[0m"
-	@echo ""
+$(NAME): $(OBJ_PATH) $(OBJS)
+	@echo "                                                        "
 	@ar rc $(NAME) $(OBJS)
-	@ranlib $(NAME)
 
-$(O_PATH)%.o: $(C_PATH)%.c
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Compiling : \033[0m" $<
-	@mkdir -p objs
-	@$(CC) $(FLAGS) $(INCS) -o $@ -c $<
+$(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INCS)
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Compiling :\033[0m" $<
+	@$(CC) $(CFLAGS) -c $< -o $@
 
-clean :
-	@rm -rf $(OBJS)
-	@rm -rf $(O_PATH)
+$(OBJ_PATH):
+	@mkdir -p $(OBJ_PATH)
+
+clean:
+	@rm -f $(OBJS)
+	@rm -rf $(OBJ_PATH)
 	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Deleted all .o\033[0m"
 
-fclean : clean
-	@rm -rf $(NAME)
+fclean: clean
+	@rm -f $(NAME)
 	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Deleted libft.a\033[0m"
 
-re : fclean all
+re: fclean all
