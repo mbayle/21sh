@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/01/20 06:06:18 by mabayle          ###   ########.fr        #
+#    Updated: 2020/01/24 02:51:27 by jmartel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,13 +78,15 @@ SRC		:=	main.c \
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))
 
+all:
+	@python3 .header.py
+	@make $(NAME)
+
 $(NAME):  $(LIBFT) $(OBJ)
 	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ)
 	@echo ""
 	@echo "\033[0;32m 21sh build done \033[0m"
 	@echo ""
-
-all: $(NAME)
 
 $(LIBFT):	$(dir $(LIBFT))Makefile
 	@make -C $(dir $(LIBFT))
