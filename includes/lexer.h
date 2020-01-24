@@ -3,15 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jmartel <jmartel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:21:06 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/20 06:12:12 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/24 02:40:24 by jmartel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
+
+/*
+** Color
+*/
+# define BLACK			"\033[0;30m"
+# define RED			"\033[0;31m"
+# define GREEN			"\033[0;32m"
+# define YELLOW			"\033[0;33m"
+# define BLUE			"\033[0;34m"
+# define PURPLE			"\033[0;35m"
+# define CYAN			"\033[0;36m"
+# define L_BLUE			"\033[0;94m"
+# define WHITE			"\033[0;37m"
+# define NC				"\033[0m"
 
 /*
 ** ENUM
@@ -83,66 +97,50 @@ typedef struct			s_21sh
 }						t_21sh;
 
 t_21sh					*g_shell;
-
 /*
-** PROTOTYPE
+********************************************************************************
 */
 
 /*
-** LEXER.C
+** lexer.c
 */
-void					ft_lexer(t_lex **lex, char *input);
-void					valid(t_lex **lex, char *input, int io, int i);
-void					invalid(t_lex **lex);
-int						end_case_index(t_lex *lex, char *input, int *io_nbr);
-int						find_end(int i, char *input);
+int					find_end(int i, char *input);
+int					end_case_index(t_lex *lex, char *input, int *io_nbr);
+void				valid(t_lex **lex, char *input, int io, int i);
+void				ft_lexer(t_lex **lex, char *input);
 
 /*
-** LIST_UTILS.C
+** list_utils.c
 */
-t_lex					*list_new(char *input);
-void					list_add(t_lex **alst, t_lex *new);
-t_lex					*lex_last(t_lex *lst);
-void					lexdel(t_lex **alst);
-void					lex_suppr_elem(t_lex **elem);
+t_lex				*list_new(char *input);
+void				list_add(t_lex **alst, t_lex *new);
+t_lex				*lex_last(t_lex *lst);
+void				lex_suppr_elem(t_lex **elem);
+void				lexdel(t_lex **alst);
 
 /*
-** UTILS.C
+** print_debug.c
 */
-int						check_redir(char *input);
-int						check_operator(char *input);
-int						quote_case(int i, char *input);
-int						ft_is_separator(char c);
+void				ft_print_header(t_lex **lex);
+void				ft_print_control_op(enum e_operator op);
+void				ft_print_redir_op(enum e_operator op);
+void				ft_print_token(t_lex **lex);
+void				ft_print_debug(t_lex **lex);
 
 /*
-** PRINT_DEBUG.C
+** type_token.c
 */
-void					ft_print_debug(t_lex **lex);
-void					ft_print_header(t_lex **lex);
-void					ft_print_control_op(enum e_operator op);
-void					ft_print_redir_op(enum e_operator op);
-void					ft_print_token(t_lex **lex);
+void				is_operator(t_lex *new);
+void				is_redirection(t_lex *new);
+void				is_assignword(t_lex *new);
+void				token_type(t_lex *new, int io_nbr, int assignword);
 
 /*
-** TYPE_TOKEN.C
+** utils.c
 */
-void					is_operator(t_lex *new);
-void					is_redirection(t_lex *new);
-void					is_assignword(t_lex *new);
-void					token_type(t_lex *new, int io_nbr, int assignword);
-
-/*
-** Color
-*/
-# define BLACK			"\033[0;30m"
-# define RED			"\033[0;31m"
-# define GREEN			"\033[0;32m"
-# define YELLOW			"\033[0;33m"
-# define BLUE			"\033[0;34m"
-# define PURPLE			"\033[0;35m"
-# define CYAN			"\033[0;36m"
-# define L_BLUE			"\033[0;94m"
-# define WHITE			"\033[0;37m"
-# define NC				"\033[0m"
+int					check_redir(char *input);
+int					check_operator(char *input);
+int					quote_case(int i, char *input);
+int					ft_is_separator(char c);
 
 #endif
