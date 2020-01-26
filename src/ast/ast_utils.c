@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 02:44:00 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/25 04:39:17 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/26 06:16:57 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ t_ast	*no_root(t_lex *lex, t_ast *ast)
 {
 	char *new_root;
 
-	new_root = ast->root;
-	lex->next ? lex = lex->next : 0;
-	while (lex && ft_strcmp(lex->value, "_EOI_") != 0)
+	new_root = ft_strdup("");
+	while (lex && lex->token != UNKNOWN)
 	{
 		new_root = ft_strjoin(new_root, lex->value);
 		new_root = ft_strjoin(new_root, " ");

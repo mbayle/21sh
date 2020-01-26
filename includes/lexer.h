@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmartel <jmartel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:21:06 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/24 02:40:24 by jmartel          ###   ########.fr       */
+/*   Updated: 2020/01/26 06:41:17 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@
 ** Color
 */
 # define BLACK			"\033[0;30m"
+# define L_GRAY			"\e[38;5;249m"
 # define RED			"\033[0;31m"
 # define GREEN			"\033[0;32m"
 # define YELLOW			"\033[0;33m"
+# define L_YELLOW		"\e[38;5;143m"
 # define BLUE			"\033[0;34m"
 # define PURPLE			"\033[0;35m"
 # define CYAN			"\033[0;36m"
