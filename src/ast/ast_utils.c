@@ -6,7 +6,7 @@
 /*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 02:44:00 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/23 06:11:03 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/25 04:39:17 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ t_ast	*no_root(t_lex *lex, t_ast *ast)
 	lex->next ? lex = lex->next : 0;
 	while (lex && ft_strcmp(lex->value, "_EOI_") != 0)
 	{
-		new_root = ft_strcat(new_root, lex->value);
-		new_root = ft_strcat(new_root, " ");
+		new_root = ft_strjoin(new_root, lex->value);
+		new_root = ft_strjoin(new_root, " ");
 		lex = lex->next;
 	}
 	ast->root = new_root;

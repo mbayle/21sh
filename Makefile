@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/01/24 02:51:27 by jmartel          ###   ########.fr        #
+#    Updated: 2020/01/26 02:03:03 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ INCLUDES	:=	./includes
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
 LDFLAGS		:=	-L$(dir $(LIBFT)) -lft
 
-CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES)
+CFLAGS		:=	-Wall -Wextra -Werror -g3 -I$(INCLUDES)
 
 ifeq ($(DEBUG), 1)
 	CFLAGS	:=	$(CFLAGS) -fsanitize=address -ggdb -fno-omit-frame-pointer
