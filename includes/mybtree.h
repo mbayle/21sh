@@ -23,7 +23,8 @@
 */
 t_ast				*sub_split(t_ast *ast, int find, int priority);
 int					find_priority(t_ast *ast, int priority);
-int					max_depth(t_ast *ast, int left_depth, int right_depth);
+int					max_depth(
+	t_ast *ast, int left_depth, int right_depth, int prio);
 int					build_ast(t_lex *lex, t_ast **ast);
 
 /*

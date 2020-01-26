@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 01:37:00 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/23 06:18:31 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/26 07:33:40 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_ast	*create_ast2(t_ast *ast, t_lex *current, t_lex *right, t_lex *left)
 }
 
 /*
-** Purpose of the function : Generate my tree with hight priority
+** Purpose of the function : Generate my tree with highest priority
 ** Return value : return ast
 */
 
