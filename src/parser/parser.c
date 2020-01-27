@@ -6,12 +6,12 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/26 07:52:09 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/01/27 01:00:45 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-#include "stdlib.h" // delete after it's just for expansion part
+#include "stdlib.h" // delete after it's just test getenv
 
 /*
 ** Purpose of the function : Find next token (skip newline)
@@ -107,7 +107,8 @@ char	*dollar_expand(char *value)
 
 	new = ft_strdup("");
 	if (value[0] == '$')
-		new = ft_strjoin_free(new, getenv(&value[1]));
+		new = (getenv(&value[1]) ? ft_strjoin_free(new, getenv(&value[1]))
+			: value);
 	ft_putstr(L_BLUE);
 	ft_putstr("    Dollar expansion work ! New value for lexeme : ");
 	ft_putstr(NC);
