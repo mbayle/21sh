@@ -6,92 +6,17 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 02:51:40 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/03 06:31:50 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
-/*
-** GENERAL NOTE
-** TODO : ajouter la gestion de l'affichage a l'ecran
-** TODO : ajouter la gestion de l'historique
-** TODO : ajouter la gestion des signaux
-** TODO : env->statement handling
-*/
-
-/*
-** KEY FUNCTION SHITLOAD
-*/
-
-int		dbg_key_cn_d(t_env *env)
-{
-	if (env->edl.len == 0)
-		env->loop = 0;
-	return (0);
-}
-
-/*
-** SHLAG PRINTER
-*/
-
-void	edl_print(t_env *env)
-{
-	int		x;
-
-	x = env->edl.opos;
-	while (x)
-	{
-		ft_putstr("\033[D");
-		x--;
-	}
-	ft_putstr(TCL);
-	ft_putstr(env->edl.line);
-	x = env->edl.len;
-	while (x > env->edl.pos)
-	{
-		ft_putstr("\033[D");
-		x--;
-	}
-	env->edl.opos = env->edl.pos;
-}
-
-/*
-** CORE MANAGER SHITLOAD
-*/
-
-void	dbg_core_manager(t_env *env)
-{
-	int	ret;
-
-	env->loop = 42;
-	ret = 0;
-	edl_print(env);
-	while (env->loop)
-	{
-		if (env->edl.line == NULL)
-			ft_putstr("\033[0;36m21sh > \033[0;37m");
-		ret = edl_controller(env);
-		edl_print(env);
-		if (ret == 1)
-		{
-			ft_putchar('\n');
-			g_shell->line = env->edl.line;
-			ft_lexer(&g_shell->lex, g_shell->line);
-			if (ft_strcmp(env->edl.line, "exit") == 0)
-				env->loop = 0;
-			free(env->edl.line);
-			env->edl.line = NULL;
-		}
-	}
-}
-
-t_21sh	*init_shell(t_env *env, int debug)
+t_21sh	*init_shell(int debug)
 {
 	t_21sh		*shell;
 
 	shell = ft_memalloc(sizeof(*shell));
-	shell->env = env;
 	shell->lex = NULL;
 	shell->lex_size = 0;
 	shell->ast = NULL;
@@ -99,26 +24,135 @@ t_21sh	*init_shell(t_env *env, int debug)
 	return (shell);
 }
 
-/*
-** MAIN AND INSTANTIATION SHITLOAD
-*/
-
-int		main(int argc, char **argv)
+static void	init_term(t_struct *s)
 {
-	t_env	env;
-	int		debug;
+	int ret;
+	struct termios	term;
 
-	env.edl.line = NULL;
-	debug = 0;
-	edl_key_assoc(&env.edl);
-	edl_fun_assoc(&env.edl);
-	argc == 2 && ft_strcmp(argv[1], "DEBUG") == 0 ? debug++ : 0;
-	g_shell = init_shell(&env, debug);
-	if (tcgetattr(0, &env.term) == 0)
+	ret = tgetent(NULL, getenv("TERM"));
+	isatty(0);
+	tcgetattr(0, &term);
+	term.c_lflag &= ~(ICANON);
+	tcsetattr(0, TCSANOW, &term);
+	s->prompt = 0;
+	s->av = NULL;
+}
+
+static void	init_struct(t_struct *s, char **envp, int ac, char **av)
+{
+	(void)av;
+	(void)ac;
+	init_term(s);
+	(*s).exit = 0;
+	(*s).env = NULL;
+	(*s).l = NULL;
+	(*s).lbg = NULL;
+	(*s).h = NULL;
+	(*s).first = 0;
+	s->set_cpt = 0;
+	(*s).comp.name = NULL;
+	s->bcom = NULL;
+	s->com = NULL;
+	if (((*s).builtin_ref = init_builtin_ref(0)) == NULL)
+		ft_exit(0, &*s);
+	if (!*envp)
+		(*s).env = NULL;
+	else
 	{
-		sh_term_switch(env.term, 1);
-		dbg_core_manager(&env);
-		sh_term_switch(env.term, 0);
+		if (((*s).env = init_lst_env(NULL, envp, NULL, 0)) == NULL)
+			ft_exit(0, &*s);
+	}
+	if (((*s).env_path = search_pathenv((*s).env)) == NULL)
+		ft_eputstr("minishell: "MAGENTA"warning"
+		WHITE": the PATH environment variable does not exist.\n\0");
+}
+
+static void	tmp_free_struct(t_struct *s, int *c)
+{
+	t_lst	*del;
+
+	*c = 0;
+	while ((del = (*s).lbg))
+	{
+		(*s).lbg = (*s).lbg->next;
+		free(del);
+	}
+	(*s).l = NULL;
+	(*s).lbg = NULL;
+	free_dchar(&(*s).av);
+	free_dchar(&(*s).envi);
+	(*s).av = NULL;
+}
+
+static void	minishell(t_struct *s)
+{
+	(*s).c = check_command(&(*s).av, *s, NULL, 0);
+	if ((*s).c < 2)
+		ft_exit((*s).c, &*s);
+	if ((*s).c > 1)
+		(*s).prompt = 0;
+	if ((*s).c > 2)
+	{
+		if ((exec_builtin(&*s, ((*s).c - 3))) == 0)
+			ft_exit(0, &*s);
+	}
+	else if (((*s).first = fork()) == 0)
+	{
+		if ((*s).c == 2)
+			exec_command(&*s, (*s).envi);
+		exit(0);
+	}
+	if ((*s).first == -1)
+		ft_exit(2, &*s);
+	if ((*s).first > 0)
+		wait(0);
+	if ((*s).exit)
+		ft_exit(0, &*s);
+}
+
+char		*create_lex_line(t_lst *s)
+{
+	char *line;
+
+	while (s)
+	{
+		line = ft_strjoin_one(line, s->c);
+		s = s->next;
+	}
+	return (line);
+}
+
+int			main(int ac, char **av, char **envp)
+{
+	t_struct	s;
+	int			c;
+	int			i;
+
+	c = 0;
+	init_struct(&s, envp, ac, av);
+	g_shell = init_shell(0);
+	s.h = create_history(NULL, NULL, NULL, &s);
+	ac == 2 && ft_strcmp(av[1], "DEBUG") == 0 ? g_shell->debug = 1 : 0;
+	while (1)
+	{
+		if (print_prompt(s.prompt, &s, 0) == 0)
+			ft_exit(0, &s);
+		if (((i = get_command(&s)) == 0) || i == 5)
+			ft_exit(i, &s);
+		else
+		{
+			while (s.av[0] && s.av[c])
+				if (check_expansion(&s, c++, s.env, 0) == 0)
+					ft_exit(0, &s);
+			c = 1;
+			if (s.av[0])
+			{
+				g_shell->line = create_lex_line(s.l);
+				ft_lexer(&g_shell->lex, g_shell->line);
+				minishell(&s);
+			}
+			tmp_free_struct(&s, &c);
+		}
 	}
 	return (0);
 }

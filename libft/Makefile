@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/01/25 04:30:42 by mabayle          ###   ########.fr        #
+#    Updated: 2020/02/01 23:58:27 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,36 @@ SRC = ft_memset.c \
 	  ft_split_whitespaces.c \
 	  ft_putendl_col.c \
 	  ft_padding.c \
-	  ft_strrev.c
+	  ft_strrev.c \
+	  check_whitespaces.c \
+	  free_char.c \
+	  free_dchar.c \
+	  ft_2eputendl.c \
+	  ft_2eputendl_fd.c \
+	  ft_2eputstr.c \
+	  ft_2putstr.c \
+	  ft_2putstr_fd.c \
+	  ft_e2putstr.c \
+	  ft_eputendl.c \
+	  ft_eputendl_fd.c \
+	  ft_eputstr.c \
+	  ft_fputendl.c \
+	  ft_fputstr.c \
+	  ft_fputstr_s.c \
+	  ft_marge.c \
+	  ft_mputendl.c \
+	  ft_mputstr.c \
+	  ft_mstrcpy.c \
+	  ft_ncl.c \
+	  ft_ptchar.c \
+	  ft_ptchar_fd.c \
+	  ft_putstr_s.c \
+	  ft_sstrev.c \
+	  putendl_dchar.c \
+	  ft_pstrback.c \
+	  ft_splitws.c \
+	  ft_nbword.c \
+	  ft_pfrontws.c
 
 OBJ_PATH = ./.obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
