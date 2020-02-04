@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/02/01 23:58:27 by mabayle          ###   ########.fr        #
+#    Updated: 2020/02/04 04:15:45 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ NAME = libft.a
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -I$(INC_PATH)
+
+INCS	= ./includes/libft.h
 
 SRC_PATH = ./src/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))

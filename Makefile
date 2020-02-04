@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/02/04 01:07:08 by mabayle          ###   ########.fr        #
+#    Updated: 2020/02/04 04:14:39 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,14 @@ DEBUG		:=	0
 LIBFT		:=	libft/libft.a
 
 INCLUDES	:=	./includes
+
+INCS		=	./includes/get_next_line.h \
+				./includes/grammar.h \
+				./includes/lexer.h \
+				./includes/minishell.h \
+				./includes/mybtree.h \
+				./includes/parser.h \
+				./includes/projectinclude.h
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
