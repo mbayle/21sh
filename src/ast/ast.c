@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 01:20:24 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/26 07:34:54 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/05 00:45:42 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ t_ast	*sub_split(t_ast *ast, int find, int priority)
 		ast->right = init_node(right, "NULL");
 		left = split_lex2(ast->lex, left->pos);
 		ast->left = init_node(left, "NULL");
+		find_priority(ast->right, priority);
 	}
+	if (left)
+		find_priority(ast->left, priority);
 	return (ast);
 }
 
@@ -79,8 +82,11 @@ int		find_priority(t_ast *ast, int priority)
 ** Return value : return depth of my tree
 */
 
-int		max_depth(t_ast *ast, int left_depth, int right_depth, int prio)
+int		max_depth(t_ast *ast, int prio)
 {
+	t_ast	*root;
+
+	root = g_shell->ast;
 	if (!ast)
 		return (0);
 	else
@@ -88,20 +94,28 @@ int		max_depth(t_ast *ast, int left_depth, int right_depth, int prio)
 		while (prio >= 1)
 		{
 			if (ast->left)
+			{
+				ast = root;
+				while (ast->left && ast->left->left)
+					ast = ast->left;
 				find_priority(ast->left, prio);
+			}
 			if (ast->right)
+			{
+				ast = root;
+				while (ast->right && ast->right->right)
+					ast = ast->right;
 				find_priority(ast->right, prio);
+			}
 			else
+			{
+				ast = root;
 				find_priority(ast, prio);
+			}
 			prio--;
 		}
-		left_depth = max_depth(ast->left, left_depth, right_depth, prio);
-		right_depth = max_depth(ast->right, left_depth, right_depth, prio);
-		if (left_depth > right_depth)
-			return (left_depth + 1);
-		else
-			return (right_depth + 1);
 	}
+	return (0);
 }
 
 /*
@@ -127,7 +141,7 @@ int		build_ast(t_lex *lex, t_ast **ast)
 		init_priority(lex);
 		*ast = init_node(lex, lex->value);
 		*ast = create_ast(*ast, 3);
-		depth_max = max_depth((*ast), 2, 2, 2);
+		depth_max = max_depth((*ast), 2);
 		!(*ast)->right && !(*ast)->left ? no_root(lex, (*ast)) : 0;
 		ast && g_shell->debug == 1 ? ft_putast(*ast) : 0;
 	}

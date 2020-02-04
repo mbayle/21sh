@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mybtree.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmartel <jmartel@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:40:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/03 06:17:17 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/04 07:52:21 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 */
 t_ast				*sub_split(t_ast *ast, int find, int priority);
 int					find_priority(t_ast *ast, int priority);
-int					max_depth(
-	t_ast *ast, int left_depth, int right_depth, int prio);
+int					max_depth(t_ast *ast, int prio);
 int					build_ast(t_lex *lex, t_ast **ast);
 
 /*
@@ -56,8 +55,7 @@ t_ast				*create_ast(t_ast *ast, int priority);
 */
 t_ast				*sub_split(t_ast *ast, int find, int priority);
 int					find_priority(t_ast *ast, int priority);
-int					max_depth(
-	t_ast *ast, int left_depth, int right_depth, int prio);
+int					max_depth(t_ast *ast, int prio);
 int					build_ast(t_lex *lex, t_ast **ast);
 
 /*

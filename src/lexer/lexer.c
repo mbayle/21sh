@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/03 06:01:58 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/04 04:29:18 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 **			6 - Upgrade lex_size
 ** Retrun value : no return
 */
-
+// Malloc not protected
 void	valid(t_lex **lex, char *input, int io, int i)
 {
 	char	*token;
