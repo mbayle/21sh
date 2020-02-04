@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:49:13 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/03 07:00:51 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/04 01:06:29 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ typedef struct		s_struct
 	t_htr			*h;
 	t_cpl			comp;
 	int				cpt;
+	int				cpt3;
+	char			*cpcl;
 	int				set_cpt;
 	int				mp;
 	int				row;
@@ -133,6 +135,7 @@ typedef struct		s_struct
 	int				nl;
 	t_htr			*com;
 	t_htr			*bcom;
+	int				iret;
 }					t_struct;
 
 /*
@@ -189,10 +192,8 @@ int					clr_cmp(t_comp *cmp, char *path);
 /*
 ** completion_commands.c
 */
-int					putchar_completion2(t_struct *s, char c);
-int					putchar_completion(
-	t_struct *s, t_htr **bcom, char *line, int c);
 void				free_bcom(t_struct *s);
+int					putchar_completion2(t_struct *s, char c);
 int					completion_commands(
 	char ***path, int c, t_struct *s, int i);
 int					ft_completion(
@@ -202,12 +203,13 @@ int					ft_completion(
 ** completion_commands2.c
 */
 int					create_line(char **line, t_struct *s, int i, int c);
-int					pwd_comp(struct dirent **dir_el, char *path, t_lst *l);
+int					pwd_comp(
+	struct dirent **dir_el, char *path, t_lst *l, int c);
 t_htr				*create_lst_comp(
 	char ***path, t_htr **bcom, char *line, t_lst *l);
 char				*create_line_comp(
-	char *line, t_htr *com, t_htr *bcom, int c);
-void				check_part_comp2(t_struct *s);
+	char **line, t_htr *com, t_htr *bcom, int c);
+void				check_part_comp2(t_struct *s, int i);
 
 /*
 ** cpc.c
@@ -232,7 +234,8 @@ int					ctrl_r(t_struct *s);
 ** ctrl_r2.c
 */
 t_htr				*check_htr(t_htr *t, char *l);
-char				*new_l(char *l);
+char				*new_l(char **l);
+int					ctrl_r2_b(char **l, char buf[5]);
 int					change_lst(t_struct *s, t_htr *t, int c);
 
 /*
@@ -310,11 +313,26 @@ int					exec_cd(
 int					exec_command(t_struct *s, char **env);
 
 /*
+** exec_help.c
+*/
+void				es7(char *s, int m);
+int					exec_sethelp(void);
+
+/*
+** exec_help2.c
+*/
+int					exit_sethelp(struct termios *term);
+void				exec_help2(int m);
+
+/*
+** exec_history.c
+*/
+int					exec_history(t_struct s);
+
+/*
 ** exec_setcpt.c
 */
 void				exec_setcpt3(t_struct *s, int m);
-void				write_anim(int i);
-void				anim_cpt(int m, int lr, int c, int i);
 int					exec_setcpt(t_struct *s);
 
 /*
@@ -347,6 +365,7 @@ void				ft_exit(int i, t_struct *s);
 ** free_path_tab.c
 */
 int					free_path(char ***path, int i);
+int					rac_free_bcom(t_struct *s, int i);
 
 /*
 ** get_command.c
@@ -370,13 +389,13 @@ char				**init_builtin_ref(int c);
 /*
 ** init_lst.c
 */
-int					init_lst(t_struct *s, int i, int r);
+int					init_lst(t_struct *s, int i, int r, int ret);
 
 /*
 ** init_lst2.c
 */
 int					init_lst_2(
-	t_struct *s, char buf[5], int *i, t_htr **t, int c);
+	t_struct *s, char buf[5], int *i, t_htr **t);
 
 /*
 ** init_lst3.c
@@ -386,7 +405,7 @@ int					init_lst_3(t_struct *s, char buf[5], int c, t_lst *l);
 /*
 ** init_lst4.c
 */
-int					init_lst_4(t_struct *s, char buf[5], int c);
+int					init_lst_4(t_struct *s, char buf[5], int c, t_lst *l);
 
 /*
 ** init_lst_comp.c
@@ -431,8 +450,22 @@ int					op_cut(t_struct *s, int i);
 int					op_paste(t_struct *s, char **l);
 
 /*
+** outils2_edit_line1_comp.c
+*/
+int					count_lst_comp_tab(t_struct s);
+
+/*
+** outils_completion.c
+*/
+t_htr				*create_lst_comp2(char ***del, char ***path);
+int					sec_free(char **s, int i);
+int					putchar_completion(
+	t_struct *s, t_htr **bcom, char **line, int c);
+
+/*
 ** outils_edit_line1_comp.c
 */
+int					free_bcmp_tab(t_comp **bcmp, t_comp **cmp, int i);
 int					show_list_poss(t_struct *s);
 
 /*
@@ -456,6 +489,7 @@ void				ft_putstr_anim(char *s, int c);
 /*
 ** print_lst.c
 */
+void				write_lst3(int *c, t_struct s, int *i, int *nl);
 int					print_lst(t_struct s, int *nl, int c);
 
 /*
@@ -561,6 +595,7 @@ void				welcome9(int m);
 /*
 ** welcome3.c
 */
+void				welcome5_b(int m);
 int					welcome10(int m, t_struct s);
 
 /*

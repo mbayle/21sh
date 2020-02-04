@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_lst.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:16:13 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 23:35:20 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void		set_plc(t_struct *s, int *i)
@@ -107,7 +119,9 @@ void			write_lst(t_struct *s, char buf[5], int *nl)
 	while ((*nl)--)
 		fp("dl", "up");
 	s->cki = print_lst(*s, &*nl, 0);
+	free_bcom(s);
 	set_pos_cur(s, i, *nl, &pc);
 	if (lbg && !(s->lbg = NULL))
 		tputs(tgetstr("le", NULL), 1, ft_ptchar);
+	s->cpt3 = 0;
 }

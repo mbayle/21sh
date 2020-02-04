@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_setcpt.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:58:15 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 00:58:16 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	exec_setcpt3(t_struct *s, int m)
+void		exec_setcpt3(t_struct *s, int m)
 {
 	int		ret;
 	char	buf[5];
@@ -28,7 +40,7 @@ void	exec_setcpt3(t_struct *s, int m)
 	}
 }
 
-void	write_anim(int i)
+void		write_anim(int i)
 {
 	tputs(tgetstr("im", NULL), 1, ft_ptchar);
 	ft_putstr(CYAN"_");
@@ -39,7 +51,7 @@ void	write_anim(int i)
 	tputs(tgetstr("rc", NULL), 1, ft_ptchar);
 }
 
-void	anim_cpt(int m, int lr, int c, int i)
+void		anim_cpt(int m, int lr, int c, int i)
 {
 	int		s;
 

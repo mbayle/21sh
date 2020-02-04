@@ -6,13 +6,13 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:49:22 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/19 00:43:09 by frameton         ###   ########.fr       */
+/*   Updated: 2020/01/25 00:27:09 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		lst2_size(t_lst2 *l)
+int			lst2_size(t_lst2 *l)
 {
 	int		c;
 
@@ -85,7 +85,7 @@ static void	print_prompt2(int p, t_lst2 *s, t_struct *st)
 	print_prompt3(h, pw, st);
 }
 
-int		print_prompt(int p, t_struct *s, int i)
+int			print_prompt(int p, t_struct *s, int i)
 {
 	int		c;
 	t_lst2	*tmp;

@@ -1,6 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   outils_edit_line1_comp.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:25:14 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 23:29:31 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static	void	show_list_poss3(t_comp **cmp, int *i, int *co, t_comp **bcmp)
+int				free_bcmp_tab(t_comp **bcmp, t_comp **cmp, int i)
+{
+	t_comp	*del;
+
+	del = NULL;
+	while (*bcmp)
+	{
+		del = (*bcmp)->next;
+		free((*bcmp)->name);
+		free(*bcmp);
+		*bcmp = del;
+	}
+	*bcmp = NULL;
+	*cmp = NULL;
+	return (i);
+}
+
+static void		show_list_poss3(t_comp **cmp, int *i, int *co, t_comp **bcmp)
 {
 	while (*cmp)
 	{
@@ -14,12 +43,12 @@ static	void	show_list_poss3(t_comp **cmp, int *i, int *co, t_comp **bcmp)
 	*cmp = *bcmp;
 }
 
-static int		show_list_poss2(t_struct *s, t_comp **cmp, int row,  int *co)
+static int		show_list_poss2(t_struct *s, t_comp **cmp, int row, int *co)
 {
-	int             i;
-	int             j;
-	int             size;
-	t_comp  *bcmp;
+	int		i;
+	int		j;
+	int		size;
+	t_comp	*bcmp;
 
 	i = 0;
 	j = 0;
@@ -38,9 +67,30 @@ static int		show_list_poss2(t_struct *s, t_comp **cmp, int row,  int *co)
 		return (1);
 	fp("vi", NULL);
 	if (!(select_comp_tab(s, bcmp, i, j)))
-		return (-1);
+		return (free_bcmp_tab(&bcmp, &*cmp, -1));
 	fp("ve", NULL);
-	return (1);
+	return (free_bcmp_tab(&bcmp, &*cmp, 1));
+}
+
+static int		comp_lv1(t_struct *s, t_comp **cmp, t_comp **bcmp)
+{
+	t_lst	*tmp;
+	int		c;
+
+	c = count_lst_comp_tab(*s);
+	tmp = NULL;
+	while ((*cmp)->name[c])
+	{
+		if ((tmp = malloc(sizeof(*tmp))) == NULL)
+			return (free_bcmp_tab(bcmp, cmp, 0));
+		tmp->c = (*cmp)->name[c++];
+		tmp->sel = 0;
+		tmp->next = NULL;
+		tmp->prev = s->tmp;
+		s->tmp->next = tmp;
+		s->tmp = s->tmp->next;
+	}
+	return (free_bcmp_tab(bcmp, cmp, 1));
 }
 
 int				show_list_poss(t_struct *s)
@@ -52,17 +102,17 @@ int				show_list_poss(t_struct *s)
 	int		row;
 
 	j = 0;
+	co = 0;
 	cmp = NULL;
 	bcmp = NULL;
 	if (!(row = init_list_poss(s, &co, &cmp, &bcmp)))
-		return (0);
+		return (free_bcmp_tab(&bcmp, &cmp, 0));
 	if (no_match(*s, bcmp))
-		return (1);
-	if (!bcmp->next)
-	{
-		free(bcmp);
-		return (1);
-	}
+		return (free_bcmp_tab(&bcmp, &cmp, 1));
+	if (!bcmp->next && s->cpt > 1)
+		return (free_bcmp_tab(&bcmp, &cmp, 1));
+	if (!bcmp->next && s->cpt == 1)
+		return (comp_lv1(s, &cmp, &bcmp));
 	if (cmp)
 		ft_putchar('\n');
 	tputs(tgetstr("sc", NULL), 1, ft_ptchar);

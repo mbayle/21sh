@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   completion_commands2.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:17:04 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 23:11:37 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int		create_line(char **line, t_struct *s, int i, int c)
@@ -5,7 +17,7 @@ int		create_line(char **line, t_struct *s, int i, int c)
 	t_lst	*tmp;
 
 	tmp = s->l;
-	if ((*line = (char*)malloc(sizeof(*line) * (c + 1))) == NULL)
+	if ((*line = (char*)malloc(sizeof(**line) * (c + 1))) == NULL)
 		return (0);
 	while (s->l)
 	{
@@ -17,32 +29,32 @@ int		create_line(char **line, t_struct *s, int i, int c)
 	return (1);
 }
 
-int		pwd_comp(struct dirent **dir_el, char *path, t_lst *l)
+int		pwd_comp(struct dirent **dir_el, char *path, t_lst *l, int c)
 {
 	struct stat	s;
 	char		*p;
-	int			c;
+	char		*del;
 
 	p = NULL;
-	c = 0;
 	if (ft_strcmp("./", path))
 		return (1);
 	if ((p = ft_strjoin("./", (*dir_el)->d_name)) == NULL)
 		return (0);
 	if ((lstat(p, &s)) == -1)
-		return (0);
-	free(p);
+		return (sec_free(&p, 0));
+	sec_free(&p, 0);
 	if (!(s.st_mode & S_IXGRP) && !(s.st_mode & S_IXOTH)
 			&& !(s.st_mode & S_IXUSR) && !(l->prev))
 		return (0);
 	if (!(l->prev) && (p = ft_strjoin("./", (*dir_el)->d_name)) == NULL)
 		return (0);
 	else if (l->prev)
-		return (1);
+		return (sec_free(&p, 1));
+	del = p;
 	while (*p)
 		(*dir_el)->d_name[c++] = *p++;
 	(*dir_el)->d_name[c] = '\0';
-	return (1);
+	return (sec_free(&del, 1));
 }
 
 t_htr	*create_lst_comp(char ***path, t_htr **bcom, char *line, t_lst *l)
@@ -59,29 +71,28 @@ t_htr	*create_lst_comp(char ***path, t_htr **bcom, char *line, t_lst *l)
 	while (**path)
 	{
 		if (!(dir = opendir(**path)))
-			return (NULL);
+			return (create_lst_comp2(&del, path));
 		while ((dir_el = readdir(dir)))
-			if (pwd_comp(&dir_el, **path, l) && !(ft_strncmp(line, dir_el->
+			if (pwd_comp(&dir_el, **path, l, 0) && !(ft_strncmp(line, dir_el->
 							d_name, c)) && !(s_command(&dir_el, &com, &*bcom)))
-				return (NULL);
+				return (create_lst_comp2(&del, path));
 		if ((closedir(dir)) == -1)
-			return (NULL);
+			return (create_lst_comp2(&del, path));
 		(*path)++;
 	}
 	free_dchar(&del);
 	return (com);
 }
 
-char	*create_line_comp(char *line, t_htr *com, t_htr *bcom, int c)
+char	*create_line_comp(char **line, t_htr *com, t_htr *bcom, int c)
 {
 	char	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = NULL;
-	if (!com->next)
-		return (com->name);
-	if ((tmp = ft_mstrcpy(tmp, com->name)) == NULL)
+	if (!com->next && (sec_free(line, 1)))
+		return (*line = ft_mstrcpy(NULL, com->name));
+	if ((tmp = ft_mstrcpy(NULL, com->name)) == NULL)
 		return (NULL);
 	while (1)
 	{
@@ -92,20 +103,18 @@ char	*create_line_comp(char *line, t_htr *com, t_htr *bcom, int c)
 		else
 			break ;
 	}
-	while (i < c)
-	{
-		line[i] = tmp[i];
-		++i;
-	}
-	line[i] = '\0';
-	return (line);
+	sec_free(line, 0);
+	if ((*line = (char*)malloc(sizeof(**line) * c + 1)) == NULL)
+		return (NULL);
+	while (i < c && (i = i + 1))
+		(*line)[i - 1] = tmp[i - 1];
+	(*line)[i] = '\0';
+	sec_free(&tmp, 0);
+	return (*line);
 }
 
-void	check_part_comp2(t_struct *s)
+void	check_part_comp2(t_struct *s, int i)
 {
-	int		i;
-
-	i = 0;
 	while (1)
 	{
 		if (check_whitespaces(s->l->c) && (i = 1))
@@ -116,8 +125,10 @@ void	check_part_comp2(t_struct *s)
 				i = 0;
 		}
 		else
+		{
 			if (s->l->next)
 				s->l = s->l->next;
+		}
 		if (!s->l->next && !i && (s->l = s->lbg))
 			break ;
 		if (!s->l->next && i)

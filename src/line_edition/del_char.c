@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   del_char.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:14:44 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 23:12:28 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int		del_char(char buf[5], t_struct *s, int *i)
@@ -21,8 +33,8 @@ int		del_char(char buf[5], t_struct *s, int *i)
 		}
 		if (s->comp.name)
 		{
+			free(s->comp.name);
 			s->comp.name = NULL;
-			return (1);
 		}
 		return (1);
 	}

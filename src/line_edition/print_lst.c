@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_lst.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:24:43 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 00:24:44 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static t_lst	*print_lst2(t_struct s, int *c, int *i, int *nl)
@@ -21,6 +33,26 @@ static t_lst	*print_lst2(t_struct s, int *c, int *i, int *nl)
 	return (s.l);
 }
 
+void			write_lst3(int *c, t_struct s, int *i, int *nl)
+{
+	char	*save;
+
+	save = s.comp.name;
+	while (save && s.comp.sz--)
+	{
+		(*c)++;
+		if (*c == *i)
+		{
+			ft_putchar('\n');
+			(*nl)++;
+			*i = *i + s.col;
+		}
+		ft_putstr(BCYAN);
+		ft_putchar(*save++);
+		ft_putstr(WHITE);
+	}
+}
+
 int				print_lst(t_struct s, int *nl, int c)
 {
 	int		i;
@@ -34,18 +66,6 @@ int				print_lst(t_struct s, int *nl, int c)
 	else
 		print_prompt_bis(s.prompt, &s, 0);
 	s.l = print_lst2(s, &c, &i, &*nl);
-	while (s.comp.name && s.comp.sz--)
-	{
-		++c;
-		if (c == i)
-		{
-			ft_putchar('\n');
-			(*nl)++;
-			i = i + s.col;
-		}
-		ft_putstr(BCYAN);
-		ft_putchar(*s.comp.name++);
-		ft_putstr(WHITE);
-	}
+	write_lst3(&c, s, &i, &*nl);
 	return (s.cki);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_setcpt3.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:55:45 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 00:55:46 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	exec_setcpt2_b(t_struct *s, int ret, int m)
@@ -30,7 +42,7 @@ void		exec_setcpt2(t_struct *s, int m)
 	ft_marge(m + 10);
 	ft_putendl("For a quick change in the completion level, use fn + < or >\n");
 	ft_mputstr(WHITE
-			"                        Current level of completion : "MAGENTA ,m);
+			"                        Current level of completion : "MAGENTA, m);
 	ft_putnbr(s->cpt);
 	ft_putstr("\n\n\n");
 	ft_mputstr(WHITE

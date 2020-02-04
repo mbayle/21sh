@@ -1,4 +1,32 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   completion_commands.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:14:00 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 01:16:50 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
+
+void		free_bcom(t_struct *s)
+{
+	t_htr	*del;
+
+	del = NULL;
+	while (s->bcom)
+	{
+		del = s->bcom->next;
+		free(s->bcom->name);
+		free(s->bcom);
+		s->bcom = del;
+	}
+	s->com = NULL;
+	s->bcom = NULL;
+}
 
 int			putchar_completion2(t_struct *s, char c)
 {
@@ -18,48 +46,6 @@ int			putchar_completion2(t_struct *s, char c)
 	return (1);
 }
 
-int			putchar_completion(t_struct *s, t_htr **bcom, char *line, int c)
-{
-	t_htr	*com;
-
-	com = *bcom;
-	if (c < 2 || !com)
-		return (0);
-	line = create_line_comp(line, com, *bcom, c);
-	if (c == (int)ft_strlen(line))
-		return (1);
-	while (c--)
-		line++;
-	if (s->cpt == 2 || s->cpt == 3)
-	{
-		s->comp.name = line;
-		s->comp.sz = ft_strlen(line);
-	}
-	else
-	{
-		while (*line)
-			if (!(putchar_completion2(s, *line++)))
-				return (-1);
-	}
-	return (2);
-}
-
-void		free_bcom(t_struct *s)
-{
-	t_htr	*del;
-
-	del = NULL;
-	while (s->bcom)
-	{
-		del = s->bcom;
-		free(del->name);
-		free(del);
-		s->bcom = s->bcom->next;
-	}
-	s->com = NULL;
-	s->bcom = NULL;
-}
-
 int			completion_commands(char ***path, int c, t_struct *s, int i)
 {
 	char		*line;
@@ -69,27 +55,26 @@ int			completion_commands(char ***path, int c, t_struct *s, int i)
 	i = 0;
 	s->l = s->lbg;
 	del = *path;
-	free_bcom(s);
 	if (!(check_whitespaces(s->tmp->c)))
-		check_part_comp2(&*s);
+		check_part_comp2(&*s, 0);
 	tmp = s->l;
 	while (s->l && (c = c + 1))
 		s->l = s->l->next;
 	s->l = tmp;
 	if (!c)
-		return (1);
+		return (free_path(&del, 1));
 	if (!(create_line(&line, &*s, 0, c)))
 		return (-1);
 	if (!(s->com = create_lst_comp(&*path, &s->bcom, line, s->l)))
-		return (1);
+		return (sec_free(&line, -1));
 	s->bcom = char_class(s->bcom, s->bcom);
 	s->l = s->lbg;
 	if ((s->bcom->next && s->cpt == 2) || (s->bcom->next && s->cpt == 4))
-		return (1);
-	return (putchar_completion(&*s, &s->bcom, line, c));
+		return (sec_free(&line, 1));
+	return (putchar_completion(&*s, &s->bcom, &line, c));
 }
 
-int		ft_completion(t_struct *s, char **path, char buf[5], int i)
+int			ft_completion(t_struct *s, char **path, char buf[5], int i)
 {
 	char	*line;
 	int		c;
@@ -104,10 +89,10 @@ int		ft_completion(t_struct *s, char **path, char buf[5], int i)
 			s->l = s->l->next;
 		s->l = s->lbg;
 		if (!(create_line(&line, s, 0, c)))
-			return (-1);
+			return (sec_free(&line, free_path(&path, -1)));
 		s->com = create_lst_comp(&path, &s->bcom, line, s->l);
 		s->bcom = char_class(s->bcom, s->bcom);
-		return (1);
+		return (sec_free(&line, 1));
 	}
 	else if (!s->lbg && !s->tmp && buf[0] == 9 && i)
 		return (show_commands(&path, 0, NULL, NULL));
@@ -115,5 +100,5 @@ int		ft_completion(t_struct *s, char **path, char buf[5], int i)
 		return (completion_commands(&path, 0, &*s, 0));
 	if (buf[0] == 9)
 		return (free_path(&path, 3));
-	return (0);
+	return (free_path(&path, 1));
 }

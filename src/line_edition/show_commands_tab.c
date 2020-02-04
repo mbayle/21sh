@@ -6,15 +6,15 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 23:30:48 by frameton          #+#    #+#             */
-/*   Updated: 2019/11/17 23:30:51 by frameton         ###   ########.fr       */
+/*   Updated: 2020/01/25 00:22:17 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_comp			*char_class_tab(t_comp *l, t_comp *s)
+t_comp		*char_class_tab(t_comp *l, t_comp *s)
 {
-	char    *tmp;
+	char	*tmp;
 	int		clr;
 
 	l = s;
@@ -41,21 +41,7 @@ t_comp			*char_class_tab(t_comp *l, t_comp *s)
 	return (s);
 }
 
-/*static void		free_completion_commands_tab(t_htr **del, int i)
-{
-	t_htr   *tmp;
-
-	while ((tmp = *del))
-	{
-		*del = (*del)->next;
-		free(tmp->name);
-		free(tmp);
-	}
-	if (i > 1)
-		ft_putchar('\n');
-}*/
-
-static int		s_command3_tab(t_comp **l, t_comp **bg, struct dirent **dir_el)
+static int	s_command3_tab(t_comp **l, t_comp **bg, struct dirent **dir_el)
 {
 	if ((*l = malloc(sizeof(**l))) == NULL)
 		return (0);
@@ -69,7 +55,8 @@ static int		s_command3_tab(t_comp **l, t_comp **bg, struct dirent **dir_el)
 	return (1);
 }
 
-int				s_command_tab(struct dirent **dir_el, t_comp **l, t_comp **bg, char *p)
+int			s_command_tab(struct dirent **dir_el, t_comp **l, t_comp **bg,
+		char *p)
 {
 	if (!*l)
 	{

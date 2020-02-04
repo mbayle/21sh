@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_lst2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:48:13 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 00:54:50 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	init_lst_2b(t_struct *s, int *i, t_lst **l, t_htr **t)
@@ -63,10 +75,12 @@ static int	init_lst_2_b3(t_struct *s, char buf[5])
 {
 	if ((buf[0] == 127 || (buf[0] == 27 && buf[3] == 126)) && (s->cpt > 3))
 		return (ft_completion(&*s, NULL, buf, 2));
+	if (buf[0] == 9 && s->cpt == 1)
+		return (1);
 	return (ft_completion(&*s, NULL, buf, 0));
 }
 
-int			init_lst_2(t_struct *s, char buf[5], int *i, t_htr **t, int c)
+int			init_lst_2(t_struct *s, char buf[5], int *i, t_htr **t)
 {
 	t_lst	*l;
 
@@ -86,7 +100,7 @@ int			init_lst_2(t_struct *s, char buf[5], int *i, t_htr **t, int c)
 		return (init_lst_2_b2(s, buf));
 	if ((l = malloc(sizeof(*l))) == NULL)
 		return (-1);
-	l->c = buf[c];
+	l->c = buf[s->iret];
 	l->sel = 0;
 	l->next = NULL;
 	init_lst_2b(&*s, &*i, &l, &*t);

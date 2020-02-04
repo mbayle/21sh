@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_input_exist.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:18:12 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 01:20:12 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int		check_input_exist2(t_struct *s, int *i, int *c)
@@ -12,27 +24,27 @@ int		check_input_exist2(t_struct *s, int *i, int *c)
 		(*c)++;
 		s->l = s->l->next;
 	}
+	s->l = s->lbg;
 	return (1);
 }
 
 int		check_input_exist3(t_struct s, int c, int i, t_htr *com)
 {
-	char	line[c + 1];
-	int		j;
+	char	*line;
 
-	j = 0;
+	c = 0;
+	line = NULL;
 	s.l = s.lbg;
-	while (s.l && j < c)
-	{
-		line[j]= s.l->c;
+	while (s.l && (c = c + 1))
 		s.l = s.l->next;
-		j++;
-	}
-	line[j] = '\0';
+	s.l = s.lbg;
+	if (!(create_line(&line, &s, 0, c)))
+		return (0);
+	s.l = s.lbg;
 	while (*s.builtin_ref)
 	{
-		if (!ft_strcmp(line, *s.builtin_ref))
-			return (1);
+		if (!(ft_strcmp(line, *s.builtin_ref)))
+			return (sec_free(&line, 1));
 		s.builtin_ref++;
 	}
 	while (com)
@@ -41,7 +53,7 @@ int		check_input_exist3(t_struct s, int c, int i, t_htr *com)
 			i = 1;
 		com = com->next;
 	}
-	return (i);
+	return (sec_free(&line, i));
 }
 
 int		check_input_exist(t_struct s, t_htr *com)
@@ -49,11 +61,13 @@ int		check_input_exist(t_struct s, t_htr *com)
 	int		c;
 	int		i;
 	int		d;
+	t_htr	*cm;
 
+	cm = com;
 	d = check_input_exist2(&s, &i, &c);
 	if (d == 2 && s.cki)
 		return (1);
-	i = check_input_exist3(s, c, i, com);
+	i = check_input_exist3(s, c, i, cm);
 	if (i)
 		return (1);
 	return (0);

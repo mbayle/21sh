@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   welcome.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:20:25 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 01:21:37 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void			ps(char *s)
@@ -92,7 +104,7 @@ static void		welcome4(int m)
 	ft_sleep(0);
 }
 
-int		welcome(t_struct s)
+int				welcome(t_struct s)
 {
 	struct winsize	sz;
 	int				m;

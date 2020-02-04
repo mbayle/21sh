@@ -1,6 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   show_commands_tab2.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:22:46 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 22:06:34 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_comp		*create_lst_comp_tab(char ***path, t_comp **bcmp, char *line, int i)
+static t_comp	*create_lst_comp_tab2(char ***del, char ***path)
+{
+	free_dchar(&*del);
+	*path = NULL;
+	return (NULL);
+}
+
+t_comp			*create_lst_comp_tab(char ***path, t_comp **bcmp, char *line,
+		int i)
 {
 	DIR				*dir;
 	struct dirent	*dir_el;
@@ -14,20 +34,20 @@ t_comp		*create_lst_comp_tab(char ***path, t_comp **bcmp, char *line, int i)
 	while (**path)
 	{
 		if (!(dir = opendir(**path)))
-			return (NULL);
+			return (create_lst_comp_tab2(&del, &*path));
 		while ((dir_el = readdir(dir)))
 			if ((!(ft_strncmp(line, dir_el->
-								d_name, c)) || i == 2) && !(s_command_tab(&dir_el, &cmp, &*bcmp, **path)))
-				return (NULL);
+	d_name, c)) || i == 2) && !(s_command_tab(&dir_el, &cmp, &*bcmp, **path)))
+				return (create_lst_comp_tab2(&del, &*path));
 		if ((closedir(dir)) == -1)
-			return (NULL);
+			return (create_lst_comp_tab2(&del, &*path));
 		(*path)++;
 	}
 	free_dchar(&del);
 	return (cmp);
 }
 
-int			find_next_cmp(t_comp *cmp, t_comp *tmp)
+int				find_next_cmp(t_comp *cmp, t_comp *tmp)
 {
 	if (!cmp)
 		return (0);
@@ -41,7 +61,7 @@ int			find_next_cmp(t_comp *cmp, t_comp *tmp)
 	return (0);
 }
 
-t_comp		*attribute_col(int *co, t_comp *cmp)
+t_comp			*attribute_col(int *co, t_comp *cmp)
 {
 	int		j;
 	int		t;
@@ -70,7 +90,7 @@ t_comp		*attribute_col(int *co, t_comp *cmp)
 	return (cmp);
 }
 
-void		print_comp_tab(t_comp *cmp, int c, int i, int *j)
+void			print_comp_tab(t_comp *cmp, int c, int i, int *j)
 {
 	while (cmp)
 	{

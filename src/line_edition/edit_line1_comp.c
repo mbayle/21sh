@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   edit_line1_comp.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:13:14 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 23:39:24 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	check_part_comp(t_struct *s)
@@ -70,18 +82,18 @@ int			init_list_poss(t_struct *s, int *co, t_comp **cmp, t_comp **bcmp)
 	if (!(create_line(&line, &*s, 0, *co)))
 		return (0);
 	if (!(path = init_list_poss2(&i, s, &*co, &sz)))
-		return (0);
+		return (sec_free(&line, 0));
 	*cmp = create_lst_comp_tab(&path, bcmp, line, i);
 	*bcmp = char_class_tab(*cmp, *bcmp);
 	if (*bcmp)
 		(*bcmp)->sel = 1;
-	return (sz.ws_row);
+	return (sec_free(&line, sz.ws_row));
 }
 
-int		no_match(t_struct s, t_comp *bcmp)
+int			no_match(t_struct s, t_comp *bcmp)
 {
 	(void)s;
-	if (bcmp)
+	if (bcmp && !s.cpt3)
 		return (0);
 	ft_putchar('\n');
 	tputs(tgetstr("up", NULL), 1, ft_ptchar);
@@ -90,9 +102,9 @@ int		no_match(t_struct s, t_comp *bcmp)
 	return (1);
 }
 
-int		edit_line_comp(t_struct *s, char buf[5], int *i)
+int			edit_line_comp(t_struct *s, char buf[5], int *i)
 {
-	if (del_char(buf, &*s, &*i))
+	if (del_char(buf, s, i))
 		return (1);
 	if (buf[0] == 9)
 	{
@@ -100,7 +112,8 @@ int		edit_line_comp(t_struct *s, char buf[5], int *i)
 			return (show_list_poss(s));
 		if (s->comp.name)
 		{
-			s->comp.name = NULL;
+			if (s->comp.name)
+				s->comp.name = NULL;
 			return (1);
 		}
 		return (ft_completion(&*s, NULL, buf, 1));

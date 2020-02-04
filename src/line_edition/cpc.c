@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cpc.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:17:41 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 01:17:41 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	reset_sel(t_struct *s)
@@ -19,11 +31,11 @@ int		free_sel(t_lst **bg, t_lst **end)
 {
 	t_lst	*del;
 
-	while (*bg != *end)
+	while (*bg && *bg != *end)
 	{
-		del = *bg;
-		*bg = (*bg)->next;
-		free(del);
+		del = (*bg)->next;
+		free(*bg);
+		*bg = del;
 	}
 	return (1);
 }
@@ -47,16 +59,14 @@ int		create_char(t_lst **end, char c)
 
 int		cpc(t_struct *s, char b, int i)
 {
-	static char	*l;
-
 	if (i == 3 && !s->lbg && b != -128)
 		return (1);
 	if (b == -120)
-		if (!op_copy(s, i, &l))
+		if (!op_copy(s, i, &s->cpcl))
 			return (0);
 	if (b == -82)
 		op_cut(s, i);
 	if (b == -128)
-		op_paste(s, &l);
+		op_paste(s, &s->cpcl);
 	return (1);
 }

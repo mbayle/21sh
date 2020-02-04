@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_lst4.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:46:08 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 00:47:29 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	init_lst_4_b(char buf[5], t_struct *s)
@@ -31,14 +43,12 @@ static	int	init_lst_4_b2(t_struct *s, char buf[5])
 	return (1);
 }
 
-int			init_lst_4(t_struct *s, char buf[5], int c)
+int			init_lst_4(t_struct *s, char buf[5], int c, t_lst *l)
 {
-	t_lst	*l;
-
-	l = NULL;
 	if ((edit_line3(s, buf)))
 		return (1);
-	if (buf[0] == 27 && buf[1] == 91 && buf[2] == 49 && buf[3] == 59 && buf[4] == 50)
+	if (buf[0] == 27 && buf[1] == 91 && buf[2] == 49
+			&& buf[3] == 59 && buf[4] == 50)
 		return (init_lst_4_b2(s, buf));
 	if (buf[0] == 18)
 		return (1);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_lst_comp.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:47:55 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 23:36:06 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	init_lst_comp2(t_struct *s, t_lst **l)
@@ -17,16 +29,22 @@ static int	init_lst_comp2(t_struct *s, t_lst **l)
 		*l = NULL;
 		s->comp.name++;
 	}
+	s->cpt3 = 1;
 	return (1);
 }
 
 int			init_lst_comp(char buf[5], t_struct *s, t_lst *l, t_lst *rt)
 {
+	char	*del;
+
+	del = s->comp.name;
 	if (buf[0] == 9)
 	{
 		if (!(init_lst_comp2(&*s, &l)))
 			return (0);
 	}
+	free(del);
+	s->comp.name = NULL;
 	rt = s->tmp;
 	while (rt)
 		rt = rt->prev;

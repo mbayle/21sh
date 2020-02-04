@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   op_cut.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:27:30 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 22:14:01 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	op_cut2(t_struct *s, t_lst **end, t_lst **bg, int lbg)
@@ -20,11 +32,23 @@ static int	op_cut2(t_struct *s, t_lst **end, t_lst **bg, int lbg)
 	}
 	else
 		s->tmp = *end;
+	s->lbg = NULL;
 	return (free_sel(&*bg, &*end));
+}
+
+static void	op_cut4(t_lst **del, t_lst **bg, t_lst **end)
+{
+	*del = *bg;
+	*bg = (*bg)->next;
+	free_sel(&*bg, &*end);
+	(*end)->prev = *del;
+	(*del)->next = *end;
 }
 
 static int	op_cut3(t_lst **bg, t_lst **end, t_struct *s, int lbg)
 {
+	t_lst	*del;
+
 	while (*bg && (*bg)->next && !(*bg)->next->sel)
 		*bg = (*bg)->next;
 	if (!(*bg)->next)
@@ -34,16 +58,17 @@ static int	op_cut3(t_lst **bg, t_lst **end, t_struct *s, int lbg)
 		*end = (*end)->next;
 	if (!*end)
 	{
-		(*bg)->next = NULL;
-		if (lbg)
-			s->tmp = s->lbg;
-		return (free_sel(&(*bg)->next, &*end));
+		del = *bg;
+		if (lbg && (s->tmp = s->lbg))
+			s->lbg = NULL;
+		*bg = (*bg)->next;
+		free_sel(&*bg, &*end);
+		del->next = NULL;
+		return (1);
 	}
-	free_sel(&(*bg)->next, &(*end)->prev);
-	(*bg)->next = *end;
-	(*end)->prev = *bg;
-	if (lbg)
-		s->tmp = s->lbg;
+	op_cut4(&del, bg, end);
+	if (lbg && (s->tmp = s->lbg))
+		s->lbg = NULL;
 	return (0);
 }
 

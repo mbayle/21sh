@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ctrl_r2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:14:20 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 01:14:25 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_htr	*check_htr(t_htr *t, char *l)
@@ -20,29 +32,45 @@ t_htr	*check_htr(t_htr *t, char *l)
 	return (t);
 }
 
-char	*new_l(char *l)
+char	*new_l(char **l)
 {
 	char	*new;
 	char	*bg;
 	char	*del;
 	int		c;
 
-	c = ft_strlen(l) - 1;
+	c = ft_strlen(*l) - 1;
 	if (!c)
+	{
+		sec_free(l, 0);
 		return (NULL);
-	del = l;
-	if ((new = (char*)malloc(sizeof(*new) * (ft_strlen(l)))) == NULL)
+	}
+	del = *l;
+	if ((new = (char*)malloc(sizeof(*new) * (ft_strlen(del)))) == NULL)
 		return (NULL);
 	bg = new;
 	while (c--)
 	{
-		*new = *l;
+		*new = *del;
 		new++;
-		l++;
+		del++;
 	}
 	*new = '\0';
-	free(del);
+	sec_free(l, 0);
 	return (bg);
+}
+
+int		ctrl_r2_b(char **l, char buf[5])
+{
+	char	*del;
+
+	del = *l;
+	if ((*l = ft_strjoin(*l, buf)) == NULL)
+	{
+		fp("ve", NULL);
+		return (sec_free(&del, 0));
+	}
+	return (sec_free(&del, 1));
 }
 
 int		change_lst(t_struct *s, t_htr *t, int c)

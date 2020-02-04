@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   coloration_completion.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:17:53 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 01:17:54 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int		check_executable(struct stat s)
@@ -52,20 +64,20 @@ int		clr_cmp(t_comp *cmp, char *path)
 	if ((p = ft_strjoin(path, cmp->name)) == NULL)
 		return (0);
 	if (lstat(p, &s) == -1)
-		return (0);
+		return (sec_free(&p, 0));
 	if (S_ISDIR(s.st_mode))
-		return (1);
+		return (sec_free(&p, 1));
 	if (S_ISCHR(s.st_mode))
-		return (2);
+		return (sec_free(&p, 2));
 	if (S_ISBLK(s.st_mode))
-		return (3);
+		return (sec_free(&p, 3));
 	if (S_ISFIFO(s.st_mode))
-		return (4);
+		return (sec_free(&p, 4));
 	if (S_ISLNK(s.st_mode))
-		return (5);
+		return (sec_free(&p, 5));
 	if (S_ISSOCK(s.st_mode))
-		return (6);
+		return (sec_free(&p, 6));
 	if (check_executable(s) == 1)
-		return (7);
-	return (0);
+		return (sec_free(&p, 7));
+	return (sec_free(&p, 0));
 }

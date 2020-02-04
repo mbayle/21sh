@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   edit_line2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:59:40 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 01:00:29 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	delete_char(t_lst **lbg, t_lst **tmp)
@@ -47,8 +59,6 @@ static void	move_cur(t_lst **tmp, t_lst **lbg, char buf[5])
 	}
 }
 
-
-
 int			edit_line2(t_lst **lbg, t_lst **tmp, char buf[5])
 {
 	if (buf[0] == 27 && buf[1] == 27 && buf[2] == 91
@@ -57,9 +67,10 @@ int			edit_line2(t_lst **lbg, t_lst **tmp, char buf[5])
 	if ((buf[0] == 127 || (buf[0] == 27 && buf[3] == 126)))
 		return (delete_char(&*lbg, &*tmp));
 	if ((buf[0] == 27 && buf[1] == 91) && (buf[2] == 68 || buf[2] == 67
-				|| buf[2] == 65 || buf[2] == 66 || buf[2] == 72 || buf[2] == 70))
+			|| buf[2] == 65 || buf[2] == 66 || buf[2] == 72 || buf[2] == 70))
 	{
-		if (*tmp && (buf[2] == 65 || buf[2] == 66 || buf[2] == 70 || buf[2] == 72))
+		if (*tmp && (buf[2] == 65 || buf[2] == 66
+					|| buf[2] == 70 || buf[2] == 72))
 			move_cur(&*tmp, &*lbg, buf);
 		return (move_cur2(&*tmp, &*lbg, buf));
 	}

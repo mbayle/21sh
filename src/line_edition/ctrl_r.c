@@ -1,17 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ctrl_r.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:12:41 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 23:13:19 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	ctrl_r2(char buf[5], t_htr **t, t_struct *s, char **l)
 {
 	fp("cl", NULL);
-	*t = s->h;
 	ft_putstr("bck-i-search: ");
-	if (buf[0] == 127 || (buf[0] == 27 && buf[3] == 126))
+	if ((*t = s->h) && (buf[0] == 127 || (buf[0] == 27 && buf[3] == 126)))
 	{
 		if (*l)
-			*l = new_l(*l);
+			*l = new_l(l);
+		else
+			sec_free(l, 0);
 	}
 	else if (!*l)
 	{
+		sec_free(l, 0);
 		if ((*l = ft_mstrcpy(*l, buf)) == NULL)
 		{
 			fp("ve", NULL);
@@ -19,11 +33,10 @@ static int	ctrl_r2(char buf[5], t_htr **t, t_struct *s, char **l)
 		}
 	}
 	else
-		if ((*l = ft_strjoin(*l, buf)) == NULL)
-		{
-			fp("ve", NULL);
+	{
+		if (!(ctrl_r2_b(l, buf)))
 			return (0);
-		}
+	}
 	ft_2putstr(*l, "_\n");
 	return (1);
 }
@@ -47,8 +60,9 @@ static void	ctrl_r3(char **l, t_htr **t, t_htr **st)
 	}
 }
 
-static int	ctrl_r4(t_htr **t, t_struct *s, t_htr **st)
+static int	ctrl_r4(t_htr **t, t_struct *s, t_htr **st, char **l)
 {
+	sec_free(l, 0);
 	if (*t)
 	{
 		if (!(change_lst(s, *t, 0)))
@@ -95,5 +109,5 @@ int			ctrl_r(t_struct *s)
 			return (0);
 		ctrl_r3(&l, &t, &st);
 	}
-	return (ctrl_r4(&t, s, &st));
+	return (ctrl_r4(&t, s, &st, &l));
 }

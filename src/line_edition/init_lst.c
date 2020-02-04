@@ -1,16 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_lst.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:54:59 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 22:50:37 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	init_lst_b(struct termios *term, t_struct *s)
 {
-	static int	wlcm;
+	//static int	wlcm;
 
 	isatty(0);
 	tcgetattr(0, &*term);
 	(*term).c_lflag &= ~(ECHO);
 	tcsetattr(0, TCSANOW, &*term);
 	s->nl = 0;
-	if (!wlcm && (wlcm = 1))
-		welcome(*s);
+	//if (!wlcm && (wlcm = 1))
+	//	welcome(*s);
 }
 
 static void	init_lst_b2(t_struct *s, char buf[5], int ret)
@@ -33,6 +45,7 @@ static void	init_lst_b2(t_struct *s, char buf[5], int ret)
 
 static int	init_lst_b3(t_struct *s, struct termios *term)
 {
+	s->nl = 0;
 	while (s->tmp && s->tmp->next)
 	{
 		s->tmp = s->tmp->next;
@@ -46,16 +59,19 @@ static int	init_lst_b3(t_struct *s, struct termios *term)
 	return (1);
 }
 
-int			init_lst(t_struct *s, int i, int r)
+int			init_lst(t_struct *s, int i, int r, int ret)
 {
 	char			buf[6];
-	int				ret;
+	int				sret;
 	struct winsize	sz;
 	struct termios	term;
 
 	init_lst_b(&term, s);
 	while (r != 3 && (ret = read(0, &buf, 6)) && buf[0] != '\n')
 	{
+		sret = ret;
+		while (sret < 6)
+			buf[sret++] = '\0';
 		if (buf[0] == 12 && ret == 1)
 			break ;
 		ioctl(0, TIOCGWINSZ, &sz);
@@ -69,6 +85,5 @@ int			init_lst(t_struct *s, int i, int r)
 	if (s->lbg)
 		if (!(edit_history(&s->h, s->lbg, s->lbg, NULL)))
 			return (0);
-	s->nl = 0;
 	return (init_lst_b3(s, &term));
 }

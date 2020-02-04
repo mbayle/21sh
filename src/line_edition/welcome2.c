@@ -1,17 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   welcome2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:16:35 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 00:19:34 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	welcome5(int m)
 {
+	welcome5_b(m);
 	ft_putchar('#');
-	do_m(m + 8);ft_putchar('#');
+	do_m(m + 9);
+	ft_putchar('#');
 	fp("up", NULL);
 	ft_sleep(0);
 	ft_putchar('#');
-	do_m(m + 9);ft_putchar('#');
-	fp("up", NULL);
-	ft_sleep(0);
+	do_m(m + 10);
 	ft_putchar('#');
-	do_m(m + 10);ft_putchar('#');
 	fp("up", NULL);
 	ft_sleep(0);
 	ft_putchar('#');

@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 22:30:09 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/12 22:58:46 by frameton         ###   ########.fr       */
+/*   Updated: 2020/02/03 23:51:13 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ char	**init_builtin_ref2(int c, char **builtin)
 	++c;
 	builtin[c] = ft_mstrcpy(builtin[c], "setcpt");
 	++c;
+	builtin[c] = ft_mstrcpy(builtin[c], "help");
+	++c;
+	builtin[c] = ft_mstrcpy(builtin[c], "history");
+	++c;
 	builtin[c] = 0;
 	c = 0;
 	return (builtin);
@@ -37,7 +41,7 @@ char	**init_builtin_ref(int c)
 {
 	char	**builtin;
 
-	if ((builtin = (char**)malloc(sizeof(*builtin) * 8)) == NULL)
+	if ((builtin = (char**)malloc(sizeof(*builtin) * 10)) == NULL)
 		return (NULL);
 	builtin = init_builtin_ref2(c, builtin);
 	while (c < 6)

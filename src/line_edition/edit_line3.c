@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   edit_line3.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 01:00:04 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 01:22:12 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int			del_move(int c)
@@ -23,7 +35,7 @@ static int	move_cur(t_struct *s, char buf[5])
 	return (1);
 }
 
-static	int		move_word_edl3(t_struct *s, int c)
+static	int	move_word_edl3(t_struct *s, int c)
 {
 	t_lst	*tp;
 
@@ -40,7 +52,7 @@ static	int		move_word_edl3(t_struct *s, int c)
 	return (1);
 }
 
-int		edit_line3(t_struct *s, char buf[5])
+int			edit_line3(t_struct *s, char buf[5])
 {
 	if (buf[0] == 27 && buf[1] == 27 && buf[2] == 91
 	&& (buf[3] == 67 || buf[3] == 68 || buf[3] == 65 || buf[3] == 66))
@@ -48,7 +60,7 @@ int		edit_line3(t_struct *s, char buf[5])
 	if ((buf[0] == 127 || (buf[0] == 27 && buf[3] == 126)))
 		return (1);
 	if ((buf[0] == 27 && buf[1] == 91) && (buf[2] == 68 || buf[2] == 67
-				|| buf[2] == 65 || buf[2] == 66 || buf[2] == 70 || buf[2] == 72))
+			|| buf[2] == 65 || buf[2] == 66 || buf[2] == 70 || buf[2] == 72))
 		return (move_cur(s, buf));
 	return (0);
 }

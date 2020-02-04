@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:09:45 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/25 02:59:56 by frameton         ###   ########.fr       */
+/*   Updated: 2020/02/03 23:50:12 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,10 @@ int		exec_builtin2(t_struct *s, int c)
 			return (0);
 	if (c == 6)
 		exec_setcpt(s);
+	if (c == 7)
+		exec_sethelp();
+	if (c == 8)
+		exec_history(*s);
 	return (1);
 }
 

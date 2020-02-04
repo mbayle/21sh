@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:49:00 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/25 02:58:48 by frameton         ###   ########.fr       */
+/*   Updated: 2020/02/03 23:35:01 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_term(t_struct *s)
 {
-	int ret;
+	int				ret;
 	struct termios	term;
 
 	ret = tgetent(NULL, getenv("TERM"));
@@ -23,6 +23,8 @@ static void	init_term(t_struct *s)
 	term.c_lflag &= ~(ICANON);
 	tcsetattr(0, TCSANOW, &term);
 	s->prompt = 0;
+	s->cpt3 = 0;
+	s->cpcl = NULL;
 	s->av = NULL;
 }
 

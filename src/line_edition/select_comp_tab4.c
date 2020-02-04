@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   select_comp_tab4.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/01/25 00:23:51 by frameton          #+#    #+#             */
+/*   Updated: 2020/01/25 00:23:52 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void	down_touch2(t_comp **cmp, t_comp *bcmp,int c)
+void	down_touch2(t_comp **cmp, t_comp *bcmp, int c)
 {
 	while ((*cmp)->col != c)
 	{

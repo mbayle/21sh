@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:48:54 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/01 23:54:25 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/03 22:49:26 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			get_command(t_struct *s)
 	char	*str;
 
 	s->tmp = NULL;
-	if ((i = (init_lst(&*s, 0, 2))) == 0)
+	if ((i = (init_lst(&*s, 0, 2, 0))) == 0)
 		return (0);
 	if (i == 2)
 		return (5);

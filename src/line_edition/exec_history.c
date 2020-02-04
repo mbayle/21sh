@@ -1,26 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   edl1_move_word.c                                   :+:      :+:    :+:   */
+/*   exec_history.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 00:58:26 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:58:27 by frameton         ###   ########.fr       */
+/*   Created: 2020/02/03 23:52:36 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/03 23:54:28 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		move_word(t_struct *s, int c)
+int		exec_history(t_struct s)
 {
-	if (c == 67 || !s->lbg || c == 65 || c == 66)
+	t_htr	*tmp;
+	int		c;
+
+	c = 1;
+	if (!s.h)
+	{
+		ft_putendl(RED"No commands found."WHITE);
 		return (1);
-	while (s->tmp->prev && !(check_whitespaces(s->tmp->prev->c)))
-		s->tmp = s->tmp->prev;
-	if (!(s->tmp->prev))
-		s->lbg = NULL;
-	else
-		s->tmp = s->tmp->prev;
+	}
+	tmp = s.h;
+	while (tmp->next)
+		tmp = tmp->next;
+	ft_putchar('\n');
+	while (tmp)
+	{
+		ft_putnbr(c++);
+		ft_2putstr("  ", tmp->name);
+		ft_putchar('\n');
+		tmp = tmp->prev;
+	}
+	ft_putchar('\n');
 	return (1);
 }

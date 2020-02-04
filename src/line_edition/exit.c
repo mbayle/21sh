@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:48:48 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/04 22:10:42 by frameton         ###   ########.fr       */
+/*   Updated: 2020/01/25 00:57:24 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	ft_exit2(int i, t_struct *s)
 	}
 }
 
-void	ft_exit(int i, t_struct *s)
+void		ft_exit(int i, t_struct *s)
 {
 	(*s).prompt = 1;
 	if (i == -1)
