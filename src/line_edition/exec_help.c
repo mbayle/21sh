@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 23:01:08 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/04 01:05:22 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/04 04:10:59 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,46 +44,6 @@ static int		help_ws(struct termios *term, int *m)
 	while (mh--)
 		tputs(tgetstr("do", NULL), 1, ft_ptchar);
 	return (1);
-}
-
-static void		write_anim(int i)
-{
-	tputs(tgetstr("im", NULL), 1, ft_ptchar);
-	ft_putstr(CYAN"_");
-	fp("ei", "rc");
-	while (i--)
-		tputs(tgetstr("le", NULL), 1, ft_ptchar);
-	ft_putstr(CYAN"_");
-	tputs(tgetstr("rc", NULL), 1, ft_ptchar);
-}
-
-static void		anim_cpt(int m, int lr, int c, int i)
-{
-	int		s;
-
-	ft_marge(m + 42);
-	ft_putstr(CYAN);
-	s = lr;
-	while (c)
-	{
-		tputs(tgetstr("sc", NULL), 1, ft_ptchar);
-		write_anim(i);
-		while (lr--)
-			tputs(tgetstr("do", NULL), 1, ft_ptchar);
-		lr = s;
-		s = m + 42;
-		while (s--)
-			tputs(tgetstr("nd", NULL), 1, ft_ptchar);
-		s = lr;
-		tputs(tgetstr("sc", NULL), 1, ft_ptchar);
-		write_anim(i);
-		while (lr--)
-			tputs(tgetstr("up", NULL), 1, ft_ptchar);
-		lr = s;
-		++i;
-		--c;
-		usleep(10000);
-	}
 }
 
 int				exec_sethelp(void)

@@ -333,6 +333,8 @@ int					exec_history(t_struct s);
 ** exec_setcpt.c
 */
 void				exec_setcpt3(t_struct *s, int m);
+void				write_anim(int i);
+void				anim_cpt(int m, int lr, int c, int i);
 int					exec_setcpt(t_struct *s);
 
 /*
