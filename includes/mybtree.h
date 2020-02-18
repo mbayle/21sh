@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:40:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/08 01:22:33 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/18 02:52:45 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 /*
 ** ast.c
 */
+void				browse_ast(t_ast *ast);
 void				sub_split(t_ast *ast, int priority);
 void				print_debug(t_ast *ast, int pad);
 t_ast				*beta_ast(t_ast *ast, int priority);
@@ -57,6 +58,7 @@ void				sub_split(t_ast *ast, int priority);
 void				print_debug(t_ast *ast, int pad);
 int					is_in_lexer(t_lex *lex, int priority);
 t_ast				*beta_ast(t_ast *ast, int priority);
+void				do_to_ast();
 int					build_ast(t_lex *lex, t_ast **ast);
 
 /*

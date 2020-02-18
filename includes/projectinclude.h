@@ -6,7 +6,7 @@
 /*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 04:05:42 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/03 06:36:13 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/17 23:16:49 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@
 # include "grammar.h"
 # include "parser.h"
 # include "mybtree.h"
+# include "jobcontrol.h"
 
 #endif

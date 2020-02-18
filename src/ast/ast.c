@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 01:20:24 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/08 03:34:07 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/18 02:56:28 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,14 @@ t_ast	*beta_ast(t_ast *ast, int priority)
 ** Return value : return ast
 */
 
+void	do_to_ast()
+{
+	char	**tmp;
+
+	tmp = quick_tab_cmd(g_jobcontrol.first_job->command);
+	pipe_exec(tmp, g_jobcontrol.env, g_jobcontrol.g_fg);
+}
+
 int		build_ast(t_lex *lex, t_ast **ast)
 {
 	int depth_max;
@@ -189,6 +197,8 @@ int		build_ast(t_lex *lex, t_ast **ast)
 		*ast = init_node(lex, lex->value);
 		*ast = beta_ast(*ast, 3);
 		!(*ast)->right && !(*ast)->left ? no_root(lex, (*ast)) : 0;
+		browse_ast(*ast);
+		do_to_ast();
 		ast && g_shell->debug == 1 ? ft_putast(*ast) : 0;
 	}
 	return (0);

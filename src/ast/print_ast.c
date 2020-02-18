@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 02:44:11 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/08 03:18:58 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/18 00:09:37 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ void	ft_print_value(t_ast *ast, char *side, int lvl)
 	}
 	else
 	{
-		while (tmp->next)
+		while (tmp)
+		{
+			ft_putstr(tmp->value);
 			tmp = tmp->next;
-		ft_putstr(tmp->value);
+		}
 	}
 }
 

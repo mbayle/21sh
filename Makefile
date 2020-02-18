@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/02/04 04:14:39 by mabayle          ###   ########.fr        #
+#    Updated: 2020/02/18 03:07:18 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,17 @@ SRC_PATH	:=	./src/
 OBJ_PATH	:=	./obj/
 
 SRC		:=	main.c \
+			jobcontrol/init_interactive_shell.c \
+			jobcontrol/put_in_fg.c \
+			jobcontrol/put_in_bg.c \
+			execution/pipeline_exec.c \
+			execution/browse_ast.c \
+			execution/pipeline_ast.c \
+			execution/get_path.c \
+			utils/ft_freetab.c\
+			utils/ft_strdupn.c\
+			utils/ft_strlenu.c\
+			redirections/redirect_to_fd.c \
 			lexer/lexer.c \
 			lexer/list_utils.c \
 			lexer/utils.c \

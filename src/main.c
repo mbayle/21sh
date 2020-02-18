@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/03 06:31:50 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/18 02:50:45 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	tmp_free_struct(t_struct *s, int *c)
 	(*s).av = NULL;
 }
 
-static void	minishell(t_struct *s)
+/*static void	minishell(t_struct *s)
 {
 	(*s).c = check_command(&(*s).av, *s, NULL, 0);
 	if ((*s).c < 2)
@@ -108,7 +108,7 @@ static void	minishell(t_struct *s)
 		wait(0);
 	if ((*s).exit)
 		ft_exit(0, &*s);
-}
+}*/
 
 char		*create_lex_line(t_lst *s)
 {
@@ -122,6 +122,23 @@ char		*create_lex_line(t_lst *s)
 	return (line);
 }
 
+char		**ft_tabdup(char **av)
+{
+	int 	i;
+	char	**dst;
+
+	i = 0;
+	while (av[i])
+		i++;
+	if (!(dst = malloc(sizeof(char*) * (i + 1))))
+		return (NULL);
+	i = -1;
+	while (av[++i])
+		dst[i] = ft_strdup(av[i]);
+	dst[i] = NULL;
+	return (dst);
+}
+
 int			main(int ac, char **av, char **envp)
 {
 	t_struct	s;
@@ -129,6 +146,7 @@ int			main(int ac, char **av, char **envp)
 	int			i;
 
 	c = 0;
+	g_jobcontrol.env = ft_tabdup(envp);
 	init_struct(&s, envp, ac, av);
 	g_shell = init_shell(0);
 	s.h = create_history(NULL, NULL, NULL, &s);
@@ -149,7 +167,7 @@ int			main(int ac, char **av, char **envp)
 			{
 				g_shell->line = create_lex_line(s.l);
 				ft_lexer(&g_shell->lex, g_shell->line);
-				minishell(&s);
+			//	minishell(&s);
 			}
 			tmp_free_struct(&s, &c);
 		}
