@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:01:11 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/01 22:50:04 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/18 21:00:20 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <stdlib.h>
 # include <limits.h>
 
-# define BUFF_SIZE 32
 # define SEPARATOR '\n'
 # define FRED "\033[0;31m"
 # define GREEN "\033[1;32m"
@@ -34,6 +33,7 @@
 # define BGREEN "\033[0;30;42m"
 # define BCYAN "\033[0;30;46m"
 # define BYELLOW "\033[0;30;43m"
+# define BUFF_SIZE 32
 
 typedef struct		s_ftlist
 {

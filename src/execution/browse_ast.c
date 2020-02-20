@@ -6,47 +6,20 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 02:48:35 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/02/18 02:56:47 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/02/20 01:22:44 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
-void	browse_ast(t_ast *ast)
-{
-	g_jobcontrol.g_fg = 1;
-	check_op(ast);
-}
 
-void	check_op(t_ast *ast)
-{
-	t_ast *tmp;
-	t_lex	*lex;
 
-	tmp = ast;
-	lex = ast->lex;
-	if (tmp == NULL || lex == NULL)
-		return ;
-	if ((int)lex->operator == 0)
-	/*job allocation in it*/
-	/*check g_jobcontrol.g_fg et set job->fg if appropriate*/
-		manage_word(ast);
-	if ((int)lex->operator == 1)
-		manage_semic(ast);
-	else if ((int)lex->operator == 3)
-		manage_pipe(ast);
-	else if ((int)lex->operator == 4)
-		manage_dor(ast);
-	else if ((int)lex->operator == 5)
-		manage_and(ast);
-	else if ((int)lex->operator == 6)
-		manage_dand(ast);
-}
+
 
 void	manage_word(t_ast *ast)
 {
 	allocate_job_loop(0);
-	execute(ast);
+	simple_exec(ast);
 }
 
 void	go_left(t_ast *ast)
@@ -96,21 +69,51 @@ void	manage_pipe(t_ast *ast)
 	int p_pos;
 
 	allocate_job_loop(0);
+	ft_putendl("I have a pipe");
 /*	joballocation : (next ? ..)
 	job->cmd = ft_strdup(ast->left->lex->value..)
 	free(tmp);*/
 	p_pos = 0;
 	if (ast->right && ast->right->lex->operator != 3)
 		p_pos = 1;	
-	go_left_pipe(ast, p_pos);
+	go_left_pipe(ast, 0);
 	go_right_pipe(ast, p_pos);
 }
 
 
 
+void	check_op(t_ast *ast)
+{
+	t_ast *tmp;
+	t_lex	*lex;
+
+	tmp = ast;
+	lex = ast->lex;
+	if (tmp == NULL || lex == NULL)
+		return ;
+	if ((int)lex->operator == 0)
+	/*job allocation in it*/
+	/*check g_jobcontrol.g_fg et set job->fg if appropriate*/
+		manage_word(ast);
+	if ((int)lex->operator == 1)
+		manage_semic(ast);
+	else if ((int)lex->operator == 3)
+		manage_pipe(ast);
+	else if ((int)lex->operator == 4)
+		manage_dor(ast);
+	else if ((int)lex->operator == 5)
+		manage_and(ast);
+	else if ((int)lex->operator == 6)
+		manage_dand(ast);
+}
 
 
 
+void	browse_ast(t_ast *ast)
+{
+	g_jobcontrol.g_fg = 1;
+	check_op(ast);
+}
 
 
 

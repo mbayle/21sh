@@ -6,14 +6,14 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/02/18 03:07:18 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/02/20 01:34:58 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	21sh
 
-CC			:=	gcc
-LINKER		:=	gcc -o
+CC			:=	clang
+LINKER		:=	clang -o
 
 DEBUG		:=	0
 
@@ -31,12 +31,11 @@ INCS		=	./includes/get_next_line.h \
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address
 
-CFLAGS		:=	-Wall -Wextra -Werror -g3 -I$(INCLUDES)
-
+CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 -fsanitize=address 
 ifeq ($(DEBUG), 1)
-	CFLAGS	:=	$(CFLAGS) -fsanitize=address -ggdb -fno-omit-frame-pointer
+	CFLAGS	:=	$(CFLAGS) -fsanitize=address -ggdb -fno-omit-frame-pointer 
 endif
 
 SRC_PATH	:=	./src/
@@ -46,7 +45,9 @@ SRC		:=	main.c \
 			jobcontrol/init_interactive_shell.c \
 			jobcontrol/put_in_fg.c \
 			jobcontrol/put_in_bg.c \
+			jobcontrol/job_alloc.c \
 			execution/pipeline_exec.c \
+			execution/simple_exec.c \
 			execution/browse_ast.c \
 			execution/pipeline_ast.c \
 			execution/get_path.c \

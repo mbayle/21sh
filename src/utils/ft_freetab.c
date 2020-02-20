@@ -1,6 +1,4 @@
-#include "../../include/input.h"
-#include "../../include/jobcontrol.h"
-#include "../../include/sh21.h"
+#include "projectinclude.h"
 
 void    ft_freetab(char **s1)
 {

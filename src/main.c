@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/18 02:50:45 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/02/20 00:44:50 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ int			main(int ac, char **av, char **envp)
 	int			i;
 
 	c = 0;
+	init_shell_sig();
 	g_jobcontrol.env = ft_tabdup(envp);
 	init_struct(&s, envp, ac, av);
 	g_shell = init_shell(0);
@@ -172,5 +173,6 @@ int			main(int ac, char **av, char **envp)
 			tmp_free_struct(&s, &c);
 		}
 	}
+	reset_attr();
 	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipeline_exec.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/02/20 01:17:26 by ymarcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "projectinclude.h"
 
 int		job_is_completed(t_job *j)
@@ -355,13 +367,18 @@ t_process	*fill_jc_struc(pid_t pid, char *cmd, t_process *pro)
 void	set_id_sign(int foreground)
 {
 	pid_t   pid;
+	int		errno;
 	
+	errno = 0;
 	pid = getpid();
 	if (g_jobcontrol.first_job->pgid == 0)
        g_jobcontrol.first_job->pgid = pid;
 	setpgid(pid, g_jobcontrol.first_job->pgid);
 	if (foreground)
+	{
 		tcsetpgrp(0, g_jobcontrol.first_job->pgid);
+	ft_putendl("DAN LA COND");
+	}
 	ign_jb_sign(1);
 }
 
@@ -395,7 +412,7 @@ char	*local_file(char *str)
 		if (read.tmp && ft_strcmp(read.tmp, read.file->d_name) == 0)
 		{
 			dst = ft_strdup(str);
-			permissions(&dst, read.buf);
+			permissions(&dst, read.rdbuf);
 			ft_strdel(&read.tmp);
 			break;
 		}
@@ -467,14 +484,18 @@ int		pipe_exec(char **av, char **env, int fg)
 	ret = -1;
 	g_jobcontrol.first_job->first_process = NULL;
 	g_jobcontrol.first_job->fg = fg;
-	while (av[i])
+	while (av && av[i])
 	{
-		
+		ft_putstr("\n PIPELINE_EXEC av[i]:");
+		ft_putendl(av[i]);
 		if (ft_strcmp(av[i], "|") == 0)
 			i++;
 		else
 		{
 			cmd = ft_strsplit(av[i], ' ');
+			ft_putstr("\n PIPELINE_EXEC cmd[]:");
+			ft_putendl(cmd[0]);
+			ft_putendl(cmd[1]);
 			oldlink[0] = newlink[0];
 			if (av[i + 1] && ft_strcmp(av[i + 1], "|") == 0)
 				if (pipe(newlink) < 0)
@@ -484,15 +505,18 @@ int		pipe_exec(char **av, char **env, int fg)
 				execute_builtin(cmd);
 			if (((mypath && ft_strcmp(mypath, "b")) ||  (ft_strcmp(mypath, "b") == 0 && av[i + 1] )) && (pid = fork()) == 0)
 			{
-				set_id_sign(fg);
-				fill_pipe(oldlink, newlink, av, i);
-				if (ft_strcmp(mypath, "b") == 0)
-				{
-					execute_builtin(cmd);
-					exit(g_jobcontrol.ret);
-				}
-				else
-					execve(mypath, cmd, env);
+					reset_attr();
+					set_id_sign(fg);
+					fill_pipe(oldlink, newlink, av, i);
+					if (ft_strcmp(mypath, "b") == 0)
+					{
+						execute_builtin(cmd);
+						exit(g_jobcontrol.ret);
+					}
+					else
+					{
+						execve(mypath, cmd, env);
+					}
 			}
 			if (oldlink[0] > -1)
 				close (oldlink[0]);
@@ -512,6 +536,7 @@ int		pipe_exec(char **av, char **env, int fg)
 		put_in_fg(0, g_jobcontrol.first_mail, NULL);
 	else
 		put_in_bg(g_jobcontrol.first_mail, 0, NULL, g_jobcontrol.first_job->first_process);
+	init_shell_sig();
 	ign_jb_sign(0);
 	return (0);
 }

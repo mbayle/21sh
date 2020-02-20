@@ -1,4 +1,4 @@
-#include "../../include/jobcontrol.h"
+#include "projectinclude.h"
 
 void	redirect_to_file(char *file, mode_t mode, int stfd)
 {

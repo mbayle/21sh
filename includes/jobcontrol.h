@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/02/18 03:07:57 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/02/20 00:43:58 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define JOBCONTROL_H
 
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <sys/wait.h>
 #include <termios.h>
 #include <unistd.h>
@@ -70,7 +71,7 @@ typedef struct				s_read
 {
 	DIR						*ptr;
 	struct dirent			*file;
-	struct stat				buf;
+	struct stat				rdbuf;
 	char					*path;
 	char					*tmp;
 
@@ -78,14 +79,30 @@ typedef struct				s_read
 
 struct s_jobcontrol				g_jobcontrol;
 
+/**
+Utils
+**/
+
+int							reset_attr();
+int							ft_occur(char const *s, char c);
+char						*ft_strjoinnf(char const *s1, char const *s2);
+char						*ft_strjoinfree(char *s1, char *s2);
 int							ft_strlenu(char *str);
 char						**quick_tab_cmd(char *line);
-void						allocate_job_loop(int repere);
-void						delete_job(t_job *job);
 int							permissions(char **str, struct stat buf);
 char						*ft_strdupn(char *str, char c);
 char						*ft_strldup(char *str, char c);
+/**
+Manage job list
+**/
 int							job_is_completed(t_job *job);
+void						allocate_job_loop(int repere);
+void						delete_job(t_job *job);
+/**
+jocontrol
+**/
+
+void						do_to_ast();
 void						update_bg_status();
 int							check_if_stop(t_process *p, t_job *job);
 int							process_status(pid_t pid, int status, t_process *p);

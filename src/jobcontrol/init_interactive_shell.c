@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 12:40:19 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/02/18 03:01:09 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/02/20 01:16:39 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		init_shell_sig()
 		tcgetattr(0, &g_jobcontrol.term_attr);
 		term = g_jobcontrol.term_attr;
 		term.c_cc[VTIME] = 0;
+		term.c_lflag &= ~(ICANON | ECHO );//| ISIG);
 		term.c_cc[VMIN] = 1;
 		//term.c_lflag &= ~(ICANON | ECHO);
 		tcsetattr(0, TCSADRAIN, &term);
@@ -61,4 +62,25 @@ int		init_shell_sig()
 		return (0);
 	}
 	return (g_jobcontrol.shell_is_int);
+}
+
+int		reset_attr()
+{
+	struct termios	term;
+	
+	if (isatty(0))
+	{
+		term = g_jobcontrol.term_attr;
+//		ign_jb_sign(1);
+//		ft_putendl("IN reset");	
+//		if (tcgetattr(0, &term) == -1)
+  //      	return (-1);
+	//	//term = g_jobcontrol.term_attr;
+    //	term.c_lflag |= ICANON;
+    //	term.c_lflag |= ECHO;
+ //   	term.c_lflag |= ISIG;
+   		if (tcsetattr(0, TCSADRAIN, &term) == -1)
+        	return (-1);
+	}
+	return (0);
 }

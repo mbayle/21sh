@@ -6,7 +6,7 @@
 /*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/09 17:15:39 by mabayle           #+#    #+#             */
-/*   Updated: 2019/02/27 22:59:47 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/19 23:12:19 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ size_t	ft_strlen(char const *s)
 	size_t i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 		i++;
 	return (i);
 }

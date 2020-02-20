@@ -422,6 +422,11 @@ t_lst2				*init_lst_env(
 	t_lst2 *l, char **env, t_lst2 *tmp, int c);
 
 /*
+** init_lsttt.c
+*/
+int					init_lst(t_struct *s, int i, int r, int ret);
+
+/*
 ** init_tab_path.c
 */
 char				**init_tab_path2(char *s);

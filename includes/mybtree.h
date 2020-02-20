@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:40:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/18 02:52:45 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/02/19 23:41:08 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@
 /*
 ** ast.c
 */
+
+
+void				join_job_line(t_ast *ast, int p_pos);
+void				manage_pipe_bis(t_ast *ast);
+void				manage_pipe(t_ast *ast);
+void				simple_exec(t_ast *ast);
+void				go_left_pipe(t_ast *ast, int p_pos);
+void				go_right_pipe(t_ast *ast, int p_pos);
+void				check_op(t_ast *ast);
 void				browse_ast(t_ast *ast);
 void				sub_split(t_ast *ast, int priority);
 void				print_debug(t_ast *ast, int pad);

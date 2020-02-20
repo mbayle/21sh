@@ -6,16 +6,18 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 23:39:14 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/02/18 02:27:26 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/02/20 00:20:50 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "projectinclude.h"
 
 int		list_size(t_lex *lex)
 {
 	int	i;
 
 	i = 0;
-	while (lex)
+	while (lex && lex->next)
 	{
 		i += ft_strlen(lex->value);
 		lex = lex->next;
@@ -29,34 +31,50 @@ char	*list_to_string(t_lex *lex)
 	char	*dst;
 
 	i = 0;
-	if ((dst = ft_strnew(1)) == NULL)
+	if (lex == NULL || (dst = ft_strnew(1)) == NULL)
+	{
+		ft_putendl("RETURN NULL AVANT DE FILL");
 //	if ((dst = malloc(sizeof(char) * (list_size(lex) + 1))) == NULL)
 		return (NULL);
-	while (lex)
+	}
+	while (lex->next)
 	{
+		ft_putstr("o lex->value in list 2 str: ");
+		ft_putendl(lex->value);
+		if (dst != NULL)
+			ft_putendl("DST XIST");
 		dst = ft_strjoinfree(dst, lex->value);
-		if (lex->next);
+		ft_putstr("DST : ");
+		ft_putstr(dst);
+		ft_putendl("-");
+		if (lex->next)
 			dst = ft_strjoinfree(dst, " ");
 		lex = lex->next;
 	}
+	return (dst);
 }
 
 void	join_job_line(t_ast *ast, int p_pos)
 {
 	char	*tmp;
 	char	*tmp2;
-	t_lex	*lex;
 
 	
 	tmp = ft_strdup(g_jobcontrol.first_job->command);
-	tmp2 = list_to_string(at->lex);
+	ft_putstr("\ng_joc.. de base tmp = ft_strdup: ");
+	ft_putendl(tmp);
+	tmp2 = list_to_string(ast->lex);
+	ft_putstr("\ntmp2 = list_to_string :");
+	ft_putendl(tmp2);
 	ft_strdel(&g_jobcontrol.first_job->command);
-
-	g_jobcontrol.first_job->command = ft_strjoin(tmp, tmp2);
+	if (tmp)
+		g_jobcontrol.first_job->command = ft_strjoin(tmp, tmp2);
+	else
+		g_jobcontrol.first_job->command = ft_strdup(tmp2);
 	ft_strdel(&tmp);
-	ft_strdel(&tmp);
-	if (p_pos)
-		g_jobcontrol.first_job->command = ft_strjoinfree(g_jobcontrol.first_job->comand, " | ");
+	ft_strdel(&tmp2);
+	if (p_pos != 1)
+		g_jobcontrol.first_job->command = ft_strjoinfree(g_jobcontrol.first_job->command, " | ");
 
 }
 
@@ -64,12 +82,14 @@ void    check_op_pipe(t_ast *ast, int p_pos)
 {
 	t_lex   *lex;
 
-	if (tmp == NULL)
+	if (ast == NULL)
 		return ;
 	lex = ast->lex;
 	if ((int)lex->operator == 0)
 	{
 		join_job_line(ast, p_pos);
+		if (p_pos == 1)
+			do_to_ast();
 	}
 	/*process aloc in it*/
 	/*job->cmd = strjoin in it*/
@@ -86,7 +106,7 @@ void    go_right_pipe(t_ast *ast, int p_pos)
 	t_ast   *tmp;
 
 	tmp = ast->right;
-	check_op_pipe(tmp);
+	check_op_pipe(tmp, p_pos);
 }
 
 void    go_left_pipe(t_ast *ast, int p_pos)
@@ -94,7 +114,7 @@ void    go_left_pipe(t_ast *ast, int p_pos)
 	t_ast   *tmp;
 
 	tmp = ast->left;
-	check_op_pipe(tmp);
+	check_op_pipe(tmp, p_pos);
 }
 
 void    manage_pipe_bis(t_ast *ast)

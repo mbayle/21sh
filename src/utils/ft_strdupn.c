@@ -1,5 +1,4 @@
-#include <jobcontrol.h>
-#include <sh21.h>
+#include "projectinclude.h"
 
 int		until_c(char *str, char c)
 {
@@ -34,7 +33,7 @@ char	*ft_strdupn(char *str, char c)
 
 	j = 0;
 	i = ft_strlen(str);
-	while (i >= 0)
+	while (str && i >= 0)
 	{
 		if (str[i] == c)
 		{
@@ -58,7 +57,7 @@ char	*ft_strldup(char *str, char c)
 
 	j = 0;
 	i = ft_strlen(str);
-	while (i >= 0)
+	while (str && i >= 0)
 	{
 		if (str[i] == c)
 		{

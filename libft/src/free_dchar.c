@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 01:11:09 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/04 01:13:01 by frameton         ###   ########.fr       */
+/*   Updated: 2020/02/19 23:18:18 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	free_dchar(char ***tab)
 	int		c;
 
 	c = 0;
+	if (!tab || !*tab || !**tab)
+		return ;
 	while ((*tab)[c])
 		free((*tab)[c++]);
 	if (*tab)
