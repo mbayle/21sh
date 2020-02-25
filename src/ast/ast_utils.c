@@ -43,7 +43,7 @@ void	init_priority(t_lex *lex)
 	{
 		if (lex->operator == OTHER)
 			lex->priority = 0;
-		else if (lex->operator == PIPE || lex->operator == DGREAT)
+		else if (lex->operator == PIPE)
 			lex->priority = 1;
 		else if (lex->operator == SEMIC || lex->operator == AND)
 			lex->priority = 3;

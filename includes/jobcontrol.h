@@ -80,6 +80,11 @@ typedef struct				s_read
 struct s_jobcontrol				g_jobcontrol;
 
 /**
+parse ast
+**/
+
+void						parse_redir(char *av);
+/**
 Utils
 **/
 

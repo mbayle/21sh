@@ -179,13 +179,24 @@ t_job	*put_last_stp(t_job *job, int i, int l)
 
 	save = g_jobcontrol.first_job;
 	cpy = g_jobcontrol.first_mail;
+	ft_putendl("BEFORE THE LOOP");
+	if (job)
+	{
+		ft_putstr("MA VAL :");
+		ft_putendl(job->command);
+		ft_putnbr(job->pgid);
+	}
 	while (cpy)
 	{
+		ft_putstr("CPY VALUE");
+		ft_putendl(cpy->command);
 		if (cpy->last_j == l && job && cpy->pgid != job->pgid)
 		{
+			ft_putendl("IN THE COND");
 			g_jobcontrol.first_job = cpy;
 			g_jobcontrol.first_job->last_j = i;
 			g_jobcontrol.first_job = save;
+			ft_putendl("BEFORE RETURN");
 			return (cpy);
 		}
 		cpy = cpy->next;
@@ -202,8 +213,11 @@ int		check_jb_nb()
 	first = g_jobcontrol.first_mail;
 	while (first)
 	{
-		if (first->stop == 1 || first->fg == 0)
+		if ((first->stop == 1 || first->fg == 0) && first->pgid != g_jobcontrol.first_job->pgid)
 		{
+			ft_putendl("\nIM IN CHECK");
+			ft_putendl(first->command);
+			ft_putnbr(first->j_nb);
 			nb = first->j_nb + 1;
 		}
 		first = first->next;
@@ -213,12 +227,19 @@ int		check_jb_nb()
 
 void	to_do_if_stp(t_job *job, t_job *save, int i)
 {
-//	ft_putendl("IM DE");
+	ft_putstr("g_job No: ");
+	ft_putnbr(g_jobcontrol.first_job->j_nb);
+	ft_putstr("\ng_job pgig: ");
+	ft_putnbr(g_jobcontrol.first_job->pgid);
+	ft_putstr("\njob pgid: ");
+	ft_putnbr(job->pgid);
 	if (g_jobcontrol.first_job->pgid == job->pgid && g_jobcontrol.first_job->j_nb == 0)
 	{
-	//	ft_putnbr(42);
+		ft_putnbr(42);
+		ft_putnbr(g_jobcontrol.repere);
 		g_jobcontrol.repere += 1;
 		g_jobcontrol.first_job->j_nb = check_jb_nb();
+		ft_putnbr(g_jobcontrol.first_job->j_nb);
 	}
 	g_jobcontrol.first_job = job;
 	g_jobcontrol.first_job->last_j = 2;	
@@ -377,7 +398,7 @@ void	set_id_sign(int foreground)
 	if (foreground)
 	{
 		tcsetpgrp(0, g_jobcontrol.first_job->pgid);
-	ft_putendl("DAN LA COND");
+//	ft_putendl("DAN LA COND");
 	}
 	ign_jb_sign(1);
 }
@@ -459,6 +480,8 @@ char		*my_path(char **cmd, char **env)
 				//g_jobcontrol.first_job->completed
 			}
 		}
+			ft_putstr("MYPATH = ");
+			ft_putendl(mypath);
 	}
 	ft_freetab(tmp);
 	return (mypath);	
@@ -486,16 +509,18 @@ int		pipe_exec(char **av, char **env, int fg)
 	g_jobcontrol.first_job->fg = fg;
 	while (av && av[i])
 	{
-		ft_putstr("\n PIPELINE_EXEC av[i]:");
-		ft_putendl(av[i]);
+		ft_putendl("I GO HEEEEEEEEEEEEEEEEEEERE");
+//		ft_putstr("\n PIPELINE_EXEC av[i]:");
+//		ft_putendl(av[i]);
 		if (ft_strcmp(av[i], "|") == 0)
 			i++;
 		else
 		{
 			cmd = ft_strsplit(av[i], ' ');
-			ft_putstr("\n PIPELINE_EXEC cmd[]:");
-			ft_putendl(cmd[0]);
-			ft_putendl(cmd[1]);
+//			ft_putstr("\n PIPELINE_EXEC cmd[]:");
+//			ft_putendl(cmd[0]);
+//			ft_putendl(cmd[1]);
+			parse_redir(av[i]);
 			oldlink[0] = newlink[0];
 			if (av[i + 1] && ft_strcmp(av[i + 1], "|") == 0)
 				if (pipe(newlink) < 0)
@@ -518,6 +543,7 @@ int		pipe_exec(char **av, char **env, int fg)
 						execve(mypath, cmd, env);
 					}
 			}
+		//	init_shell_sig();
 			if (oldlink[0] > -1)
 				close (oldlink[0]);
 			if (newlink[1] > -1)
@@ -535,8 +561,8 @@ int		pipe_exec(char **av, char **env, int fg)
 	if (fg)
 		put_in_fg(0, g_jobcontrol.first_mail, NULL);
 	else
-		put_in_bg(g_jobcontrol.first_mail, 0, NULL, g_jobcontrol.first_job->first_process);
+		put_in_bg(g_jobcontrol.first_job, 0, NULL, g_jobcontrol.first_job->first_process);
 	init_shell_sig();
-	ign_jb_sign(0);
+	//ign_jb_sign(0);
 	return (0);
 }

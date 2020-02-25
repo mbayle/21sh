@@ -48,6 +48,7 @@ void    allocate_job_loop(int repere)
 {
 		if (!g_jobcontrol.first_job)
 		{
+				ft_putendl("FIRST JOB BABY");
 				ft_memdel((void**)g_jobcontrol.first_mail);
 				g_jobcontrol.first_mail = ft_memalloc(sizeof(*g_jobcontrol.first_job));
 				g_jobcontrol.first_mail->pgid = 0;

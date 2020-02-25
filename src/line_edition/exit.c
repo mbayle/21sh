@@ -74,6 +74,7 @@ static void	ft_exit2(int i, t_struct *s)
 		ft_exit3(&*s);
 		if (!(*s).exit)
 			ft_eputstr(FRED"Stop: unknown error.\n"WHITE);
+		reset_attr();
 		exit(0);
 	}
 }
@@ -102,6 +103,7 @@ void		ft_exit(int i, t_struct *s)
 		ft_putchar('\n');
 		if (!(file_history(s->h, &s->h, s, 0)))
 			ft_exit2(0, s);
+		reset_attr();
 		exit(0);
 	}
 }

@@ -69,7 +69,7 @@ void	manage_pipe(t_ast *ast)
 	int p_pos;
 
 	allocate_job_loop(0);
-	ft_putendl("I have a pipe");
+//	ft_putendl("I have a pipe");
 /*	joballocation : (next ? ..)
 	job->cmd = ft_strdup(ast->left->lex->value..)
 	free(tmp);*/
@@ -89,7 +89,9 @@ void	check_op(t_ast *ast)
 
 	tmp = ast;
 	lex = ast->lex;
-	if (tmp == NULL || lex == NULL)
+	ft_putstr("In check op ma val is : ");
+	ft_putendl(lex->value);
+	if (tmp == NULL || lex == NULL || lex->token == UNKNOWN)
 		return ;
 	if ((int)lex->operator == 0)
 	/*job allocation in it*/

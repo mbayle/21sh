@@ -55,6 +55,7 @@ SRC		:=	main.c \
 			utils/ft_strdupn.c\
 			utils/ft_strlenu.c\
 			redirections/redirect_to_fd.c \
+			redirections/parse_redir.c \
 			lexer/lexer.c \
 			lexer/list_utils.c \
 			lexer/utils.c \

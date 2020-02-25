@@ -19,6 +19,10 @@ void	delete_job(t_job *job)
 //	ft_putendl("im here in dele");
 	delete_process(job->first_process);
 	ft_strdel(&job->command);
+	if (job->pgid != -1)
+	{
+		kill(-(job->pgid), 9);
+	}
 	ft_memdel((void**)job);
 }
 	
@@ -188,9 +192,10 @@ int		put_in_bg(t_job *job, int cont, char **av, t_process *pro)
 	t_job	*tjob;
 
 	if (!cont)
-		wait_for_job(pro, job, 0);
+		wait_for_job(pro, job , 0);
 	tjob = right_job(cont, av, job);
 	save = g_jobcontrol.first_job;
+	init_shell_sig();
 	if (cont && tjob)
 	{
 		if (g_jobcontrol.first_job && g_jobcontrol.first_job->fg == 0)

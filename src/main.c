@@ -155,9 +155,15 @@ int			main(int ac, char **av, char **envp)
 	while (1)
 	{
 		if (print_prompt(s.prompt, &s, 0) == 0)
+		{
+			delete_job(g_jobcontrol.first_mail);
 			ft_exit(0, &s);
+		}
 		if (((i = get_command(&s)) == 0) || i == 5)
+		{
+			delete_job(g_jobcontrol.first_mail);
 			ft_exit(i, &s);
+		}
 		else
 		{
 			while (s.av[0] && s.av[c])
@@ -172,7 +178,9 @@ int			main(int ac, char **av, char **envp)
 			}
 			tmp_free_struct(&s, &c);
 		}
+		update_bg_status();
 	}
 	reset_attr();
+	delete_job(g_jobcontrol.first_mail);
 	return (0);
 }

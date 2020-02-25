@@ -19,16 +19,16 @@ void	simple_exec(t_ast *ast)
 
 	lex = ast->lex;
 	tmp = lex;
-	while (lex)
-	{
-		ft_putstr("lex->value simple_exec: ");
-		ft_putendl(lex->value);
-		ft_putstr("\nAST_>lex->value simple_exec: ");
-		ft_putendl(ast->lex->value);
-		lex = lex->next;
-	}
+//	while (lex)
+//	{
+//		ft_putstr("lex->value simple_exec: ");
+//		ft_putendl(lex->value);
+//		ft_putstr("\nAST_>lex->value simple_exec: ");
+//		ft_putendl(ast->lex->value);
+//		lex = lex->next;
+//	}
 	join_job_line(ast, 1);
-	ft_putstr("\njob command after created: ");
-	ft_putendl(g_jobcontrol.first_job->command);
+//	ft_putstr("\njob command after created: ");
+//	ft_putendl(g_jobcontrol.first_job->command);
 	do_to_ast();
 }

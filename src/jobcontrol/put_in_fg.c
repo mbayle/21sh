@@ -83,17 +83,35 @@ void	put_last_fg(t_job *job, int i, int l)
 	t_job	**comp2;
 
 	comp = NULL;
+	comp2 = NULL;
 	save = g_jobcontrol.first_job;
 	cpy = g_jobcontrol.first_mail;
+	if (job)
+	{
+		ft_putnbr(i);
+		ft_putnbr(l);
+		ft_putstr("MA FG VAL :");
+		ft_putendl(job->command);
+		ft_putnbr(job->last_j);
+	}
+	if (!job)
+		return ;
 	while (cpy)
 	{
+		ft_putstr("IN FG LOOP : ");
+		ft_putnbr(cpy->last_j);
+		ft_putendl(cpy->command);
    	 	if ((cpy->stop == 1 || cpy->fg != 1) && cpy->last_j == l && job && cpy->pgid != job->pgid)
 		{
+			ft_putstr("FG VAL :");
+			ft_putendl(cpy->command);
 			comp = cpy;
 			comp2 = &comp;
 		}
     	cpy = cpy->next;
 	}
+	if (!comp2)
+		return ;
     g_jobcontrol.first_job = (*comp2);
     g_jobcontrol.first_job->last_j = i;
    	g_jobcontrol.first_job = save;
@@ -115,13 +133,18 @@ int		put_in_fg(int cont, t_job *job, char **av)
 	if (cont && tjob)
 	{
 		tcsetpgrp(0, tjob->pgid);
+		reset_attr();
+		ft_putendl_fd(tjob->command, 2);
+//		init_shell_sig();
 //		ign_jb_sign(1);
-		tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
+//		tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
 		if (kill(-(tjob->pgid), SIGCONT) < 0)
 		{
 			ft_putendl_fd("Fail to continue", 2);
 			return (1);
 		}
+		ft_putstr_fd("JOB VAL :", 2);
+		ft_putendl(tjob->command);
 		g_jobcontrol.first_job = tjob;
 		g_jobcontrol.first_job->stop = -1;
 		g_jobcontrol.first_job->last_j = 0;
@@ -133,6 +156,7 @@ int		put_in_fg(int cont, t_job *job, char **av)
 	}
 	wait_for_job(pro, save, 1);
 	tcsetpgrp(0, g_jobcontrol.shell_pgid);
-	tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
+	init_shell_sig();
+//	tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
 	return (!tjob);
 }
