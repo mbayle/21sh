@@ -38,16 +38,18 @@ void	go_right(t_ast *ast)
 	check_op(tmp);
 }
 
-void	manage_semic(t_ast *ast)
+void	manage_semic(t_ast *ast, int fg)
 {
+	if (fg == 0)
+		g_jobcontrol.g_fg = 0;
 	go_left(ast);
+	g_jobcontrol.g_fg = 1;
 	go_right(ast);
 }
 
 void	manage_and(t_ast *ast)
 {
-	g_jobcontrol.g_fg = 0;
-	manage_semic(ast);
+	manage_semic(ast, 0);
 }
 
 void	manage_dand(t_ast *ast)
@@ -98,7 +100,7 @@ void	check_op(t_ast *ast)
 	/*check g_jobcontrol.g_fg et set job->fg if appropriate*/
 		manage_word(ast);
 	if ((int)lex->operator == 1)
-		manage_semic(ast);
+		manage_semic(ast, 1);
 	else if ((int)lex->operator == 3)
 		manage_pipe(ast);
 	else if ((int)lex->operator == 4)

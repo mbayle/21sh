@@ -509,17 +509,11 @@ int		pipe_exec(char **av, char **env, int fg)
 	g_jobcontrol.first_job->fg = fg;
 	while (av && av[i])
 	{
-		ft_putendl("I GO HEEEEEEEEEEEEEEEEEEERE");
-//		ft_putstr("\n PIPELINE_EXEC av[i]:");
-//		ft_putendl(av[i]);
 		if (ft_strcmp(av[i], "|") == 0)
 			i++;
 		else
 		{
 			cmd = ft_strsplit(av[i], ' ');
-//			ft_putstr("\n PIPELINE_EXEC cmd[]:");
-//			ft_putendl(cmd[0]);
-//			ft_putendl(cmd[1]);
 			parse_redir(av[i]);
 			oldlink[0] = newlink[0];
 			if (av[i + 1] && ft_strcmp(av[i + 1], "|") == 0)
@@ -530,7 +524,9 @@ int		pipe_exec(char **av, char **env, int fg)
 				execute_builtin(cmd);
 			if (((mypath && ft_strcmp(mypath, "b")) ||  (ft_strcmp(mypath, "b") == 0 && av[i + 1] )) && (pid = fork()) == 0)
 			{
-					reset_attr();
+//					tcsetattr(0, TCSANOW, &g_jobcontrol.first_job->j_mode);
+					if (fg)
+						reset_attr();
 					set_id_sign(fg);
 					fill_pipe(oldlink, newlink, av, i);
 					if (ft_strcmp(mypath, "b") == 0)
@@ -543,7 +539,8 @@ int		pipe_exec(char **av, char **env, int fg)
 						execve(mypath, cmd, env);
 					}
 			}
-		//	init_shell_sig();
+//			else
+//				init_shell_sig();
 			if (oldlink[0] > -1)
 				close (oldlink[0]);
 			if (newlink[1] > -1)
@@ -551,7 +548,6 @@ int		pipe_exec(char **av, char **env, int fg)
 			ft_freetab(cmd);
 			if (mypath)
 				pro = fill_jc_struc(pid, av[i], pro);
-			//if (!mypath)
 			i++;
 			ft_strdel(&mypath);
 			pid = -1;
@@ -562,7 +558,9 @@ int		pipe_exec(char **av, char **env, int fg)
 		put_in_fg(0, g_jobcontrol.first_mail, NULL);
 	else
 		put_in_bg(g_jobcontrol.first_job, 0, NULL, g_jobcontrol.first_job->first_process);
-	init_shell_sig();
+//	tcgetattr(0, &g_jobcontrol.first_job->j_mode);
+//	tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
+//	init_shell_sig();
 	//ign_jb_sign(0);
 	return (0);
 }

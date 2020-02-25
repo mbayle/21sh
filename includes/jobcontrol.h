@@ -42,6 +42,7 @@ typedef struct				s_process
 typedef struct				s_job
 {
 	struct s_process		*first_process;
+	struct termios			j_mode;
 //	struct s_process		*last_process;
 	struct s_job			*next;
 	char					*command;
@@ -58,6 +59,7 @@ typedef struct				s_jobcontrol
 {
 	char					**env;
 	struct termios			term_attr;
+	struct termios			save_attr;
 	struct s_job			*first_job;
 	struct s_job			*first_mail;
 	pid_t					shell_pgid;

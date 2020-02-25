@@ -195,7 +195,7 @@ int		put_in_bg(t_job *job, int cont, char **av, t_process *pro)
 		wait_for_job(pro, job , 0);
 	tjob = right_job(cont, av, job);
 	save = g_jobcontrol.first_job;
-	init_shell_sig();
+//	init_shell_sig();
 	if (cont && tjob)
 	{
 		if (g_jobcontrol.first_job && g_jobcontrol.first_job->fg == 0)
@@ -212,5 +212,8 @@ int		put_in_bg(t_job *job, int cont, char **av, t_process *pro)
 		put_last_stp(put_last_stp(tjob, 1, 2), 0, 1);
 		g_jobcontrol.first_job  = save;
 	}
+//tcgetattr(0, &tjob->j_mode);
+//tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
+
 		return (!tjob);
 }

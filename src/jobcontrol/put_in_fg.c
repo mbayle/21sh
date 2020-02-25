@@ -133,11 +133,11 @@ int		put_in_fg(int cont, t_job *job, char **av)
 	if (cont && tjob)
 	{
 		tcsetpgrp(0, tjob->pgid);
-		reset_attr();
+//		reset_attr();
 		ft_putendl_fd(tjob->command, 2);
 //		init_shell_sig();
 //		ign_jb_sign(1);
-//		tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
+		tcsetattr(0, TCSANOW, &g_jobcontrol.save_attr);
 		if (kill(-(tjob->pgid), SIGCONT) < 0)
 		{
 			ft_putendl_fd("Fail to continue", 2);
@@ -153,10 +153,12 @@ int		put_in_fg(int cont, t_job *job, char **av)
 		g_jobcontrol.first_job = save;
 		pro = tjob->first_process;
 		save = tjob;
+//		exit(0);
 	}
 	wait_for_job(pro, save, 1);
 	tcsetpgrp(0, g_jobcontrol.shell_pgid);
-	init_shell_sig();
-//	tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
+	//init_shell_sig();
+//	tcgetattr(0, &tjob->j_mode);
+	tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
 	return (!tjob);
 }

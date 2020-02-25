@@ -29,7 +29,7 @@ void	ign_jb_sign(int i)
 
 int		init_shell_sig()
 {
-	struct termios	term;
+//	struct termios	term;
 	/* check if shell is interactive so if 0 refers to a tty*/
 	if ((g_jobcontrol.shell_is_int = isatty(0)))
 	{
@@ -47,15 +47,15 @@ int		init_shell_sig()
 			return (0);
 		}
 		/*putting our process in forground so grab rights of th tty*/
-		tcsetpgrp(0, g_jobcontrol.shell_pgid);
+	//	tcsetpgrp(0, g_jobcontrol.shell_pgid);
 		/*save default term attr, if problems return (0) is an error*/
 		tcgetattr(0, &g_jobcontrol.term_attr);
-		term = g_jobcontrol.term_attr;
-		term.c_cc[VTIME] = 0;
-		term.c_lflag &= ~(ICANON | ECHO );//| ISIG);
-		term.c_cc[VMIN] = 1;
+		g_jobcontrol.save_attr = g_jobcontrol.term_attr;
+		g_jobcontrol.term_attr.c_cc[VTIME] = 0;
+		g_jobcontrol.term_attr.c_lflag &= ~(ICANON | ECHO );//| ISIG);
+		g_jobcontrol.term_attr.c_cc[VMIN] = 1;
 		//term.c_lflag &= ~(ICANON | ECHO);
-		tcsetattr(0, TCSADRAIN, &term);
+		tcsetattr(0, TCSADRAIN, &g_jobcontrol.term_attr);
 		/* v don't forget to set the sigint flag refer to
 		21shtest/srcs/input/term_mode.c and exec file*/
 //		(set_none_canon_mode(0));
@@ -68,16 +68,15 @@ int		reset_attr()
 {
 	struct termios	term;
 	
+//		ign_jb_sign(1);
 	if (isatty(0))
 	{
-		term = g_jobcontrol.term_attr;
-//		ign_jb_sign(1);
+		term = g_jobcontrol.save_attr;
 //		ft_putendl("IN reset");	
-//		if (tcgetattr(0, &term) == -1)
-  //      	return (-1);
-	//	//term = g_jobcontrol.term_attr;
+	//	if (tcgetattr(0, &term) == -1)
+  	  //   	return (-1);
     //	term.c_lflag |= ICANON;
-    //	term.c_lflag |= ECHO;
+   // 	term.c_lflag |= ECHO;
  //   	term.c_lflag |= ISIG;
    		if (tcsetattr(0, TCSADRAIN, &term) == -1)
         	return (-1);
