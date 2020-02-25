@@ -82,10 +82,16 @@ typedef struct				s_read
 struct s_jobcontrol				g_jobcontrol;
 
 /**
+ redir
+ **/
+
+void						redirect_to_file(char *file, mode_t mode, int stfd);
+
+/**
 parse ast
 **/
 
-void						parse_redir(char *av);
+char						**parse_redir(char *line, int exec);
 /**
 Utils
 **/

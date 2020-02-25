@@ -53,7 +53,7 @@ char	*list_to_string(t_lex *lex)
 //		ft_putstr("DST : ");
 //		ft_putstr(dst);
 //		ft_putendl("-");
-		if (lex->next)
+		if (lex->next && lex->token != IO_NUMBER)
 			dst = ft_strjoinfree(dst, " ");
 		lex = lex->next;
 	}

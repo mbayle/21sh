@@ -28,7 +28,23 @@ int		size_tab(char *line)
 	return (nb);
 }
 
-void	parse_redir(char *line)
+void	execute_redir(char **cmd)
+{
+	int i;
+
+	i = 0;
+	/*if redir error stop executing or browsing (to verify)*/
+	while (cmd[i])
+	{
+		if (ft_strcmp(cmd[i], ">>") == 0)
+			redirect_to_file(cmd[i + 1], O_APPEND, 1);
+		else if (ft_strcmp(cmd[i], ">") == 0)
+			redirect_to_file(cmd[i + 1], O_TRUNC, 1);
+		i++;
+	}
+}
+
+char	**parse_redir(char *line, int exec)
 {
 	char    **command;
 	char	**dst;
@@ -40,7 +56,7 @@ void	parse_redir(char *line)
 	x = 0;
 	y = 0;
 	if (!line || !(command = malloc(sizeof(char*) * (size_tab(line) + 1))))// || !(command[y] = ft_strnew(ft_strlen(av))))
-		return ;
+		return (NULL);
 	ft_putstr("Number of line in my tab : ");
 	ft_putnbr(size_tab(line));
 	ft_putchar('\n');
@@ -51,7 +67,7 @@ void	parse_redir(char *line)
 		if (line[i] !=  ' ' && line[i] != '<' && line[i] != '>' && line[i] !='&')
 		{
 			if (!(command[y] = ft_strnew(ft_strlen(line))))
-				return ;
+				return (NULL);
 			while (line[i] && line[i] !=  ' ') //&& line[i] != '<' && line[i] != '>' && line[i] !='&')
 				command[y][x++] = line[i++];
 			command[y][x] = '\0';
@@ -62,7 +78,7 @@ void	parse_redir(char *line)
 		else if (line[i] == '<' || line[i] == '>' || line[i] =='&')
 		{
 			if (!(command[y] = ft_strnew(ft_strlen(line))))
-				return ;
+				return (NULL);;
 			while (line[i] == '<' || line[i]== '>' || line[i] =='&')
 			//	i++;
 				command[y][x++] = line[i++];
@@ -73,24 +89,40 @@ void	parse_redir(char *line)
 		}
 		i++;
 	}
-	(void)dst;
 	ft_putnbr(y);
 	command[y] = NULL;
 	i = 0;
 	ft_putstr("MY TAB :\n");
 	while (command[i])
 		ft_putendl(command[i++]);
-/*		if (line[i] == ' ')
+	i = 0;
+	dst = malloc(sizeof(char *) * (y + 1));
+	y = 0;
+	while (command[i])
+	{
+		if (ft_occur(command[i], '<') || ft_occur(command[i], '>'))
 		{
-			command[y][x] = '\0';
-			x = 0;
-			command[++y] = ft_strdup("|");
-			command[++y] = malloc(sizeof(char) * (ft_strlen(line) + 1));
+			i++;
+			i++;
 		}
-		else if (line[i])
-			command[y][x++] = line[i];
+		else if (command[i] && !ft_occur(command[i], '<') && !ft_occur(command[i], '>') )
+		{
+			dst[y++] = ft_strdup(command[i]);
+			i++;
+		}
 	}
-	command[y][x] = '\0';
-	command[++y] = NULL;
-	return (command);*/
+	dst[y] = NULL;
+	i = 0;
+	ft_putstr("MY DST :\n");
+	while (dst[i])
+		ft_putendl(dst[i++]);
+	if (exec)
+	{
+		execute_redir(command);
+		ft_freetab(dst);
+		dst = NULL;
+	}
+	ft_putendl("\n\n");
+	ft_freetab(command);
+	return (dst);
 }

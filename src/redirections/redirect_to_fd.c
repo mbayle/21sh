@@ -1,5 +1,9 @@
 #include "projectinclude.h"
 
+
+/*return value*/
+/*check if n (fd) exist*/
+/*do check fd to redirect (modify parameters add fd )*/
 void	redirect_to_file(char *file, mode_t mode, int stfd)
 {
 	int	fd;

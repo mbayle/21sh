@@ -513,8 +513,7 @@ int		pipe_exec(char **av, char **env, int fg)
 			i++;
 		else
 		{
-			cmd = ft_strsplit(av[i], ' ');
-			parse_redir(av[i]);
+			cmd = parse_redir(av[i], 0);
 			oldlink[0] = newlink[0];
 			if (av[i + 1] && ft_strcmp(av[i + 1], "|") == 0)
 				if (pipe(newlink) < 0)
@@ -529,6 +528,7 @@ int		pipe_exec(char **av, char **env, int fg)
 						reset_attr();
 					set_id_sign(fg);
 					fill_pipe(oldlink, newlink, av, i);
+					parse_redir(av[i], 1);
 					if (ft_strcmp(mypath, "b") == 0)
 					{
 						execute_builtin(cmd);
