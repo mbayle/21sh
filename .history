@@ -1,4 +1,12 @@
 2
+ls 1>&-
+exi
+exit
+ls 1>&-
+make re
+ls 1>&-
+exit
+ls 1>&-
 exit
 ls > toto | cat -e
 ls ls 1>&-

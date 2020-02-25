@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/02/19 03:44:05 by mabayle          ###   ########.fr        #
+#    Updated: 2020/02/25 21:07:18 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I$(INC_PATH)
+CFLAGS = -Wall -Werror -Wextra -g3 -I$(INC_PATH)
 
 INCS	= ./includes/libft.h
 
