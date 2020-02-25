@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*   search_str_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/27 04:59:07 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/24 04:19:13 by mabayle          ###   ########.fr       */
+/*   Created: 2020/02/10 23:42:26 by frameton          #+#    #+#             */
+/*   Updated: 2020/02/16 02:16:50 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/linedition.h"
 
-char		*ft_strjoin_free(char *s1, char *s2)
+int		search_str_cmd(t_struct *s, char **line)
 {
-	char	*new;
-	
-	new = ft_strjoin(s1, s2);
-	free(s1);
-	s1 = NULL;
-	return (new);
+	int		c;
+	char	*l;
+	t_htr	*t;
+
+	l = *line;
+	t = s->h;
+	l++;
+	c = ft_strlen(l);
+	if (!*l)
+		return (sec_free(line, 0));
+	while (t)
+	{
+		if (!ft_strncmp(l, t->name, c))
+			break ;
+		t = t->next;
+	}
+	if (!t)
+		return (no_match_cmd(s));
+	return (change_lst_nbr(t, s));
 }

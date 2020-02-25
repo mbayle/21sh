@@ -1,0 +1,56 @@
+2
+exit
+ls > toto | cat -e
+ls ls 1>&-
+exit
+env
+exit
+env
+exit
+env
+exit
+env
+exit
+env
+ls $HOME
+exit
+ls ~
+exit
+ls $HOME
+env
+ls $HOME
+ls ~
+env
+ls ~
+env
+rnv
+ls ~
+exit
+ls ~
+exit
+ls ~
+exit
+ls ~
+exit
+ls ~
+exit
+ls ~
+exit
+env
+exit
+echo $PATH
+exit
+man getenv
+echo $OLDPWD
+ls ~
+exit
+ls $HOME
+env
+rnv
+exit
+env
+exit
+ls -la
+exit
+exi
+ls -a

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lst_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:58:20 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/25 02:59:08 by frameton         ###   ########.fr       */
+/*   Updated: 2020/02/25 20:50:55 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,30 @@ static int	init_lst_env3(t_lst2 **l, t_lst2 **bg, t_lst2 **tmp, char ***env)
 	(*env)++;
 	return (1);
 }
+
+/*void	init_env(char **environ)
+{
+	int		len;
+	int		i;
+
+	len = ft_tablen(environ);
+	i = 0;
+	if (environ && len > 1)
+	{
+		g_msh_env = (char **)malloc(sizeof(char *) * (len + 1));
+		g_msh_env[len--] = NULL;
+		while (i <= len)
+		{
+			g_msh_env[i] = ft_strdup(environ[i]);
+			i++;
+		}
+	}
+	else
+	{
+		g_msh_env = ft_memalloc(sizeof(char **));
+		g_msh_env[0] = NULL;
+	}
+}*/
 
 t_lst2		*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c)
 {
