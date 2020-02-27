@@ -4,25 +4,42 @@
 /*return value*/
 /*check if n (fd) exist*/
 /*do check fd to redirect (modify parameters add fd )*/
-void	redirect_to_file(char *file, mode_t mode, int stfd)
+int		redirect_to_file(char *redir, char *file, mode_t mode, int stfd)
 {
 	int	fd;
+	int	n;
 
+	n = dig_to_io(redir);
+	if (n == 0)
+		n = redir[0] == '>' ? 1 : 0;
+	if (fcntl(n, F_GETFD) == -1)
+	{
+		ft_putendl_fd("Shell: bad fd", 2);
+		return (-1);
+	}
 	if (stfd)
 	{
 		if (access(file, F_OK) == -1)
 		{
 			if ((fd = open(file, O_CREAT, 0644)) < 0)
-				return (ft_putendl_fd("Failure : error while creating the file", 2));
+			{
+				ft_putendl_fd("Failure : error while creating the file", 2);
+				return (-1);
+			}
+			close(fd);
 		}
 		fd = open(file, O_WRONLY | mode);
-		dup2(fd, 1);
+		dup2(fd, n);
 	}
 	else
 	{
 		if (access(file, F_OK) == -1)
-			return (ft_putendl_fd("No such file or directory", 2));
+		{
+			ft_putendl_fd("No such file or directory", 2);
+			return (-1);
+		}
 		fd = open(file, O_RDONLY);
-		dup2(fd, 0);
+		dup2(fd, n);
 	}
+	return (0);
 }

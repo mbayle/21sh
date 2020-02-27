@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/02/25 21:06:54 by mabayle          ###   ########.fr        #
+#    Updated: 2020/02/20 01:34:58 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ INCS		=	./includes/get_next_line.h \
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
 LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address
 
-CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 
+CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 -fsanitize=address 
 ifeq ($(DEBUG), 1)
 	CFLAGS	:=	$(CFLAGS) -fsanitize=address -ggdb -fno-omit-frame-pointer 
 endif

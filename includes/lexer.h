@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:21:06 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/23 23:37:32 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/03 06:16:11 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,12 @@ typedef struct		s_ast
 	struct s_ast	*right;
 }					t_ast;
 
-typedef struct		s_env
-{
-	char			*key;
-	char			*value;
-	int				index;
-	struct s_env	*next;
-}					t_env;
-
 typedef struct		s_21sh
 {
 	char			*line;
 	t_lex			*lex;
 	int				lex_size;
 	t_ast			*ast;
-	t_env			*env;
 	int				debug;
 }					t_21sh;
 

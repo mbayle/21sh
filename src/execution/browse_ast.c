@@ -91,8 +91,8 @@ void	check_op(t_ast *ast)
 
 	tmp = ast;
 	lex = ast->lex;
-	ft_putstr("In check op ma val is : ");
-	ft_putendl(lex->value);
+//	ft_putstr("In check op ma val is : ");
+//	ft_putendl(lex->value);
 	if (tmp == NULL || lex == NULL || lex->token == UNKNOWN)
 		return ;
 	if ((int)lex->operator == 0)

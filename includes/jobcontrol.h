@@ -85,8 +85,8 @@ struct s_jobcontrol				g_jobcontrol;
  redir
  **/
 
-void						redirect_to_file(char *file, mode_t mode, int stfd);
-
+int						redirect_to_file(char *redir, char *file, mode_t mode, int stfd);
+int						dig_to_io(char *str);
 /**
 parse ast
 **/

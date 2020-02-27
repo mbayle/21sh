@@ -154,6 +154,7 @@ int			main(int ac, char **av, char **envp)
 	ac == 2 && ft_strcmp(av[1], "DEBUG") == 0 ? g_shell->debug = 1 : 0;
 	while (1)
 	{
+//		update_bg_status();
 		if (print_prompt(s.prompt, &s, 0) == 0)
 		{
 			delete_job(g_jobcontrol.first_mail);
@@ -178,6 +179,7 @@ int			main(int ac, char **av, char **envp)
 			}
 			tmp_free_struct(&s, &c);
 		}
+//		update_bg_status();
 		update_bg_status();
 	}
 	reset_attr();

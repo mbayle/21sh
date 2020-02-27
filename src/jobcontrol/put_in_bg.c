@@ -186,6 +186,41 @@ check = NULL;
 	}
 }
 
+int	put_last_bg(t_job *job, int i)
+{
+	t_job   *cpy;
+   t_job   *save;
+   t_job   *comp;
+   t_job   **comp2;
+
+   comp = NULL;
+   comp2 = NULL;
+   save = g_jobcontrol.first_job;
+   cpy = g_jobcontrol.first_mail;
+   if (!job)
+       return (-1);
+   while (cpy)
+   {
+       if (cpy->stop == 1 && job && cpy->pgid != job->pgid)
+       {
+           comp = cpy;
+           comp2 = &comp;
+       }
+       cpy = cpy->next;
+   }
+   if (!comp2)
+       return (-1);
+   ft_putstr("job->pgid");
+   ft_putnbr(job->pgid);
+   ft_putstr("  ");
+   ft_putnbr((*comp2)->pgid);
+   g_jobcontrol.first_job = (*comp2);
+   g_jobcontrol.first_job->last_j = i;
+   g_jobcontrol.first_job = save;
+   return (1);
+
+}
+
 int		put_in_bg(t_job *job, int cont, char **av, t_process *pro)
 {
 	t_job	*save;
@@ -198,6 +233,13 @@ int		put_in_bg(t_job *job, int cont, char **av, t_process *pro)
 //	init_shell_sig();
 	if (cont && tjob)
 	{
+		if (tjob->stop != 1 && tjob->fg != 1)
+		{
+			ft_putstr_fd("Shell: bg: job [", 2);
+			ft_putnbr_fd(tjob->j_nb, 2);
+			ft_putendl_fd("] already in bg", 2);
+			return (-1);
+		}
 		if (g_jobcontrol.first_job && g_jobcontrol.first_job->fg == 0)
 			ft_putendl_fd("bg: no jobcontrol", 2);
 		if (kill(-(tjob->pgid), SIGCONT) < 0)
@@ -208,7 +250,9 @@ int		put_in_bg(t_job *job, int cont, char **av, t_process *pro)
 		g_jobcontrol.first_job = tjob;
 		g_jobcontrol.first_job->stop = 0;
 		g_jobcontrol.first_job->fg = 0;
-		g_jobcontrol.first_job->last_j = 2;
+		g_jobcontrol.first_job->last_j = 0;
+		if (put_last_bg(tjob, 2) == -1)
+			g_jobcontrol.first_job->last_j = 2;
 		put_last_stp(put_last_stp(tjob, 1, 2), 0, 1);
 		g_jobcontrol.first_job  = save;
 	}

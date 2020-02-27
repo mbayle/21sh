@@ -179,24 +179,24 @@ t_job	*put_last_stp(t_job *job, int i, int l)
 
 	save = g_jobcontrol.first_job;
 	cpy = g_jobcontrol.first_mail;
-	ft_putendl("BEFORE THE LOOP");
+//	ft_putendl("BEFORE THE LOOP");
 	if (job)
 	{
-		ft_putstr("MA VAL :");
-		ft_putendl(job->command);
-		ft_putnbr(job->pgid);
+//		ft_putstr("MA VAL :");
+//		ft_putendl(job->command);
+//		ft_putnbr(job->pgid);
 	}
 	while (cpy)
 	{
-		ft_putstr("CPY VALUE");
-		ft_putendl(cpy->command);
+//		ft_putstr("CPY VALUE");
+//		ft_putendl(cpy->command);
 		if (cpy->last_j == l && job && cpy->pgid != job->pgid)
 		{
-			ft_putendl("IN THE COND");
+//			ft_putendl("IN THE COND");
 			g_jobcontrol.first_job = cpy;
 			g_jobcontrol.first_job->last_j = i;
 			g_jobcontrol.first_job = save;
-			ft_putendl("BEFORE RETURN");
+//			ft_putendl("BEFORE RETURN");
 			return (cpy);
 		}
 		cpy = cpy->next;
@@ -215,9 +215,9 @@ int		check_jb_nb()
 	{
 		if ((first->stop == 1 || first->fg == 0) && first->pgid != g_jobcontrol.first_job->pgid)
 		{
-			ft_putendl("\nIM IN CHECK");
-			ft_putendl(first->command);
-			ft_putnbr(first->j_nb);
+//			ft_putendl("\nIM IN CHECK");
+//			ft_putendl(first->command);
+//			ft_putnbr(first->j_nb);
 			nb = first->j_nb + 1;
 		}
 		first = first->next;
@@ -227,23 +227,25 @@ int		check_jb_nb()
 
 void	to_do_if_stp(t_job *job, t_job *save, int i)
 {
-	ft_putstr("g_job No: ");
-	ft_putnbr(g_jobcontrol.first_job->j_nb);
-	ft_putstr("\ng_job pgig: ");
-	ft_putnbr(g_jobcontrol.first_job->pgid);
-	ft_putstr("\njob pgid: ");
-	ft_putnbr(job->pgid);
+//	ft_putstr("g_job No: ");
+//	ft_putnbr(g_jobcontrol.first_job->j_nb);
+//	ft_putstr("\ng_job pgig: ");
+//	ft_putnbr(g_jobcontrol.first_job->pgid);
+//	ft_putstr("\njob pgid: ");
+//	ft_putnbr(job->pgid);
 	if (g_jobcontrol.first_job->pgid == job->pgid && g_jobcontrol.first_job->j_nb == 0)
 	{
-		ft_putnbr(42);
-		ft_putnbr(g_jobcontrol.repere);
+//		ft_putnbr(42);
+//		ft_putnbr(g_jobcontrol.repere);
 		g_jobcontrol.repere += 1;
 		g_jobcontrol.first_job->j_nb = check_jb_nb();
-		ft_putnbr(g_jobcontrol.first_job->j_nb);
+//		ft_putnbr(g_jobcontrol.first_job->j_nb);
 	}
 	g_jobcontrol.first_job = job;
 	g_jobcontrol.first_job->last_j = 2;	
+	ft_putnbr(g_jobcontrol.first_job->last_j);
 	put_last_stp(put_last_stp(job, 1, 2), 0, 1);
+	ft_putnbr(g_jobcontrol.first_job->last_j);
 //	put_last_stp(job, 1, 2);
 	if (i)
 		ft_putstr_fd("\n", 2);
@@ -528,14 +530,20 @@ int		pipe_exec(char **av, char **env, int fg)
 						reset_attr();
 					set_id_sign(fg);
 					fill_pipe(oldlink, newlink, av, i);
-					parse_redir(av[i], 1);
+					if (parse_redir(av[i], 1) == NULL)
+					{
+						mypath = NULL;
+						exit(g_jobcontrol.ret = 1);
+					}
 					if (ft_strcmp(mypath, "b") == 0)
 					{
 						execute_builtin(cmd);
 						exit(g_jobcontrol.ret);
 					}
-					else
+		
+					else if (ft_strcmp(mypath, "b") != -1 && ft_strcmp(mypath, "b") != 0)
 					{
+						ft_putendl("I EXECVE");
 						execve(mypath, cmd, env);
 					}
 			}
@@ -547,7 +555,10 @@ int		pipe_exec(char **av, char **env, int fg)
 				close(newlink[1]);
 			ft_freetab(cmd);
 			if (mypath)
+			{
+				ft_putendl("I SET PRO");
 				pro = fill_jc_struc(pid, av[i], pro);
+			}
 			i++;
 			ft_strdel(&mypath);
 			pid = -1;

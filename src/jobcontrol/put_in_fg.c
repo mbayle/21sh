@@ -4,16 +4,35 @@ t_job		*stopped_pgid(char **av, t_job *job)
 {
 	pid_t	pgid;
 	t_job	*save;
+	t_job	*comp;
+	t_job	**tmp;
 
 	save = job;
+	tmp = NULL;
 	if ((av && !av[1]) || !av)
 	{
-		
-		while (job)
+		if (ft_strcmp(av[0], "bg") == 0)
 		{
-			if (job->pgid == last_stp_job(save))
-				break ;;
-			job = job->next;
+			while (job)
+			{
+				if (job->stop == 1)
+				{
+					comp = job;
+					tmp = &comp;
+				}
+				job = job->next;
+			}
+			if (tmp)
+				job = (*tmp);
+		}
+		else
+		{
+			while (job)
+			{
+				if (job->pgid == last_stp_job(save))
+					break ;;
+				job = job->next;
+			}
 		}
 	}
 	else if (!av[2])
@@ -132,6 +151,7 @@ int		put_in_fg(int cont, t_job *job, char **av)
 		 ft_putendl_fd("fg: no jobcontrol", 2);
 	if (cont && tjob)
 	{
+//		exit(0);
 		tcsetpgrp(0, tjob->pgid);
 //		reset_attr();
 		ft_putendl_fd(tjob->command, 2);
@@ -157,7 +177,7 @@ int		put_in_fg(int cont, t_job *job, char **av)
 	}
 	wait_for_job(pro, save, 1);
 	tcsetpgrp(0, g_jobcontrol.shell_pgid);
-	//init_shell_sig();
+//	init_shell_sig();
 //	tcgetattr(0, &tjob->j_mode);
 	tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
 	return (!tjob);

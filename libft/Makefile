@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/02/25 21:07:18 by mabayle          ###   ########.fr        #
+#    Updated: 2020/02/04 04:15:45 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g3 -I$(INC_PATH)
+CFLAGS = -Wall -Werror -Wextra -I$(INC_PATH)
 
 INCS	= ./includes/libft.h
 
@@ -138,11 +138,8 @@ $(NAME): $(OBJ_PATH) $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INCS)
-	@echo "\033[1;32m`cat .progress`/100\033[0m"
-	@echo "\033[0;33m[LIBFT] Compiling : \033[0m" $<
-	@expr `cat .progress` + 1 > .progress
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Compiling :\033[0m" $<
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@clear
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
@@ -150,12 +147,10 @@ $(OBJ_PATH):
 clean:
 	@rm -f $(OBJS)
 	@rm -rf $(OBJ_PATH)
-	@echo "\033[0;32m[✓]\033[0m\033[0;33m [LIBFT] Deleted all .o\033[0m"
-	@expr `echo 1` > .progress
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Deleted all .o\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[0;32m[✓]\033[0m\033[0;33m [LIBFT] Deleted libft.a\033[0m"
-	@expr `echo 1` > .progress
+	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Deleted libft.a\033[0m"
 
 re: fclean all

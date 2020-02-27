@@ -6,11 +6,12 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/25 20:51:03 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/07 05:27:06 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+#include "stdlib.h" // delete after it's just test getenv
 
 /*
 ** Purpose of the function : Find next token (skip newline)
@@ -57,6 +58,17 @@ char	*check_tokenerror(t_lex *lex)
 	return (NULL);
 }
 
+char	*value_env(char *input, int i)
+{
+	char	*new;
+
+	new = ft_strdup("");
+	while (input[i] && !ft_isspace(input[i]) && input[i] != '$' &&
+			input[i] != ':' && input[i] != '"')
+		new = ft_strjoin_onef(new, input[i++]);
+	return (new);
+}
+
 /*
 ** Purpose of the function : Check error and after check posix grammar. If
 **							everything is ok call build_ast
@@ -72,7 +84,6 @@ int		ft_parse(t_lex **lex)
 	error = NULL;
 	if (g_shell->lex_size == 0)
 		return (0);
-	//verify_expansion(g_shell->lex);
 	ft_putstr(PURPLE);
 	ft_putendl("Parser debug :");
 	ft_putstr(NC);
