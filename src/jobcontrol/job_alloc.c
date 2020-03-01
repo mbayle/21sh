@@ -14,58 +14,55 @@
 
 char    **quick_tab_cmd(char *line)
 {
-		char    **command;
-		int     i;
-		int     x;
-		int     y;
+	t_index	index;
+	char    **command;
 
-		i = -1;
-		x = 0;
-		y = 0;
-		if (!line)
-				return (NULL);
-		command = malloc(sizeof(char*) * (ft_occur(line, '|') * 2 + 2));
-		command[y] = malloc(sizeof(char) * (ft_strlen(line) + 1));
-		while (line[++i])
+	ft_bzero(&index, sizeof(index));
+	if (!line || !(command = malloc(sizeof(char*) * (ft_occur(line, '|') * 2 +
+	2))) || !(command[index.y] = malloc(sizeof(char) * (ft_strlen(line) + 1))))
+		return (NULL);
+	while (line[index.i])
+	{
+		if (line[index.i] == '|')
 		{
-				if (line[i] == '|')
-				{
-						command[y][x] = '\0';
-						x = 0;
-						command[++y] = ft_strdup("|");
-						command[++y] = malloc(sizeof(char) * (ft_strlen(line) + 1));
-				}
-				else
-						command[y][x++] = line[i];
+			command[index.y][index.x] = '\0';
+			index.x = 0;
+			command[++index.y] = ft_strdup("|");
+			if (!(command[++index.y] = malloc(sizeof(char) *
+			(ft_strlen(line) + 1))))
+				return (NULL);
 		}
-		command[y][x] = '\0';
-		command[++y] = NULL;
-		return (command);
+		else
+			command[index.y][index.x++] = line[index.i];
+		index.i++;
+	}
+	command[index.y][index.x] = '\0';
+	command[++index.y] = NULL;
+	return (command);
 }
 
 
 void    allocate_job_loop(int repere)
 {
-		if (!g_jobcontrol.first_job)
-		{
-				ft_putendl("FIRST JOB BABY");
-				ft_memdel((void**)g_jobcontrol.first_mail);
-				g_jobcontrol.first_mail = ft_memalloc(sizeof(*g_jobcontrol.first_job));
-				g_jobcontrol.first_mail->pgid = 0;
-				g_jobcontrol.first_mail->last_j = 0;
-				g_jobcontrol.repere = repere;
-				g_jobcontrol.shell_is_int = isatty(0);
-				g_jobcontrol.first_job = g_jobcontrol.first_mail;
-				g_jobcontrol.first_job->command = ft_strnew(1);
-				g_jobcontrol.first_job->next = NULL;
-		}
-		else
-		{
-				//ft_putendl(g_jobcontrol.first_job->command);
-				g_jobcontrol.first_job->next = ft_memalloc(sizeof(*g_jobcontrol.first_job));
-				g_jobcontrol.first_job = g_jobcontrol.first_job->next;
-				g_jobcontrol.first_job->command = ft_strnew(1);
-				g_jobcontrol.first_job->next = NULL;
-		}
+	if (!g_jobcontrol.first_job)
+	{
+		ft_memdel((void**)g_jobcontrol.first_mail);
+		g_jobcontrol.first_mail = ft_memalloc(sizeof(*g_jobcontrol.first_job));
+		g_jobcontrol.first_mail->pgid = 0;
+		g_jobcontrol.first_mail->last_j = 0;
+		g_jobcontrol.repere = repere;
+		g_jobcontrol.shell_is_int = isatty(0);
+		g_jobcontrol.first_job = g_jobcontrol.first_mail;
+		g_jobcontrol.first_job->command = ft_strnew(1);
+		g_jobcontrol.first_job->next = NULL;
+	}
+	else
+	{
+		g_jobcontrol.first_job->next =
+				ft_memalloc(sizeof(*g_jobcontrol.first_job));
+		g_jobcontrol.first_job = g_jobcontrol.first_job->next;
+		g_jobcontrol.first_job->command = ft_strnew(1);
+		g_jobcontrol.first_job->next = NULL;
+	}
 }
 

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-
+#include "../includes/jobcontrol.h"
 void	simple_exec(t_ast *ast)
 {
 	t_lex	*lex;

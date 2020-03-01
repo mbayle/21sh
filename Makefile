@@ -31,9 +31,9 @@ INCS		=	./includes/get_next_line.h \
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address 
 
-CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 -fsanitize=address 
+CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 
 ifeq ($(DEBUG), 1)
 	CFLAGS	:=	$(CFLAGS) -fsanitize=address -ggdb -fno-omit-frame-pointer 
 endif
@@ -44,17 +44,29 @@ OBJ_PATH	:=	./obj/
 SRC		:=	main.c \
 			jobcontrol/init_interactive_shell.c \
 			jobcontrol/put_in_fg.c \
+			jobcontrol/ft_job.c\
+			jobcontrol/ft_job_bis.c\
+			jobcontrol/job_fill_exec.c\
+			jobcontrol/manage_job.c\
+			jobcontrol/find_right_job.c\
+			jobcontrol/manage_job_list.c\
 			jobcontrol/put_in_bg.c \
+			jobcontrol/changed_status.c \
 			jobcontrol/job_alloc.c \
 			execution/pipeline_exec.c \
 			execution/simple_exec.c \
 			execution/browse_ast.c \
+			execution/exec_ast.c\
 			execution/pipeline_ast.c \
 			execution/get_path.c \
+			execution/assign.c\
+			execution/child_exec.c\
 			utils/ft_freetab.c\
 			utils/ft_strdupn.c\
 			utils/ft_strlenu.c\
 			redirections/redirect_to_fd.c \
+			redirections/redir_utils.c \
+			redirections/exec_redir.c \
 			redirections/parse_redir.c \
 			lexer/lexer.c \
 			lexer/list_utils.c \

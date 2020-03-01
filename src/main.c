@@ -160,6 +160,7 @@ int			main(int ac, char **av, char **envp)
 			delete_job(g_jobcontrol.first_mail);
 			ft_exit(0, &s);
 		}
+//		update_bg_status();
 		if (((i = get_command(&s)) == 0) || i == 5)
 		{
 			delete_job(g_jobcontrol.first_mail);
@@ -171,9 +172,10 @@ int			main(int ac, char **av, char **envp)
 				if (check_expansion(&s, c++, s.env, 0) == 0)
 					ft_exit(0, &s);
 			c = 1;
+			update_bg_status();
 			if (s.av[0])
 			{
-				g_shell->line = create_lex_line(s.l);
+				ft_putendl(g_shell->line);
 				ft_lexer(&g_shell->lex, g_shell->line);
 			//	minishell(&s);
 			}

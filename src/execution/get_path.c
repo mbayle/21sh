@@ -1,5 +1,5 @@
 #include "projectinclude.h"
-
+#include "../includes/jobcontrol.h"
 int		permissions(char **str, struct stat buf)
 {
 	int	i;

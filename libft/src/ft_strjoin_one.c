@@ -30,6 +30,7 @@ char	*ft_strjoin_one(char *s1, char c)
 	else
 	{
 		i = -1;
+//		ft_putendl("HERERER");
 		len = ft_strlen(s1);
 		result = ft_strnew(len + 1);
 		while (++i < len)

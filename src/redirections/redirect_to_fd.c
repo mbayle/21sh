@@ -1,12 +1,39 @@
 #include "projectinclude.h"
 
-
-/*return value*/
-/*check if n (fd) exist*/
-/*do check fd to redirect (modify parameters add fd )*/
-int		redirect_to_file(char *redir, char *file, mode_t mode, int stfd)
+int		write_in(int n, char *file, mode_t mode)
 {
 	int	fd;
+
+	if (access(file, F_OK) == -1)
+	{
+		if ((fd = open(file, O_CREAT, 0644)) < 0)
+		{
+			ft_putendl_fd("Failure : error while creating the file", 2);
+			return (-1);
+		}
+		close(fd);
+	}
+	fd = open(file, O_WRONLY | mode);
+	dup2(fd, n);
+	return (0);
+}
+
+int		read_from(int n, char *file)
+{
+	int	fd;
+
+	if (access(file, F_OK) == -1)
+	{
+		ft_putendl_fd("No such file or directory", 2);
+		return (-1);
+	}
+	fd = open(file, O_RDONLY);
+	dup2(fd, n);
+	return (0);
+}
+
+int		redirect_to_file(char *redir, char *file, mode_t mode, int stfd)
+{
 	int	n;
 
 	n = dig_to_io(redir);
@@ -18,28 +45,7 @@ int		redirect_to_file(char *redir, char *file, mode_t mode, int stfd)
 		return (-1);
 	}
 	if (stfd)
-	{
-		if (access(file, F_OK) == -1)
-		{
-			if ((fd = open(file, O_CREAT, 0644)) < 0)
-			{
-				ft_putendl_fd("Failure : error while creating the file", 2);
-				return (-1);
-			}
-			close(fd);
-		}
-		fd = open(file, O_WRONLY | mode);
-		dup2(fd, n);
-	}
+		return (write_in(n, file, mode));
 	else
-	{
-		if (access(file, F_OK) == -1)
-		{
-			ft_putendl_fd("No such file or directory", 2);
-			return (-1);
-		}
-		fd = open(file, O_RDONLY);
-		dup2(fd, n);
-	}
-	return (0);
+		return (read_from(n, file));
 }

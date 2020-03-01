@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-
+#include "../includes/jobcontrol.h"
 int		list_size(t_lex *lex)
 {
 	int	i;
@@ -49,6 +49,8 @@ char	*list_to_string(t_lex *lex)
 //		ft_putendl(lex->value);
 //		if (dst != NULL)
 //			ft_putendl("DST XIST");
+		if (lex->token == ASSIGN_WORD)
+			dst = ft_strjoinfree(dst, "\r");
 		dst = ft_strjoinfree(dst, lex->value);
 //		ft_putstr("DST : ");
 //		ft_putstr(dst);
@@ -98,7 +100,8 @@ void    check_op_pipe(t_ast *ast, int p_pos)
 		{
 		//	ft_putstr_fd("TOTAL LINE: ", 2);
 		//	ft_putendl_fd(g_jobcontrol.first_job->command, 2);
-			do_to_ast();
+			ft_putendl("I AM IN PIPE AST");
+				do_to_ast();
 		}
 	}
 	/*process aloc in it*/
