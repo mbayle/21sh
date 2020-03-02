@@ -88,6 +88,7 @@ typedef	struct				s_index
 	int						j;
 	int						x;
 	int						y;
+	char					**command;
 }							t_index;
 
 struct s_jobcontrol				g_jobcontrol;

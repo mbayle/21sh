@@ -110,13 +110,28 @@ static void	tmp_free_struct(t_struct *s, int *c)
 		ft_exit(0, &*s);
 }*/
 
+int			size_list(t_lst *s)
+{
+	int		i;
+
+	i = 0;
+	while (s)
+	{
+		i++;
+		s = s->next;
+	}
+	return (i);
+}
+
 char		*create_lex_line(t_lst *s)
 {
 	char *line;
+	int	i = 0;
 
+	line = malloc(sizeof(char) * size_list(s));
 	while (s)
 	{
-		line = ft_strjoin_one(line, s->c);
+		line[i++] = s->c;
 		s = s->next;
 	}
 	return (line);
@@ -175,6 +190,7 @@ int			main(int ac, char **av, char **envp)
 			update_bg_status();
 			if (s.av[0])
 			{
+					g_shell->line = create_lex_line(s.l);
 				ft_putendl(g_shell->line);
 				ft_lexer(&g_shell->lex, g_shell->line);
 			//	minishell(&s);

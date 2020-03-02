@@ -1,40 +1,40 @@
 #include "projectinclude.h"
 
 
-char	*for_if(char **command, char *line, int *i, int *y)
+char	*for_if(char *line, int *i)
 {
-	int x;
+	int		x;
+	char	*command;
 
 	x = 0;
-	ft_putnbr(*y);
-	ft_putnbr(*i);
-	ft_putnbr(ft_strlen(line));
-	while (line[x])
-		ft_putchar(line[x++]);;
-	x = 0;
-	if (!(command[*y] = ft_strnew(ft_strlen(line))))
+	if (!(command = ft_strnew(ft_strlen(line))))
 		return (NULL);
 	while (line && line[*i] && line[*i] !=  ' ') 
-		command[*y][x++] = line[*i++];
-	command[*y][x] = '\0';
-	*y += 2;
-	*i += 1;
-	return (command[*y]);
+	{
+		command[x++] = line[*i];
+		*i += 1;
+	}
+	command[x] = '\0';
+	*i -= 1;
+	return (command);
 }
 
-char	*for_else(char **command, char *line, int *i, int *y)
+char	*for_else(char *line, int *i)
 {
-	int	x;
+	int		x;
+	char	*command;
 
 	x = 0;
-	if (!(command[*y] = ft_strnew(ft_strlen(line))))
-		return (NULL);;
+	if (!(command = ft_strnew(ft_strlen(line))))
+		return (NULL);
 	while (line[*i] == '<' || line[*i]== '>' || line[*i] =='&')
-		command[*y][x++] = line[*i++];
-	command[*y][x] = '\0';
-	*y += 1;
-	*i += 1;
-	return (command[*y]);
+	{
+		command[x++] = line[*i];
+		*i += 1;
+	}
+	command[x] = '\0';
+	*i -= 1;
+	return (command);
 }
 
 char	**fill_redir_tab(char *line)
@@ -50,14 +50,12 @@ char	**fill_redir_tab(char *line)
 	while (line && line[i])
 	{
 		if (line[i] !=  ' ' && line[i] != '<' && line[i] != '>' && line[i] !='&')
-		{
-				command[y] = for_if(command, line, &i, &y);
-				ft_putendl(command[y]);
-		}
+			command[y++] = for_if(line, &i);
 		else if (line[i] == '<' || line[i] == '>' || line[i] =='&')
-			command[y] = for_if(command, line, &i, &y);
+			command[y++] = for_else(line, &i);
 		i++;
 	}
+	ft_putnbr(y);
 	command[y] = NULL;
 	return (command);
 }
@@ -88,10 +86,11 @@ char	**dst_redir(char **command, int j)
 
 void	ft_printtab(char **tt)
 {
-	int i = -1;
+	int i;
 
-	while (tt[++i])
-		ft_putendl(tt[i]);
+	i = 0;
+	while (tt[i])
+		ft_putendl(tt[i++]);
 
 }
 

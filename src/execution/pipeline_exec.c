@@ -32,9 +32,7 @@ int		child_process(int oldlink[2], int newlink[2], char *mypath, char **cmd)
 	av = tab_copy(g_jobcontrol.av);
 	if (((mypath && ft_strcmp(mypath, "b")) ||  (ft_strcmp(mypath, "b") == 0 && av[g_jobcontrol.i + 1] )) && (pid = fork()) == 0)
 	{
-		ft_putnbr(g_jobcontrol.g_fg);
-		if (g_jobcontrol.g_fg)
-			reset_attr();
+		g_jobcontrol.g_fg ? reset_attr() : 0;
 		set_id_sign(g_jobcontrol.g_fg);
 		fill_pipe(oldlink, newlink, av, g_jobcontrol.i);
 		if (parse_redir(av[g_jobcontrol.i], 1) == NULL)

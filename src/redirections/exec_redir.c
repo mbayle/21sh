@@ -73,7 +73,7 @@ int     execute_redir(char **cmd)
     int ret;
 
     i = 0;
-    ret = -1;
+    ret = 0;
     while (cmd[i])
     {
         if (ft_seq_occur(cmd[i], ">>"))
@@ -93,6 +93,7 @@ int     execute_redir(char **cmd)
             return (-1);
         i++;
     }
+	ft_putendl("RETURN 0");
     return (0);
 }
 
