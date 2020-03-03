@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   del_char.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/25 01:14:44 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/03 23:12:28 by frameton         ###   ########.fr       */
+/*   Created: 2020/02/16 00:10:00 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
-int		del_char(char buf[5], t_struct *s, int *i)
+int		del_char1(char buf[6], t_struct *s, int *i)
 {
 	if ((buf[0] == 127 || (buf[0] == 27 && buf[3] == 126)))
 	{

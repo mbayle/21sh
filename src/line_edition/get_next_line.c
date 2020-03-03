@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/04 00:52:43 by frameton          #+#    #+#             */
-/*   Updated: 2018/10/14 23:32:05 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "projectinclude.h"
 
 void			ft_list_clear(t_gnl **begin_list, int ind)
 {

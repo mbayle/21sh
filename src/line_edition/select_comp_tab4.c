@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   select_comp_tab4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:23:51 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:23:52 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 void	down_touch2(t_comp **cmp, t_comp *bcmp, int c)
 {

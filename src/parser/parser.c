@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/07 05:27:06 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/03 22:17:02 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ int		ft_parse(t_lex **lex)
 		return (0);
 	ft_putstr(PURPLE);
 	ft_putendl("Parser debug :");
-	ft_putstr(NC);
+	ft_putstr(WHITE);
 	if ((error = check_tokenerror(current)) != NULL)
 	{
 		ft_putstr(RED);
 		ft_putstr("42sh: parse error near: '");
 		ft_putstr(error);
 		ft_putendl("'");
-		ft_putstr(NC);
+		ft_putstr(WHITE);
 		return (0);
 	}
 	current = *lex;
@@ -101,13 +101,13 @@ int		ft_parse(t_lex **lex)
 	{
 		ft_putstr(RED);
 		ft_putendl("42sh: parse error");
-		ft_putstr(NC);
+		ft_putstr(WHITE);
 	}
 	else
 	{
 		ft_putstr(GREEN);
 		ft_putendl("No parse error\n");
-		ft_putstr(NC);
+		ft_putstr(WHITE);
 		build_ast(g_shell->lex, &g_shell->ast);
 	}
 	return (1);

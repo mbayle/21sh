@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ctrl_r.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:12:41 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/03 23:13:19 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
-static int	ctrl_r2(char buf[5], t_htr **t, t_struct *s, char **l)
+static int	ctrl_r2(char buf[6], t_htr **t, t_struct *s, char **l)
 {
 	fp("cl", NULL);
 	ft_putstr("bck-i-search: ");

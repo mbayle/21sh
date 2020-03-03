@@ -3,38 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/09 17:25:50 by mabayle           #+#    #+#             */
-/*   Updated: 2018/04/21 18:31:12 by mabayle          ###   ########.fr       */
+/*   Created: 2018/04/14 17:11:06 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/02 23:02:32 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "libft.h"
 
 int		ft_atoi(const char *str)
 {
-	int i;
-	int num;
-	int neg;
+	int nb;
+	int ind;
 
-	i = 0;
-	num = 0;
-	neg = 1;
-	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\r' || str[i] == '\v'
-			|| str[i] == ' ' || str[i] == '\f')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			neg = -1;
-		i++;
-	}
-	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
-	{
-		num = num * 10 + (str[i] - '0');
-		i++;
-	}
-	return (neg * num);
+	nb = 0;
+	ind = 0;
+	str = ft_pfrontws((char *)str);
+	if (*str == '-')
+		ind++;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
+		nb = (nb * 10) + (*str++ - 48);
+	if (ind > 0)
+		return (-nb);
+	return (nb);
 }

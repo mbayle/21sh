@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_lst4.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:46:08 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:47:29 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
-static int	init_lst_4_b(char buf[5], t_struct *s)
+static int	init_lst_4_b(char buf[6], t_struct *s)
 {
 	if (buf[2] == 81)
 	{
@@ -32,7 +32,7 @@ static int	init_lst_4_b(char buf[5], t_struct *s)
 	return (1);
 }
 
-static	int	init_lst_4_b2(t_struct *s, char buf[5])
+static	int	init_lst_4_b2(t_struct *s, char buf[6])
 {
 	if (!s->tmp->sel)
 		s->tmp->sel = 1;
@@ -43,7 +43,7 @@ static	int	init_lst_4_b2(t_struct *s, char buf[5])
 	return (1);
 }
 
-int			init_lst_4(t_struct *s, char buf[5], int c, t_lst *l)
+int			init_lst_4(t_struct *s, char buf[6], int c, t_lst *l)
 {
 	if ((edit_line3(s, buf)))
 		return (1);
@@ -58,6 +58,8 @@ int			init_lst_4(t_struct *s, char buf[5], int c, t_lst *l)
 		return (cpc(s, buf[1], 1));
 	if (buf[0] == 27 && buf[1] == 79 && (buf[2] == 80 || buf[2] == 81))
 		return (init_lst_4_b(buf, s));
+	if (buf[0] < 0 || buf[0] > 127)
+		return (1);
 	if ((l = malloc(sizeof(*l))) == NULL)
 		return (-1);
 	l->c = buf[c];

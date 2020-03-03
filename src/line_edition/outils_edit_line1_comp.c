@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   outils_edit_line1_comp.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:25:14 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/03 23:29:31 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 int				free_bcmp_tab(t_comp **bcmp, t_comp **cmp, int i)
 {
@@ -109,11 +109,12 @@ int				show_list_poss(t_struct *s)
 		return (free_bcmp_tab(&bcmp, &cmp, 0));
 	if (no_match(*s, bcmp))
 		return (free_bcmp_tab(&bcmp, &cmp, 1));
+	if ((!bcmp->next && s->cpt == 1) || (!bcmp->next && s->cpt > 1
+				&& !s->comp.name))
+		return (comp_lv1(s, &cmp, &bcmp));
 	if (!bcmp->next && s->cpt > 1)
 		return (free_bcmp_tab(&bcmp, &cmp, 1));
-	if (!bcmp->next && s->cpt == 1)
-		return (comp_lv1(s, &cmp, &bcmp));
-	if (cmp)
+	if (bcmp)
 		ft_putchar('\n');
 	tputs(tgetstr("sc", NULL), 1, ft_ptchar);
 	cmp = bcmp;

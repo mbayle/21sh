@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   edit_line1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:58:56 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:59:00 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static int	move_cur(int i, t_lst **tmp, t_lst **lbg)
 {
@@ -71,7 +71,7 @@ static int	copy_history(t_struct *s, t_lst **lbg, int c, t_htr **t)
 	return (1);
 }
 
-static void	edi_line_bis(char buf[5], t_struct *s)
+static void	edi_line_bis(char buf[6], t_struct *s)
 {
 	if (s->comp.name)
 		s->comp.name = NULL;
@@ -83,7 +83,7 @@ static void	edi_line_bis(char buf[5], t_struct *s)
 	}
 }
 
-int			edit_line(t_struct *s, char buf[5], int *i, t_htr **t)
+int			edit_line(t_struct *s, char buf[6], int *i, t_htr **t)
 {
 	if ((s->c = edit_line_comp(&*s, buf, &*i)) != 4)
 		return (s->c);

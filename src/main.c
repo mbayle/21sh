@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/20 00:44:50 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/03 23:32:29 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ static void	init_term(t_struct *s)
 	s->av = NULL;
 }
 
-static void	init_struct(t_struct *s, char **envp, int ac, char **av)
+void	init_struct(t_struct *s, char **envp)
 {
-	(void)av;
-	(void)ac;
 	init_term(s);
 	(*s).exit = 0;
 	(*s).env = NULL;
@@ -67,11 +65,10 @@ static void	init_struct(t_struct *s, char **envp, int ac, char **av)
 		WHITE": the PATH environment variable does not exist.\n\0");
 }
 
-static void	tmp_free_struct(t_struct *s, int *c)
+void	tmp_free_struct(t_struct *s)
 {
 	t_lst	*del;
 
-	*c = 0;
 	while ((del = (*s).lbg))
 	{
 		(*s).lbg = (*s).lbg->next;
@@ -163,7 +160,7 @@ int			main(int ac, char **av, char **envp)
 	c = 0;
 	init_shell_sig();
 	g_jobcontrol.env = ft_tabdup(envp);
-	init_struct(&s, envp, ac, av);
+	init_struct(&s, envp);
 	g_shell = init_shell(0);
 	s.h = create_history(NULL, NULL, NULL, &s);
 	ac == 2 && ft_strcmp(av[1], "DEBUG") == 0 ? g_shell->debug = 1 : 0;
@@ -195,7 +192,7 @@ int			main(int ac, char **av, char **envp)
 				ft_lexer(&g_shell->lex, g_shell->line);
 			//	minishell(&s);
 			}
-			tmp_free_struct(&s, &c);
+			tmp_free_struct(&s);
 		}
 //		update_bg_status();
 		update_bg_status();

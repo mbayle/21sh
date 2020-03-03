@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:22:48 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 07:04:46 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/03 22:16:11 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_print_header(t_lex **lex)
 {
 	ft_putstr(PURPLE);
 	ft_putendl("Lexer debug :");
-	ft_putstr(NC);
+	ft_putstr(WHITE);
 	ft_putstr(" -----------------------------------------------------------");
 	ft_putendl("----------------------");
 	ft_putstr("|             TOKEN            	 | PRIORITY | POSITION |");
@@ -126,11 +126,11 @@ void	ft_print_debug(t_lex **lex)
 	{
 		ft_putstr(CYAN);
 		ft_print_token(lex);
-		ft_putstr(NC);
+		ft_putstr(WHITE);
 		write(1, "|     ", 6);
 		ft_putstr(RED);
 		ft_putnbr((*lex)->priority);
-		ft_putstr(NC);
+		ft_putstr(WHITE);
 		write(1, "    |    ", 9);
 		ft_putnbr((*lex)->pos);
 		(*lex)->pos <= 9 ? write(1, "     |    ", 10)
@@ -139,7 +139,7 @@ void	ft_print_debug(t_lex **lex)
 		ft_putendl((*lex)->value);
 		(*lex) = (*lex)->next;
 	}
-	ft_putstr(NC);
+	ft_putstr(WHITE);
 	write(1, "\n", 1);
 	(*lex) = tmp;
 }

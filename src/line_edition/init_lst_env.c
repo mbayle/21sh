@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_lst_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:58:20 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/25 02:59:08 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static void	init_lst_env2(t_lst2 **bg, t_lst2 **l, t_lst2 **tmp)
 {
@@ -65,7 +65,7 @@ t_lst2		*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c)
 	t_lst2		*bg;
 
 	bg = NULL;
-	while (*env)
+	while (*env && !(c = 0))
 	{
 		if ((l = malloc(sizeof(*l))) == NULL)
 			return (NULL);

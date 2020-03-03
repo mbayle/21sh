@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 09:57:50 by mabayle           #+#    #+#             */
-/*   Updated: 2019/03/18 20:45:00 by mabayle          ###   ########.fr       */
+/*   Created: 2018/04/25 15:25:38 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/02 23:02:32 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include "libft.h"
 
 void	ft_putendl(char const *s)
@@ -18,6 +17,7 @@ void	ft_putendl(char const *s)
 	if (s)
 	{
 		ft_putstr(s);
+		ft_putstr(WHITE);
 		ft_putchar('\n');
 	}
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   select_comp_tab2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:24:02 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:24:04 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 void	left_touch2(t_comp *end, int c, int *j, t_comp **cmp)
 {

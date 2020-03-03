@@ -3,23 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_splitws.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 00:22:19 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/21 00:22:21 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/02 23:02:32 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
-
-#define W ft_nbword((char *)s)
 
 #include "libft.h"
 
 static int	ft_create(size_t *z, char ***tab, const char *s)
 {
 	*tab = NULL;
-	*z = W;
+	*z = ft_nbword((char *)s);
 	return (0);
 }
 
@@ -36,10 +32,10 @@ char		**ft_splitws(char const *s)
 	int		i1;
 	size_t	z;
 
-	i1 = ft_create(&z, &tab, s);
-	if (s)
+	if (!(i1 = ft_create(&z, &tab, s)) && s)
 	{
-		if ((tab = (char**)malloc(sizeof(*tab) * (W + 1))) == NULL)
+		if ((tab = (char**)malloc(sizeof(*tab)
+						* (ft_nbword((char *)s) + 1))) == NULL)
 			return (NULL);
 		while (z--)
 		{

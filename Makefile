@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/02/20 01:34:58 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/03/03 22:58:42 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,14 +24,14 @@ INCLUDES	:=	./includes
 INCS		=	./includes/get_next_line.h \
 				./includes/grammar.h \
 				./includes/lexer.h \
-				./includes/minishell.h \
+				./includes/linedition.h \
 				./includes/mybtree.h \
 				./includes/parser.h \
 				./includes/projectinclude.h
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address 
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft 
 
 CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 
 ifeq ($(DEBUG), 1)
@@ -115,6 +115,7 @@ SRC		:=	main.c \
 			line_edition/edit_history.c \
 			line_edition/edit_line1.c \
 			line_edition/edit_line1_comp.c \
+			line_edition/edit_line1_comp2.c \
 			line_edition/edit_line2.c \
 			line_edition/edit_line3.c \
 			line_edition/edl1_move_word.c \
@@ -155,6 +156,7 @@ SRC		:=	main.c \
 			line_edition/print_prompt2.c \
 			line_edition/recup_stdin.c \
 			line_edition/search_pathenv.c \
+			line_edition/search_nbr_cmd.c \
 			line_edition/select_comp_tab.c \
 			line_edition/select_comp_tab2.c \
 			line_edition/select_comp_tab3.c \
@@ -165,9 +167,16 @@ SRC		:=	main.c \
 			line_edition/show_commands_tab.c \
 			line_edition/show_commands_tab2.c \
 			line_edition/welcome.c \
-			line_edition/welcome2.c \
-			line_edition/welcome3.c \
-			line_edition/write_lst.c
+			line_edition/write_lst.c \
+			line_edition/check_quotes.c \
+			line_edition/history_exp.c \
+			line_edition/search_str_cmd.c \
+			line_edition/exit_edl.c\
+			line_edition/test.c\
+			line_edition/test2.c\
+			line_edition/test3.c\
+			line_edition/test4.c\
+			line_edition/show_commands_tab3.c\
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

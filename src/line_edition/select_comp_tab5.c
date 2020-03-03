@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   select_comp_tab5.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 23:43:30 by frameton          #+#    #+#             */
-/*   Updated: 2019/11/18 00:46:48 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 int		other_touch(char buf[5], int *j, t_struct *s)
 {

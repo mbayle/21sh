@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   welcome.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:20:25 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 01:21:37 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 void			ps(char *s)
 {
@@ -75,35 +75,6 @@ static void		welcome3(int m)
 	ft_putstr("      _____      _____       ____________");
 }
 
-static void		welcome4(int m)
-{
-	rbar(m);
-	fp("do", NULL);
-	sleep(1);
-	es8(m + 6, "####");
-	es8(m + 5, "####");
-	es8(m + 4, "####");
-	es8(m + 3, "####");
-	es8(m + 2, "####");
-	es8(m + 1, "####");
-	ft_sleep(0);
-	ft_putchar('#');
-	fp("up", NULL);
-	ft_sleep(0);
-	ft_putchar('#');
-	do_m(m + 6);
-	ft_sleep(0);
-	ft_putchar('#');
-	fp("up", NULL);
-	ft_sleep(0);
-	ft_putchar('#');
-	do_m(m + 7);
-	ft_sleep(0);
-	ft_putchar('#');
-	fp("up", NULL);
-	ft_sleep(0);
-}
-
 int				welcome(t_struct s)
 {
 	struct winsize	sz;
@@ -123,11 +94,9 @@ int				welcome(t_struct s)
 		tputs(tgetstr("do", NULL), 1, ft_ptchar);
 	welcome2(m);
 	welcome3(m);
-	welcome4(m);
-	welcome5(m);
-	welcome6(m);
-	welcome7(m);
-	welcome8(m);
-	welcome9(m);
-	return (welcome10(m, s));
+	rbar(m);
+	usleep(500000);
+	fp("cl", NULL);
+	print_prompt_bis(s.prompt, &s, 0);
+	return (1);
 }

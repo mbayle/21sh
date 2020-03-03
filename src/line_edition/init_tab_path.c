@@ -3,28 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   init_tab_path.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:45:50 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:45:51 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 23:04:29 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
+#include "../../libft/includes/libft.h"
 
-static char	**create_path_tab2_b(char **path, int t)
+static char	*find_home_path(t_struct st)
 {
+	t_lst2	*env;
+
+	env = st.env;
+	while (env && ft_strcmp(env->varn, "HOME"))
+		env = env->next;
+	if (env)
+		return (env->var);
+	return (NULL);
+}
+
+static char	**create_path_tab2_b(char **path, int t, t_struct st)
+{
+	char	*p;
+
+	p = find_home_path(st);
 	if ((path[t] = ft_mstrcpy(path[t], "./")) == NULL)
 		return (NULL);
 	++t;
-	if ((path[t] = ft_mstrcpy(path[t], "./.builtin_name/")) == NULL)
+	if ((path[t] = ft_strjoin(p, "/.builtin_name/")) == NULL)
 		return (NULL);
 	++t;
 	path[t] = 0;
 	return (path);
 }
 
-static char	**create_path_tab2(char *s, char **path)
+static char	**create_path_tab2(char *s, char **path, t_struct st)
 {
 	int		c;
 	int		t;
@@ -47,12 +63,12 @@ static char	**create_path_tab2(char *s, char **path)
 		c = 0;
 		++t;
 	}
-	if ((path = create_path_tab2_b(path, t)) == NULL)
+	if ((path = create_path_tab2_b(path, t, st)) == NULL)
 		return (NULL);
 	return (path);
 }
 
-char		**init_tab_path2(char *s)
+char		**init_tab_path2(char *s, t_struct *st)
 {
 	int		c;
 	char	*bg;
@@ -75,7 +91,7 @@ char		**init_tab_path2(char *s)
 	s = bg;
 	if ((path = (char**)malloc(sizeof(*path) * (c + 3))) == NULL)
 		return (NULL);
-	if ((path = create_path_tab2(s, path)) == NULL)
+	if ((path = create_path_tab2(s, path, *st)) == NULL)
 		return (NULL);
 	return (path);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   edit_line3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:00:04 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 01:22:12 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 int			del_move(int c)
 {
@@ -22,7 +22,7 @@ int			del_move(int c)
 	return (1);
 }
 
-static int	move_cur(t_struct *s, char buf[5])
+static int	move_cur(t_struct *s, char buf[6])
 {
 	if ((buf[2] == 65 || buf[2] == 70) && s->tmp)
 	{
@@ -52,7 +52,35 @@ static	int	move_word_edl3(t_struct *s, int c)
 	return (1);
 }
 
-int			edit_line3(t_struct *s, char buf[5])
+static int	check_sign(t_struct *s, char buf[6], t_lst *del, int c)
+{
+	if (buf[0] == 3 && s->iret == 1)
+	{
+		while (c < s->nl && (c = c + 1))
+			fp("do", NULL);
+		s->nl = 0;
+		ft_putchar('\n');
+		free_lst(s);
+	}
+	if (buf[0] == 4 && s->iret == 1)
+	{
+		if (s->tmp && s->tmp->next)
+		{
+			del = s->tmp;
+			s->tmp = s->tmp->next;
+			s->tmp->prev = NULL;
+			free(del);
+		}
+		else if (!s->tmp->next)
+		{
+			free(s->tmp);
+			s->tmp = NULL;
+		}
+	}
+	return (1);
+}
+
+int			edit_line3(t_struct *s, char buf[6])
 {
 	if (buf[0] == 27 && buf[1] == 27 && buf[2] == 91
 	&& (buf[3] == 67 || buf[3] == 68 || buf[3] == 65 || buf[3] == 66))
@@ -62,5 +90,12 @@ int			edit_line3(t_struct *s, char buf[5])
 	if ((buf[0] == 27 && buf[1] == 91) && (buf[2] == 68 || buf[2] == 67
 			|| buf[2] == 65 || buf[2] == 66 || buf[2] == 70 || buf[2] == 72))
 		return (move_cur(s, buf));
+	if (buf[0] == 9)
+	{
+		fp("bl", NULL);
+		return (1);
+	}
+	if ((buf[0] == 3 || buf[0] == 4) && s->iret == 1)
+		return (check_sign(s, buf, NULL, 0));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 02:44:11 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/18 00:09:37 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:18:33 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ void	ft_print_node(t_ast *ast, char *side, int lvl)
 	ft_strcmp(side, "right") == 0 ? ft_putstr(YELLOW) : ft_putstr(GREEN);
 	ft_putstr(side);
 	ft_putnbr(lvl);
-	ft_putstr(NC);
+	ft_putstr(WHITE);
 	ft_putendl(" **");
 	ft_padding(lvl);
 	ft_print_value(ast, side, lvl);
-	ft_putendl(NC);
+	ft_putendl(WHITE);
 	ft_padding(lvl);
 	ft_putendl("***********");
 	(void)ast;
@@ -81,7 +81,7 @@ void	ft_putast(t_ast *ast)
 {
 	if (ast)
 	{
-		ft_putendl_col("AST debug :\n", PURPLE, NC);
+		ft_putendl_col("AST debug :\n", PURPLE, WHITE);
 		ft_print_ast(ast, "root", 0);
 	}
 }

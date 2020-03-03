@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setcpt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:58:15 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:58:16 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 void		exec_setcpt3(t_struct *s, int m)
 {
@@ -80,25 +80,14 @@ void		anim_cpt(int m, int lr, int c, int i)
 	}
 }
 
-static int	exit_setcpt(struct termios *term)
-{
-	isatty(0);
-	tcgetattr(0, &*term);
-	(*term).c_lflag |= ECHO;
-	tcsetattr(0, TCSANOW, &*term);
-	tputs(tgetstr("ve", NULL), 1, ft_ptchar);
-	return (1);
-}
-
 int			exec_setcpt(t_struct *s)
 {
 	int				ret;
 	int				m;
-	struct termios	term;
 
 	m = 0;
 	ret = tgetent(NULL, getenv("TERM"));
-	if (!(exec_setcpt8(s, &term, &m)))
+	if (!(exec_setcpt8(s, &m)))
 		return (1);
 	anim_cpt(m, 28, 42, 1);
 	ft_putchar('\n');
@@ -113,5 +102,6 @@ int			exec_setcpt(t_struct *s)
 	ft_marge(m + 10);
 	ft_putendl("Lvl 4 : Automatic completion, effective with a single match\n");
 	exec_setcpt6(s, m);
-	return (exit_setcpt(&term));
+	fp("ve", NULL);
+	return (1);
 }

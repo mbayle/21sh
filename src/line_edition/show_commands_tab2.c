@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   show_commands_tab2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:22:46 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/03 22:06:34 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static t_comp	*create_lst_comp_tab2(char ***del, char ***path)
 {

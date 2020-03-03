@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ctrl_r2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:14:20 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 01:14:25 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 t_htr	*check_htr(t_htr *t, char *l)
 {
@@ -60,7 +60,7 @@ char	*new_l(char **l)
 	return (bg);
 }
 
-int		ctrl_r2_b(char **l, char buf[5])
+int		ctrl_r2_b(char **l, char buf[6])
 {
 	char	*del;
 

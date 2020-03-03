@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_cut.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:27:30 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/03 22:14:01 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static int	op_cut2(t_struct *s, t_lst **end, t_lst **bg, int lbg)
 {

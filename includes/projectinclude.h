@@ -6,7 +6,7 @@
 /*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 04:05:42 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/18 20:30:27 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/02 22:18:06 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdlib.h>
 # include "jobcontrol.h"
 # include "get_next_line.h"
-# include "minishell.h"
+# include "linedition.h"
 # include "libft.h"
 # include "lexer.h"
 # include "grammar.h"

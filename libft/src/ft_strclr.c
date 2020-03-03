@@ -3,26 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 10:05:08 by mabayle           #+#    #+#             */
-/*   Updated: 2018/04/16 10:05:33 by mabayle          ###   ########.fr       */
+/*   Created: 2018/04/16 22:17:12 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/02 23:02:32 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "libft.h"
 
-void	ft_strclr(char *s)
+char	*ft_strclr2(char *s)
 {
-	size_t	i;
+	char *b;
 
-	i = 0;
-	if (s == NULL)
-		return ;
-	while (s[i] != '\0')
+	b = s;
+	if (s)
 	{
-		s[i] = '\0';
-		++i;
+		while (*s)
+			*s++ = '\0';
 	}
+	return (b);
 }

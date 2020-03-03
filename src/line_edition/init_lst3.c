@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_lst3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:55:10 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:55:11 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
-static int	init_lst_3_b(t_struct *s, char buf[5])
+static int	init_lst_3_b(t_struct *s, char buf[6])
 {
 	if (!s->tmp->next->sel)
 		s->tmp->next->sel = 1;
@@ -31,7 +31,7 @@ static int	init_lst_3_b(t_struct *s, char buf[5])
 	return (1);
 }
 
-static int	init_lst_3_b2(t_struct *s, char buf[5])
+static int	init_lst_3_b2(t_struct *s, char buf[6])
 {
 	if (buf[2] == 81)
 	{
@@ -51,21 +51,22 @@ static int	init_lst_3_b2(t_struct *s, char buf[5])
 	return (1);
 }
 
-int			init_lst_3(t_struct *s, char buf[5], int c, t_lst *l)
+int			init_lst_3(t_struct *s, char buf[6], int c, t_lst *l)
 {
-	if ((edit_line2(&s->lbg, &s->tmp, buf)))
+	if ((edit_line2(s, &s->lbg, &s->tmp, buf)))
 		return (ft_completion(&*s, NULL, buf, 0));
 	if (buf[0] == 27 && buf[1] == 91 && buf[2] == 49 && buf[3] == 59
 			&& buf[4] == 50)
 		return (init_lst_3_b(s, buf));
 	if (buf[0] == 18)
 		return (1);
-	if ((buf[0] == -49 && buf[1] == -128)
-			|| (buf[0] == -62 && buf[1] == -82)
+	if ((buf[0] == -49 && buf[1] == -128) || (buf[0] == -62 && buf[1] == -82)
 			|| (buf[0] == -30 && buf[1] == -120 && buf[2] == -126))
 		return (cpc(s, buf[1], 2));
 	if (buf[0] == 27 && buf[1] == 79 && (buf[2] == 80 || buf[2] == 81))
 		return (init_lst_3_b2(s, buf));
+	if (buf[0] < 0 || buf[0] > 127)
+		return (1);
 	if ((l = malloc(sizeof(*l))) == NULL)
 		return (-1);
 	l->c = buf[c];

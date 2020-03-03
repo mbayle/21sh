@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_prompt.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:49:22 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:27:09 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 int			lst2_size(t_lst2 *l)
 {
@@ -27,6 +27,7 @@ int			lst2_size(t_lst2 *l)
 
 static void	print_prompt4(t_struct *s, char *h, char *pw)
 {
+	g_lined ? s->cpt = g_lined->cpt : 0;
 	ft_putstr(BLUE);
 	if (pw)
 	{
@@ -51,10 +52,14 @@ static void	print_prompt4(t_struct *s, char *h, char *pw)
 	s->coprompt = s->coprompt + 8;
 }
 
-static void	print_prompt3(char *h, char *pw, t_struct *s)
+static void	print_prompt3(char *h, char **pw, t_struct *s)
 {
+	char	*l;
+
+	g_lined ? s->cpt = g_lined->cpt : 0;
+	l = *pw;
 	s->coprompt = 0;
-	if ((pw && h) && strcmp(h, pw) == 0)
+	if ((*pw && h) && strcmp(h, *pw) == 0)
 	{
 		ft_putstr(BLUE"~ -");
 		ft_putnbr(s->cpt);
@@ -63,7 +68,8 @@ static void	print_prompt3(char *h, char *pw, t_struct *s)
 		s->coprompt = 9;
 	}
 	else
-		print_prompt4(s, h, pw);
+		print_prompt4(s, h, l);
+	sec_free(pw, 0);
 }
 
 static void	print_prompt2(int p, t_lst2 *s, t_struct *st)
@@ -74,15 +80,14 @@ static void	print_prompt2(int p, t_lst2 *s, t_struct *st)
 	h = NULL;
 	pw = NULL;
 	(void)p;
+	pw = getcwd(pw, PATH_MAX);
 	while (s)
 	{
 		if (ft_strcmp(s->varn, "HOME") == 0)
 			h = s->var;
-		if (ft_strcmp(s->varn, "PWD") == 0)
-			pw = s->var;
 		s = s->next;
 	}
-	print_prompt3(h, pw, st);
+	print_prompt3(h, &pw, st);
 }
 
 int			print_prompt(int p, t_struct *s, int i)

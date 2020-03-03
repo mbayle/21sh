@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_lst_comp.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:47:55 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/03 23:36:06 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static int	init_lst_comp2(t_struct *s, t_lst **l)
 {
@@ -33,7 +33,7 @@ static int	init_lst_comp2(t_struct *s, t_lst **l)
 	return (1);
 }
 
-int			init_lst_comp(char buf[5], t_struct *s, t_lst *l, t_lst *rt)
+int			init_lst_comp(char buf[6], t_struct *s, t_lst *l, t_lst *rt)
 {
 	char	*del;
 

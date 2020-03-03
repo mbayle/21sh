@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   show_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 23:31:10 by frameton          #+#    #+#             */
-/*   Updated: 2019/11/17 23:31:22 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 t_htr		*char_class(t_htr *l, t_htr *s)
 {
@@ -60,8 +60,26 @@ int			s_command3(t_htr **l, t_htr **bg, struct dirent **dir_el)
 	return (1);
 }
 
+static int	check_cpt_exist(t_htr *bg, struct dirent *dir_el)
+{
+	t_htr	*tmp;
+
+	tmp = bg;
+	if (!bg)
+		return (0);
+	while (tmp)
+	{
+		if (!(ft_strcmp(tmp->name, dir_el->d_name)))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 int			s_command(struct dirent **dir_el, t_htr **l, t_htr **bg)
 {
+	if (check_cpt_exist(*bg, *dir_el))
+		return (1);
 	if (!*l)
 	{
 		if (!(s_command3(&*l, &*bg, &*dir_el)))

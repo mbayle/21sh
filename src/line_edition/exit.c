@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:48:48 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:57:24 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static int	file_history(t_htr *h, t_htr **del, t_struct *s, int fd)
 {
@@ -74,7 +74,6 @@ static void	ft_exit2(int i, t_struct *s)
 		ft_exit3(&*s);
 		if (!(*s).exit)
 			ft_eputstr(FRED"Stop: unknown error.\n"WHITE);
-		reset_attr();
 		exit(0);
 	}
 }
@@ -103,7 +102,6 @@ void		ft_exit(int i, t_struct *s)
 		ft_putchar('\n');
 		if (!(file_history(s->h, &s->h, s, 0)))
 			ft_exit2(0, s);
-		reset_attr();
 		exit(0);
 	}
 }

@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/09 17:15:39 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/19 23:12:19 by ymarcill         ###   ########.fr       */
+/*   Created: 2018/04/09 14:21:06 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/02 23:02:32 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
 #include "libft.h"
 
-size_t	ft_strlen(char const *s)
+size_t		ft_strlen(const char *s)
 {
-	size_t i;
+	size_t c;
 
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
+	c = 0;
+	if (!s)
+		return (c);
+	while (s[c])
+		c++;
+	return (c);
 }

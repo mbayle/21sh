@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_history.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:17:33 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 01:17:34 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static void	create_history2(t_htr **new, char **l, t_htr **bg, t_htr **h)
 {

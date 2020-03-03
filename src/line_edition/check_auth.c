@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_auth.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 00:25:35 by frameton          #+#    #+#             */
-/*   Updated: 2019/08/21 00:43:37 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:07:28 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 int		check_auth(char *s)
 {

@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   print_prompt2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:24:57 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:24:58 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:13:52 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static void	print_prompt_bis4(t_struct st, int i)
 {
+	g_lined ? st.cpt = g_lined->cpt : 0;
 	ft_putstr(BLUE"~ ");
 	if (st.set_cpt)
 	{
@@ -36,6 +37,9 @@ static void	print_prompt_bis4(t_struct st, int i)
 
 static void	print_prompt_bis5(char *pw, char *h)
 {
+	char	*tmp;
+
+	tmp = pw;
 	if (pw)
 	{
 		h = pw;
@@ -47,18 +51,20 @@ static void	print_prompt_bis5(char *pw, char *h)
 		ft_putstr(pw);
 	}
 	else
-		ft_putstr("Minishell");
+		ft_putstr("42sh");
 	ft_putstr(" ");
+	pw = tmp;
 }
 
-static void	print_prompt_bis3(t_struct st, char *h, char *pw, int i)
+static void	print_prompt_bis3(t_struct st, char *h, char **pw, int i)
 {
-	if ((pw && h) && strcmp(h, pw) == 0)
+	g_lined ? st.cpt = g_lined->cpt : 0;
+	if ((pw && h) && strcmp(h, *pw) == 0)
 		print_prompt_bis4(st, i);
 	else
 	{
 		ft_putstr(BLUE);
-		print_prompt_bis5(pw, h);
+		print_prompt_bis5(*pw, h);
 		if (st.set_cpt)
 		{
 			ft_putstr(GREEN);
@@ -72,11 +78,10 @@ static void	print_prompt_bis3(t_struct st, char *h, char *pw, int i)
 			ft_putnbr(st.cpt);
 			ft_putchar('-');
 		}
-		if (!i)
-			ft_putstr(RED" > "WHITE);
-		else
-			ft_putstr(GREEN" > "WHITE);
+		(!i) ? ft_putstr(RED) : ft_putstr(GREEN);
+		ft_putstr(" > "WHITE);
 	}
+	sec_free(pw, 0);
 }
 
 int			print_prompt_bis(int p, t_struct *s, int i)
@@ -91,15 +96,14 @@ int			print_prompt_bis(int p, t_struct *s, int i)
 	h = NULL;
 	pw = NULL;
 	sa = st;
+	pw = getcwd(pw, PATH_MAX);
 	while (st)
 	{
 		if (ft_strcmp(st->varn, "HOME") == 0)
 			h = st->var;
-		if (ft_strcmp(st->varn, "PWD") == 0)
-			pw = st->var;
 		st = st->next;
 	}
 	st = sa;
-	print_prompt_bis3(*s, h, pw, i);
+	print_prompt_bis3(*s, h, &pw, i);
 	return (1);
 }

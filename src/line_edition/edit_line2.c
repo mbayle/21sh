@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   edit_line2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:59:40 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 01:00:29 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static int	delete_char(t_lst **lbg, t_lst **tmp)
 {
@@ -32,7 +32,7 @@ static int	delete_char(t_lst **lbg, t_lst **tmp)
 	return (1);
 }
 
-static int	move_cur2(t_lst **tmp, t_lst **lbg, char buf[5])
+static int	move_cur2(t_lst **tmp, t_lst **lbg, char buf[6])
 {
 	if (buf[2] == 68 && *tmp)
 	{
@@ -46,7 +46,7 @@ static int	move_cur2(t_lst **tmp, t_lst **lbg, char buf[5])
 	return (1);
 }
 
-static void	move_cur(t_lst **tmp, t_lst **lbg, char buf[5])
+static void	move_cur(t_lst **tmp, t_lst **lbg, char buf[6])
 {
 	if ((buf[2] == 65 || buf[2] == 70) && *tmp)
 		while (*tmp && (*tmp)->next)
@@ -59,7 +59,36 @@ static void	move_cur(t_lst **tmp, t_lst **lbg, char buf[5])
 	}
 }
 
-int			edit_line2(t_lst **lbg, t_lst **tmp, char buf[5])
+static int	check_sign(t_struct *s, char buf[6], t_lst *del, int c)
+{
+	if (buf[0] == 3 && s->iret == 1)
+	{
+		c = s->tmp->line;
+		while (c < s->nl && (c = c + 1))
+			fp("do", NULL);
+		s->nl = 0;
+		ft_putchar('\n');
+		free_lst(s);
+	}
+	if (buf[0] == 4 && s->iret == 1)
+		if (s->tmp && s->tmp->next)
+		{
+			if (s->tmp->next->next && (del = s->tmp->next))
+			{
+				s->tmp->next->next->prev = s->tmp;
+				s->tmp->next = s->tmp->next->next;
+				free(del);
+			}
+			else
+			{
+				free(s->tmp->next);
+				s->tmp->next = NULL;
+			}
+		}
+	return (1);
+}
+
+int			edit_line2(t_struct *s, t_lst **lbg, t_lst **tmp, char buf[6])
 {
 	if (buf[0] == 27 && buf[1] == 27 && buf[2] == 91
 	&& (buf[3] == 67 || buf[3] == 68 || buf[3] == 65 || buf[3] == 66))
@@ -74,5 +103,12 @@ int			edit_line2(t_lst **lbg, t_lst **tmp, char buf[5])
 			move_cur(&*tmp, &*lbg, buf);
 		return (move_cur2(&*tmp, &*lbg, buf));
 	}
+	if (buf[0] == 9)
+	{
+		fp("bl", NULL);
+		return (1);
+	}
+	if ((buf[0] == 3 || buf[0] == 4) && s->iret == 1)
+		return (check_sign(s, buf, NULL, 0));
 	return (0);
 }

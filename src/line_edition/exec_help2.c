@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_help2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 23:00:01 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/03 23:05:32 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int		exit_sethelp(struct termios *term)
-{
-	isatty(0);
-	tcgetattr(0, &*term);
-	(*term).c_lflag |= ECHO;
-	tcsetattr(0, TCSANOW, &*term);
-	fp("ve", "cl");
-	return (1);
-}
+#include "projectinclude.h"
 
 void	exec_help2(int m)
 {

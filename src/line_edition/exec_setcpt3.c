@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setcpt3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:55:45 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:55:46 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static void	exec_setcpt2_b(t_struct *s, int ret, int m)
 {

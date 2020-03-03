@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:24:43 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:24:44 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static t_lst	*print_lst2(t_struct s, int *c, int *i, int *nl)
 {
@@ -19,6 +19,12 @@ static t_lst	*print_lst2(t_struct s, int *c, int *i, int *nl)
 	{
 		if (s.l->sel)
 			ft_putstr(BWHITE);
+		if (s.eq || s.edq)
+			fp("bl", NULL);
+		if (s.eq && s.l->c == '\'')
+			ft_putstr(RED);
+		if (s.edq && s.l->c == '"')
+			ft_putstr(RED);
 		write(1, &s.l->c, 1);
 		ft_putstr(WHITE);
 		*c = s.l->plc;

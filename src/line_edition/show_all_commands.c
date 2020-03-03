@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   show_all_commands.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 23:29:26 by frameton          #+#    #+#             */
-/*   Updated: 2019/11/18 00:29:22 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static t_htr	*char_lst_class(t_htr *l, t_htr *s, char ***del)
 {
@@ -114,8 +114,7 @@ int				show_commands(char ***path, size_t c, t_htr *l, t_htr *bg)
 	char			**del;
 
 	del = *path;
-	while (**path && ft_strcmp("./", **path)
-	&& ft_strcmp("./.builtin_name/", **path))
+	while (**path)
 	{
 		if (!(dir = opendir(**path)))
 		{
@@ -130,7 +129,8 @@ int				show_commands(char ***path, size_t c, t_htr *l, t_htr *bg)
 			ft_eputstr("Error: failed closedir process.\n");
 			return (-1);
 		}
-		(*path)++;
+		if ((*path)++ && **path && !(ft_strcmp("./", **path)))
+			(*path)++;
 	}
 	bg = char_lst_class(bg, bg, &del);
 	return (show_command3(0, c, 0, &bg));

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   select_comp_tab.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 23:29:41 by frameton          #+#    #+#             */
-/*   Updated: 2019/11/18 00:47:24 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 int		tab_touch(t_comp *cmp, t_comp *bcmp, int *j, int i)
 {
@@ -80,8 +80,9 @@ int		entr_touch(t_comp *cmp, t_struct *s, int *j, int c)
 	}
 	fp("up", "dl");
 	print_prompt_bis(s->prompt, s, 0);
-	while (s->l && line++)
+	while (!s->cpt_p && s->l && line++)
 		s->l = s->l->next;
+	s->cpt_p = 0;
 	return (entr_touch2(s, line, NULL));
 }
 

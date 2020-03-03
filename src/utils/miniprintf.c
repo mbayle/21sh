@@ -1,5 +1,5 @@
 #include <stdarg.h>
-#include "../../libft/libft.h"
+#include "../../libft/includes/libft.h"
 
 /*char	*types(char *str)
 {

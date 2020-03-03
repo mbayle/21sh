@@ -3,22 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   write_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:16:13 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/03 23:35:20 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
-static void		set_plc(t_struct *s, int *i)
+static void		set_plc(t_struct *s, int *i, int l)
 {
-	int		l;
 	int		c;
 
 	s->row = 0;
-	l = 0;
 	c = s->coprompt;
 	*i = s->col;
 	s->l = s->lbg;
@@ -39,9 +37,10 @@ static void		set_plc(t_struct *s, int *i)
 	--c;
 	while (c >= *i && (*i = *i + s->col))
 		s->row++;
+	fp("cr", NULL);
 }
 
-static int		move_up_down(char buf[5], t_struct *s, int *lbg)
+static int		move_up_down(char buf[6], t_struct *s, int *lbg)
 {
 	int		i;
 	int		ref;
@@ -97,25 +96,22 @@ static void		check_sel(t_struct *s)
 	}
 }
 
-void			write_lst(t_struct *s, char buf[5], int *nl)
+void			write_lst(t_struct *s, char buf[6], int *nl)
 {
 	int			i;
 	static int	pc;
 	int			lbg;
 
+	fp("vi", NULL);
 	if (!s->lbg && s->tmp && (lbg = 1))
 		s->lbg = s->tmp;
 	else
 		lbg = 0;
 	check_sel(s);
 	move_up_down(buf, s, &lbg);
-	set_plc(s, &i);
-	tputs(tgetstr("cr", NULL), 1, ft_ptchar);
-	while (pc < *nl)
-	{
+	set_plc(s, &i, 0);
+	while (pc < *nl && (pc = pc + 1))
 		tputs(tgetstr("do", NULL), 1, ft_ptchar);
-		++pc;
-	}
 	while ((*nl)--)
 		fp("dl", "up");
 	s->cki = print_lst(*s, &*nl, 0);
@@ -124,4 +120,7 @@ void			write_lst(t_struct *s, char buf[5], int *nl)
 	if (lbg && !(s->lbg = NULL))
 		tputs(tgetstr("le", NULL), 1, ft_ptchar);
 	s->cpt3 = 0;
+	s->eq = 0;
+	s->edq = 0;
+	fp("ve", NULL);
 }

@@ -3,66 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 09:52:08 by mabayle           #+#    #+#             */
-/*   Updated: 2018/04/16 09:52:56 by mabayle          ###   ########.fr       */
+/*   Created: 2018/04/25 15:23:03 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/02 23:02:32 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <string.h>
 #include "libft.h"
 
-static long		ft_digitnb(int n)
+char	*ft_itoa(int n)
 {
-	long		size;
+	long int	nb;
+	char		*dest;
+	char		*sa;
 
-	if (n == 0)
-		return (1);
-	size = 0;
-	if (n < 0)
+	nb = n;
+	if ((dest = ft_strnew(ft_nci((int)n))) == NULL)
+		return (0);
+	sa = dest;
+	if (nb < 0)
 	{
-		size++;
-		n = -n;
+		*dest++ = '-';
+		nb = nb * -1;
 	}
-	while (n != 0)
+	while (nb / 10)
 	{
-		n /= 10;
-		size++;
+		*dest++ = ((nb % 10) + 48);
+		nb = nb / 10;
 	}
-	return (size++);
-}
-
-static int		ft_sign(int n)
-{
-	if (n < 0)
-		return (1);
-	return (0);
-}
-
-char			*ft_itoa(int n)
-{
-	long		n_long;
-	long		length;
-	char		*fresh;
-
-	n_long = n;
-	length = ft_digitnb(n_long);
-	fresh = (char *)malloc((length + 1) * sizeof(char));
-	if (!fresh)
-		return (NULL);
-	fresh[length] = '\0';
-	length--;
-	if (n_long < 0)
-		n_long = -n_long;
-	while (length >= 0)
-	{
-		fresh[length] = (n_long % 10) + '0';
-		length--;
-		n_long /= 10;
-	}
-	if (ft_sign(n))
-		fresh[0] = '-';
-	return (fresh);
+	*dest++ = nb + 48;
+	dest = sa;
+	if (dest[0] == '-')
+		dest++;
+	ft_strev(dest);
+	return (sa);
 }

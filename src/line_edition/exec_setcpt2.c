@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   exec_setcpt2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:57:46 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:57:47 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 void	es9(char *s, int m)
 {
 	ft_mputendl(s, m);
 }
 
-int		exec_setcpt8(t_struct *s, struct termios *term, int *m)
+int		exec_setcpt8(t_struct *s, int *m)
 {
 	struct winsize	sz;
 	int				mh;
@@ -30,10 +30,6 @@ int		exec_setcpt8(t_struct *s, struct termios *term, int *m)
 		ft_putendl("window size too small.");
 		return (0);
 	}
-	isatty(0);
-	tcgetattr(0, &*term);
-	(*term).c_lflag &= ~(ECHO);
-	tcsetattr(0, TCSANOW, &*term);
 	tputs(tgetstr("vi", NULL), 1, ft_ptchar);
 	tputs(tgetstr("cl", NULL), 1, ft_ptchar);
 	*m = sz.ws_col - 84;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   op_copy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:31:46 by frameton          #+#    #+#             */
-/*   Updated: 2020/01/25 00:31:47 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "projectinclude.h"
 
 static int	op_copy2(t_lst **sa, t_lst **bg, char **l, int *c)
 {
@@ -29,6 +29,7 @@ static int	op_copy2(t_lst **sa, t_lst **bg, char **l, int *c)
 		(*c)++;
 		*sa = (*sa)->next;
 	}
+	(*l)[*c] = '\0';
 	return (1);
 }
 
