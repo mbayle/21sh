@@ -113,7 +113,8 @@ char	**parse_redir(char *line, int exec)
 	{
 		if (execute_redir(command) == -1)
 		{
-//			ft_putendl("FAIL REDIR");
+			ft_freetab(dst);
+			ft_freetab(command);
 			return (NULL);
 		}
 	}

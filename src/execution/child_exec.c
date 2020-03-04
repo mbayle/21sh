@@ -87,12 +87,12 @@ char        *my_path(char **cmd, char **env)
         {
 			mypath = get_pathh(cmd[0], tmp);
 			if (mypath && permissions(&mypath, rd.rdbuf))
-                g_jobcontrol.first_job->last_ret = 1;	
+                g_jobcontrol.ret = 1;	
 			else if (!mypath && g_jobcontrol.first_job->last_ret != 1)
             {
                 ft_putstr_fd("Shell : No cmd found: ", 2);
                 ft_putendl_fd(cmd[0], 2);
-                g_jobcontrol.first_job->last_ret = 1;
+                g_jobcontrol.ret = 1;
             }
         }
     }

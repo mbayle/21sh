@@ -31,7 +31,7 @@ INCS		=	./include/get_next_line.h \
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))include
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address 
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft #-fsanitize=address 
 
 CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 
 ifeq ($(DEBUG), 1)

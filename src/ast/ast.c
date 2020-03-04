@@ -199,6 +199,7 @@ int		build_ast(t_lex *lex, t_ast **ast)
 		!(*ast)->right && !(*ast)->left ? no_root(lex, (*ast)) : 0;
 		browse_ast(*ast);
 		ast && g_shell->debug == 1 ? ft_putast(*ast) : 0;
+
 	}
 	return (0);
 }

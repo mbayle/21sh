@@ -98,9 +98,9 @@ int     execute_redir(char **cmd)
     int i;
     int ret;
 
-    i = 0;
+    i = -1;
     ret = 0;
-    while (cmd[i])
+    while (cmd[++i])
     {
         if (ft_seq_occur(cmd[i], ">>"))
             ret =  redirect_to_file(cmd[i], cmd[i + 1], O_APPEND, 1);
@@ -114,15 +114,10 @@ int     execute_redir(char **cmd)
         else if (ft_seq_occur(cmd[i], "<&"))
             ret = dup_fd(cmd[i], cmd[i + 1]);
         else if (ft_seq_occur(cmd[i], "<"))
-		{
-//			ft_putendl("Receive <");
             ret = redirect_to_file(cmd[i], cmd[i + 1], O_RDONLY, 0);
-		}
-        if (ret == -1)
+        if (ret == -1 && (g_jobcontrol.ret = 1) == 1)
             return (g_jobcontrol.red = -1);
-        i++;
     }
-//	ft_putendl("RETURN 0");
     return (0);
 }
 
