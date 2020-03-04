@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/03 22:58:42 by mabayle          ###   ########.fr        #
+#    Updated: 2020/03/04 23:16:14 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,7 +186,7 @@ all:
 	@make $(NAME)
 
 $(NAME):  $(LIBFT) $(OBJ)
-	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap
+	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap -fsanitize=address
 	@echo ""
 	@echo "\033[0;32m 21sh build done \033[0m"
 	@echo ""

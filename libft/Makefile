@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/03 23:10:18 by mabayle          ###   ########.fr        #
+#    Updated: 2020/03/04 23:11:20 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -146,7 +146,7 @@ $(NAME): $(OBJ_PATH) $(OBJS)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INCS)
 	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Compiling :\033[0m" $<
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -fsanitize=address -c $< -o $@
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)

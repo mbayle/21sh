@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/03 23:32:29 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/04 23:17:36 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,59 +81,6 @@ void	tmp_free_struct(t_struct *s)
 	(*s).av = NULL;
 }
 
-/*static void	minishell(t_struct *s)
-{
-	(*s).c = check_command(&(*s).av, *s, NULL, 0);
-	if ((*s).c < 2)
-		ft_exit((*s).c, &*s);
-	if ((*s).c > 1)
-		(*s).prompt = 0;
-	if ((*s).c > 2)
-	{
-		if ((exec_builtin(&*s, ((*s).c - 3))) == 0)
-			ft_exit(0, &*s);
-	}
-	else if (((*s).first = fork()) == 0)
-	{
-		if ((*s).c == 2)
-			exec_command(&*s, (*s).envi);
-		exit(0);
-	}
-	if ((*s).first == -1)
-		ft_exit(2, &*s);
-	if ((*s).first > 0)
-		wait(0);
-	if ((*s).exit)
-		ft_exit(0, &*s);
-}*/
-
-int			size_list(t_lst *s)
-{
-	int		i;
-
-	i = 0;
-	while (s)
-	{
-		i++;
-		s = s->next;
-	}
-	return (i);
-}
-
-char		*create_lex_line(t_lst *s)
-{
-	char *line;
-	int	i = 0;
-
-	line = malloc(sizeof(char) * size_list(s));
-	while (s)
-	{
-		line[i++] = s->c;
-		s = s->next;
-	}
-	return (line);
-}
-
 char		**ft_tabdup(char **av)
 {
 	int 	i;
@@ -187,7 +134,7 @@ int			main(int ac, char **av, char **envp)
 			update_bg_status();
 			if (s.av[0])
 			{
-					g_shell->line = create_lex_line(s.l);
+				g_shell->line = s.cmd;
 				ft_putendl(g_shell->line);
 				ft_lexer(&g_shell->lex, g_shell->line);
 			//	minishell(&s);
