@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   projectinclude.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 10:06:19 by mabayle           #+#    #+#             */
-/*   Updated: 2018/06/12 04:22:02 by mabayle          ###   ########.fr       */
+/*   Created: 2020/01/20 04:05:42 by mabayle           #+#    #+#             */
+/*   Updated: 2020/02/18 20:30:27 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef PROJECTINCLUDE_H
+# define PROJECTINCLUDE_H
 
-char	*ft_strdup(const char *src)
-{
-	char	*str;
-	int		index;
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include "jobcontrol.h"
+# include "get_next_line.h"
+# include "minishell.h"
+# include "../libft/includes/libft.h"
+# include "lexer.h"
+# include "grammar.h"
+# include "parser.h"
+# include "mybtree.h"
 
-	index = 0;
-	if (!src)
-		return (NULL);;
-	while (src[index])
-		index++;
-	str = (char *)malloc(sizeof(*str) * index + 1);
-	if (str == NULL)
-		return (NULL);
-	index = 0;
-	while (src[index] != '\0')
-	{
-		str[index] = src[index];
-		index++;
-	}
-	str[index] = '\0';
-	return (str);
-}
+#endif

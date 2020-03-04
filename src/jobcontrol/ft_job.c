@@ -31,9 +31,9 @@ void    print_job_status(int i, t_job *j, t_job *f_job)
 {
 		pid_t   pgid;
 
-		ft_putnbr(j->last_ret);
-		if (j->last_ret == 149 || j->last_ret == 150)
-				return ;
+//		ft_putnbr(j->last_ret);
+//		if (j->last_ret == 149 || j->last_ret == 150)
+//ls -lR /usr >fifo 2>&1 &				return ;
 		pgid = last_stp_job(f_job);
 		ft_putstr_fd("[", 1);
 		ft_putnbr_fd(j->j_nb, 1);

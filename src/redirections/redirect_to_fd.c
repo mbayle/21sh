@@ -13,7 +13,7 @@ int		write_in(int n, char *file, mode_t mode)
 		}
 		close(fd);
 	}
-	fd = open(file, O_WRONLY | mode);
+	fd = open(file, O_RDWR |  mode);
 	dup2(fd, n);
 	return (0);
 }

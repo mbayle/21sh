@@ -39,20 +39,103 @@ char    **del_one(char **tabl, int pos)
     j = 0;
     if (!(dst = malloc(sizeof(char*) * (tab_size(tabl) + 1))))
         return (NULL);
-    while (tabl[i])
-    {
-        if (i == pos)
-            i++;
-        if (tabl[i])
+    while (tabl[i] && i < pos)
+		i++;
+//	if (pos)
+//		i--;
+	while (tabl[i])
             dst[j++] = ft_strdup(tabl[i++]);
-
-    }
     dst[j] = NULL;
-    ft_putendl(dst[0]);
-    ft_freetab(tabl);
     return (dst);
 
 }
+
+int		just_ass(char **ass)
+{
+	int	i;
+
+	i = 0;
+	while (ass[i])
+	{
+		if (ass[i][0] != '\r')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+
+void	exec_ass(char **ass)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (ass[i] && ass[i][0] == '\r')
+	{
+		tmp = ft_strdup(ass[i]);
+		free(ass[i]);
+		ass[i] = ft_strdup(tmp + 1);
+		//g_jobcontrol.first_job->last_ret = ft_set.c
+		i++;
+	}
+}
+
+
+void	unexec_ass(char **ass)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (ass[i] && ass[i][0] == '\r')
+	{
+		tmp = ft_strdup(ass[i]);
+		free(ass[i]);
+		ass[i] = ft_strdup(tmp + 1);
+		//g_jobcontrol.first_job->last_ret = ft_unset.c
+		i++;
+	}
+}
+
+void	save_ass(char **ass)
+{
+	int	i;
+	int	y;
+
+	i = 0;
+	y = 0;
+	if (!(g_jobcontrol.ass = malloc(sizeof(char *) * (just_ass(ass) + 1))))
+		return;
+	while (ass[i] && ass[i][0] == '\r')
+		g_jobcontrol.ass[y++] = ft_strdup(ass[i++]);
+	g_jobcontrol.ass[y] = NULL;
+}
+
+/*void	save_ass_stock(char **ass)
+{
+	int	i;
+	int	x;
+	int	y;
+
+	i = 0;
+	x = 0;
+	y = 0;
+	if (!(g_jobcontrol.ass_stock = malloc(sizeof(char*) * (just_ass(ass) + 1))))
+		return ;
+	while (ass[i] && i < just_ass(ass))
+	{
+		while (localstr[x])
+		{
+			if (ft_strcmp(localstr[x], ass[i]) == 0)
+				g_jobcontrol.ass_stock[y++] = ft_strdup(localstr[x]);
+			x++;
+		}
+		x = 0;
+		i++;
+	}
+	g_jobcontrol.ass_stock[y] = NULL
+}*/
 
 char    **check_assign(char **ass)
 {
@@ -61,23 +144,44 @@ char    **check_assign(char **ass)
 
     i = 0;
     tmp = NULL;
-    while (ass[i])
+	if (!ass || !ass[i])
+		return (NULL);;
+    if (ass[i][0] == '\r')
     {
-        if (ass[i][0] == '\r')
-        {
-            tmp = ft_strdup(ass[i]);
-            free(ass[i]);
-            ft_putstr("check assign : ");
-            ft_putendl(tmp + 1);
-            ass[i] = ft_strdup(tmp + 1);
-            if (i == 0)
+     		 if ((i = just_ass(ass)) == -1)//&& pas de ARGV)
             {
+
+				ft_putstr("NO argv  ");
+//				ft_putnbr(i);
                 //g_jobcontrol.ret= ft_export.c();
-                ass = del_one(ass, 0);
             }
+			else 
+			{
+			/*	g_jobcontrol.assi = 1;
+				save_ass_stock(ass);
+				save_ass(ass);
+				exec_ass(ass);*/
+			//	parcour structu var local et stock ass qui existent
+			//	set tout assign
+			//	APRES EXEc: unset tous assign de la cmd, reset mon stock
+                ass = del_one(ass, just_ass(ass));
+			//	ft_printtab(ass);
+			}
         }
-        i++;
-    }
+		else
+		{
+			while (ass[i])
+			{
+				if (ass[i][0] == '\r')
+				{
+					tmp = ft_strdup(ass[i]);
+					ft_strdel(&ass[i]);
+					ass[i] = ft_strdup(tmp + 1);
+				}
+				i++;
+			}
+		}
+
     return (ass);
 }
 

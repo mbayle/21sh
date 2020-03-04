@@ -131,9 +131,13 @@ char		*create_lex_line(t_lst *s)
 	line = malloc(sizeof(char) * size_list(s));
 	while (s)
 	{
-		line[i++] = s->c;
+		if (s->c < 127 && s->c > 0)
+		{
+			line[i++] = s->c;
+		}
 		s = s->next;
 	}
+	line[i] = '\0';
 	return (line);
 }
 
@@ -162,6 +166,7 @@ int			main(int ac, char **av, char **envp)
 
 	c = 0;
 	init_shell_sig();
+	g_jobcontrol.first_job = NULL;
 	g_jobcontrol.env = ft_tabdup(envp);
 	init_struct(&s, envp, ac, av);
 	g_shell = init_shell(0);
@@ -191,8 +196,10 @@ int			main(int ac, char **av, char **envp)
 			if (s.av[0])
 			{
 					g_shell->line = create_lex_line(s.l);
-				ft_putendl(g_shell->line);
+				//	ft_putendl("In main");
 				ft_lexer(&g_shell->lex, g_shell->line);
+				//	ft_putendl("In main2");
+				ft_strdel(&g_shell->line);
 			//	minishell(&s);
 			}
 			tmp_free_struct(&s, &c);

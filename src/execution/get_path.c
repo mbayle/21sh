@@ -1,15 +1,16 @@
 #include "projectinclude.h"
-#include "../includes/jobcontrol.h"
+
 int		permissions(char **str, struct stat buf)
 {
 	int	i;
 
 	i = 0;
-	if (stat(*str, &buf) == 0 && (S_IXUSR & buf.st_mode) == 0)
+	if (stat(*str, &buf) == 0 && ((S_ISDIR(buf.st_mode)) ||  (S_IXUSR & buf.st_mode) == 0))
 	{
-		ft_putstr("Minishell: Permission denied: ");
+		ft_putstr("Shell: Permission denied: ");
 		ft_putendl(*str);
 		i = 1;
+		ft_strdel(str);
 		*str = NULL;
 	}
 	return (i);

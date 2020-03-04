@@ -19,18 +19,18 @@ DEBUG		:=	0
 
 LIBFT		:=	libft/libft.a
 
-INCLUDES	:=	./includes
+INCLUDES	:=	./include
 
-INCS		=	./includes/get_next_line.h \
-				./includes/grammar.h \
-				./includes/lexer.h \
-				./includes/minishell.h \
-				./includes/mybtree.h \
-				./includes/parser.h \
-				./includes/projectinclude.h
+INCS		=	./include/get_next_line.h \
+				./include/grammar.h \
+				./include/lexer.h \
+				./include/minishell.h \
+				./include/mybtree.h \
+				./include/parser.h \
+				./include/projectinclude.h
 
 #libft
-INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
+INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))include
 LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address 
 
 CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 
@@ -167,7 +167,8 @@ SRC		:=	main.c \
 			line_edition/welcome.c \
 			line_edition/welcome2.c \
 			line_edition/welcome3.c \
-			line_edition/write_lst.c
+			line_edition/write_lst.c \
+
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

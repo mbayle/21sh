@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-#include "../includes/jobcontrol.h"
 
 void	manage_and(t_ast *ast)
 {
@@ -21,16 +20,20 @@ void	manage_and(t_ast *ast)
 void	manage_dand(t_ast *ast)
 {
 	go_left(ast);
-	if (g_jobcontrol.first_job && g_jobcontrol.first_job->last_ret == 0)
-		g_jobcontrol.ret = 0;
+	if (g_jobcontrol.first_job && g_jobcontrol.ret != 0)
+		g_jobcontrol.ao = 1;
+//	else
+//		g_jobcontrol.ret = -2;
 	go_right(ast);
 }
 
 void	manage_dor(t_ast *ast)
 {
 	go_left(ast);
-	if (g_jobcontrol.first_job && g_jobcontrol.first_job->last_ret == 0)
-		g_jobcontrol.ret = -1;
+	if (g_jobcontrol.first_job && g_jobcontrol.ret == 0)
+		g_jobcontrol.ao = 1;
+//	else
+//		g_jobcontrol.ret = 0;
 	go_right(ast);
 }
 
@@ -43,7 +46,8 @@ void	check_op(t_ast *ast)
 	lex = ast->lex;
 	if (tmp == NULL || lex == NULL || lex->token == UNKNOWN)
 		return ;
-	if ((int)lex->operator == 0)
+	if ((int)lex->token == WORD || lex->token == REDIR_OPE ||
+		lex->token == ASSIGN_WORD || lex->token == IO_NUMBER)
 		manage_word(ast);
 	if ((int)lex->operator == 1)
 		manage_semic(ast, 1);

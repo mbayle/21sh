@@ -180,9 +180,6 @@ void	do_to_ast()
 	char	**tmp;
 
 	tmp = quick_tab_cmd(g_jobcontrol.first_job->command);
-//	ft_putstr("\nJob->command\"[0]\" after quick_tab:");
-//	ft_putendl(tmp[0]);
-//	ft_putendl(tmp[1]);
 	pipe_exec(tmp, g_jobcontrol.env, g_jobcontrol.g_fg);
 }
 
@@ -196,13 +193,11 @@ int		build_ast(t_lex *lex, t_ast **ast)
 	*ast = NULL;
 	if (lex && lex->token != UNKNOWN)
 	{
-//		ft_putendl("I CREATE THE ASt");
 		init_priority(lex);
 		*ast = init_node(lex, lex->value);
 		*ast = beta_ast(*ast, 3);
 		!(*ast)->right && !(*ast)->left ? no_root(lex, (*ast)) : 0;
 		browse_ast(*ast);
-//		do_to_ast();
 		ast && g_shell->debug == 1 ? ft_putast(*ast) : 0;
 	}
 	return (0);

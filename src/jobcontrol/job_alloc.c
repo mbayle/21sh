@@ -58,8 +58,7 @@ void    allocate_job_loop(int repere)
 	}
 	else
 	{
-		g_jobcontrol.first_job->next =
-				ft_memalloc(sizeof(*g_jobcontrol.first_job));
+		g_jobcontrol.first_job->next = ft_memalloc(sizeof(*g_jobcontrol.first_job));
 		g_jobcontrol.first_job = g_jobcontrol.first_job->next;
 		g_jobcontrol.first_job->command = ft_strnew(1);
 		g_jobcontrol.first_job->next = NULL;

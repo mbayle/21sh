@@ -28,9 +28,10 @@ void    to_do_if_stp(t_job *job, t_job *save, int i)
 		}
 		g_jobcontrol.first_job = job;
 		g_jobcontrol.first_job->last_j = 2;
-		ft_putnbr(g_jobcontrol.first_job->last_j);
+//		ft_putnbr(g_jobcontrol.first_job->last_j);
+//		ft_putchar(' ');
 		put_last_stp(put_last_stp(job, 1, 2), 0, 1);
-		ft_putnbr(g_jobcontrol.first_job->last_j);
+//		ft_putnbr(g_jobcontrol.first_job->last_j);
 		if (i)
 				ft_putstr_fd("\n", 2);
 		ft_putstr_fd("[", 2);
@@ -80,20 +81,24 @@ int     process_status(pid_t pid, int status, t_process *p)
 	if (pid < 0)
 			return (-1);
 	g_jobcontrol.first_job->first_process->r_value = status;
+	g_jobcontrol.ret = status;
 	if (WIFEXITED(status) == TRUE)
+	{
 		g_jobcontrol.first_job->first_process->status = status ? status : 2;
+		g_jobcontrol.ret = status > 1 ? 1 : status;
+	}
 	else if (WIFSIGNALED(status) == TRUE)
 	{
 		g_jobcontrol.first_job->first_process->status = status;
 		g_jobcontrol.first_job->first_process->r_value = status + 128;
-		g_jobcontrol.first_job->last_ret = status + 128;
+		g_jobcontrol.ret = status + 128;
 	}
 	else if (WIFSTOPPED(status) == TRUE)
 	{
 		g_jobcontrol.first_job->first_process->status = 1;
 		g_jobcontrol.first_job->first_process->r_value =
 		128 + WSTOPSIG(status);
-		g_jobcontrol.first_job->last_ret = 128 + WSTOPSIG(status);
+		g_jobcontrol.ret = 128 + WSTOPSIG(status);
 	}
 	g_jobcontrol.first_job->first_process = pro;
 	return (status);
