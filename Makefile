@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/04 23:16:14 by mabayle          ###   ########.fr        #
+#    Updated: 2020/03/06 01:18:18 by frameton         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -177,6 +177,7 @@ SRC		:=	main.c \
 			line_edition/test3.c\
 			line_edition/test4.c\
 			line_edition/show_commands_tab3.c\
+			line_edition/init_lst2_b.c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

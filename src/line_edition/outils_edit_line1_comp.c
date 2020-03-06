@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:25:14 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/06 00:30:42 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int		show_list_poss2(t_struct *s, t_comp **cmp, int row, int *co)
 		*cmp = (*cmp)->next;
 	}
 	if (size > row - 1)
-		return (1);
+		return (free_bcmp_tab(&bcmp, cmp, 1));
 	fp("vi", NULL);
 	if (!(select_comp_tab(s, bcmp, i, j)))
 		return (free_bcmp_tab(&bcmp, &*cmp, -1));

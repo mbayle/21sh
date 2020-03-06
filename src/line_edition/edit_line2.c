@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:59:40 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/16 05:37:47 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	move_cur(t_lst **tmp, t_lst **lbg, char buf[6])
 
 static int	check_sign(t_struct *s, char buf[6], t_lst *del, int c)
 {
-	if (buf[0] == 3 && s->iret == 1)
+	if (buf[0] == 3 && s->ret == 1)
 	{
 		c = s->tmp->line;
 		while (c < s->nl && (c = c + 1))
@@ -70,7 +70,7 @@ static int	check_sign(t_struct *s, char buf[6], t_lst *del, int c)
 		ft_putchar('\n');
 		free_lst(s);
 	}
-	if (buf[0] == 4 && s->iret == 1)
+	if (buf[0] == 4 && s->ret == 1)
 		if (s->tmp && s->tmp->next)
 		{
 			if (s->tmp->next->next && (del = s->tmp->next))
@@ -108,7 +108,7 @@ int			edit_line2(t_struct *s, t_lst **lbg, t_lst **tmp, char buf[6])
 		fp("bl", NULL);
 		return (1);
 	}
-	if ((buf[0] == 3 || buf[0] == 4) && s->iret == 1)
+	if ((buf[0] == 3 || buf[0] == 4) && s->ret == 1)
 		return (check_sign(s, buf, NULL, 0));
 	return (0);
 }

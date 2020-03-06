@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:00:04 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/16 05:37:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static	int	move_word_edl3(t_struct *s, int c)
 
 static int	check_sign(t_struct *s, char buf[6], t_lst *del, int c)
 {
-	if (buf[0] == 3 && s->iret == 1)
+	if (buf[0] == 3 && s->ret == 1)
 	{
 		while (c < s->nl && (c = c + 1))
 			fp("do", NULL);
@@ -62,7 +62,7 @@ static int	check_sign(t_struct *s, char buf[6], t_lst *del, int c)
 		ft_putchar('\n');
 		free_lst(s);
 	}
-	if (buf[0] == 4 && s->iret == 1)
+	if (buf[0] == 4 && s->ret == 1)
 	{
 		if (s->tmp && s->tmp->next)
 		{
@@ -95,7 +95,7 @@ int			edit_line3(t_struct *s, char buf[6])
 		fp("bl", NULL);
 		return (1);
 	}
-	if ((buf[0] == 3 || buf[0] == 4) && s->iret == 1)
+	if ((buf[0] == 3 || buf[0] == 4) && s->ret == 1)
 		return (check_sign(s, buf, NULL, 0));
 	return (0);
 }

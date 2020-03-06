@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 23:44:42 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/28 00:44:03 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 int			check_sign_edl1(t_struct *s, char buf[6])
 {
-	if (buf[0] == 3 && s->iret == 1)
+	if (buf[0] == 3 && s->ret == 1)
 	{
 		s->nl = 0;
 		ft_putchar('\n');
 		free_lst(s);
 	}
-	if (buf[0] == 4 && s->iret == 1)
+	if (buf[0] == 4 && s->ret == 1)
 		if (!s->tmp)
 			s->ctrl_d = 1;
 	return (1);

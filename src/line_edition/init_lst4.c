@@ -6,13 +6,13 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:46:08 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/05 22:39:02 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
-static int	init_lst_4_b(char buf[6], t_struct *s)
+static int	init_lst_4_b(char buf[701], t_struct *s)
 {
 	if (buf[2] == 81)
 	{
@@ -32,7 +32,7 @@ static int	init_lst_4_b(char buf[6], t_struct *s)
 	return (1);
 }
 
-static	int	init_lst_4_b2(t_struct *s, char buf[6])
+static	int	init_lst_4_b2(t_struct *s, char buf[701])
 {
 	if (!s->tmp->sel)
 		s->tmp->sel = 1;
@@ -43,31 +43,31 @@ static	int	init_lst_4_b2(t_struct *s, char buf[6])
 	return (1);
 }
 
-int			init_lst_4(t_struct *s, char buf[6], int c, t_lst *l)
+int			init_lst_4(t_struct *s, char buf[701], int c, t_lst *l)
 {
-	if ((edit_line3(s, buf)))
+	if ((edit_line3(s, buf)) || (buf[0] == 18))
 		return (1);
 	if (buf[0] == 27 && buf[1] == 91 && buf[2] == 49
 			&& buf[3] == 59 && buf[4] == 50)
 		return (init_lst_4_b2(s, buf));
-	if (buf[0] == 18)
-		return (1);
 	if ((buf[0] == -49 && buf[1] == -128)
 			|| (buf[0] == -62 && buf[1] == -82)
 			|| (buf[0] == -30 && buf[1] == -120 && buf[2] == -126))
 		return (cpc(s, buf[1], 1));
 	if (buf[0] == 27 && buf[1] == 79 && (buf[2] == 80 || buf[2] == 81))
 		return (init_lst_4_b(buf, s));
-	if (buf[0] < 0 || buf[0] > 127)
+	if (buf[c] < 0 || buf[c] > 127)
 		return (1);
 	if ((l = malloc(sizeof(*l))) == NULL)
 		return (-1);
-	l->c = buf[c];
+	l->c = buf[0];
 	l->sel = 0;
 	l->next = s->tmp;
 	s->tmp->prev = l;
 	l->prev = NULL;
 	s->lbg = l;
 	s->tmp = s->lbg;
+	if (ft_strlen(buf) > 1)
+		return (init_lst_3(s, buf, 1, NULL));
 	return (2);
 }

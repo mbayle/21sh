@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/04 23:17:36 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/06 01:43:44 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,42 @@ t_21sh	*init_shell(int debug)
 
 static void	init_term(t_struct *s)
 {
-	int ret;
-	struct termios	term;
+	int		ret;
 
+	s->env_i = 1;
 	ret = tgetent(NULL, getenv("TERM"));
-	isatty(0);
-	tcgetattr(0, &term);
-	term.c_lflag &= ~(ICANON);
-	tcsetattr(0, TCSANOW, &term);
 	s->prompt = 0;
-	s->av = NULL;
+	s->cpt3 = 0;
+	s->copy = 0;
+	s->eq = 0;
+	s->cpt5 = 0;
+	s->edq = 0;
+	s->cpt_p3 = 0;
+	s->cpt_p = 0;
+	s->cpt_p2 = 0;
+	s->exit = 0;
+	s->ctrl_d = 0;
+	s->cmd = NULL;
+	s->cpcl = NULL;
 }
 
-void	init_struct(t_struct *s, char **envp)
+static void	init_start_pwd(t_struct *s)
+{
+	t_lst2	*env;
+
+	env = s->env;
+	while (env && ft_strcmp(env->varn, "PWD"))
+		env = env->next;
+	if (env)
+		s->start_pwd = env->var;
+	else
+		s->start_pwd = NULL;
+	g_lined = s;
+}
+
+void		init_struct(t_struct *s, char **envp)
 {
 	init_term(s);
-	(*s).exit = 0;
 	(*s).env = NULL;
 	(*s).l = NULL;
 	(*s).lbg = NULL;
@@ -60,12 +80,13 @@ void	init_struct(t_struct *s, char **envp)
 		if (((*s).env = init_lst_env(NULL, envp, NULL, 0)) == NULL)
 			ft_exit(0, &*s);
 	}
+	init_start_pwd(s);
 	if (((*s).env_path = search_pathenv((*s).env)) == NULL)
 		ft_eputstr("minishell: "MAGENTA"warning"
 		WHITE": the PATH environment variable does not exist.\n\0");
 }
 
-void	tmp_free_struct(t_struct *s)
+void		tmp_free_struct(t_struct *s)
 {
 	t_lst	*del;
 
@@ -76,7 +97,7 @@ void	tmp_free_struct(t_struct *s)
 	}
 	(*s).l = NULL;
 	(*s).lbg = NULL;
-	free_dchar(&(*s).av);
+	(*s).tmp = NULL;
 	free_dchar(&(*s).envi);
 	(*s).av = NULL;
 }
@@ -102,7 +123,6 @@ int			main(int ac, char **av, char **envp)
 {
 	t_struct	s;
 	int			c;
-	int			i;
 
 	c = 0;
 	init_shell_sig();
@@ -111,37 +131,21 @@ int			main(int ac, char **av, char **envp)
 	g_shell = init_shell(0);
 	s.h = create_history(NULL, NULL, NULL, &s);
 	ac == 2 && ft_strcmp(av[1], "DEBUG") == 0 ? g_shell->debug = 1 : 0;
-	while (1)
+	while (init_lst(&s, 0, 2, 0))
 	{
 //		update_bg_status();
-		if (print_prompt(s.prompt, &s, 0) == 0)
-		{
-			delete_job(g_jobcontrol.first_mail);
-			ft_exit(0, &s);
-		}
 //		update_bg_status();
-		if (((i = get_command(&s)) == 0) || i == 5)
+		update_bg_status();
+		if (s.cmd)
 		{
-			delete_job(g_jobcontrol.first_mail);
-			ft_exit(i, &s);
+			g_shell->line = s.cmd;
+			ft_putendl(g_shell->line);
+			ft_lexer(&g_shell->lex, g_shell->line);
+		//	minishell(&s);
 		}
-		else
-		{
-			while (s.av[0] && s.av[c])
-				if (check_expansion(&s, c++, s.env, 0) == 0)
-					ft_exit(0, &s);
-			c = 1;
-			update_bg_status();
-			if (s.av[0])
-			{
-				g_shell->line = s.cmd;
-				ft_putendl(g_shell->line);
-				ft_lexer(&g_shell->lex, g_shell->line);
-			//	minishell(&s);
-			}
-			tmp_free_struct(&s);
-		}
-//		update_bg_status();
+		tmp_free_struct(&s);
+		
+///		update_bg_status();
 		update_bg_status();
 	}
 	reset_attr();

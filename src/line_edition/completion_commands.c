@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:14:00 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/02/16 02:16:50 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ int			ft_completion(t_struct *s, char **path, char buf[6], int i)
 
 	line = NULL;
 	c = 0;
-	if (s->envi && !(path = init_tab_path2(s->env_path, s)))
+	if (s->env_i && !(path = init_tab_path2(s->env_path, s)))
 		return (-1);
-	if (s->envi && i == 2 && s->lbg && (s->l = s->lbg))
+	if (s->env_i && i == 2 && s->lbg && (s->l = s->lbg))
 	{
 		while (s->l && (c = c + 1))
 			s->l = s->l->next;
@@ -94,11 +94,11 @@ int			ft_completion(t_struct *s, char **path, char buf[6], int i)
 		s->bcom = char_class(s->bcom, s->bcom);
 		return (sec_free(&line, 1));
 	}
-	else if (s->envi && !s->lbg && !s->tmp && buf[0] == 9 && i)
+	else if (s->env_i && !s->lbg && !s->tmp && buf[0] == 9 && i)
 		return (show_commands(&path, 0, NULL, NULL));
-	else if (s->envi && s->lbg && !s->tmp->next && s->cpt > 1)
+	else if (s->env_i && s->lbg && !s->tmp->next && s->cpt > 1)
 		return (completion_commands(&path, 0, &*s, 0));
-	if (s->envi && buf[0] == 9)
+	if (s->env_i && buf[0] == 9)
 		return (free_path(&path, 3));
 	return (free_path(&path, 1));
 }

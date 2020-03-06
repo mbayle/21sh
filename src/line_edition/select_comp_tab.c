@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 23:29:41 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/03 22:47:55 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,30 @@ int		tab_touch(t_comp *cmp, t_comp *bcmp, int *j, int i)
 	return (1);
 }
 
+int		entr_touch3(t_struct *s, char *line, t_lst *tmp)
+{
+	int		c;
+
+	c = count_lst_comp_tab(*s);
+	tmp = NULL;
+	while (line[c])
+	{
+		if ((tmp = malloc(sizeof(*tmp))) == NULL)
+			return (0);
+		tmp->c = line[c++];
+		tmp->sel = 0;
+		tmp->next = NULL;
+		tmp->prev = s->tmp;
+		s->tmp->next = tmp;
+		s->tmp = s->tmp->next;
+	}
+	return (1);
+}
+
 int		entr_touch2(t_struct *s, char *line, t_lst *l)
 {
+	if (s->cpt_p2)
+		return (entr_touch3(s, line, l));
 	while (*line)
 	{
 		if ((l = malloc(sizeof(*l))) == NULL)

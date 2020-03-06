@@ -3,16 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   linedition.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:01:38 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/06 01:21:42 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LINEDITION_H
 # define LINEDITION_H
+# define FRED "\033[0;31m"
+# define RED "\033[1;31m"
+# define FGREEN "\033[0;32m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define FYELLOW "\033[0;33m"
+# define BLUE "\033[1;34m"
+# define FBLUE "\033[0;34m"
+# define MAGENTA "\033[1;35m"
+# define FMAGENTA "\033[0;35m"
+# define CYAN "\033[1;36m"
+# define GREY "\033[1;30m"
+# define FCYAN "\033[0;36m"
+# define WHITE "\033[0;m"
+# define SCYAN "\033[0;30;46m"
+# define SYELLOW "\033[0;30;43m"
+# define SRED "\033[0;30;41m"
+# define SGREEN "\033[0;30;42m"
+# define BBLUE "\033[0;30;44m"
+# define BMAGENTA "\033[0;30;45m"
+# define BCYAN "\033[0;30;46m"
+# define BWHITE "\033[0;30;47m"
 
+# include "projectinclude.h"
 # include <sys/types.h>
 # include <dirent.h>
 # include <stdio.h>
@@ -137,9 +160,12 @@ typedef struct		s_struct
 	int				edq;
 	int				mp;
 	int				env_i;
+	int				cpt5;
 	int				ctrl_d;
+	int				copy;
 	int				row;
 	int				cpt_p2;
+	int				cpt_p3;
 	int				ret;
 	int				cpt3;
 	int				cpt_p;
@@ -309,4 +335,6 @@ int					check_prec_path(struct stat *st, char **l, char **tmp,
 		int *ind);
 int					s_command_tab2(char *str, t_comp **l, t_comp **bg,
 		char *p);
+int					init_lst2_b4(char buf[701], t_lst **l, int *c);
+int					e_cpt(t_struct *s, t_comp **cmp, t_comp **bcmp);
 #endif

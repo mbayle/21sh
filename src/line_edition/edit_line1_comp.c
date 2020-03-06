@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:13:14 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:48 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/05 22:58:19 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,49 +44,21 @@ int			check_prec_path(struct stat *st, char **l, char **tmp, int *ind)
 	if (c)
 		(*l)[c] = '\0';
 	else
-		return (0);
-	if (lstat(*l, &*st) == -1)
+	{
+		if ((*l)[0] != '/')
+			return (0);
+		lstat("/", &*st);
+	}
+	if (lstat(*l, &*st) == -1 && c)
 		return (0);
 	*ind = 1;
 	*tmp = *l;
+	if (!c && (*tmp)++)
+		return (2);
 	while (**tmp)
 		(*tmp)++;
 	(*tmp)++;
 	return (1);
-}
-
-int			e_cpt(t_struct *s, t_comp **cmp, t_comp **bcmp)
-{
-	t_lst	*l;
-	char	*line;
-	int		c;
-	t_lst2	*cpt;
-
-	c = 0;
-	l = s->lbg;
-	line = NULL;
-	cpt = s->env;
-	while (l->next)
-		l = l->next;
-	while (l != s->lbg && check_whitespaces(l->c))
-		l = l->prev;
-	while (l && l->c != '(')
-		l = l->prev;
-	if (!l || l->prev->c != '$')
-		return (0);
-	l = l->next;
-	s->l = l;
-	while (s->l && (c = c + 1))
-		s->l = s->l->next;
-	s->l = l;
-	create_line(&line, s, 0, c);
-	while (cpt)
-	{
-		if (!(ft_strncmp(line, cpt->varn, c)) && !(s_command_tab2(line, &*cmp,
-					&*bcmp, NULL)))
-			return (0);
-	}
-	return (0);
 }
 
 int			init_list_poss(t_struct *s, int *co, t_comp **cmp, t_comp **bcmp)

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:55:10 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/05 22:42:24 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,18 @@ static int	init_lst_3_b2(t_struct *s, char buf[6])
 	return (1);
 }
 
-int			init_lst_3(t_struct *s, char buf[6], int c, t_lst *l)
+static void	init_lst_3_b3(t_struct *s, t_lst **l)
+{
+	(*l)->sel = 0;
+	(*l)->next = s->tmp->next;
+	(*l)->prev = s->tmp;
+	s->tmp->next->prev = *l;
+	s->tmp->next = *l;
+	s->tmp = s->tmp->next;
+	*l = (*l)->next;
+}
+
+int			init_lst_3(t_struct *s, char buf[701], int c, t_lst *l)
 {
 	if ((edit_line2(s, &s->lbg, &s->tmp, buf)))
 		return (ft_completion(&*s, NULL, buf, 0));
@@ -65,17 +76,15 @@ int			init_lst_3(t_struct *s, char buf[6], int c, t_lst *l)
 		return (cpc(s, buf[1], 2));
 	if (buf[0] == 27 && buf[1] == 79 && (buf[2] == 80 || buf[2] == 81))
 		return (init_lst_3_b2(s, buf));
-	if (buf[0] < 0 || buf[0] > 127)
-		return (1);
-	if ((l = malloc(sizeof(*l))) == NULL)
-		return (-1);
-	l->c = buf[c];
-	l->sel = 0;
-	l->next = s->tmp->next;
-	l->prev = s->tmp;
-	s->tmp->next->prev = l;
-	s->tmp->next = l;
-	s->tmp = s->tmp->next;
-	l = l->next;
+	while (buf[c])
+	{
+		if (buf[c] < 0 || buf[c] > 127)
+			return (1);
+		if ((l = malloc(sizeof(*l))) == NULL)
+			return (-1);
+		l->c = buf[c];
+		init_lst_3_b3(s, &l);
+		++c;
+	}
 	return (2);
 }

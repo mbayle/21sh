@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 22:14:07 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/05 22:35:24 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,28 @@ int			count_lst_comp_tab2(t_struct s)
 	return (c);
 }
 
+int			count_lst_comp_tab3(t_struct s)
+{
+	int		c;
+	t_lst	*l;
+
+	c = 0;
+	l = s.lbg;
+	while (l->next)
+		l = l->next;
+	while (l != s.lbg && check_whitespaces(l->c))
+		l = l->prev;
+	while (l != s.lbg && l->c != '(')
+		l = l->prev;
+	l = l->next;
+	while (l && !check_whitespaces(l->c))
+	{
+		++c;
+		l = l->next;
+	}
+	return (c);
+}
+
 int			count_lst_comp_tab(t_struct s)
 {
 	int		c;
@@ -41,6 +63,8 @@ int			count_lst_comp_tab(t_struct s)
 
 	if (s.cpt_p2)
 		return (count_lst_comp_tab2(s));
+	if (s.cpt_p3)
+		return (count_lst_comp_tab3(s));
 	c = 0;
 	l = s.lbg;
 	while (l->next)
@@ -74,25 +98,24 @@ int			check_path_cpt(t_struct *s, t_comp **cmp, t_comp **bcmp, char **l)
 	DIR				*dir;
 	struct dirent	*dir_el;
 	char			*tmp;
-	int				ind;
+	int				i;
 
 	tmp = NULL;
-	ind = 0;
-	if (lstat(*l, &st) == -1)
-		if (!check_prec_path(&st, l, &tmp, &ind))
+	if (!(i = 0) && lstat(*l, &st) == -1)
+		if (!(i = check_prec_path(&st, l, &tmp, &i)))
 			return (0);
-	if (!(S_ISDIR(st.st_mode)))
+	if ((!(S_ISDIR(st.st_mode))) || (!i && check_slash(s, l)))
 		return (0);
-	if (!ind && check_slash(s, l))
+	if (i != 2 && !(dir = opendir(*l)))
 		return (0);
-	if (!(dir = opendir(*l)))
+	if (i == 2 && !(dir = opendir("/")))
 		return (0);
 	while ((dir_el = readdir(dir)))
-		if ((!ind && !(s_command_tab(&dir_el, &*cmp, &*bcmp, *l)))
-				|| (ind && !ft_strncmp(tmp, dir_el->d_name, ft_strlen(tmp))
+		if ((!i && !(s_command_tab(&dir_el, &*cmp, &*bcmp, *l)))
+				|| (i && !ft_strncmp(tmp, dir_el->d_name, ft_strlen(tmp))
 					&& !(s_command_tab(&dir_el, &*cmp, &*bcmp, *l))))
 			return (0);
 	if ((closedir(dir)) == -1)
 		return (0);
-	return (check_path_cpt_b(s, ind, bcmp));
+	return (check_path_cpt_b(s, i, bcmp));
 }

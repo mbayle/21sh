@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:54:59 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 23:34:59 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/02 23:46:01 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,16 @@ static int	init_lst_b3(t_struct *s, struct termios *term, int i)
 
 int			init_lst(t_struct *s, int i, int r, int ret)
 {
-	char			buf[6];
+	char			buf[701];
 	int				sret;
 	struct winsize	sz;
 	struct termios	term;
 
 	init_lst_b(&term, s);
-	while (!s->ctrl_d && r != 3 && (ret = read(0, buf, 6)))
+	while (!s->ctrl_d && r != 3 && (ret = read(0, buf, 700)))
 	{
 		sret = ret;
-		while (sret < 6)
+		while (sret < 701)
 			buf[sret++] = '\0';
 		ioctl(0, TIOCGWINSZ, &sz);
 		if ((s->col = sz.ws_col) && ((buf[0] == '\n' && !history_exp(s, 0, NULL)

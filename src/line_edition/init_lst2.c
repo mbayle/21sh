@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:48:13 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/03 22:09:01 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/05 23:12:36 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,13 @@ static int	init_lst_2_b3(t_struct *s, char buf[6])
 	return (ft_completion(&*s, NULL, buf, 0));
 }
 
-int			init_lst_2(t_struct *s, char buf[6], int *i, t_htr **t)
+int			init_lst_2(t_struct *s, char buf[701], int *i, t_htr **t)
 {
 	t_lst	*l;
+	int		c;
+	int		a;
 
+	c = 0;
 	if (edit_line(&*s, buf, &*i, &*t))
 		return (init_lst_2_b3(s, buf));
 	if ((buf[0] == -49 && buf[1] == -128) || (buf[0] == -62 && buf[1] == -82)
@@ -96,15 +99,12 @@ int			init_lst_2(t_struct *s, char buf[6], int *i, t_htr **t)
 		return (init_lst_2_b(s, buf));
 	if (buf[0] == 27 && buf[1] == 79 && (buf[2] == 80 || buf[2] == 81))
 		return (init_lst_2_b2(s, buf));
-	if (buf[0] < 0 || buf[0] > 127)
-		return (1);
-	if ((l = malloc(sizeof(*l))) == NULL)
-		return (-1);
-	l->c = buf[s->iret];
-	l->sel = 0;
-	l->next = NULL;
-	init_lst_2b(&*s, &*i, &l, &*t);
-	if ((ft_completion(&*s, NULL, buf, 0)) == 1)
-		return (2);
-	return (2);
+	while (buf[c])
+	{
+		if ((a = init_lst2_b4(buf, &l, &c)) == -1 || a == 1)
+			return (a);
+		init_lst_2b(&*s, &*i, &l, &*t);
+		++c;
+	}
+	return (ft_completion(&*s, NULL, buf, 0));
 }
