@@ -35,6 +35,7 @@ void    manage_pipe(t_ast *ast)
 {
 	int p_pos;
 
+	g_jobcontrol.sim = 1;
 	allocate_job_loop(0);
 	p_pos = 0;
 	if (ast->right && ast->right->lex->operator != 3)

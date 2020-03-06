@@ -19,6 +19,7 @@ void	simple_exec(t_ast *ast)
 
 	lex = ast->lex;
 	tmp = lex;
+	g_jobcontrol.sim = 0;
 //	ft_putnbr(g_jobcontrol.g_fg);
 	join_job_line(ast, 1);
 	do_to_ast();

@@ -117,6 +117,7 @@ void	save_ass(char **ass)
 	int	i;
 	int	x;
 	int	y;
+	char	**tmp;
 
 	i = 0;
 	x = 0;
@@ -125,9 +126,10 @@ void	save_ass(char **ass)
 		return ;
 	while (ass[i] && i < just_ass(ass))
 	{
-		while (localstr[x])
+		while (localstr[x]) // ta struct de var locale
 		{
-			if (ft_strcmp(localstr[x], ass[i]) == 0)
+			tmp = ft_strsplit(localstr[x], '=');
+		//	if (ft_strcmp(tmp, ass[i]) == 0)
 				g_jobcontrol.ass_stock[y++] = ft_strdup(localstr[x]);
 			x++;
 		}
@@ -155,11 +157,11 @@ char    **check_assign(char **ass)
 //				ft_putnbr(i);
                 //g_jobcontrol.ret= ft_export.c();
             }
-			else 
+			else //ex: a=b c=d ls -l
 			{
-			/*	g_jobcontrol.assi = 1;
-				save_ass_stock(ass);
-				save_ass(ass);
+			/*	g_jobcontrol.assi = i;
+				save_ass_stock(ass); // jenregistre mes assignement de ma commande qui sont deja present dans la struct
+				save_ass(ass);// jenreigstre mes assig de command
 				exec_ass(ass);*/
 			//	parcour structu var local et stock ass qui existent
 			//	set tout assign

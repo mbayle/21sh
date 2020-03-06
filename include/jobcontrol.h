@@ -78,6 +78,7 @@ typedef struct				s_jobcontrol
 	int						assi;
 	int						red;
 	int						ao;
+	int						sim;
 }							t_jobcontrol;
 
 typedef struct				s_read
