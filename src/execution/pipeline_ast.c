@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 23:39:14 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/02/20 00:20:50 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/06 23:33:50 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void	join_job_line(t_ast *ast, int p_pos)
 	ft_strdel(&tmp);
 	ft_strdel(&tmp2);
 	if (p_pos != 1)
-		g_jobcontrol.first_job->command = ft_strjoinfree(g_jobcontrol.first_job->command, " | ");
-
+		g_jobcontrol.first_job->command =
+			ft_strjoinfree(g_jobcontrol.first_job->command, " | ");
 }
 
-void    check_op_pipe(t_ast *ast, int p_pos)
+void	check_op_pipe(t_ast *ast, int p_pos)
 {
-	t_lex   *lex;
+	t_lex	*lex;
 
 	if (ast == NULL)
 		return ;
@@ -81,23 +81,23 @@ void    check_op_pipe(t_ast *ast, int p_pos)
 		manage_pipe_bis(ast);
 }
 
-void    go_right_pipe(t_ast *ast, int p_pos)
+void	go_right_pipe(t_ast *ast, int p_pos)
 {
-	t_ast   *tmp;
+	t_ast	*tmp;
 
 	tmp = ast->right;
 	check_op_pipe(tmp, p_pos);
 }
 
-void    go_left_pipe(t_ast *ast, int p_pos)
+void	go_left_pipe(t_ast *ast, int p_pos)
 {
-	t_ast   *tmp;
+	t_ast	*tmp;
 
 	tmp = ast->left;
 	check_op_pipe(tmp, p_pos);
 }
 
-void    manage_pipe_bis(t_ast *ast)
+void	manage_pipe_bis(t_ast *ast)
 {
 	int p_pos;
 

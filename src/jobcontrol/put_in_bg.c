@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_in_bg.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/07 00:32:56 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/07 00:34:19 by ymarcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "projectinclude.h"
 
-void	update_bg_status()
+void	update_bg_status(void)
 {
 	t_job		*cpy;
 	t_process	*pro;
@@ -19,43 +31,41 @@ void	update_bg_status()
 	}
 }
 
-t_job		**save_addr(t_job *cpy, t_job *job)
+t_job	**save_addr(t_job *cpy, t_job *job)
 {
 	t_job	*comp;
 	t_job	**comp2;
 
 	comp2 = NULL;
-   while (cpy)
-   {
-       if (cpy->stop == 1 && job && cpy->pgid != job->pgid)
-       {
-           comp = cpy;
-           comp2 = &comp;
-       }
-       cpy = cpy->next;
-   }
-   return (comp2);
+	while (cpy)
+	{
+		if (cpy->stop == 1 && job && cpy->pgid != job->pgid)
+		{
+			comp = cpy;
+			comp2 = &comp;
+		}
+		cpy = cpy->next;
+	}
+	return (comp2);
 }
 
-int	put_last_bg(t_job *job, int i)
+int		put_last_bg(t_job *job, int i)
 {
-	t_job   *cpy;
-   t_job   *save;
-   t_job   **comp2;
+	t_job	*cpy;
+	t_job	*save;
+	t_job	**comp2;
 
-   comp2 = NULL;
-   save = g_jobcontrol.first_job;
-   cpy = g_jobcontrol.first_mail;
-   if (!job)
-       return (-1);
-   if (!(comp2 = save_addr(cpy, job)))
-       return (-1);
-//   ft_putnbr((*comp2)->pgid);
-   g_jobcontrol.first_job = (*comp2);
-   g_jobcontrol.first_job->last_j = i;
-   g_jobcontrol.first_job = save;
-   return (1);
-
+	comp2 = NULL;
+	save = g_jobcontrol.first_job;
+	cpy = g_jobcontrol.first_mail;
+	if (!job)
+		return (-1);
+	if (!(comp2 = save_addr(cpy, job)))
+		return (-1);
+	g_jobcontrol.first_job = (*comp2);
+	g_jobcontrol.first_job->last_j = i;
+	g_jobcontrol.first_job = save;
+	return (1);
 }
 
 int		if_cont(t_job *tjob, t_job *save)
@@ -81,7 +91,7 @@ int		if_cont(t_job *tjob, t_job *save)
 	if (put_last_bg(tjob, 2) == -1)
 		g_jobcontrol.first_job->last_j = 2;
 	put_last_stp(put_last_stp(tjob, 1, 2), 0, 1);
-	g_jobcontrol.first_job  = save;
+	g_jobcontrol.first_job = save;
 	return (0);
 }
 
@@ -91,7 +101,7 @@ int		put_in_bg(t_job *job, int cont, char **av, t_process *pro)
 	t_job	*tjob;
 
 	if (!cont)
-		wait_for_job(pro, job , 0);
+		wait_for_job(pro, job, 0);
 	tjob = right_job(cont, av, job);
 	save = g_jobcontrol.first_job;
 	if (cont && tjob)

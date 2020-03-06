@@ -1,28 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_ast.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/06 23:29:07 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/06 23:31:03 by ymarcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "projectinclude.h"
 
-void    manage_word(t_ast *ast)
+void	manage_word(t_ast *ast)
 {
 	allocate_job_loop(0);
 	simple_exec(ast);
 }
 
-void    go_left(t_ast *ast)
+void	go_left(t_ast *ast)
 {
-	t_ast   *tmp;
+	t_ast	*tmp;
 
 	tmp = ast->left;
 	check_op(tmp);
 }
 
-void    go_right(t_ast *ast)
+void	go_right(t_ast *ast)
 {
-	t_ast   *tmp;
+	t_ast	*tmp;
 
 	tmp = ast->right;
 	check_op(tmp);
 }
 
-void    manage_semic(t_ast *ast, int fg)
+void	manage_semic(t_ast *ast, int fg)
 {
 	if (fg == 0)
 		g_jobcontrol.g_fg = 0;
@@ -31,9 +43,9 @@ void    manage_semic(t_ast *ast, int fg)
 	go_right(ast);
 }
 
-void    manage_pipe(t_ast *ast)
+void	manage_pipe(t_ast *ast)
 {
-	int p_pos;
+	int	p_pos;
 
 	g_jobcontrol.sim = 1;
 	allocate_job_loop(0);

@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_job.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/07 00:18:33 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/07 00:19:39 by ymarcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "projectinclude.h"
 
-pid_t       jobs_parser(char *str, t_job *j)
+pid_t		jobs_parser(char *str, t_job *j)
 {
-	int     i;
-	pid_t   pgid;
+	int		i;
+	pid_t	pgid;
 
 	i = 0;
 	pgid = 0;
@@ -11,10 +23,10 @@ pid_t       jobs_parser(char *str, t_job *j)
 	{
 		ft_putendl_fd(j->command, 1);
 		if (((j->fg == 0 && !job_is_completed(j)) ||
-			j->stop == 1) && ft_strcmp(j->command, str) == 0)
+					j->stop == 1) && ft_strcmp(j->command, str) == 0)
 			return (j->pgid);
 		else if (((j->fg == 0 && !job_is_completed(j)) ||
-				j->stop == 1) && j->command[i] == str[i])
+					j->stop == 1) && j->command[i] == str[i])
 		{
 			while (str[i] && str[i] == j->command[i])
 				i++;
@@ -27,46 +39,43 @@ pid_t       jobs_parser(char *str, t_job *j)
 	return (pgid);
 }
 
-void    print_job_status(int i, t_job *j, t_job *f_job)
+void		print_job_status(int i, t_job *j, t_job *f_job)
 {
-		pid_t   pgid;
+	pid_t	pgid;
 
-//		ft_putnbr(j->last_ret);
-//		if (j->last_ret == 149 || j->last_ret == 150)
-//ls -lR /usr >fifo 2>&1 &				return ;
-		pgid = last_stp_job(f_job);
-		ft_putstr_fd("[", 1);
-		ft_putnbr_fd(j->j_nb, 1);
-		ft_putstr_fd("]  ", 1);
-		print_pid(j);
-		ft_putchar(' ');
-		if (pgid && pgid == j->pgid)
-				ft_putstr_fd(" +", 1);
-		else
-				ft_putstr_fd("  ", 1);
-		if (i == 1)
-				ft_putstr_fd(" suspended ", 1);
-		else
-				ft_putstr_fd(" running ", 1);
-		ft_putendl_fd(j->command, 1);
+	pgid = last_stp_job(f_job);
+	ft_putstr_fd("[", 1);
+	ft_putnbr_fd(j->j_nb, 1);
+	ft_putstr_fd("]  ", 1);
+	print_pid(j);
+	ft_putchar(' ');
+	if (pgid && pgid == j->pgid)
+		ft_putstr_fd(" +", 1);
+	else
+		ft_putstr_fd("  ", 1);
+	if (i == 1)
+		ft_putstr_fd(" suspended ", 1);
+	else
+		ft_putstr_fd(" running ", 1);
+	ft_putendl_fd(j->command, 1);
 }
 
-void    no_param_jobs(t_job *j)
+void		no_param_jobs(t_job *j)
 {
-		t_job   *save;
+	t_job	*save;
 
-		save = j;
-		while (j)
-		{
-				if (j->stop == 1)
-						print_job_status(j->stop, j, save);
-				else if (j->fg != 1 && !job_is_completed(j))
-						print_job_status(j->stop, j, save);
-				j = j->next;
-		}
+	save = j;
+	while (j)
+	{
+		if (j->stop == 1)
+			print_job_status(j->stop, j, save);
+		else if (j->fg != 1 && !job_is_completed(j))
+			print_job_status(j->stop, j, save);
+		j = j->next;
+	}
 }
 
-void	job_param(char **av, t_job *j)
+void		job_param(char **av, t_job *j)
 {
 	int		i;
 	pid_t	pgid;
@@ -93,21 +102,20 @@ void	job_param(char **av, t_job *j)
 	}
 }
 
-int     ft_jobs(t_job *j, char **av)
+int			ft_jobs(t_job *j, char **av)
 {
-		int     i;
-		pid_t   pgid;
-		t_job   *save;
+	int		i;
+	pid_t	pgid;
+	t_job	*save;
 
-		i = 1;
-		save = j;
-		pgid = 0;
-		if (g_jobcontrol.first_job && g_jobcontrol.first_job->fg == 0)
-				return (2);
-		if (!av[1])
-				no_param_jobs(j);
-		else
-			job_param(av, j);
+	i = 1;
+	save = j;
+	pgid = 0;
+	if (g_jobcontrol.first_job && g_jobcontrol.first_job->fg == 0)
 		return (2);
+	if (!av[1])
+		no_param_jobs(j);
+	else
+		job_param(av, j);
+	return (2);
 }
-

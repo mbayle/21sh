@@ -1,5 +1,16 @@
-#include "projectinclude.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_redir.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/07 00:05:21 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/07 00:09:09 by ymarcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "projectinclude.h"
 
 char	*for_if(char *line, int *i)
 {
@@ -9,7 +20,7 @@ char	*for_if(char *line, int *i)
 	x = 0;
 	if (!(command = ft_strnew(ft_strlen(line))))
 		return (NULL);
-	while (line && line[*i] && line[*i] !=  ' ') 
+	while (line && line[*i] && line[*i] != ' ')
 	{
 		command[x++] = line[*i];
 		*i += 1;
@@ -27,7 +38,7 @@ char	*for_else(char *line, int *i)
 	x = 0;
 	if (!(command = ft_strnew(ft_strlen(line))))
 		return (NULL);
-	while (line[*i] == '<' || line[*i]== '>' || line[*i] =='&')
+	while (line[*i] == '<' || line[*i] == '>' || line[*i] == '&')
 	{
 		command[x++] = line[*i];
 		*i += 1;
@@ -49,13 +60,13 @@ char	**fill_redir_tab(char *line)
 		return (NULL);
 	while (line && line[i])
 	{
-		if (line[i] !=  ' ' && line[i] != '<' && line[i] != '>' && line[i] !='&')
+		if (line[i] != ' ' && line[i] != '<' && line[i] != '>' &&
+			line[i] != '&')
 			command[y++] = for_if(line, &i);
-		else if (line[i] == '<' || line[i] == '>' || line[i] =='&')
+		else if (line[i] == '<' || line[i] == '>' || line[i] == '&')
 			command[y++] = for_else(line, &i);
 		i++;
 	}
-//	ft_putnbr(y);
 	command[y] = NULL;
 	return (command);
 }
@@ -79,11 +90,9 @@ char	**dst_redir(char **command)
 			else
 				i++;
 		}
-		else if (command[i] && !ft_occur(command[i], '<') && !ft_occur(command[i], '>') )
-		{
-			dst[y++] = ft_strdup(command[i]);
-			i++;
-		}
+		else if (command[i] && !ft_occur(command[i], '<') &&
+		!ft_occur(command[i], '>'))
+			dst[y++] = ft_strdup(command[i++]);
 	}
 	dst[y] = NULL;
 	return (dst);
@@ -96,15 +105,14 @@ void	ft_printtab(char **tt)
 	i = 0;
 	while (tt[i])
 	{
-		printf("%s %s %p\n", "DST is : ",  tt[i], tt[i]);
+		ft_putendl_fd(tt[i], 2);
 		i++;
 	}
-
 }
 
 char	**parse_redir(char *line, int exec)
 {
-	char    **command;
+	char	**command;
 	char	**dst;
 
 	command = fill_redir_tab(line);

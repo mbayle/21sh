@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 02:48:35 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/02/20 01:22:44 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/06 23:23:14 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void	manage_dand(t_ast *ast)
 	go_left(ast);
 	if (g_jobcontrol.first_job && g_jobcontrol.ret != 0)
 		g_jobcontrol.ao = 1;
-//	else
-//		g_jobcontrol.ret = -2;
 	go_right(ast);
 }
 
@@ -32,14 +30,12 @@ void	manage_dor(t_ast *ast)
 	go_left(ast);
 	if (g_jobcontrol.first_job && g_jobcontrol.ret == 0)
 		g_jobcontrol.ao = 1;
-//	else
-//		g_jobcontrol.ret = 0;
 	go_right(ast);
 }
 
 void	check_op(t_ast *ast)
 {
-	t_ast *tmp;
+	t_ast	*tmp;
 	t_lex	*lex;
 
 	tmp = ast;
@@ -63,7 +59,7 @@ void	check_op(t_ast *ast)
 
 void	browse_ast(t_ast *ast)
 {
+	g_jobcontrol.sim = 0;
 	g_jobcontrol.g_fg = 1;
 	check_op(ast);
 }
-

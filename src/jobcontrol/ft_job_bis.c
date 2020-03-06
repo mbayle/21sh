@@ -1,46 +1,56 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_job_bis.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/07 00:19:55 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/07 00:20:42 by ymarcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "projectinclude.h"
 
-void    job_error(const char *str)
+void	job_error(const char *str)
 {
-		ft_putstr_fd("jobs: no such job : ", 2);
-		ft_putendl_fd(str, 2);
+	ft_putstr_fd("jobs: no such job : ", 2);
+	ft_putendl_fd(str, 2);
 }
 
-int     job_is_completed(t_job *j)
+int		job_is_completed(t_job *j)
 {
-		t_process   *p;
+	t_process	*p;
 
-		p = j->first_process;
-		while (p && p->next && p->next->next)
-				p = p->next;
-		if (p && (p->status >1 || p->status == -1)
-		   )
-				return (1);
-		return (0);
+	p = j->first_process;
+	while (p && p->next && p->next->next)
+		p = p->next;
+	if (p && (p->status > 1 || p->status == -1))
+		return (1);
+	return (0);
 }
 
-pid_t   job_nb(int i, t_job *j)
+pid_t	job_nb(int i, t_job *j)
 {
-		while (j->next)
-		{
-				if (j->j_nb == i)
-						return (j->pgid);
-				j = j->next;
-		}
-		return (0);
+	while (j->next)
+	{
+		if (j->j_nb == i)
+			return (j->pgid);
+		j = j->next;
+	}
+	return (0);
 }
 
-void    print_pid(t_job *j)
+void	print_pid(t_job *j)
 {
-		t_process *p;
+	t_process *p;
 
-		p = j->first_process;
-		while (p)
-		{
-				ft_putnbr_fd(p->lpid, 1);
-				p = p->next;
-				if (p)
-						ft_putstr_fd(" | ", 1);
-		}
+	p = j->first_process;
+	while (p)
+	{
+		ft_putnbr_fd(p->lpid, 1);
+		p = p->next;
+		if (p)
+			ft_putstr_fd(" | ", 1);
+	}
 }
-

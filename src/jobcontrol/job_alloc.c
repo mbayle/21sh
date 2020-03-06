@@ -6,16 +6,16 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 21:02:06 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/02/19 17:08:31 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/07 00:23:55 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "projectinclude.h"
+#include "projectinclude.h"
 
-char    **quick_tab_cmd(char *line)
+char	**quick_tab_cmd(char *line)
 {
 	t_index	index;
-	char    **command;
+	char	**command;
 
 	ft_bzero(&index, sizeof(index));
 	if (!line || !(command = malloc(sizeof(char*) * (ft_occur(line, '|') * 2 +
@@ -29,7 +29,7 @@ char    **quick_tab_cmd(char *line)
 			index.x = 0;
 			command[++index.y] = ft_strdup("|");
 			if (!(command[++index.y] = malloc(sizeof(char) *
-			(ft_strlen(line) + 1))))
+							(ft_strlen(line) + 1))))
 				return (NULL);
 		}
 		else
@@ -41,8 +41,7 @@ char    **quick_tab_cmd(char *line)
 	return (command);
 }
 
-
-void    allocate_job_loop(int repere)
+void	allocate_job_loop(int repere)
 {
 	if (!g_jobcontrol.first_job)
 	{
@@ -58,10 +57,10 @@ void    allocate_job_loop(int repere)
 	}
 	else
 	{
-		g_jobcontrol.first_job->next = ft_memalloc(sizeof(*g_jobcontrol.first_job));
+		g_jobcontrol.first_job->next =
+			ft_memalloc(sizeof(*g_jobcontrol.first_job));
 		g_jobcontrol.first_job = g_jobcontrol.first_job->next;
 		g_jobcontrol.first_job->command = ft_strnew(1);
 		g_jobcontrol.first_job->next = NULL;
 	}
 }
-

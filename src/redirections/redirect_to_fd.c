@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirect_to_fd.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/07 00:14:15 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/07 00:14:28 by ymarcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "projectinclude.h"
 
 int		write_in(int n, char *file, mode_t mode)
@@ -13,7 +25,7 @@ int		write_in(int n, char *file, mode_t mode)
 		}
 		close(fd);
 	}
-	fd = open(file, O_RDWR |  mode);
+	fd = open(file, O_RDWR | mode);
 	dup2(fd, n);
 	return (0);
 }

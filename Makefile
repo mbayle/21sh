@@ -6,11 +6,11 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/06 03:08:54 by mabayle          ###   ########.fr        #
+#    Updated: 2020/03/06 23:49:35 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		:=	21sh
+NAME		:=	42sh
 
 CC			:=	clang
 LINKER		:=	clang -o
@@ -56,6 +56,7 @@ SRC		:=	main.c \
 			jobcontrol/job_alloc.c \
 			execution/pipeline_exec.c \
 			execution/simple_exec.c \
+			execution/process_fd.c \
 			execution/browse_ast.c \
 			execution/exec_ast.c\
 			execution/pipeline_ast.c \

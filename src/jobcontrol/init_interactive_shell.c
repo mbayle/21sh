@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 12:40:19 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/02/20 01:16:39 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/07 00:22:06 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ void	ign_jb_sign(int i)
 	signal(SIGTTOU, func);
 }
 
-int		init_shell_sig()
+int		init_shell_sig(void)
 {
 	if ((g_jobcontrol.shell_is_int = isatty(0)))
 	{
 		while (tcgetpgrp(0) != (g_jobcontrol.shell_pgid = getpgrp()))
 			kill(-(g_jobcontrol.shell_pgid), SIGTTIN);
 		ign_jb_sign(0);
-		if (setpgid(g_jobcontrol.shell_pgid = getpid(), g_jobcontrol.shell_pgid) < 0)
+		if (setpgid(g_jobcontrol.shell_pgid = getpid(), g_jobcontrol.shell_pgid)
+			< 0)
 		{
 			ft_putstr_fd("Could not put the shell in its own process group", 2);
 			return (0);
@@ -41,7 +42,7 @@ int		init_shell_sig()
 		tcgetattr(0, &g_jobcontrol.term_attr);
 		g_jobcontrol.save_attr = g_jobcontrol.term_attr;
 		g_jobcontrol.term_attr.c_cc[VTIME] = 0;
-		g_jobcontrol.term_attr.c_lflag &= ~(ICANON | ECHO );//| ISIG);
+		g_jobcontrol.term_attr.c_lflag &= ~(ICANON | ECHO | ISIG);
 		g_jobcontrol.term_attr.c_cc[VMIN] = 1;
 		tcsetattr(0, TCSANOW, &g_jobcontrol.term_attr);
 		return (0);
@@ -49,15 +50,15 @@ int		init_shell_sig()
 	return (g_jobcontrol.shell_is_int);
 }
 
-int		reset_attr()
+int		reset_attr(void)
 {
 	struct termios	term;
-	
+
 	if (isatty(0))
 	{
 		term = g_jobcontrol.save_attr;
-   		if (tcsetattr(0, TCSANOW, &term) == -1)
-        	return (-1);
+		if (tcsetattr(0, TCSANOW, &term) == -1)
+			return (-1);
 	}
 	return (0);
 }

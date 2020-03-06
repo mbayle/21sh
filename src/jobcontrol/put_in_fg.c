@@ -1,5 +1,16 @@
-#include "projectinclude.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   put_in_fg.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/07 00:34:34 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/07 00:38:14 by ymarcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "projectinclude.h"
 
 int		fg_or_bg(pid_t pgid, t_job *job)
 {
@@ -15,7 +26,7 @@ int		fg_or_bg(pid_t pgid, t_job *job)
 	return (-1);
 }
 
-t_job		*right_job(int cont, char **av, t_job *job)
+t_job	*right_job(int cont, char **av, t_job *job)
 {
 	t_job	*tjob;
 
@@ -27,7 +38,7 @@ t_job		*right_job(int cont, char **av, t_job *job)
 			ft_putstr_fd(av[0], 2);
 			if (av[0] && av[1] && av[2])
 				ft_putendl_fd(": Too many arguments", 2);
-			else	
+			else
 				ft_putendl_fd(": no current job", 2);
 		}
 	}
@@ -36,10 +47,17 @@ t_job		*right_job(int cont, char **av, t_job *job)
 	return (tjob);
 }
 
+void	norme(t_job *comp2, int i, t_job *save)
+{
+	g_jobcontrol.first_job = comp2;
+	g_jobcontrol.first_job->last_j = i;
+	g_jobcontrol.first_job = save;
+}
+
 void	put_last_fg(t_job *job, int i, int l)
 {
-	t_job   *cpy;
-	t_job   *save;
+	t_job	*cpy;
+	t_job	*save;
 	t_job	*comp;
 	t_job	**comp2;
 
@@ -51,18 +69,17 @@ void	put_last_fg(t_job *job, int i, int l)
 		return ;
 	while (cpy)
 	{
-   	 	if ((cpy->stop == 1 || cpy->fg != 1) && cpy->last_j == l && job && cpy->pgid != job->pgid)
+		if ((cpy->stop == 1 || cpy->fg != 1) && cpy->last_j == l && job &&
+				cpy->pgid != job->pgid)
 		{
 			comp = cpy;
 			comp2 = &comp;
 		}
-    	cpy = cpy->next;
+		cpy = cpy->next;
 	}
 	if (!comp2)
 		return ;
-    g_jobcontrol.first_job = (*comp2);
-    g_jobcontrol.first_job->last_j = i;
-   	g_jobcontrol.first_job = save;
+	norme((*comp2), i, save);
 }
 
 int		if_fg_cont(t_job *tjob, t_job *save)
@@ -86,8 +103,8 @@ int		if_fg_cont(t_job *tjob, t_job *save)
 
 int		put_in_fg(int cont, t_job *job, char **av)
 {
-	t_job	*save;
-	t_job	*tjob;
+	t_job		*save;
+	t_job		*tjob;
 	t_process	*pro;
 
 	save = g_jobcontrol.first_job;
@@ -96,7 +113,7 @@ int		put_in_fg(int cont, t_job *job, char **av)
 	if (tjob == NULL)
 		tcsetpgrp(0, g_jobcontrol.first_job->pgid);
 	if (g_jobcontrol.first_job && g_jobcontrol.first_job->fg == 0)
-		 ft_putendl_fd("fg: no jobcontrol", 2);
+		ft_putendl_fd("fg: no jobcontrol", 2);
 	if (cont && tjob)
 	{
 		if (if_fg_cont(tjob, save) == -1)

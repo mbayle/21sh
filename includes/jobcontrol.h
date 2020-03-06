@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/02/20 00:43:58 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/06 23:48:30 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct				s_job
 {
 	struct s_process		*first_process;
 	struct termios			j_mode;
-//	struct s_process		*last_process;
 	struct s_job			*next;
 	char					*command;
 	int						fg;
@@ -123,6 +122,8 @@ char						**parse_redir(char *line, int exec);
 /**
 Utils
 **/
+char						**del_one(char **tabl, int pos);
+int							just_ass(char **ass);
 void						ft_printtab(char **tt);
 int							reset_attr();
 int							ft_occur(char const *s, char c);
@@ -151,6 +152,11 @@ void						delete_job(t_job *job);
 /**
 jocontrol / execution
 **/
+
+void						save_fd(void);
+void						reset_fd(void);
+void						close_fd(void);
+void						do_in_child(int oldlink[2], int newlink[2], char **av);
 t_job						*if_bg_stp(t_job *job, t_job *save);
 t_job						*if_bg(t_job *job, t_job *save, char *av);
 t_job						*if_parser(char **av, t_job *job);
