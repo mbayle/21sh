@@ -60,6 +60,8 @@ typedef struct				s_jobcontrol
 {
 	char					**env;
 	char					**av;
+	char					**ass_stock;
+	char					**ass;
 	struct termios			term_attr;
 	struct termios			save_attr;
 	struct s_job			*first_job;
@@ -69,7 +71,14 @@ typedef struct				s_jobcontrol
 	int						repere;
 	int						ret;
 	int						i;
+	int						stdi;
+	int						stdo;
+	int						stde;
 	int						g_fg;
+	int						assi;
+	int						red;
+	int						ao;
+	int						sim;
 }							t_jobcontrol;
 
 typedef struct				s_read
@@ -114,6 +123,7 @@ char						**parse_redir(char *line, int exec);
 /**
 Utils
 **/
+void						ft_printtab(char **tt);
 int							reset_attr();
 int							ft_occur(char const *s, char c);
 char						*ft_strjoinnf(char const *s1, char const *s2);

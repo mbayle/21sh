@@ -60,6 +60,12 @@ int		child_process(int oldlink[2], int newlink[2], char *mypath, char **cmd)
 		g_jobcontrol.g_fg ? reset_attr() : 0;
 		set_id_sign(g_jobcontrol.g_fg);
 		fill_pipe(oldlink, newlink, av, g_jobcontrol.i);
+		if (g_jobcontrol.sim  == 1)
+		{
+			cmd = check_assign(cmd);
+			ft_strdel(&mypath);
+			mypath = my_path(cmd, g_jobcontrol.env);
+		}
 		if (g_jobcontrol.red == -1)
 		{
 			ft_strdel(&mypath);
@@ -91,8 +97,10 @@ t_process	*father_process(char **av, t_process *pro, int oldlink[2], int newlink
 		//g_jobcontrol.ret = -3;
 		return (NULL);
 	}
+	/*EXPANSION a faire mtn avant les redir pour char process*/
 	cmd = parse_redir(av[g_jobcontrol.i], 1);
-	cmd = check_assign(cmd);
+	if (g_jobcontrol.sim == 0)
+		cmd = check_assign(cmd);
 	mypath = my_path(cmd, g_jobcontrol.env);
 	if (ft_strcmp(mypath, "b") == 0 && !av[g_jobcontrol.i + 1])
 		execute_builtin(cmd);
@@ -101,7 +109,7 @@ t_process	*father_process(char **av, t_process *pro, int oldlink[2], int newlink
 	close_fd_father(oldlink, newlink);
 	reset_fd();
 	g_jobcontrol.red = 0;
-/*	if (g_jobcontrol.assi == 1)
+/*	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
 	{
 		unexec_ass(g_jobcontrol.ass);
 		exec_ass(g_jobcontrol.ass_stock);
