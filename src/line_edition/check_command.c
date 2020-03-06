@@ -6,12 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:48:41 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/17 01:46:45 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/06 02:24:49 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-#include "../../libft/libft.h"
 
 int		free_tab_path(char ***tab, int c)
 {

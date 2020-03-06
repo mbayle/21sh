@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/06 01:18:18 by frameton         ###   ########.fr        #
+#    Updated: 2020/03/06 03:08:54 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ INCLUDES	:=	./includes
 
 INCS		=	./includes/get_next_line.h \
 				./includes/grammar.h \
+				./includes/jobcontrol.h \
 				./includes/lexer.h \
 				./includes/linedition.h \
 				./includes/mybtree.h \

@@ -1,5 +1,5 @@
 #include "projectinclude.h"
-#include "../includes/jobcontrol.h"
+
 void    set_id_sign(int foreground)
 {
     pid_t   pid;
@@ -11,10 +11,7 @@ void    set_id_sign(int foreground)
        g_jobcontrol.first_job->pgid = pid;
     setpgid(pid, g_jobcontrol.first_job->pgid);
     if (foreground)
-    {
         tcsetpgrp(0, g_jobcontrol.first_job->pgid);
-//  ft_putendl("DAN LA COND");
-    }
     ign_jb_sign(1);
 }
 
@@ -59,6 +56,8 @@ char    *local_file(char *str)
         {
             dst = ft_strdup(str);
             permissions(&dst, read.rdbuf);
+			if (dst == NULL)
+            	g_jobcontrol.first_job->last_ret = 1;	
             ft_strdel(&read.tmp);
             break;
         }
@@ -72,24 +71,28 @@ char        *my_path(char **cmd, char **env)
 {
     char    **tmp;
     char    *mypath;
+	t_read	rd;
 
+//	buf = NULL;
     mypath = ft_strdup("b");
     tmp = NULL;
-    if (ft_strcmp(cmd[0], "jobs") == 0 || ft_strcmp(cmd[0], "fg") == 0
-        || ft_strcmp(cmd[0], "bg") == 0|| cmd[0][0] == '\r')
+    if (cmd && cmd[0] && (ft_strcmp(cmd[0], "jobs") == 0 || ft_strcmp(cmd[0], "fg") == 0
+        || ft_strcmp(cmd[0], "bg") == 0|| cmd[0][0] == '\r'))
         return (mypath);
-    else
+    else if (cmd && cmd[0])
     {
         tmp = get_line(env);
         ft_strdel(&mypath);
         if (!(mypath = local_file(cmd[0])))
         {
-            mypath = get_pathh(cmd[0], tmp);
-            if (!mypath)
+			mypath = get_pathh(cmd[0], tmp);
+			if (mypath && permissions(&mypath, rd.rdbuf))
+                g_jobcontrol.ret = 1;	
+			else if (!mypath && g_jobcontrol.first_job->last_ret != 1)
             {
                 ft_putstr_fd("Shell : No cmd found: ", 2);
                 ft_putendl_fd(cmd[0], 2);
-                g_jobcontrol.ret = -1;
+                g_jobcontrol.ret = 1;
             }
         }
     }

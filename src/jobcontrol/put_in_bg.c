@@ -24,6 +24,7 @@ t_job		**save_addr(t_job *cpy, t_job *job)
 	t_job	*comp;
 	t_job	**comp2;
 
+	comp2 = NULL;
    while (cpy)
    {
        if (cpy->stop == 1 && job && cpy->pgid != job->pgid)
@@ -49,7 +50,7 @@ int	put_last_bg(t_job *job, int i)
        return (-1);
    if (!(comp2 = save_addr(cpy, job)))
        return (-1);
-   ft_putnbr((*comp2)->pgid);
+//   ft_putnbr((*comp2)->pgid);
    g_jobcontrol.first_job = (*comp2);
    g_jobcontrol.first_job->last_j = i;
    g_jobcontrol.first_job = save;

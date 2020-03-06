@@ -6,12 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:45:50 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/17 01:47:32 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/06 02:24:05 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-#include "../../libft/libft.h"
 
 static char	*find_home_path(t_struct st)
 {

@@ -55,12 +55,12 @@ char	**fill_redir_tab(char *line)
 			command[y++] = for_else(line, &i);
 		i++;
 	}
-	ft_putnbr(y);
+//	ft_putnbr(y);
 	command[y] = NULL;
 	return (command);
 }
 
-char	**dst_redir(char **command, int j)
+char	**dst_redir(char **command)
 {
 	int		i;
 	int		y;
@@ -68,12 +68,17 @@ char	**dst_redir(char **command, int j)
 
 	i = 0;
 	y = 0;
-	if (!(dst = malloc(sizeof(char *) * (j + 1))))
+	if (!(dst = malloc(sizeof(char *) * (tab_size(command) + 1))))
 		return (NULL);
 	while (command[i])
 	{
 		if (ft_occur(command[i], '<') || ft_occur(command[i], '>'))
-			i += 2;
+		{
+			if (command[i + 1])
+				i += 2;
+			else
+				i++;
+		}
 		else if (command[i] && !ft_occur(command[i], '<') && !ft_occur(command[i], '>') )
 		{
 			dst[y++] = ft_strdup(command[i]);
@@ -90,7 +95,10 @@ void	ft_printtab(char **tt)
 
 	i = 0;
 	while (tt[i])
-		ft_putendl(tt[i++]);
+	{
+		printf("%s %s %p\n", "DST is : ",  tt[i], tt[i]);
+		i++;
+	}
 
 }
 
@@ -98,20 +106,19 @@ char	**parse_redir(char *line, int exec)
 {
 	char    **command;
 	char	**dst;
-	int     i;
-	int     y;
 
-	i = 0;
-	y = 0;
 	command = fill_redir_tab(line);
-	if (command)
-		ft_printtab(command);;
-	dst = dst_redir(command, y);
+	dst = dst_redir(command);
 	if (exec)
 	{
 		if (execute_redir(command) == -1)
+		{
+			ft_freetab(dst);
+			ft_freetab(command);
 			return (NULL);
+		}
 	}
+//	ft_printtab(dst);
 	ft_freetab(command);
 	return (dst);
 }

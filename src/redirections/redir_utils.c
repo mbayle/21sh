@@ -65,7 +65,6 @@ int     dig_to_io(char *str)
     i = 0;
     if (!(dst = ft_strnew(ft_strlen(str))))
         return (-1);
-    ft_putendl(str);
     while (str[i] && ft_isdigit(str[i]))
     {
         dst[i] = str[i];
@@ -96,12 +95,16 @@ int     if_digit(char *file, int n)
         int fd;
 
         fd = dig_to_io(file);
-        if (fcntl(fd, F_GETFD) == -1)
-        {
-            ft_putendl_fd("Shell: bad fd", 2);
-            return (-1);
-        }
-        dup2(fd, n);
+   //     if (fcntl(fd, F_GETFD) == -1)
+     //   {
+       //     ft_putendl_fd("Shell: bad fd", 2);
+         //   return (-1);
+        //}
+        if (dup2(fd, n) == -1)
+		{
+			ft_putendl_fd("Shell: Bad file descriptor", 2);
+			return (-1);
+		}
         return (0);
 }
 
