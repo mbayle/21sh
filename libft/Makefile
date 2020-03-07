@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/04 23:11:20 by mabayle          ###   ########.fr        #
+#    Updated: 2020/03/07 19:19:07 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -145,7 +145,7 @@ $(NAME): $(OBJ_PATH) $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INCS)
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Compiling :\033[0m" $<
+	@echo "\033[0;32m[✓]\033[0m\033[0;33m [lib] Compiling :\033[0m" $<
 	@$(CC) $(CFLAGS) -fsanitize=address -c $< -o $@
 
 $(OBJ_PATH):
@@ -154,10 +154,10 @@ $(OBJ_PATH):
 clean:
 	@rm -f $(OBJS)
 	@rm -rf $(OBJ_PATH)
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Deleted all .o\033[0m"
+	@echo "\033[0;32m[✓]\033[0m\033[0;33m [lib] Deleted all .o\033[0m"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [LIBFT] Deleted libft.a\033[0m"
+	@echo "\033[0;32m[✓]\033[0m\033[0;33m [lib] Deleted libft.a\033[0m"
 
 re: fclean all

@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/06 23:49:35 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/03/07 19:30:55 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -191,28 +191,30 @@ all:
 $(NAME):  $(LIBFT) $(OBJ)
 	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap -fsanitize=address
 	@echo ""
-	@echo "\033[0;32m 21sh build done \033[0m"
+	@echo "\033[0;32m42sh build done\033[0m"
 	@echo ""
+	@cp -R ./.builtin_name ~/
 
 $(LIBFT):	$(dir $(LIBFT))Makefile
-	@make -C $(dir $(LIBFT))
+	@make -j4 -C $(dir $(LIBFT))
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INCS)
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [21_SH] Compiling : \033[0m" $<
+	@echo "\033[0;32m[✓]\033[0m\033[0;33m [42sh] Compiling : \033[0m" $<
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make -C libft/ clean
+	@make -j4 -C libft/ clean
 	@rm -rf $(OBJ_PATH)
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [21_SH] Deleted all .o\033[0m"
+	@echo "\033[0;32m[✓]\033[0m\033[0;33m [42sh] Deleted all .o\033[0m"
+	@rm -rf 42sh.dSYM
 
 fclean:
-	@make -C libft/ fclean
+	@make -j4 -C libft/ fclean
 	@rm -f $(NAME)
 	@rm -rf $(OBJ_PATH)
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [21_SH] Deleted all .o\033[0m"
-	@echo "\033[0;32m [OK] \033[0m       \033[0;33m [21_SH] Deleted 21sh\033[0m"
+	@echo "\033[0;32m[✓]\033[0m\033[0;33m [42sh] Deleted all .o\033[0m"
+	@echo "\033[0;32m[✓]\033[0m\033[0;33m [42sh] Deleted 42sh\033[0m"
 
 re: fclean all
 
