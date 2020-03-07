@@ -6,11 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:54:59 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/02 23:46:01 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/07 20:53:41 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static void	init_lst_b(struct termios *term, t_struct *s)
 {
@@ -20,7 +20,7 @@ static void	init_lst_b(struct termios *term, t_struct *s)
 	print_prompt(s->prompt, s, 0);
 	sec_free(&s->cmd, 0);
 	s->nl = 0;
-	if (!wlcm && (wlcm = 1) && s->env_i)
+	if (!wlcm && isatty(0) && (wlcm = 1) && s->env_i)
 		welcome(*s);
 	fp("ve", NULL);
 }
@@ -75,6 +75,17 @@ static int	init_lst_b3(t_struct *s, struct termios *term, int i)
 	return (i);
 }
 
+int			init_lst_b4(t_struct *s, struct winsize *sz, char buf[701])
+{
+	if (isatty(0) == 0)
+	{
+		s->cmd = ft_strdupt(buf, '\n');
+		return (0);
+	}
+	ioctl(0, TIOCGWINSZ, sz);
+	return (1);
+}
+
 int			init_lst(t_struct *s, int i, int r, int ret)
 {
 	char			buf[701];
@@ -88,7 +99,8 @@ int			init_lst(t_struct *s, int i, int r, int ret)
 		sret = ret;
 		while (sret < 701)
 			buf[sret++] = '\0';
-		ioctl(0, TIOCGWINSZ, &sz);
+		if (!init_lst_b4(s, &sz, buf))
+			return (1);
 		if ((s->col = sz.ws_col) && ((buf[0] == '\n' && !history_exp(s, 0, NULL)
 					&& check_quotes(s, buf)) || (buf[0] == 12 && ret == 1)))
 			break ;
@@ -98,8 +110,7 @@ int			init_lst(t_struct *s, int i, int r, int ret)
 	init_lst_b2(s, buf, ret);
 	if (buf[0] != '\n' && r < 3)
 		return (init_lst_b3(s, &term, 2));
-	if (s->lbg)
-		if (!(edit_history(&s->h, s->lbg, s->lbg, NULL)))
-			return (0);
+	if (s->lbg && !(edit_history(&s->h, s->lbg, s->lbg, NULL)))
+		return (0);
 	return (init_lst_b3(s, &term, 1));
 }

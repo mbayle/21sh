@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/06 23:48:30 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/07 20:07:36 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char						**parse_redir(char *line, int exec);
 /**
 Utils
 **/
+char						*ft_strdupt(char *str, char c);
 char						**del_one(char **tabl, int pos);
 int							just_ass(char **ass);
 void						ft_printtab(char **tt);
