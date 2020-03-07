@@ -6,11 +6,24 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 12:40:19 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:22:06 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/07 21:27:53 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+void	sig_handler(int i)
+{
+	if (i == SIGINT || i == SIGTERM || i == SIGKILL)
+	{
+		reset_attr();
+		ft_putendl("GOT SIG");
+		exit(128 + i);
+		//ft_exit();
+	}
+	else if (i == SIGCONT)
+		init_shell_sig();
+}
 
 void	ign_jb_sign(int i)
 {
@@ -19,11 +32,14 @@ void	ign_jb_sign(int i)
 	func = SIG_IGN;
 	if (i)
 		func = SIG_DFL;
-	signal(SIGINT, func);
-	signal(SIGQUIT, func);
+	signal(SIGINT, sig_handler);
+	signal(SIGKILL, sig_handler);
+	signal(SIGTERM, sig_handler);
+	signal(SIGQUIT, sig_handler);
 	signal(SIGTSTP, func);
 	signal(SIGTTIN, func);
 	signal(SIGTTOU, func);
+	signal(SIGCONT, sig_handler);
 }
 
 int		init_shell_sig(void)
@@ -57,6 +73,7 @@ int		reset_attr(void)
 	if (isatty(0))
 	{
 		term = g_jobcontrol.save_attr;
+		term.c_lflag |= ISIG;
 		if (tcsetattr(0, TCSANOW, &term) == -1)
 			return (-1);
 	}

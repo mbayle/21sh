@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:00:18 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/07 23:20:18 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,17 @@
 int				execute_builtin(char **cmd)
 {
 	if (!cmd || !cmd[0])
-		return (g_jobcontrol.first_job->last_ret = 1);
+		return (g_jobcontrol.ret = 1);
+	if (ft_strcmp(cmd[0], "setcpt") == 0)
+		g_jobcontrol.ret = exec_setcpt(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "history") == 0)
+		g_jobcontrol.ret = exec_history(g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "help") == 0)
+		g_jobcontrol.ret = exec_sethelp();
+	if (ft_strcmp(cmd[0], "jobs") == 0)
+		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
+	if (ft_strcmp(cmd[0], "jobs") == 0)
+		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
 	else if (ft_strcmp(cmd[0], "fg") == 0)

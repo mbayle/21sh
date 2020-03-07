@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 20:07:36 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/07 23:39:29 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <sys/errno.h>
 #include <dirent.h>
 #include "lexer.h"
+#include "linedition.h"
 
 /*a process is a single process*/
 typedef struct				s_process
@@ -78,6 +79,7 @@ typedef struct				s_jobcontrol
 	int						red;
 	int						ao;
 	int						sim;
+	struct s_struct			s;
 }							t_jobcontrol;
 
 typedef struct				s_read

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/07 20:09:36 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/07 23:38:24 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,8 @@ int			main(int ac, char **av, char **envp)
 		update_bg_status();
 		if (s.cmd)
 		{
-				g_shell->line = s.cmd;
+			g_shell->line = s.cmd;
+			g_jobcontrol.s = s;
 			ft_putendl(g_shell->line);
 			ft_lexer(&g_shell->lex, g_shell->line);
 		//	minishell(&s);
