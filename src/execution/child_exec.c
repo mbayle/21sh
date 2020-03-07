@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:23:35 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/06 23:30:08 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/07 22:12:49 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,22 @@ void	if_not_cmd(char *cmd)
 	g_jobcontrol.ret = 1;
 }
 
+int		check_b(char **cmd)
+{
+	if (cmd && cmd[0] && (!ft_strcmp(cmd[0], "jobs") || !ft_strcmp(cmd[0], "fg")
+	|| !ft_strcmp(cmd[0], "bg") || !ft_strcmp(cmd[0], "setcpt")
+	|| !ft_strcmp(cmd[0], "history") || !ft_strcmp(cmd[0], "help")
+	|| !ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "echo") ||
+	!ft_strcmp(cmd[0], "env") || !ft_strcmp(cmd[0], "exit") ||
+	!ft_strcmp(cmd[0], "setenv") || !ft_strcmp(cmd[0], "unsetenv") ||
+	!ft_strcmp(cmd[0], "set") || !ft_strcmp(cmd[0], "unset") ||
+	cmd[0][0] == '\r'))
+		return (0);
+	else
+		return (1);
+
+}
+
 char	*my_path(char **cmd, char **env)
 {
 	char	**tmp;
@@ -92,9 +108,7 @@ char	*my_path(char **cmd, char **env)
 
 	mypath = ft_strdup("b");
 	tmp = NULL;
-	if (cmd && cmd[0] && (ft_strcmp(cmd[0], "jobs") == 0 ||
-	ft_strcmp(cmd[0], "fg") == 0 || ft_strcmp(cmd[0], "bg") == 0 ||
-	cmd[0][0] == '\r'))
+	if (!check_b(cmd))
 		return (mypath);
 	else if (cmd && cmd[0])
 	{
