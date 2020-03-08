@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:33:27 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/08 02:01:04 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/08 02:01:35 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void			set_pos_cur(t_struct *s, int i, int nl, int *pc)
 	*pc = nl;
 	if (!s->tmp || s->tmp->line == i)
 	{
-		while (s->tmp && s->l != s->tmp && s->l && s->l->prev)
+		while (s->tmp && s->l && s->l != s->tmp && s->l->prev)
 		{
 			s->l = s->l->prev;
 			tputs(tgetstr("le", NULL), 1, ft_ptchar);

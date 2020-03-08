@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 22:43:48 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/06 00:41:22 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/08 21:43:27 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	e_cpt_2(t_struct *s, t_lst **l, int *c)
 		*l = (*l)->next;
 	while (*l != s->lbg && check_whitespaces((*l)->c))
 		*l = (*l)->prev;
-	while (*l && (*l)->c != '(')
+	while (*l && (*l)->c != '{')
 		*l = (*l)->prev;
 	if (!*l || (*l)->prev->c != '$')
 		return (0);

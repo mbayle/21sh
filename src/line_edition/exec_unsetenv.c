@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_unsetenv.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 23:00:21 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 02:16:50 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/08 21:25:20 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
-static int	checkenv_unsetenv(t_struct s, t_lst2 *l)
+int		checkenv_unsetenv(t_struct s, t_lst2 *l)
 {
 	int		c;
 	int		lc;
@@ -39,7 +39,7 @@ static int	checkenv_unsetenv(t_struct s, t_lst2 *l)
 	return (-1);
 }
 
-static void	exec_unsetenv2(t_struct *s, t_lst2 **new, t_lst2 **cp, int c)
+void	exec_unsetenv2(t_struct *s, t_lst2 **new, t_lst2 **cp, int c)
 {
 	if (c == 1)
 	{
@@ -67,7 +67,7 @@ static void	exec_unsetenv2(t_struct *s, t_lst2 **new, t_lst2 **cp, int c)
 	}
 }
 
-int			exec_unsetenv(t_struct *s)
+int		exec_unsetenv(t_struct *s)
 {
 	t_lst2	*new;
 	t_lst2	*cp;
@@ -75,6 +75,8 @@ int			exec_unsetenv(t_struct *s)
 
 	new = (*s).env;
 	cp = (*s).env;
+	if ((s->av = ft_splitws(s->cmd)) == NULL)
+		return (1);
 	if (!(*s).av[1])
 	{
 		ft_putendl("setenv: error: no variable indicated.");
@@ -89,5 +91,5 @@ int			exec_unsetenv(t_struct *s)
 		(*s).prompt = 1;
 	else
 		exec_unsetenv2(&*s, &new, &cp, c);
-	return (1);
+	return (0);
 }

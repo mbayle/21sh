@@ -43,6 +43,9 @@ static void	init_term(t_struct *s)
 	s->ctrl_d = 0;
 	s->cmd = NULL;
 	s->cpcl = NULL;
+	s->env = NULL;
+	s->l = NULL;
+	s->lbg = NULL;
 }
 
 static void	init_start_pwd(t_struct *s)
@@ -61,25 +64,24 @@ static void	init_start_pwd(t_struct *s)
 
 void		init_struct(t_struct *s, char **envp)
 {
+	char	**save;
+
 	init_term(s);
-	(*s).env = NULL;
-	(*s).l = NULL;
-	(*s).lbg = NULL;
 	(*s).h = NULL;
 	(*s).first = 0;
 	s->set_cpt = 0;
 	(*s).comp.name = NULL;
 	s->bcom = NULL;
 	s->com = NULL;
+	save = envp;
 	if (((*s).builtin_ref = init_builtin_ref(0)) == NULL)
 		ft_exit(0, &*s);
 	if (!*envp)
 		(*s).env = NULL;
 	else
-	{
 		if (((*s).env = init_lst_env(NULL, envp, NULL, 0)) == NULL)
 			ft_exit(0, &*s);
-	}
+	envp = save;
 	init_start_pwd(s);
 	if (((*s).env_path = search_pathenv((*s).env)) == NULL)
 		ft_eputstr("minishell: "MAGENTA"warning"
@@ -144,6 +146,8 @@ int			main(int ac, char **av, char **envp)
 		}
 		tmp_free_struct(&s);
 		update_bg_status();
+		if (isatty(0) == 0)
+			break ;
 	}
 	reset_attr();
 	delete_job(g_jobcontrol.first_mail);

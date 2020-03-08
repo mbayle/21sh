@@ -126,6 +126,7 @@ char						**parse_redir(char *line, int exec);
 /**
 Utils
 **/
+char						*ft_strdupt(char *str, char c);
 char						**del_one(char **tabl, int pos);
 int							just_ass(char **ass);
 void						ft_printtab(char **tt);
