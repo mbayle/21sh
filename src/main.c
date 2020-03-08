@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/07 23:15:20 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/08 19:00:40 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,20 +134,15 @@ int			main(int ac, char **av, char **envp)
 	ac == 2 && ft_strcmp(av[1], "DEBUG") == 0 ? g_shell->debug = 1 : 0;
 	while (init_lst(&s, 0, 2, 0))
 	{
-//		update_bg_status();
-//		update_bg_status();
-		update_bg_status();
 		if (s.cmd)
 		{
+			update_bg_status();
 			g_shell->line = s.cmd;
 			g_jobcontrol.s = s;
 			ft_putendl(g_shell->line);
 			ft_lexer(&g_shell->lex, g_shell->line);
-		//	minishell(&s);
 		}
 		tmp_free_struct(&s);
-		
-///		update_bg_status();
 		update_bg_status();
 	}
 	reset_attr();

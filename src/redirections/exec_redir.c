@@ -6,19 +6,24 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:01:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 02:25:27 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/08 23:59:23 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
-int		heredoc(char *redir, char *file)
+int		myheredoc(char *redir, char *file, int nb)
 {
-	int	link[2];
-	int	n;
+	int		n;
+//	int		fd;
+	int		link[2];
+	char	*tmp;
 
+	link[0] = -1;
+	link[1] = -1;
 	ft_putendl("I do HEREDOC");
 	n = dig_to_io(redir);
+	ft_putnbr(n);
 	if (pipe(link) < 0)
 	{
 		write(2, "Shell: pipe error", 17);
@@ -26,18 +31,38 @@ int		heredoc(char *redir, char *file)
 	}
 	if (check_fd(0, n))
 		return (-1);
-	if (dup2(link[0], n) < 0)
+	tmp = heredoc(file);
+	//fd = open("/tmp/.mytesthi", O_CREAT | O_WRONLY, 0644);
+	//close(g_jobcontrol.stdi);
+	if (write(link[1], tmp, (ft_strlen(tmp))) < 0)
 	{
-		write(2, "Shell: dup2 error", 17);
-		return (-1);
-	}
-	close(link[0]);
-	if (write(link[1], file, (ft_strlen(file))) < 0)
-	{
+		ft_strdel(&tmp);
 		write(2, "Shell: write error", 18);
 		return (-1);
 	}
 	close(link[1]);
+//	close(fd);
+//	ft_putstr("MY LINE: ");
+//	ft_putendl(tmp);
+//	fd = open("/tmp/.mytesthi", O_CREAT | O_RDONLY, 0644);
+	ft_strdel(&tmp);
+	if (isatty(0) == 0)
+		ft_putendl("NO TTY BEFORE DUP");
+//	unlink("/tmp/.mytesthi");
+	int fd;
+
+	fd = dup(0);
+	if (nb == g_jobcontrol.here)
+	{
+		if (dup2(link[0], n) < 0)
+		{
+			write(2, "Shell: bad fd", 14);
+			return (-1);
+		}
+		close(link[0]);
+	}
+	if (isatty(0) == 0)
+		ft_putendl("NO TTY AFTER DUP");
 	return (0);
 }
 
@@ -99,20 +124,43 @@ int		redir_to_file(char **cmd, int i, int ret)
 	return (ret);
 }
 
+void	nb_heredoc(char **cmd)
+{
+	int	i;
+	int	nb;
+
+	i = 0;
+	nb = 0;
+	while (cmd[i])
+	{
+		if (ft_seq_occur(cmd[i], "<<"))
+			nb++;
+		i++;
+	}
+	g_jobcontrol.here = nb;
+}
+
 int		execute_redir(char **cmd)
 {
 	int i;
 	int ret;
+	int	nb;
 
 	i = -1;
 	ret = 0;
+	nb = 0;
+	g_jobcontrol.here = 0;
+	nb_heredoc(cmd);
 	while (cmd[++i])
 	{
 		if (ft_seq_occur(cmd[i], ">>"))
 			ret = redirect_to_file(cmd[i], cmd[i + 1], O_APPEND, 1);
 		else if (ft_seq_occur(cmd[i], "<<"))
+		{
+			nb++;
 		//  ft_putendl("O \"<<\" has occur");
-			ret = heredoc(cmd[i], "Ma phrase\n");
+			ret = myheredoc(cmd[i], cmd[i + 1], nb);
+		}
 		else if (ft_seq_occur(cmd[i], ">&"))
 			ret = dup_fd(cmd[i], cmd[i + 1]);
 		else if (ft_seq_occur(cmd[i], "&>") || ft_seq_occur(cmd[i], ">"))

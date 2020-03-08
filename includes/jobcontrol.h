@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 02:19:04 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/08 23:54:19 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct				s_jobcontrol
 	int						ao;
 	int						sim;
 	struct s_struct			s;
+	int						here;
 }							t_jobcontrol;
 
 typedef struct				s_read

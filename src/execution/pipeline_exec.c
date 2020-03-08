@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 02:02:29 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/08 23:34:43 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,9 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		g_jobcontrol.ao = 0;
 		return (NULL);
 	}
-	/*	EXPANSION a faire mtn avant les redir pour char process*/
 	save_fd();
 	cmd = parse_redir(av[g_jobcontrol.i], 1);
+	/*	EXPANSION a faire mtn avant les apres pour char process*/
 	if (g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	else
@@ -94,8 +94,8 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	pid = child_process(oldlink, newlink, mypath, cmd);
 	ft_freetab(cmd);
 	close_fd_father(oldlink, newlink);
-	reset_fd();
 	g_jobcontrol.red = 0;
+	reset_fd();
 	/*	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
 		{
 		unexec_ass(g_jobcontrol.ass);

@@ -6,7 +6,7 @@
 /*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 04:05:42 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/02 22:18:06 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/08 19:44:58 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "jobcontrol.h"
+# include "input.h"
 # include "get_next_line.h"
 # include "linedition.h"
 # include "libft.h"
