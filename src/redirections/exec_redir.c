@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:01:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:03:37 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/08 02:25:27 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@ int		heredoc(char *redir, char *file)
 	int	link[2];
 	int	n;
 
+	ft_putendl("I do HEREDOC");
 	n = dig_to_io(redir);
 	if (pipe(link) < 0)
 	{
 		write(2, "Shell: pipe error", 17);
 		return (-1);
 	}
+	if (check_fd(0, n))
+		return (-1);
 	if (dup2(link[0], n) < 0)
 	{
 		write(2, "Shell: dup2 error", 17);

@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 23:17:08 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/08 02:19:04 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ struct s_jobcontrol				g_jobcontrol;
 /**
  redir
  **/
+int						check_fd(int fd, int n);
 int						size_tab(char *line);
 int						ft_seq_occur(char *str, char *seq);
 int						dig_to_io(char *str);

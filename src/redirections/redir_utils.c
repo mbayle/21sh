@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:09:25 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:13:57 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/08 02:24:02 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,28 @@ int		is_strdigit(char *str)
 	return (1);
 }
 
+int		check_fd(int fd, int n)
+{
+	if (n == 3 || n == 4 || n == 5)
+	{
+		ft_putendl_fd("Shell: fd 3, 4, 5 are reserved by 42sh", 2);
+		return (1);
+	}
+	if (fd == 3 || fd == 4 || fd == 5)
+	{
+		ft_putendl_fd("Shell: fd 3, 4, 5 are reserved by 42sh", 2);
+		return (1);
+	}
+	return (0);
+}
+
 int		if_digit(char *file, int n)
 {
-	int fd;
+	int 	fd;
 
 	fd = dig_to_io(file);
+	if (check_fd(fd, n))
+		return (-1);
 	if (dup2(fd, n) == -1)
 	{
 		ft_putendl_fd("Shell: Bad file descriptor", 2);
