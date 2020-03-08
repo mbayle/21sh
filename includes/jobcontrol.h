@@ -106,6 +106,7 @@ struct s_jobcontrol				g_jobcontrol;
 /**
  redir
  **/
+int						check_fd(int fd, int n);
 int						size_tab(char *line);
 int						ft_seq_occur(char *str, char *seq);
 int						dig_to_io(char *str);

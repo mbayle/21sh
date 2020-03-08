@@ -84,6 +84,7 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		return (NULL);
 	}
 	/*	EXPANSION a faire mtn avant les redir pour char process*/
+	save_fd();
 	cmd = parse_redir(av[g_jobcontrol.i], 1);
 	if (g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
@@ -142,7 +143,6 @@ int				pipe_exec(char **av, char **env, int fg)
 
 	i = 0;
 	(void)env;
-	save_fd();
 	g_jobcontrol.first_job->first_process = NULL;
 	g_jobcontrol.first_job->fg = fg;
 	g_jobcontrol.av = tab_copy(av);
@@ -156,5 +156,6 @@ int				pipe_exec(char **av, char **env, int fg)
 	ft_freetab(g_jobcontrol.av);
 	ft_putstr("\nRET: ");
 	ft_putnbr(g_jobcontrol.ret);
+	//close_fd();
 	return (0);
 }
