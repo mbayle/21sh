@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/06 01:21:42 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/08 20:36:11 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,4 +337,5 @@ int					s_command_tab2(char *str, t_comp **l, t_comp **bg,
 		char *p);
 int					init_lst2_b4(char buf[701], t_lst **l, int *c);
 int					e_cpt(t_struct *s, t_comp **cmp, t_comp **bcmp);
+int					exec_env(t_struct *s);
 #endif

@@ -6,11 +6,11 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 23:44:31 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/08 20:34:41 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 int				execute_builtin(char **cmd)
 {
@@ -24,10 +24,12 @@ int				execute_builtin(char **cmd)
 		g_jobcontrol.ret = exec_sethelp();
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
-	if (ft_strcmp(cmd[0], "jobs") == 0)
-		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
-	if (ft_strcmp(cmd[0], "jobs") == 0)
-		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
+	if (ft_strcmp(cmd[0], "setenv") == 0)
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "unsetenv") == 0)
+		g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "env") == 0)
+		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
 	else if (ft_strcmp(cmd[0], "fg") == 0)

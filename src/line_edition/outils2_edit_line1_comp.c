@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 22:14:07 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/05 22:35:24 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/08 21:51:46 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			count_lst_comp_tab3(t_struct s)
 		l = l->next;
 	while (l != s.lbg && check_whitespaces(l->c))
 		l = l->prev;
-	while (l != s.lbg && l->c != '(')
+	while (l != s.lbg && l->c != '{')
 		l = l->prev;
 	l = l->next;
 	while (l && !check_whitespaces(l->c))
