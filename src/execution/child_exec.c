@@ -90,9 +90,10 @@ int		check_b(char **cmd)
 	|| !ft_strcmp(cmd[0], "bg") || !ft_strcmp(cmd[0], "setcpt")
 	|| !ft_strcmp(cmd[0], "history") || !ft_strcmp(cmd[0], "help")
 	|| !ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "echo") ||
-	!ft_strcmp(cmd[0], "exit") || !ft_strcmp(cmd[0], "exit") ||
+	!ft_strcmp(cmd[0], "test") || !ft_strcmp(cmd[0], "exit") ||
 	!ft_strcmp(cmd[0], "setenv") || !ft_strcmp(cmd[0], "unsetenv") ||
 	!ft_strcmp(cmd[0], "set") || !ft_strcmp(cmd[0], "unset") ||
+	!ft_strcmp(cmd[0], "export") || !ft_strcmp(cmd[0], "type") ||
 	cmd[0][0] == '\r'))
 		return (0);
 	else
