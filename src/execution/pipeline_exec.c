@@ -6,11 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/03/09 19:29:22 by frameton         ###   ########.fr       */
-=======
-/*   Updated: 2020/03/09 09:02:23 by ymarcill         ###   ########.fr       */
->>>>>>> 98ea57d6ce456325b0c6de09da61f59f15bd2e52
+/*   Updated: 2020/03/09 21:12:26 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +17,7 @@ int				execute_builtin(char **cmd)
 	if (!cmd || !cmd[0])
 	{
 		return (g_jobcontrol.ret = 1);
-<<<<<<< HEAD
-	puts("7");
-=======
 	}
->>>>>>> 98ea57d6ce456325b0c6de09da61f59f15bd2e52
 	if (ft_strcmp(cmd[0], "setcpt") == 0)
 		g_jobcontrol.ret = exec_setcpt(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "type") == 0)
@@ -44,17 +36,16 @@ int				execute_builtin(char **cmd)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "alias") == 0)
 		g_jobcontrol.ret = exec_alias(cmd);
+	if (ft_strcmp(cmd[0], "unalias") == 0)
+		g_jobcontrol.ret = exec_unalias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)
 		exit(0);
-<<<<<<< HEAD
 	if (ft_strcmp(cmd[0], "env") == 0)
 		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
-=======
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
->>>>>>> 98ea57d6ce456325b0c6de09da61f59f15bd2e52
 	if (ft_strcmp(cmd[0], "set") == 0)
 		g_jobcontrol.ret = exec_set(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "unset") == 0)
@@ -153,6 +144,7 @@ char			**do_red_ass_exp_quo(char **cmd, char **av)
 {
 	cmd = parse_redir(av[g_jobcontrol.i], 1);
 	/*	EXPANSION a faire mtn avant les apres pour char process*/
+	/*cmd = parsing_redir rturn (command) sans exec)*/
 if (g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	else
@@ -191,12 +183,12 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	close_fd_father(oldlink, newlink);
 	g_jobcontrol.red = 0;
 	reset_fd();
-	/*	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
-		{
+	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
+	{
 		unexec_ass(g_jobcontrol.ass);
 		exec_ass(g_jobcontrol.ass_stock);
-		g_jobcontrol.asso == 0;
-		}*/
+		g_jobcontrol.assi = 0;
+	}
 	if (mypath)
 		pro = fill_jc_struc(pid, av[g_jobcontrol.i], pro);
 	ft_strdel(&mypath);

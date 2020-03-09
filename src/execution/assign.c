@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 22:50:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 09:19:53 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 21:11:28 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	exec_ass(char **ass)
 		tmp = ft_strdup(ass[i]);
 		free(ass[i]);
 		ass[i] = ft_strdup(tmp + 1);
-		/*g_jobcontrol.first_job->last_ret = ft_set.c*/
+//		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, 1);
 		i++;
 	}
 }
@@ -100,7 +100,7 @@ void	unexec_ass(char **ass)
 		tmp = ft_strdup(ass[i]);
 		free(ass[i]);
 		ass[i] = ft_strdup(tmp + 1);
-		/*g_jobcontrol.first_job->last_ret = ft_unset.c*/
+//		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, 1);
 		i++;
 	}
 }
@@ -119,51 +119,48 @@ void	save_ass(char **ass)
 	g_jobcontrol.ass[y] = NULL;
 }
 
-/*void	save_ass_stock(char **ass)
-  {
-  int	i;
-  int	x;
-  int	y;
-  char	**tmp;
+void	save_ass_stock(char **ass)
+{
+	int			i;
+	int			y;
+	char		**tmp;
+	t_lst2		*menv;
 
-  i = 0;
-  x = 0;
-  y = 0;
-  if (!(g_jobcontrol.ass_stock = malloc(sizeof(char*) * (just_ass(ass) + 1))))
-  return ;
-  while (ass[i] && i < just_ass(ass))
-  {
-  while (localstr[x]) // ta struct de var locale
-  {
-  tmp = ft_strsplit(localstr[x], '=');
-//	if (ft_strcmp(tmp, ass[i]) == 0)
-g_jobcontrol.ass_stock[y++] = ft_strdup(localstr[x]);
-x++;
+	i = 0;
+	y = 0;
+	menv = g_jobcontrol.s.env;
+	if (!(g_jobcontrol.ass_stock = malloc(sizeof(char*) * (just_ass(ass) + 1))))
+		return ;
+	while (ass[i] && i < just_ass(ass))
+	{
+		while (menv) // ta struct de var locale
+		{
+	 		tmp = ft_strsplit(menv->env, '=');
+			if (menv->lcl == 1 && ft_strcmp(tmp[0], ass[i]) == 0)
+				g_jobcontrol.ass_stock[y++] = ft_strdup(menv->env);
+			ft_freetab(tmp);
+			menv = menv->next;
+		}
+		menv = g_jobcontrol.s.env;
+		i++;
+	}
+	g_jobcontrol.ass_stock[y] = NULL;
+	ft_printtab(g_jobcontrol.ass_stock);
 }
-x = 0;
-i++;
-}
-g_jobcontrol.ass_stock[y] = NULL
-}*/
 
 char	**ass_arg(char **ass, int i)
 {
 	if ((i = just_ass(ass)) == -1)/*&& pas de ARGV)*/
 	{
-	/*	g_jobcontrol.ret= ft_export.c();*/
+//		g_jobcontrol.ret= exec_setenv(&g_jobcontrol.s, ass, 1);
 	}
 	else /*ex: a=b c=d ls -l*/
 	{
-	/*	g_jobcontrol.assi = i;
+		g_jobcontrol.assi = i;
 		save_ass_stock(ass);
-		jenregistre mes assignement de ma commande qui sont deja present dans
-																	la struct
 		save_ass(ass);// jenreigstre mes assig de command
 		exec_ass(ass);
-	//	parcour structu var local et stock ass qui existent
-	//	set tout assign
-	//	APRES EXEc: unset tous assign de la cmd, reset mon stock*/
-	/*	ft_printtab(ass);*/
+		ft_printtab(ass);
 	}
 	ass = del_one(ass, just_ass(ass));
 	return (ass);

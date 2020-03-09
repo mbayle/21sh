@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/09 23:44:23 by frameton         ###   ########.fr        #
+#    Updated: 2020/03/09 23:53:03 by frameton         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,8 @@ OBJ_PATH	:=	./obj/
 SRC		:=	main.c \
 			builtins/type.c\
 			builtins/alias.c\
+			builtins/alias_bis.c\
+			builtins/unalias.c\
 			jobcontrol/init_interactive_shell.c \
 			jobcontrol/put_in_fg.c \
 			jobcontrol/ft_job.c\
