@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/09 05:00:55 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 09:01:39 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int			main(int ac, char **av, char **envp)
 	c = 0;
 	init_shell_sig();
 	g_jobcontrol.first_job = NULL;
+	g_jobcontrol.alias = NULL;
 	g_jobcontrol.env = ft_tabdup(envp);
 	init_struct(&s, envp);
 	g_shell = init_shell(0);
@@ -141,7 +142,6 @@ int			main(int ac, char **av, char **envp)
 			update_bg_status();
 			g_shell->line = s.cmd;
 			g_jobcontrol.s = s;
-			ft_putendl(g_shell->line);
 			ft_lexer(&g_shell->lex, g_shell->line);
 		}
 		tmp_free_struct(&s);

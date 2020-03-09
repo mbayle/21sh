@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:23:35 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 03:59:20 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 04:51:56 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int		check_b(char **cmd)
 	!ft_strcmp(cmd[0], "setenv") || !ft_strcmp(cmd[0], "unsetenv") ||
 	!ft_strcmp(cmd[0], "set") || !ft_strcmp(cmd[0], "unset") ||
 	!ft_strcmp(cmd[0], "export") || !ft_strcmp(cmd[0], "type") ||
+	!ft_strcmp(cmd[0], "alias") || !ft_strcmp(cmd[0], "unalias") ||
 	cmd[0][0] == '\r'))
 		return (0);
 	else

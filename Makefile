@@ -6,7 +6,11 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2020/03/09 10:21:02 by frameton         ###   ########.fr        #
+=======
+#    Updated: 2020/03/09 09:03:09 by ymarcill         ###   ########.fr        #
+>>>>>>> 98ea57d6ce456325b0c6de09da61f59f15bd2e52
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +48,8 @@ SRC_PATH	:=	./src/
 OBJ_PATH	:=	./obj/
 
 SRC		:=	main.c \
+			builtins/type.c\
+			builtins/alias.c\
 			jobcontrol/init_interactive_shell.c \
 			jobcontrol/put_in_fg.c \
 			jobcontrol/ft_job.c\
@@ -126,8 +132,6 @@ SRC		:=	main.c \
 			line_edition/edl2_move_word.c \
 			line_edition/exec_builtin.c \
 			line_edition/exec_cd.c \
-			line_edition/exec_env.c \
-			line_edition/exec_setenv.c \
 			line_edition/exec_command.c \
 			line_edition/exec_help.c \
 			line_edition/exec_help2.c \
@@ -184,6 +188,8 @@ SRC		:=	main.c \
 			line_edition/test4.c\
 			line_edition/show_commands_tab3.c\
 			line_edition/init_lst2_b.c\
+			line_edition/exec_setenv.c\
+			line_edition/exec_env.c\
 			line_edition/exec_export.c\
 			line_edition/exec_set.c\
 			line_edition/exec_unset.c\

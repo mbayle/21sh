@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/16 15:03:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 23:54:05 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 05:40:23 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,11 @@ int		init(int *mainindex, int **prompt, t_coord *c)
 char	*read_quit(int **prompt, int **pos, char d)
 {
 	t_coord c;
-	int	errno;
 
-errno = 0;
 	c.buf = ft_strnew(4096);
-	if (isatty(0) == 0)
-		ft_putendl("IM NOT A TTY");
 	if ((c.ret = read(0, c.buf, 4096)) <= 0 ||
 	(c.buf[0] == 4 && c.buf[1] == 0 && g_mainline[0] == 0))
 	{
-		ft_putendl("PROBLEME");
-		perror(strerror(errno));
-		ft_putnbr(c.ret);
 		if (d != 'h')
 			ft_putstr_fd("exit\n", 2);
 		free(prompt[0]);
@@ -63,12 +56,6 @@ int		control_c(char *buf, int *prompt, int *coord, int r)
 {
 	struct s_coord	c;
 	int				rr;
-
-//	rr = 0;
-	if (!prompt)
-		ft_putendl("ERRORROR");
-	if (!coord)
-		ft_putendl("ERRAAR");
 
 	rr = get_row(0, ft_strlen(g_mainline), prompt[1]);
 	if ((buf[0] == 3 && !r) || (buf[0] == 3 && !buf[1] && r))

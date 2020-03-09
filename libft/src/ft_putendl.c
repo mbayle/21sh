@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 15:25:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/02 23:02:32 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/09 06:10:44 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_putendl(char const *s)
 	if (s)
 	{
 		ft_putstr(s);
-		ft_putstr(WHITE);
 		ft_putchar('\n');
 	}
 }
