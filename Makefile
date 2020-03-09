@@ -126,6 +126,8 @@ SRC		:=	main.c \
 			line_edition/edl2_move_word.c \
 			line_edition/exec_builtin.c \
 			line_edition/exec_cd.c \
+			line_edition/exec_env.c \
+			line_edition/exec_setenv.c \
 			line_edition/exec_command.c \
 			line_edition/exec_help.c \
 			line_edition/exec_help2.c \
