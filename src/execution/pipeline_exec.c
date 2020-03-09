@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 09:21:10 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:29:22 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int				execute_builtin(char **cmd)
 {
 	if (!cmd || !cmd[0])
 		return (g_jobcontrol.ret = 1);
+	puts("7");
 	if (ft_strcmp(cmd[0], "setcpt") == 0)
 		g_jobcontrol.ret = exec_setcpt(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "history") == 0)
@@ -32,7 +33,8 @@ int				execute_builtin(char **cmd)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "exit") == 0)
 		exit(0);
-//		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "env") == 0)
+		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "set") == 0)
 		g_jobcontrol.ret = exec_set(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "unset") == 0)

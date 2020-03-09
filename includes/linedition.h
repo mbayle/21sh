@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 09:20:10 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:47:34 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,21 @@ typedef struct		s_lst2
 	int				lcl;
 	struct s_lst2	*next;
 }					t_lst2;
+
+typedef struct		s_fc
+{
+	int				e;
+	int				i;
+	int				s;
+	int				r;
+	int				n;
+	int				l;
+	int				ret;
+	int				min;
+	int				max;
+	char			*edtr;
+	char			opt;
+}					t_fc;
 
 typedef struct		s_struct2
 {
