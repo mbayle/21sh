@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:18:33 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:19:39 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 06:04:46 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ int			ft_jobs(t_job *j, char **av)
 	save = j;
 	pgid = 0;
 	if (g_jobcontrol.first_job && g_jobcontrol.first_job->fg == 0)
-		return (2);
+		return (0);
 	if (!av[1])
 		no_param_jobs(j);
 	else
 		job_param(av, j);
-	return (2);
+	return (0);
 }

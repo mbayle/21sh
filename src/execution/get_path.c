@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:31:23 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/06 23:32:24 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 05:38:41 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int		permissions(char **str, struct stat buf)
 	if (stat(*str, &buf) == 0 && ((S_ISDIR(buf.st_mode)) ||
 		(S_IXUSR & buf.st_mode) == 0))
 	{
-		ft_putstr("Shell: Permission denied: ");
-		ft_putendl(*str);
+		ft_putstr_fd("Shell: Permission denied: ", 2);
+		ft_putendl_fd(*str, 2);
 		i = 1;
 		ft_strdel(str);
 		*str = NULL;

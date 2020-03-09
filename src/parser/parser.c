@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/03 22:17:02 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/09 05:11:39 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,6 @@ int		ft_parse(t_lex **lex)
 	error = NULL;
 	if (g_shell->lex_size == 0)
 		return (0);
-	ft_putstr(PURPLE);
-	ft_putendl("Parser debug :");
-	ft_putstr(WHITE);
 	if ((error = check_tokenerror(current)) != NULL)
 	{
 		ft_putstr(RED);
@@ -104,11 +101,6 @@ int		ft_parse(t_lex **lex)
 		ft_putstr(WHITE);
 	}
 	else
-	{
-		ft_putstr(GREEN);
-		ft_putendl("No parse error\n");
-		ft_putstr(WHITE);
 		build_ast(g_shell->lex, &g_shell->ast);
-	}
 	return (1);
 }
