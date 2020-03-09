@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 09:40:19 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 10:33:39 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 21:33:07 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_alias     *set_alias(t_alias *al, char *key, char *value)
 		tmp = tmp->next;
 	}
 	al = set_value(al, key, value);
+	g_jobcontrol.alias = save;
 	return (al);
 }
 

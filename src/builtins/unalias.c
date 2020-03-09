@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 10:35:07 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 11:27:32 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 22:42:59 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ int		del_alias(char *key)
 		if (link->next && ft_strcmp(link->next->key, key) == 0)
 		{
 			ft_putendl("I FOUND IT");
-			ft_putendl(link->key);
-			ft_strdel(&link->key);
-			ft_strdel(&link->value);
+			ft_putendl(link->next->key);
+			ft_strdel(&link->next->key);
+			ft_strdel(&link->next->value);
 			tmp = link->next;
-			if (link->next->next == NULL)
+			if (link->next && link->next->next == NULL)
 				g_jobcontrol.alias = link;
 			link->next = link->next->next;
 			ft_memdel((void**)tmp);
@@ -77,13 +77,15 @@ int		del_alias(char *key)
 
 void	del_all(t_alias *al)
 {
+	printf("%s %p\n", "adressde g_alias: ", g_jobcontrol.alias);
+	printf("%s %p\n", "adressde al: ", al);
 	if (!al)
 		return ;
 	if (al->next)
 		del_all(al->next);
 	ft_strdel(&al->key);
 	ft_strdel(&al->value);
-	ft_memdel((void**)al);
+	ft_memdel((void**)&al);
 }
 
 int		exec_unalias(char **cmd)

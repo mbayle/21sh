@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 05:49:07 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 11:37:27 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 22:20:28 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,15 @@ int		print_value(char *key, int i)
 	return (0);
 }
 
+t_alias	*last_al(void)
+{
+	t_alias	*al;
+	
+	al = g_jobcontrol.alias;
+	while (al->next)
+		al = al->next;
+	return (al);
+}
 int		exec_alias(char **cmd)
 {
 	int		i;
@@ -70,7 +79,7 @@ int		exec_alias(char **cmd)
 	ret = 0;
 	alloc_alias();
 	save = g_jobcontrol.alias;
-	al = g_jobcontrol.alias;
+	al = last_al();
 	ft_putendl(g_jobcontrol.alias->key);
 	if (tab_size(cmd) < 2)
 		ret = print_value(NULL, 0);
