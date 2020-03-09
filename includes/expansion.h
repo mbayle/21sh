@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   projectinclude.h                                   :+:      :+:    :+:   */
+/*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/20 04:05:42 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/09 04:20:00 by mabayle          ###   ########.fr       */
+/*   Created: 2020/03/08 21:07:51 by mabayle           #+#    #+#             */
+/*   Updated: 2020/03/08 23:26:10 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROJECTINCLUDE_H
-# define PROJECTINCLUDE_H
+#ifndef EXPANSION_H
+# define EXPANSION_H
 
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include "jobcontrol.h"
-# include "input.h"
-# include "get_next_line.h"
-# include "linedition.h"
-# include "libft.h"
-# include "lexer.h"
-# include "grammar.h"
-# include "parser.h"
-# include "mybtree.h"
-# include "expansion.h"
+# include "projectinclude.h"
+
+/*
+********************************************************************************
+*/
+
+/*
+** expansion.c
+*/
+int					 not_expand(char *str);
 
 #endif

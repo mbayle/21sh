@@ -6,12 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/03 22:17:02 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/09 11:45:54 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-#include "stdlib.h" // delete after it's just test getenv
 
 /*
 ** Purpose of the function : Find next token (skip newline)
@@ -69,6 +68,111 @@ char	*value_env(char *input, int i)
 	return (new);
 }
 
+char	*dquote_expand(char *input)
+{
+	int		i;
+	char 	*var;
+	char	*new;
+
+	i = 0;
+	new = ft_strdup("");
+	while (input[i])
+	{
+		if (input[i] == '$' && ft_strlen(input) > 1)
+		{
+			var = value_env(input, i++ + 1);
+			new = ft_strjoin_free(new, ((getenv(var)) ? getenv(var) : "\0"));
+			free(var);
+			while (input[i] && !ft_isspace(input[i]))
+				i++;
+			input[i] ? new = ft_strjoin_onef(new, ' ') : 0;
+		}
+		// INSERER BOUCLE DE LECTURE DES VARIABLES LOCALES ICI
+		else
+			new = ft_strjoin_onef(new, input[i]);
+		i++;
+	}
+	input[0] == '"' && input[i] != '"' ? new = ft_strjoin_onef(new, '"') : 0;
+	ft_putstr(L_BLUE);
+	ft_putstr("    Echo special case ! Old / New value for token->next : ");
+	ft_putstr(WHITE);
+	ft_putendl(new);
+	return (new);
+}
+
+char	*is_in_env(char *search)
+{
+	while (g_lined->env)
+	{
+		if (ft_strcmp(g_lined->env->varn, search) == 0)
+			return (g_lined->env->var);
+		g_lined->env = g_lined->env->next;
+	}
+	return (0);
+}
+
+#include <stdio.h>
+char	*dollar_expand(char *value)
+{
+	char *new;
+
+	new = ft_strdup("");
+
+	if (value[0] == '$')
+		new = is_in_env(&value[1]);
+	printf("Value de getenv pour la valeur = %s\n", &value[1]);
+	// INSERER BOUCLE POUR LES VARIABLES LOCALES ICI
+	ft_putstr(L_BLUE);
+	ft_putstr("    Dollar expansion work ! New value for lexeme : ");
+	ft_putstr(WHITE);
+	ft_putendl(new);
+	return (new);
+}
+
+char	*tilde_expand(char *value)
+{
+	char *new;
+
+	new = ft_strdup("");
+	if (value[0] == '~')
+	{
+		if (value[1] == '+')
+			new = ft_strjoin_free(new, getenv("PWD"));
+		else if (value[1] == '-')
+			new = ft_strjoin_free(new, getenv("OLDPWD"));
+		else
+			new = ft_strjoin_free(new, getenv("HOME"));	
+		if (ft_strlen(value) >= 1 && value[1] == '/')
+			new = ft_strjoin_free(new, &value[1]);
+	}
+	ft_putstr(L_BLUE);
+	ft_putstr("    Tilde expansion work ! New value for lexeme : ");
+	ft_putstr(WHITE);
+	ft_putendl(new);
+	return (ft_strlen(new) >= 1 ? new : value);
+}
+
+void	verify_expansion(t_lex *lex)
+{
+	ft_putstr(PURPLE);
+	ft_putendl("Expansion debug :");
+	ft_putstr(WHITE);
+	while (lex)
+	{
+		ft_putendl_col("Searching, please wait...", L_GRAY, WHITE);
+		if (lex->value[0] == '~')
+			lex->value = tilde_expand(lex->value);
+		else if (lex->value[0] == '$')
+			lex->value = dollar_expand(lex->value);
+		else if (lex->value[0] == '"')
+			lex->value = dquote_expand(lex->value);
+		else
+			ft_putendl_col("No expand symbol in this token", L_YELLOW, WHITE);
+		lex = lex->next;
+	}
+	write(1, "\n", 1);
+}
+
 /*
 ** Purpose of the function : Check error and after check posix grammar. If
 **							everything is ok call build_ast
@@ -108,6 +212,7 @@ int		ft_parse(t_lex **lex)
 		ft_putstr(GREEN);
 		ft_putendl("No parse error\n");
 		ft_putstr(WHITE);
+		verify_expansion(*lex);
 		build_ast(g_shell->lex, &g_shell->ast);
 	}
 	return (1);
