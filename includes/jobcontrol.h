@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 23:39:29 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 01:30:34 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct				s_jobcontrol
 	char					**av;
 	char					**ass_stock;
 	char					**ass;
+//	char					**env_cmd;
 	struct termios			term_attr;
 	struct termios			save_attr;
 	struct s_job			*first_job;
@@ -80,6 +81,8 @@ typedef struct				s_jobcontrol
 	int						ao;
 	int						sim;
 	struct s_struct			s;
+	int						here;
+//	int						env;
 }							t_jobcontrol;
 
 typedef struct				s_read

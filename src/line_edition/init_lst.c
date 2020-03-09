@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:54:59 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/07 20:53:41 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 01:18:01 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static void	init_lst_b(struct termios *term, t_struct *s)
 {
-	static int		wlcm;
+//	static int		wlcm;
 
 	(void)term;
 	print_prompt(s->prompt, s, 0);
 	sec_free(&s->cmd, 0);
 	s->nl = 0;
-	if (!wlcm && isatty(0) && (wlcm = 1) && s->env_i)
-		welcome(*s);
+//	if (!wlcm && isatty(0) && (wlcm = 1) && s->env_i)
+//		welcome(*s);
 	fp("ve", NULL);
 }
 

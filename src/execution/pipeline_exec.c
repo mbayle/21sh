@@ -6,7 +6,11 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/03/09 02:24:47 by frameton         ###   ########.fr       */
+=======
+/*   Updated: 2020/03/09 01:37:50 by ymarcill         ###   ########.fr       */
+>>>>>>> c97155131f27d4aaae29be06ea7adec9dd11ca2c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +36,17 @@ int				execute_builtin(char **cmd)
 		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "unsetenv") == 0)
 		g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s);
+<<<<<<< HEAD
 	if (ft_strcmp(cmd[0], "export") == 0)
 	{
 		puts("8");
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s);
 	}
+=======
+	if (ft_strcmp(cmd[0], "exit") == 0)
+		exit(0);
+//		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
+>>>>>>> c97155131f27d4aaae29be06ea7adec9dd11ca2c
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
 	else if (ft_strcmp(cmd[0], "fg") == 0)
@@ -77,6 +87,74 @@ int				child_process(int oldlink[2], int newlink[2], char *mypath,
 	return (pid);
 }
 
+int				is_env_arg(char **cmd)
+{
+	int	i;
+
+	i = 1;
+	while (cmd[i])
+	{
+		if (ft_occur(cmd[i], '-') == 0 && ft_occur(cmd[i], '=') == 0)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+char			**copy_u(char **cmd, int pos)
+{
+	int		i;
+	int		y;
+	char	**dst;
+
+	i = 0;
+	y = 0;
+	if (!(dst = malloc(sizeof(char*) * (tab_size(cmd) + 1))))
+		return (NULL);
+	while (cmd[i] && i < pos)
+		dst[y++] = ft_strdup(cmd[i++]);
+	dst[y] = NULL;
+	return (dst);
+}
+
+char			**check_opt_env(char **cmd)
+{
+	int		i;
+	int		y;
+	char	**dst;
+
+	i = 0;
+	y = 0;
+	if (!(dst = malloc(sizeof(char*) * (tab_size(cmd) + 1))))
+		return (NULL);
+	while (cmd[i])
+	{
+		if (ft_occur(cmd[i], '-') || ft_occur(cmd[i], '='))
+			i++;
+		if (cmd[i])
+			dst[y++] = ft_strdup(cmd[i++]);
+	}
+	dst[y] = NULL;
+	ft_freetab(cmd);
+	return (dst);
+}
+
+char			**do_red_ass_exp_quo(char **cmd, char **av)
+{
+	cmd = parse_redir(av[g_jobcontrol.i], 1);
+	/*	EXPANSION a faire mtn avant les apres pour char process*/
+if (g_jobcontrol.sim == 0)
+		cmd = check_assign(cmd);
+	else
+		cmd = del_one(cmd, just_ass(cmd));
+	if (ft_strcmp(cmd[0], "env") == 0 && is_env_arg(cmd))
+	{
+		del_one(cmd, 1);
+		cmd = check_opt_env(cmd);
+	}
+	return (cmd);
+}
+
 t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		int newlink[2])
 {
@@ -90,21 +168,20 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		g_jobcontrol.ao = 0;
 		return (NULL);
 	}
-	/*	EXPANSION a faire mtn avant les redir pour char process*/
 	save_fd();
-	cmd = parse_redir(av[g_jobcontrol.i], 1);
-	if (g_jobcontrol.sim == 0)
-		cmd = check_assign(cmd);
-	else
-		cmd = del_one(cmd, just_ass(cmd));
+	cmd = do_red_ass_exp_quo(cmd, av);;
+	ft_putstr("cmd[0]: ");
+	ft_putendl(cmd[0]);	
 	mypath = my_path(cmd, g_jobcontrol.env);
+	ft_putstr("mypath: ");
+	ft_putendl(mypath);	
 	if (mypath && ft_strcmp(mypath, "b") == 0 && !av[g_jobcontrol.i + 1])
 		execute_builtin(cmd);
 	pid = child_process(oldlink, newlink, mypath, cmd);
 	ft_freetab(cmd);
 	close_fd_father(oldlink, newlink);
-	reset_fd();
 	g_jobcontrol.red = 0;
+	reset_fd();
 	/*	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
 		{
 		unexec_ass(g_jobcontrol.ass);

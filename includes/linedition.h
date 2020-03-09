@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/08 20:36:11 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 02:02:49 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct		s_lst2
 	int				nvar;
 	int				nenv;
 	int				size;
+	int				lcl;
 	struct s_lst2	*next;
 }					t_lst2;
 
@@ -338,4 +339,5 @@ int					s_command_tab2(char *str, t_comp **l, t_comp **bg,
 int					init_lst2_b4(char buf[701], t_lst **l, int *c);
 int					e_cpt(t_struct *s, t_comp **cmp, t_comp **bcmp);
 int					exec_env(t_struct *s);
+int					exec_export(t_struct *s);
 #endif

@@ -6,7 +6,11 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2020/03/09 02:02:20 by frameton         ###   ########.fr        #
+=======
+#    Updated: 2020/03/08 20:17:46 by ymarcill         ###   ########.fr        #
+>>>>>>> c97155131f27d4aaae29be06ea7adec9dd11ca2c
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +32,7 @@ INCS		=	./includes/get_next_line.h \
 				./includes/linedition.h \
 				./includes/mybtree.h \
 				./includes/parser.h \
+				./includes/input.h \
 				./includes/projectinclude.h
 
 #libft
@@ -70,6 +75,7 @@ SRC		:=	main.c \
 			redirections/redir_utils.c \
 			redirections/exec_redir.c \
 			redirections/parse_redir.c \
+			redirections/heredoc.c \
 			lexer/lexer.c \
 			lexer/list_utils.c \
 			lexer/utils.c \
@@ -124,6 +130,8 @@ SRC		:=	main.c \
 			line_edition/edl2_move_word.c \
 			line_edition/exec_builtin.c \
 			line_edition/exec_cd.c \
+			line_edition/exec_env.c \
+			line_edition/exec_setenv.c \
 			line_edition/exec_command.c \
 			line_edition/exec_help.c \
 			line_edition/exec_help2.c \
@@ -180,9 +188,26 @@ SRC		:=	main.c \
 			line_edition/test4.c\
 			line_edition/show_commands_tab3.c\
 			line_edition/init_lst2_b.c\
+<<<<<<< HEAD
 			line_edition/exec_setenv.c\
 			line_edition/exec_env.c\
 			line_edition/exec_export.c
+=======
+			input/line_edition.c \
+			input/term_mode.c \
+			input/get_cursor_pos.c \
+			input/move_cursor.c \
+			input/go_last_char.c \
+			input/right_arrow.c \
+			input/insert_del.c \
+			input/move_toword.c \
+			input/ft_copy_cut_paste_del.c \
+			input/char_handler.c \
+			input/tools.c \
+			input/tools_bis.c \
+			input/signals.c \
+
+>>>>>>> c97155131f27d4aaae29be06ea7adec9dd11ca2c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))
