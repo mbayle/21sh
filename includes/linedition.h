@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 05:47:48 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 19:47:34 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,21 @@ typedef struct		s_lst2
 	int				lcl;
 	struct s_lst2	*next;
 }					t_lst2;
+
+typedef struct		s_fc
+{
+	int				e;
+	int				i;
+	int				s;
+	int				r;
+	int				n;
+	int				l;
+	int				ret;
+	int				min;
+	int				max;
+	char			*edtr;
+	char			opt;
+}					t_fc;
 
 typedef struct		s_struct2
 {
@@ -195,7 +210,7 @@ t_lst2				*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c);
 int					exec_command(t_struct *s, char **env);
 int					exec_unsetenv(t_struct *s);
 int					check_auth(char *s);
-int					exec_setenv(t_struct *s, t_lst2 *new);
+int					exec_setenv(t_struct *s, t_lst2 *new, int i);
 int					exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd);
 int					check_expansion(t_struct *s, int i, t_lst2 *env, int c);
 int					create_path_home(t_struct *s, char *new, int i);

@@ -92,7 +92,7 @@ int		exec_export(t_struct *s)
 		if (!ft_strcmp(s->av[1], l->varn) && !l->lcl)
 		{
 			exec_unsetenv(s);
-			exec_setenv(s, NULL);
+			exec_setenv(s, NULL, 0);
 			return (0);
 		}
 		else

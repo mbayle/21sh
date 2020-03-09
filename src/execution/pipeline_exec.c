@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 20:29:55 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 20:58:54 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int				execute_builtin(char **cmd)
 		g_jobcontrol.ret = exec_unalias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)
 		exit(0);
+	if (ft_strcmp(cmd[0], "env") == 0)
+		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
@@ -180,12 +182,12 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	close_fd_father(oldlink, newlink);
 	g_jobcontrol.red = 0;
 	reset_fd();
-	/*	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
-		{
+	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
+	{
 		unexec_ass(g_jobcontrol.ass);
 		exec_ass(g_jobcontrol.ass_stock);
-		g_jobcontrol.asso == 0;
-		}*/
+		g_jobcontrol.assi = 0;
+	}
 	if (mypath)
 		pro = fill_jc_struc(pid, av[g_jobcontrol.i], pro);
 	ft_strdel(&mypath);

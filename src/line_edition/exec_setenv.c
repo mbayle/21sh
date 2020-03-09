@@ -59,16 +59,16 @@ t_lst2	*exec_setenv2(t_lst2 *l, char *s, int c, t_struct *st)
 int		exec_setenv3(t_struct *s)
 {
 	if (s->t == 0)
-		{
-			exec_unsetenv(s);
-			exec_setenv(s, NULL);
-			return (0);
-		}
+	{
+		exec_unsetenv(s);
+		exec_setenv(s, NULL, 0);
+		return (0);
+	}
 	else
 		return (1);
 }
 
-int		exec_setenv(t_struct *s, t_lst2 *new)
+int		exec_setenv(t_struct *s, t_lst2 *new, int i)
 {
 	if ((s->av = ft_splitws(s->cmd)) == NULL)
 		return (1);
@@ -86,7 +86,7 @@ int		exec_setenv(t_struct *s, t_lst2 *new)
 			return (1);
 		if ((new = exec_setenv2(new, (*s).av[1], 0, &*s)) == NULL)
 			return (1);
-		if (s->av[2] && ft_strlen(s->av[2]) == 1 && ft_atoi(s->av[2]) == 1)
+		if (i == 1)
 			new->lcl = 1;
 		if (!(*s).env)
 			(*s).env = new;
