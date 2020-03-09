@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 05:51:11 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 09:21:10 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int				execute_builtin(char **cmd)
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
 	if (ft_strcmp(cmd[0], "setenv") == 0)
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, NULL);
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, NULL, 0);
 	if (ft_strcmp(cmd[0], "unsetenv") == 0)
 		g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "export") == 0)

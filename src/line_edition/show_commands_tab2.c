@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:22:46 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 02:16:50 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/09 11:36:01 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,10 @@ t_comp			*create_lst_comp_tab(char ***path, t_comp **bcmp, char *line,
 	c = (int)ft_strlen(line);
 	while (**path)
 	{
-		if (!(dir = opendir(**path)))
-			return (create_lst_comp_tab2(&del, &*path));
+		while (!(dir = opendir(**path)))
+			(*path)++;
+		if (!**path)
+			break ;
 		while ((dir_el = readdir(dir)))
 			if ((!(ft_strncmp(line, dir_el->
 	d_name, c)) || i == 2) && !(s_command_tab(&dir_el, &cmp, &*bcmp, **path)))

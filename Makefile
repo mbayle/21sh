@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/09 05:48:37 by frameton         ###   ########.fr        #
+#    Updated: 2020/03/09 10:21:02 by frameton         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -228,6 +228,7 @@ clean:
 	@rm -rf $(OBJ_PATH)
 	@echo "\033[0;32m[✓]\033[0m\033[0;33m [42sh] Deleted all .o\033[0m"
 	@rm -rf 42sh.dSYM
+	@rm -rf ~/.builtin_name
 
 fclean:
 	@make -j4 -C libft/ fclean

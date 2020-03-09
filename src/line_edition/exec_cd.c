@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 22:55:09 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 05:36:05 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 09:22:24 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ int		exec_cd2(t_struct *s, char *cwd, char *ocwd, char *tmp)
 		free(cwd);
 	if (exec_unsetenv(&*s) == 0)
 		return (0);
-	if (exec_setenv(&*s, NULL) == 0)
+	if (exec_setenv(&*s, NULL, 0) == 0)
 		return (0);
 	free((*s).av[1]);
 	if (((*s).av[1] = ft_strjoin("OLD_PWD=", ocwd)) == NULL)
 		return (0);
 	if (exec_unsetenv(&*s) == 0)
 		return (0);
-	if (exec_setenv(&*s, NULL) == 0)
+	if (exec_setenv(&*s, NULL, 0) == 0)
 		return (0);
 	return (1);
 }
