@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 22:50:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/06 23:22:10 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 20:31:06 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	unexec_ass(char **ass)
 		tmp = ft_strdup(ass[i]);
 		free(ass[i]);
 		ass[i] = ft_strdup(tmp + 1);
-		/*g_jobcontrol.first_job->last_ret = ft_unset.c*/
+		g_jobcontrol.first_job->last_ret = exe_setenv(&g_jobcontrol.s, NULL, 1);
 		i++;
 	}
 }
@@ -119,7 +119,7 @@ void	save_ass(char **ass)
 	g_jobcontrol.ass[y] = NULL;
 }
 
-/*void	save_ass_stock(char **ass)
+/*`void	save_ass_stock(char **ass)
   {
   int	i;
   int	x;

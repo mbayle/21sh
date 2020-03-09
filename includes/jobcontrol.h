@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 08:38:54 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 10:34:43 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,14 @@ struct s_jobcontrol				g_jobcontrol;
 /**
 builtuin
 **/
+void					alloc_alias(void);
+t_alias					*set_value(t_alias *al, char *key, char *value);
+t_alias					*set_alias(t_alias *al, char *key, char *value);
+int						check_error_key(char *cmd);
+char					**key_val_split(char *cmd);
 int						exec_type(char **arg);
 int						exec_alias(char **cmd);
+int						exec_unalias(char **cmd);
 /**
  redir
  **/

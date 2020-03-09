@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 09:02:23 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 20:29:55 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int				execute_builtin(char **cmd)
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
 	if (ft_strcmp(cmd[0], "setenv") == 0)
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, NULL);
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, NULL, 0);
 	if (ft_strcmp(cmd[0], "unsetenv") == 0)
 		g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "export") == 0)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "alias") == 0)
 		g_jobcontrol.ret = exec_alias(cmd);
+	if (ft_strcmp(cmd[0], "unalias") == 0)
+		g_jobcontrol.ret = exec_unalias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)
 		exit(0);
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
