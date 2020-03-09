@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/24 23:21:24 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/25 03:03:35 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 02:24:03 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		ft_test(char **av, int ac, char *p)
 	t_struct2	st;
 	struct stat	s;
 
+	puts("9");
 	while (av[ac])
 		++ac;
 	if (ac > 4)

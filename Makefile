@@ -6,7 +6,11 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
+<<<<<<< HEAD
+#    Updated: 2020/03/09 02:02:20 by frameton         ###   ########.fr        #
+=======
 #    Updated: 2020/03/08 20:17:46 by ymarcill         ###   ########.fr        #
+>>>>>>> c97155131f27d4aaae29be06ea7adec9dd11ca2c
 #                                                                              #
 # **************************************************************************** #
 
@@ -184,6 +188,11 @@ SRC		:=	main.c \
 			line_edition/test4.c\
 			line_edition/show_commands_tab3.c\
 			line_edition/init_lst2_b.c\
+<<<<<<< HEAD
+			line_edition/exec_setenv.c\
+			line_edition/exec_env.c\
+			line_edition/exec_export.c
+=======
 			input/line_edition.c \
 			input/term_mode.c \
 			input/get_cursor_pos.c \
@@ -198,6 +207,7 @@ SRC		:=	main.c \
 			input/tools_bis.c \
 			input/signals.c \
 
+>>>>>>> c97155131f27d4aaae29be06ea7adec9dd11ca2c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))
