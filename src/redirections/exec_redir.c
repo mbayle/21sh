@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:01:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 23:59:23 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 05:39:30 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 int		myheredoc(char *redir, char *file, int nb)
 {
 	int		n;
-//	int		fd;
 	int		link[2];
 	char	*tmp;
 
 	link[0] = -1;
 	link[1] = -1;
-	ft_putendl("I do HEREDOC");
 	n = dig_to_io(redir);
 	ft_putnbr(n);
 	if (pipe(link) < 0)
@@ -32,8 +30,6 @@ int		myheredoc(char *redir, char *file, int nb)
 	if (check_fd(0, n))
 		return (-1);
 	tmp = heredoc(file);
-	//fd = open("/tmp/.mytesthi", O_CREAT | O_WRONLY, 0644);
-	//close(g_jobcontrol.stdi);
 	if (write(link[1], tmp, (ft_strlen(tmp))) < 0)
 	{
 		ft_strdel(&tmp);
@@ -41,17 +37,9 @@ int		myheredoc(char *redir, char *file, int nb)
 		return (-1);
 	}
 	close(link[1]);
-//	close(fd);
-//	ft_putstr("MY LINE: ");
-//	ft_putendl(tmp);
-//	fd = open("/tmp/.mytesthi", O_CREAT | O_RDONLY, 0644);
 	ft_strdel(&tmp);
 	if (isatty(0) == 0)
 		ft_putendl("NO TTY BEFORE DUP");
-//	unlink("/tmp/.mytesthi");
-	int fd;
-
-	fd = dup(0);
 	if (nb == g_jobcontrol.here)
 	{
 		if (dup2(link[0], n) < 0)
@@ -61,8 +49,6 @@ int		myheredoc(char *redir, char *file, int nb)
 		}
 		close(link[0]);
 	}
-	if (isatty(0) == 0)
-		ft_putendl("NO TTY AFTER DUP");
 	return (0);
 }
 

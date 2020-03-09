@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 01:30:34 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 08:38:54 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,13 @@ typedef struct				s_job
 	int						last_ret;
 }							t_job;
 
+typedef struct				s_alias
+{
+	char					*key;
+	char					*value;
+	struct s_alias			*next;
+}							t_alias;
+
 typedef struct				s_jobcontrol
 {
 	char					**env;
@@ -67,6 +74,7 @@ typedef struct				s_jobcontrol
 	struct termios			save_attr;
 	struct s_job			*first_job;
 	struct s_job			*first_mail;
+	struct s_alias			*alias;
 	pid_t					shell_pgid;
 	int						shell_is_int;
 	int						repere;
@@ -106,6 +114,11 @@ typedef	struct				s_index
 
 struct s_jobcontrol				g_jobcontrol;
 
+/**
+builtuin
+**/
+int						exec_type(char **arg);
+int						exec_alias(char **cmd);
 /**
  redir
  **/

@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 23:00:21 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/08 21:25:20 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 05:46:59 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		checkenv_unsetenv(t_struct s, t_lst2 *l)
 			i++;
 		if (i == c)
 		{
-			if (ft_strncmp(s.av[1], l->env, c) == 0)
+			if (ft_strncmp(s.av[1], l->env, c) == 0 && !l->lcl)
 				return (lc);
 		}
 		l = l->next;
@@ -78,17 +78,11 @@ int		exec_unsetenv(t_struct *s)
 	if ((s->av = ft_splitws(s->cmd)) == NULL)
 		return (1);
 	if (!(*s).av[1])
-	{
-		ft_putendl("setenv: error: no variable indicated.");
-		(*s).prompt = 1;
-	}
+		ft_putendl("unsetenv: error: no variable indicated.");
 	else if ((*s).av[1][0] == '=')
-	{
-		ft_putendl("setenv: error: bad variable name.");
-		(*s).prompt = 1;
-	}
+		ft_putendl("unsetenv: error: bad variable name.");
 	else if ((c = checkenv_unsetenv(*s, (*s).env)) == -1)
-		(*s).prompt = 1;
+		return (1);
 	else
 		exec_unsetenv2(&*s, &new, &cp, c);
 	return (0);

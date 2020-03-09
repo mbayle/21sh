@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 04:13:05 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 09:02:23 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 int				execute_builtin(char **cmd)
 {
 	if (!cmd || !cmd[0])
+	{
 		return (g_jobcontrol.ret = 1);
+	}
 	if (ft_strcmp(cmd[0], "setcpt") == 0)
 		g_jobcontrol.ret = exec_setcpt(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "type") == 0)
+		g_jobcontrol.ret = exec_type(cmd);
 	if (ft_strcmp(cmd[0], "history") == 0)
 		g_jobcontrol.ret = exec_history(g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "help") == 0)
@@ -25,16 +29,23 @@ int				execute_builtin(char **cmd)
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
 	if (ft_strcmp(cmd[0], "setenv") == 0)
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s);
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, NULL);
 	if (ft_strcmp(cmd[0], "unsetenv") == 0)
 		g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "export") == 0)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "alias") == 0)
+		g_jobcontrol.ret = exec_alias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)
 		exit(0);
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
+//		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "set") == 0)
+		g_jobcontrol.ret = exec_set(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "unset") == 0)
+		g_jobcontrol.ret = exec_unset(&g_jobcontrol.s);
 	else if (ft_strcmp(cmd[0], "fg") == 0)
 		g_jobcontrol.ret = put_in_fg(1, g_jobcontrol.first_mail, cmd);
 	else if (ft_strcmp(cmd[0], "bg") == 0)
@@ -156,13 +167,12 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	}
 	save_fd();
 	cmd = do_red_ass_exp_quo(cmd, av);;
-	ft_putstr("cmd[0]: ");
-	ft_putendl(cmd[0]);	
 	mypath = my_path(cmd, g_jobcontrol.env);
-	ft_putstr("mypath: ");
-	ft_putendl(mypath);	
 	if (mypath && ft_strcmp(mypath, "b") == 0 && !av[g_jobcontrol.i + 1])
+	{
 		execute_builtin(cmd);
+		ft_putendl_fd("IN NO FORK", 2);
+	}
 	pid = child_process(oldlink, newlink, mypath, cmd);
 	ft_freetab(cmd);
 	close_fd_father(oldlink, newlink);

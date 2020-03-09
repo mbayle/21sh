@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:14:15 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 23:45:14 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 05:39:45 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,11 @@ int		read_from(int n, char *file)
 	fd = open(file, O_RDWR);
 	if (check_fd(fd, n))
 		return (-1);
-	if (isatty(0) == 0)
-		ft_putendl("IN SIMPLE < NO TTY BOFRE DUP");
 	if (dup2(fd, n) == -1)
 	{
 		ft_putendl_fd("Shell: Bad file descriptor", 2);
 		return (-1);
 	}
-	if (isatty(0) == 0)
-		ft_putendl("IN SIMPLE < NO TTY");
 	return (0);
 }
 

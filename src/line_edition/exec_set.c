@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   exec_set.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/25 15:25:46 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 06:11:25 by ymarcill         ###   ########.fr       */
+/*   Created: 2020/03/09 04:25:07 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/09 04:34:00 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/projectinclude.h"
 
-void	ft_putendl_fd(char const *s, int fd)
+int		exec_set(t_struct *s)
 {
-	if (s)
+	t_lst2	*l;
+
+	if ((s->av = ft_splitws(s->cmd)) == NULL)
+		return (1);
+	if ((*s).av[1])
+		return (0);
+	l = s->env;
+	while (l)
 	{
-		ft_putstr_fd(s, fd);
-		ft_putchar_fd('\n', fd);
+		ft_putendl(l->env);
+		l = l->next;
 	}
+	return (0);
 }

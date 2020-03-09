@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:37:24 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 02:02:04 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 06:04:20 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@ void	close_fd(void)
 
 void	do_in_child(int oldlink[2], int newlink[2], char **av)
 {
+	(void)oldlink;
+	(void)newlink;
+	(void)av;
 	g_jobcontrol.g_fg ? reset_attr() : 0;
 	set_id_sign(g_jobcontrol.g_fg);
 	fill_pipe(oldlink, newlink, av, g_jobcontrol.i);
