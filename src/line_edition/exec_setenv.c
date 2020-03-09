@@ -47,6 +47,7 @@ t_lst2	*exec_setenv2(t_lst2 *l, char *s, int c, t_struct *st)
 	if ((l->nenv = ft_strlen(s)))
 		if ((l->var = ft_mstrcpy(l->var, s)) == NULL)
 			return (NULL);
+	l->lcl = 0;
 	l->size = ft_strlen(l->env);
 	l->nvar = ft_strlen(l->varn);
 	l->next = NULL;
@@ -55,10 +56,20 @@ t_lst2	*exec_setenv2(t_lst2 *l, char *s, int c, t_struct *st)
 	return (l);
 }
 
-int		exec_setenv(t_struct *s)
+int		exec_setenv3(t_struct *s)
 {
-	t_lst2	*new;
+	if (s->t == 0)
+		{
+			exec_unsetenv(s);
+			exec_setenv(s, NULL);
+			return (0);
+		}
+	else
+		return (1);
+}
 
+int		exec_setenv(t_struct *s, t_lst2 *new)
+{
 	if ((s->av = ft_splitws(s->cmd)) == NULL)
 		return (1);
 	if (!(*s).av[1])
@@ -66,10 +77,7 @@ int		exec_setenv(t_struct *s)
 	else if ((*s).av[1][0] == '=')
 		ft_putendl("setenv: error: bad variable name.");
 	else if (!((*s).t = checkenv_setenv(*s, (*s).env, 0, 0)) || (*s).t == -1)
-	{
-		if ((*s).t == 0)
-			ft_putendl("setenv: error: the specified variable already exists.");
-	}
+			return (exec_setenv3(s));
 	else
 	{
 		if ((new = malloc(sizeof(*new))) == NULL)
@@ -78,6 +86,8 @@ int		exec_setenv(t_struct *s)
 			return (1);
 		if ((new = exec_setenv2(new, (*s).av[1], 0, &*s)) == NULL)
 			return (1);
+		if (s->av[2] && ft_strlen(s->av[2]) == 1 && ft_atoi(s->av[2]) == 1)
+			new->lcl = 1;
 		if (!(*s).env)
 			(*s).env = new;
 	}
