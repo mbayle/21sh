@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:09:45 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/08 20:12:55 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 05:34:41 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		exec_builtin2(t_struct *s, int c)
 		free(ocwd);
 	}
 	if (c == 2)
-		if (exec_setenv(&*s) == 0)
+		if (exec_setenv(&*s, NULL) == 0)
 			return (0);
 	if (c == 3)
 		if (exec_unsetenv(&*s) == 0)

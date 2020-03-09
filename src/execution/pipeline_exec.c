@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 08:38:24 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/09 09:02:23 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int				execute_builtin(char **cmd)
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
 	if (ft_strcmp(cmd[0], "setenv") == 0)
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s);
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, NULL);
 	if (ft_strcmp(cmd[0], "unsetenv") == 0)
 		g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "export") == 0)
@@ -41,6 +41,11 @@ int				execute_builtin(char **cmd)
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
+//		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "set") == 0)
+		g_jobcontrol.ret = exec_set(&g_jobcontrol.s);
+	if (ft_strcmp(cmd[0], "unset") == 0)
+		g_jobcontrol.ret = exec_unset(&g_jobcontrol.s);
 	else if (ft_strcmp(cmd[0], "fg") == 0)
 		g_jobcontrol.ret = put_in_fg(1, g_jobcontrol.first_mail, cmd);
 	else if (ft_strcmp(cmd[0], "bg") == 0)

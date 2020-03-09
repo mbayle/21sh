@@ -25,7 +25,7 @@ int		checkenv_export(t_struct s, t_lst2 *l, int i, int c)
 	{
 		ft_2eputendl("setenv: bad variable declaration.\n",
 		"usage: [variable environnement name]=[variable...]");
-		return (-1);
+		return (1);
 	}
 	return (1);
 }
@@ -58,31 +58,44 @@ t_lst2	*exec_export2(t_lst2 *l, char *s, int c, t_struct *st)
 	return (l);
 }
 
+int		exec_export3(t_struct *s)
+{
+	t_lst2	*l;
+
+	l = s->env;
+	while (l)
+	{
+		if (!l->lcl && ft_strcmp(l->varn, "_"))
+			ft_putendl(l->env);
+		l = l->next;
+	}
+	return (0);
+}
+
 int		exec_export(t_struct *s)
 {
-	t_lst2	*new;
+	t_lst2	*l;
 
 	if ((s->av = ft_splitws(s->cmd)) == NULL)
 		return (1);
 	if (!(*s).av[1])
-		ft_putendl("export: error: no variable indicated.");
+		return (exec_export3(s));
 	else if ((*s).av[1][0] == '=')
+	{
 		ft_putendl("export: error: bad variable name.");
+		return (1);
+	}
 	else if (!((*s).t = checkenv_export(*s, (*s).env, 0, 0)) || (*s).t == -1)
-	{
-		if ((*s).t == 0)
+		return (s->t);
+	l = s->env;
+	while (l)
+		if (!ft_strcmp(s->av[1], l->varn) && !l->lcl)
+		{
+			exec_unsetenv(s);
+			exec_setenv(s, NULL);
 			return (0);
-	}
-	else
-	{
-		if ((new = malloc(sizeof(*new))) == NULL)
-			return (1);
-		if ((new->env = ft_mstrcpy(new->env, (*s).av[1])) == NULL)
-			return (1);
-		if ((new = exec_export2(new, (*s).av[1], 0, &*s)) == NULL)
-			return (1);
-		if (!(*s).env)
-			(*s).env = new;
-	}
+		}
+		else
+			l = l->next;
 	return (0);
 }
