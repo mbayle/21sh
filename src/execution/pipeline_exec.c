@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 02:54:30 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 04:01:40 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,36 @@ char			**do_red_ass_exp_quo(char **cmd, char **av)
 	return (cmd);
 }
 
+int				lst_size(t_lst2 *env)
+{
+	int	i;
+
+	i = 0;
+	while (env)
+	{
+		i++;
+		env = env->next;
+	}
+	return (i);
+}
+
+char			**env_copy(t_lst2 *menv)
+{
+	int		i;
+	char	**dst;
+
+	i = 0;
+	if (!(dst = malloc(sizeof(char*) * ((lst_size(menv) + 1)))))
+		return (NULL);
+	while (menv)
+	{
+		dst[i++] = ft_strdup(menv->env);
+		menv = menv->next;
+	}
+	dst[i] = NULL;
+	return (dst);
+}
+
 t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		int newlink[2])
 {
@@ -229,6 +259,9 @@ int				pipe_exec(char **av, char **env, int fg)
 
 	i = 0;
 	(void)env;
+	if (g_jobcontrol.env)
+		ft_freetab(g_jobcontrol.env);
+	g_jobcontrol.env = env_copy(g_jobcontrol.s.env);
 	g_jobcontrol.first_job->first_process = NULL;
 	g_jobcontrol.first_job->fg = fg;
 	g_jobcontrol.av = tab_copy(av);
