@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 17:09:33 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/10 17:23:30 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int				execute_builtin(char **cmd)
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "set") == 0)
 		g_jobcontrol.ret = exec_set(&g_jobcontrol.s, cmd);
-	if (ft_strcmp(cmd[0], "unset") == 0)
-		g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, cmd);
 	else if (ft_strcmp(cmd[0], "fg") == 0)
 		g_jobcontrol.ret = put_in_fg(1, g_jobcontrol.first_mail, cmd);
 	else if (ft_strcmp(cmd[0], "bg") == 0)
