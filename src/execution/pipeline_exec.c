@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 02:54:30 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 03:49:42 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ int				execute_builtin(char **cmd)
 	if (ft_strcmp(cmd[0], "unalias") == 0)
 		g_jobcontrol.ret = exec_unalias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)
+	{
+		exit_edl(&g_jobcontrol.s);
 		exit(0);
+	}
 	if (ft_strcmp(cmd[0], "env") == 0)
 		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
