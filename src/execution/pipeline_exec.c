@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline_exec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 06:12:13 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 17:09:33 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ char			**do_red_ass_exp_quo(char **cmd, char **av)
 	char **tmp;
 
 	cmd = parse_redir(av[g_jobcontrol.i], 0);
+	//INSERT QUOTE_REMOVAL HERE
 	if (g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	else

@@ -1,4 +1,10 @@
 2
+exit
+ls "-l \" dd" && cd test
+ls "-l dd" && \" cd test\"
+ls "-l dd" && \" cd test
+ls "-l dd" && cd test
+ls "-l dd"
 ls
 echo $PATH
 echo $PQTH

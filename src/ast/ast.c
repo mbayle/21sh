@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 01:20:24 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/20 00:22:55 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 16:42:07 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,93 +44,6 @@ void	sub_split(t_ast *ast, int priority)
 	ast->left = init_node(ast->lex, NULL);
 	ast->lex = current;
 }
-
-/*
-** Purpose of the function : Found next priority and call sub_split
-** Return value : SUCCESS (or no new priority) = return 1 | else return 0
-*/
-
-/*int		find_priority(t_ast *ast, int priority)
-{
-	t_lex *lex;
-
-	lex = ast->lex;
-	if (!ast)
-		return (0);
-	while (priority >= 1)
-	{
-		while (lex)
-		{
-			if (lex->priority == priority)
-				if (lex->next != NULL)
-					sub_split(ast, lex->pos, priority);
-			lex = lex->next;
-		}
-		priority--;
-	}
-	return (1);
-}*/
-
-/*#include <stdio.h>
-void	print_debug(t_ast *ast, int pad)
-{
-	t_lex *tmp;
-
-	tmp = ast->lex;
-	printf("%*s", pad*4, "");
-	while (tmp)
-	{
-		printf("%s (position %d)", tmp->value, tmp->pos);
-		tmp = tmp->next;
-	}
-	printf("\n");
-	if (ast->left)
-		print_debug(ast->left, pad + 1);
-	if (ast->right)
-		print_debug(ast->right, pad + 1);
-}*/
-
-/*
-** Purpose of the function : Calculate depth of my tree and find future
-**							priority
-** Return value : return depth of my tree
-*/
-
-/*int		max_depth(t_ast *ast, int prio)
-{
-	t_ast	*root;
-
-	root = g_shell->ast;
-	if (!ast)
-		return (0);
-	else
-	{
-		while (prio >= 1)
-		{
-			if (ast->left)
-			{
-				ast = root;
-				while (ast->left && ast->left->left)
-					ast = ast->left;
-				find_priority(ast->left, prio);
-			}
-			if (ast->right)
-			{
-				ast = root;
-				while (ast->right && ast->right->right)
-					ast = ast->right;
-				find_priority(ast->right, prio);
-			}
-			if (!ast->right && !ast->left)
-			{
-				ast = root;
-				find_priority(ast, prio);
-			}
-			prio--;
-		}
-	}
-	return (0);
-}*/
 
 int		is_in_lexer(t_lex *lex, int priority)
 {
