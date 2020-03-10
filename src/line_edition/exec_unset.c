@@ -18,7 +18,7 @@ int		checkenv_unset(char **av, t_lst2 *l)
 			i++;
 		if (i == c)
 		{
-			if (ft_strncmp(av[1], l->env, c) == 0 && l->lcl)
+			if (ft_strncmp(av[1], l->varn, c) == 0 && l->lcl)
 				return (lc);
 		}
 		l = l->next;
