@@ -78,7 +78,7 @@ int		exec_export(t_struct *s, char **av)
 
 	if (!av[1])
 		return (exec_export3(s));
-	else if (av[1][0] == '=')
+	else if (av[1][0] == '=' || ft_isnum(av[1][0]))
 	{
 		ft_putendl("export: error: bad variable name.");
 		return (1);

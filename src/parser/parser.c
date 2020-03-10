@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/10 00:37:52 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/10 04:03:43 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*value_env(char *input, int i)
 
 char	*variable_expansion(char *input)
 {
-	char	*var;
+//	char	*var;
 	char	*new;
 	int		len;
 	char	save;
@@ -100,7 +100,7 @@ int 	valid_variable_name(char *name)
 	return (i + 1);
 }
 
-char	*check_expansion_scan(char *input, int *i)
+/*char	*check_expansion_scan(char *input, int *i)
 {
 	char	*res;
 	int		end;
@@ -119,12 +119,13 @@ char	*check_expansion_scan(char *input, int *i)
 		return (NULL);
 	// replace input[i] + new index ? by res
 	// update i
-}
+	return (NULL);
+}*/
 
 char	*dquote_expand(char *input)
 {
 	int		i;
-	char 	*var;
+	//char 	*var;
 	char	*new;
 
 	i = 0;

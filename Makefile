@@ -6,11 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2020/03/09 19:54:24 by mabayle          ###   ########.fr        #
-=======
-#    Updated: 2020/03/10 03:05:21 by ymarcill         ###   ########.fr        #
->>>>>>> 4e30c33dbb692d853826ebac24c6635b3221652a
+#    Updated: 2020/03/10 04:01:46 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -207,7 +203,8 @@ SRC		:=	main.c \
 			input/tools.c \
 			input/tools_bis.c \
 			input/signals.c \
-			expansion/expansion.c
+			expansion/expansion.c \
+			expansion/param_expand.c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

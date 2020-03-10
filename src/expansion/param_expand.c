@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 00:07:10 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/10 00:56:37 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/10 03:57:46 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** take a valid parameter expansion, isolate param in expression and expand it
 ** return value, or NULL if unset
 */
-char	*parameter_get_param(char *input)
+/*char	*parameter_get_param(char *input)
 {
 	char	*end;
 	char	save;
@@ -54,7 +54,7 @@ char	*parameter_get_word(char *input)
 	return (word);
 }
 
-char	*parameter_minus(input)
+char	*parameter_minus(char *input)
 {
 	char	*param;
 	char	*word;
@@ -101,4 +101,4 @@ char	*parameter_expansion(char *input)
 	// look for format
 	// switch
 	// return res foud
-}
+}*/
