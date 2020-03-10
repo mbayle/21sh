@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 21:14:06 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/09 01:30:38 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/09 19:51:50 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,16 @@ int     not_expand(char *str)
         return (1);
 }
 
-/*char    *ft_expansion(char *str)
+char    *search_varloc(char *search)
 {
-    if (not_expand(str) == 0)
-        return (str);
-    if (ft_strncmp(str, "${", 2) == 0)
+    t_lst2 *tmp;
+
+    tmp = g_lined->env;
+    while (tmp)
     {
-        if (str[ft_strlen(str)] != '}')
-            return (NULL);
-        // A FAIRE APRES POUR GERER LES BRACES EXPANSIONS
+        if (tmp->lcl == 1 && (ft_strcmp(tmp->varn, search) == 0))
+            return (tmp->var);
+        tmp = tmp->next;
     }
-    if (str[0] == '~')
-        return (tilde_expand(str));
-    if (str[0] == '$')
-        return (simple_expand(str));
-}*/
+    return (NULL);
+}

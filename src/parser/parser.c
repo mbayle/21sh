@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/09 11:50:27 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/10 00:37:52 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,59 @@ char	*value_env(char *input, int i)
 	return (new);
 }
 
+char	*variable_expansion(char *input)
+{
+	char	*var;
+	char	*new;
+	int		len;
+	char	save;
+
+	len = valid_variable_name(input);
+	save = input[len];
+	input[len] = '\0';
+	if (getenv(input))
+		new = ft_strdup(getenv(input));
+	else if (search_varloc(input))
+		new = ft_strdup(search_varloc(input));
+	else
+		new = ft_strdup("");
+	input[len] = save;
+	return (new);
+}
+
+int 	valid_variable_name(char *name)
+{
+	int		i;
+
+	if (!ft_isalpha(*name) && !(*name == '_'))
+		return (-1);
+	i = 0;
+	while (ft_isalnum(name[i]) || name[i] == '_')
+		i++;
+	return (i + 1);
+}
+
+char	*check_expansion_scan(char *input, int *i)
+{
+	char	*res;
+	int		end;
+
+	*i += 1;
+	if (input[*i] == '{')
+		res = parameter_expansion(input);
+	else if ((end = valid_variable_name(input + *i)) > 0)
+		res = variable_expansion(input);
+	else
+	{
+		*i += 1;
+		return (input);
+	}
+	if (!res)
+		return (NULL);
+	// replace input[i] + new index ? by res
+	// update i
+}
+
 char	*dquote_expand(char *input)
 {
 	int		i;
@@ -78,16 +131,18 @@ char	*dquote_expand(char *input)
 	new = ft_strdup("");
 	while (input[i])
 	{
-		if (input[i] == '$' && ft_strlen(input) > 1)
+		if (input[i] == '\\')
+			i++;
+		else if (input[i] == '"')
+			;
+		else if (input[i] == '\'')
 		{
-			var = value_env(input, i++ + 1);
-			new = ft_strjoin_free(new, ((getenv(var)) ? getenv(var) : "\0"));
-			free(var);
-			while (input[i] && !ft_isspace(input[i]))
+			while (input[i] && input[i] != '\'')
 				i++;
-			input[i] ? new = ft_strjoin_onef(new, ' ') : 0;
 		}
-		// INSERER BOUCLE DE LECTURE DES VARIABLES LOCALES ICI
+		else if (input[i] == '$' && ft_strlen(input) > 1)
+		{			
+		}
 		else
 			new = ft_strjoin_onef(new, input[i]);
 		i++;
@@ -102,11 +157,19 @@ char	*dquote_expand(char *input)
 
 char	*is_in_env(char *search)
 {
-	while (g_lined->env)
+	t_lst2	*tmp;
+	char	*new;
+
+	tmp = g_lined->env;
+	new = NULL;
+	while (tmp)
 	{
-		if (ft_strcmp(g_lined->env->varn, search) == 0)
-			return (g_lined->env->var);
-		g_lined->env = g_lined->env->next;
+		if (ft_strcmp(tmp->varn, search) == 0)
+		{
+			new = ft_strdup(tmp->var);
+			return (new);
+		}	
+		tmp = tmp->next;
 	}
 	return (0);
 }
@@ -117,16 +180,16 @@ char	*dollar_expand(char *value)
 	char *new;
 
 	new = ft_strdup("");
-
-	if (value[0] == '$')
+	if (value[0] == '$' && value[1] == '?')
+		new = ft_itoa(g_jobcontrol.ret);
+	if (value[0] == '$' && value[1] != '?')
 		new = is_in_env(&value[1]);
-	printf("Value de getenv pour la valeur = %s\n", &value[1]);
 	// INSERER BOUCLE POUR LES VARIABLES LOCALES ICI
 	ft_putstr(L_BLUE);
 	ft_putstr("    Dollar expansion work ! New value for lexeme : ");
 	ft_putstr(WHITE);
 	ft_putendl(new);
-	return (new);
+	return (new != NULL ? new : value);
 }
 
 char	*tilde_expand(char *value)
@@ -205,6 +268,9 @@ int		ft_parse(t_lex **lex)
 		ft_putstr(WHITE);
 	}
 	else
+	{
+		verify_expansion(g_shell->lex);
 		build_ast(g_shell->lex, &g_shell->ast);
+	}
 	return (1);
 }
