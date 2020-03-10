@@ -25,7 +25,7 @@ int		checkenv_export(char **av, t_lst2 *l, int i, int c)
 	{
 		ft_2eputendl("setenv: bad variable declaration.\n",
 		"usage: [variable environnement name]=[variable...]");
-		return (1);
+		return (-1);
 	}
 	return (1);
 }
@@ -84,7 +84,10 @@ int		exec_export(t_struct *s, char **av)
 		return (1);
 	}
 	else if (!((*s).t = checkenv_export(av, (*s).env, 0, 0)) || (*s).t == -1)
+	{
+		(*s).t == -1 ? (*s).t = 1 : 0;
 		return (s->t);
+	}
 	l = s->env;
 	while (l)
 		if (!ft_strcmp(av[1], l->varn) && !l->lcl)
