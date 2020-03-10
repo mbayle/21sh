@@ -1,0 +1,16 @@
+2
+exit
+a=b
+a=g
+set
+env
+export o=l
+set
+ls
+exit
+a=b
+a = b
+a=b
+set
+a=b
+env

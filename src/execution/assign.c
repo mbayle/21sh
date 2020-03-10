@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 22:50:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 04:04:32 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 06:09:17 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	exec_ass(char **ass)
 		tmp = ft_strdup(ass[i]);
 		free(ass[i]);
 		ass[i] = ft_strdup(tmp + 1);
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 1);
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		i++;
 	}
 }
@@ -100,7 +100,7 @@ void	unexec_ass(char **ass)
 		tmp = ft_strdup(ass[i]);
 		free(ass[i]);
 		ass[i] = ft_strdup(tmp + 1);
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 1);
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		i++;
 	}
 }
@@ -152,7 +152,7 @@ char	**ass_arg(char **ass, int i)
 {
 	if ((i = just_ass(ass)) == -1)/*&& pas de ARGV)*/
 	{
-		g_jobcontrol.ret= exec_setenv(&g_jobcontrol.s, ass, NULL, 1);
+		g_jobcontrol.ret= exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 	}
 	else /*ex: a=b c=d ls -l*/
 	{

@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 05:36:23 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 06:12:13 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ int				execute_builtin(char **cmd)
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
 	if (ft_strcmp(cmd[0], "setenv") == 0)
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, cmd, NULL, 0);
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, cmd, NULL, 1);
 	if (ft_strcmp(cmd[0], "unsetenv") == 0)
 		g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s, cmd);
+	if (ft_strcmp(cmd[0], "unset") == 0)
+		g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "export") == 0)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "alias") == 0)
@@ -184,7 +186,8 @@ char			**env_copy(t_lst2 *menv)
 		return (NULL);
 	while (menv)
 	{
-		dst[i++] = ft_strdup(menv->env);
+		if (menv->lcl == 0)
+			dst[i++] = ft_strdup(menv->env);
 		menv = menv->next;
 	}
 	dst[i] = NULL;
