@@ -6,11 +6,33 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/05 22:43:48 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/08 21:43:27 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/10 19:16:57 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
+
+void		free_tmp_export5(char ***tmp)
+{
+	free((*tmp)[0]);
+	free(*tmp);
+}
+
+int			exec_export5(char ***tmp, char **av, t_struct *s, t_lst2 **l)
+{
+	*l = s->env;
+	if ((*tmp = (char**)malloc(sizeof(**tmp) * 3)) == NULL)
+	{
+		ft_eputendl("export: warning: malloc error.");
+		return (0);
+	}
+	if (((*tmp[0]) = ft_mstrcpy(NULL, av[1])) == NULL)
+	{
+		ft_eputendl("export: warning: malloc error");
+		return (0);
+	}
+	return (1);
+}
 
 static int	e_cpt_2(t_struct *s, t_lst **l, int *c)
 {

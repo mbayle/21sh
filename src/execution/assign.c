@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 22:50:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 06:09:17 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 15:48:31 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	unexec_ass(char **ass)
 		tmp = ft_strdup(ass[i]);
 		free(ass[i]);
 		ass[i] = ft_strdup(tmp + 1);
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
+				g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		i++;
 	}
 }
@@ -148,11 +148,35 @@ void	save_ass_stock(char **ass)
 	ft_printtab(g_jobcontrol.ass_stock);
 }
 
+char	**move_char(char **ass)
+{
+	int	i;
+	char	*tmp;
+
+	i = 0;
+	while (ass[i])
+	{
+		if (ass[i][0] == '\r')
+		{
+			tmp = ft_strdup(ass[i]);
+			ft_strdel(&ass[i]);
+			ass[i] = ft_strdup(tmp + 1);
+		}
+		i++;
+	}
+	return (ass);
+}
+
 char	**ass_arg(char **ass, int i)
 {
+	char	**tmp;
+
+	tmp = tab_copy(ass);
 	if ((i = just_ass(ass)) == -1)/*&& pas de ARGV)*/
 	{
+		ass= move_char(ass);
 		g_jobcontrol.ret= exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
+		return (tmp);
 	}
 	else /*ex: a=b c=d ls -l*/
 	{

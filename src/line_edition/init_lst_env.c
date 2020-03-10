@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 23:58:20 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 05:02:53 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:47:06 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,11 @@ t_lst2		*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c)
 {
 	t_lst2		*bg;
 
-	bg = NULL;
 	while (*env && !(c = 0))
 	{
 		if ((l = malloc(sizeof(*l))) == NULL)
 			return (NULL);
-		if (!(l->lcl = 0) && (l->env = ft_mstrcpy(l->env, *env)) == NULL)
+		if ((l->env = ft_mstrcpy(l->env, *env)) == NULL)
 			return (NULL);
 		while ((*env)[c] && (*env)[c] != '=')
 			++c;
@@ -81,6 +80,7 @@ t_lst2		*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c)
 		l->varn[c] = '\0';
 		(*env)++;
 		l->var = NULL;
+		l->lcl = 0;
 		if ((l->nenv = ft_strlen(*env)))
 			if ((l->var = ft_mstrcpy(l->var, *env)) == NULL)
 				return (NULL);
