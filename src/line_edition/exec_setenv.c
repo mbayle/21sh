@@ -1,6 +1,6 @@
 #include "../../includes/projectinclude.h"
 
-int		checkenv_setenv(car **av, t_lst2 *l, int i, int c)
+int		checkenv_setenv(char **av, t_lst2 *l, int i, int c)
 {
 	while (av[1][c] && av[1][c] != '=')
 		c++;

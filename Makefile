@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/09 23:53:03 by frameton         ###   ########.fr        #
+#    Updated: 2020/03/10 03:05:21 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,10 +128,9 @@ SRC		:=	main.c \
 			line_edition/edit_line3.c \
 			line_edition/edl1_move_word.c \
 			line_edition/edl2_move_word.c \
-			line_edition/exec_builtin.c \
-			line_edition/exec_cd.c \
 			line_edition/exec_command.c \
 			line_edition/exec_help.c \
+			line_edition/exec_cd.c \
 			line_edition/exec_help2.c \
 			line_edition/exec_history.c \
 			line_edition/exec_setcpt.c \

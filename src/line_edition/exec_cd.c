@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 22:55:09 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 09:22:24 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/10 03:05:42 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		create_path_home(t_struct *s, char *new, int i)
 	return (1);
 }
 
-int		exec_cd2(t_struct *s, char *cwd, char *ocwd, char *tmp)
+/*int		exec_cd2(t_struct *s, char *cwd, char *ocwd, char *tmp)
 {
 	(*s).prompt = 0;
 	tmp = (*s).av[1];
@@ -129,4 +129,4 @@ int		exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 			return (0);
 	}
 	return (1);
-}
+}*/
