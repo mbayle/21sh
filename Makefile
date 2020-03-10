@@ -6,7 +6,11 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2020/03/09 19:54:24 by mabayle          ###   ########.fr        #
+=======
+#    Updated: 2020/03/10 03:05:21 by ymarcill         ###   ########.fr        #
+>>>>>>> 4e30c33dbb692d853826ebac24c6635b3221652a
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +50,8 @@ OBJ_PATH	:=	./obj/
 SRC		:=	main.c \
 			builtins/type.c\
 			builtins/alias.c\
+			builtins/alias_bis.c\
+			builtins/unalias.c\
 			jobcontrol/init_interactive_shell.c \
 			jobcontrol/put_in_fg.c \
 			jobcontrol/ft_job.c\
@@ -126,10 +132,9 @@ SRC		:=	main.c \
 			line_edition/edit_line3.c \
 			line_edition/edl1_move_word.c \
 			line_edition/edl2_move_word.c \
-			line_edition/exec_builtin.c \
-			line_edition/exec_cd.c \
 			line_edition/exec_command.c \
 			line_edition/exec_help.c \
+			line_edition/exec_cd.c \
 			line_edition/exec_help2.c \
 			line_edition/exec_history.c \
 			line_edition/exec_setcpt.c \
@@ -231,6 +236,7 @@ clean:
 	@rm -rf $(OBJ_PATH)
 	@echo "\033[0;32m[✓]\033[0m\033[0;33m [42sh] Deleted all .o\033[0m"
 	@rm -rf 42sh.dSYM
+	@rm -rf ~/.builtin_name
 
 fclean:
 	@make -j4 -C libft/ fclean

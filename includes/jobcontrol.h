@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 08:38:54 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:45:02 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ typedef struct				s_job
 	int						last_j;
 	int						last_ret;
 }							t_job;
+
+typedef struct				s_hash
+{
+	char					*path;
+	int						hits;
+	struct s_hash			*next[256];
+}							t_hash;
 
 typedef struct				s_alias
 {
@@ -117,8 +124,16 @@ struct s_jobcontrol				g_jobcontrol;
 /**
 builtuin
 **/
+void					unexec_ass(char **ass);
+void					exec_ass(char **ass);
+void					alloc_alias(void);
+t_alias					*set_value(t_alias *al, char *key, char *value);
+t_alias					*set_alias(t_alias *al, char *key, char *value);
+int						check_error_key(char *cmd);
+char					**key_val_split(char *cmd);
 int						exec_type(char **arg);
 int						exec_alias(char **cmd);
+int						exec_unalias(char **cmd);
 /**
  redir
  **/

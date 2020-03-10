@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 23:52:36 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 20:25:07 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:52:53 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ int		exec_history(t_struct s)
 		tmp = tmp->prev;
 	}
 	ft_putchar('\n');
-	return (1);
+	return (0);
 }

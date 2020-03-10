@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_set.c                                         :+:      :+:    :+:   */
+/*   exp_alias.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/09 04:25:07 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/10 03:14:52 by frameton         ###   ########.fr       */
+/*   Created: 2020/03/09 23:48:26 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/10 01:09:15 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/projectinclude.h"
 
-int		exec_set(t_struct *s, char **av)
+char	
+
+char	*
+
+char	*check_alias(char *word)
 {
-	t_lst2	*l;
+	char	*dst;
+	t_alias	*al;
 
-	if (av[1])
-		return (0);
-	l = s->env;
-	while (l)
+	al = g_jobconctrol.alias;
+	while (al)
 	{
-		ft_putendl(l->env);
-		l = l->next;
+		if (al->key && word && ft_strcmp(al->key, word) == 0)
+		{
+			
+		}
 	}
-	return (0);
 }

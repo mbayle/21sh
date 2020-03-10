@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 09:02:23 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 03:49:42 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,30 @@ int				execute_builtin(char **cmd)
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
 	if (ft_strcmp(cmd[0], "setenv") == 0)
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, NULL);
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, cmd, NULL, 0);
 	if (ft_strcmp(cmd[0], "unsetenv") == 0)
-		g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s);
+		g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "export") == 0)
-		g_jobcontrol.ret = exec_export(&g_jobcontrol.s);
+		g_jobcontrol.ret = exec_export(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "alias") == 0)
 		g_jobcontrol.ret = exec_alias(cmd);
+	if (ft_strcmp(cmd[0], "unalias") == 0)
+		g_jobcontrol.ret = exec_unalias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)
+	{
+		exit_edl(&g_jobcontrol.s);
 		exit(0);
+	}
+	if (ft_strcmp(cmd[0], "env") == 0)
+		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "set") == 0)
-		g_jobcontrol.ret = exec_set(&g_jobcontrol.s);
+		g_jobcontrol.ret = exec_set(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "unset") == 0)
-		g_jobcontrol.ret = exec_unset(&g_jobcontrol.s);
+		g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, cmd);
 	else if (ft_strcmp(cmd[0], "fg") == 0)
 		g_jobcontrol.ret = put_in_fg(1, g_jobcontrol.first_mail, cmd);
 	else if (ft_strcmp(cmd[0], "bg") == 0)
@@ -138,12 +145,14 @@ char			**check_opt_env(char **cmd)
 
 char			**do_red_ass_exp_quo(char **cmd, char **av)
 {
-	cmd = parse_redir(av[g_jobcontrol.i], 1);
-	/*	EXPANSION a faire mtn avant les apres pour char process*/
-if (g_jobcontrol.sim == 0)
+	char **tmp;
+
+	cmd = parse_redir(av[g_jobcontrol.i], 0);
+	if (g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	else
 		cmd = del_one(cmd, just_ass(cmd));
+	tmp = parse_redir(av[g_jobcontrol.i], 1);
 	if (ft_strcmp(cmd[0], "env") == 0 && is_env_arg(cmd))
 	{
 		del_one(cmd, 1);
@@ -178,12 +187,12 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	close_fd_father(oldlink, newlink);
 	g_jobcontrol.red = 0;
 	reset_fd();
-	/*	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
-		{
+	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
+	{
 		unexec_ass(g_jobcontrol.ass);
 		exec_ass(g_jobcontrol.ass_stock);
-		g_jobcontrol.asso == 0;
-		}*/
+		g_jobcontrol.assi = 0;
+	}
 	if (mypath)
 		pro = fill_jc_struc(pid, av[g_jobcontrol.i], pro);
 	ft_strdel(&mypath);

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 23:29:26 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 02:16:50 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/09 11:21:36 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,10 @@ int				show_commands(char ***path, size_t c, t_htr *l, t_htr *bg)
 	del = *path;
 	while (**path)
 	{
-		if (!(dir = opendir(**path)))
-		{
-			ft_eputstr("Error opendir: bad access path.\n");
-			return (-1);
-		}
+		while (!(dir = opendir(**path)))
+			(*path)++;
+		if (!**path)
+			break ;
 		while ((dir_el = readdir(dir)))
 			if (!(show2(&dir_el, &c, &l, &bg)))
 				return (-1);

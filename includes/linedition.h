@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 05:47:48 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/09 23:49:06 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,24 @@ typedef struct		s_htr
 	struct s_htr	*prev;
 }					t_htr;
 
+typedef struct		s_fc
+{
+	int				e;
+	int				i;
+	int				s;
+	int				r;
+	int				n;
+	int				l;
+	int				ret;
+	int				min;
+	int				frst;
+	int				scd;
+	int				max;
+	char			*edtr;
+	char			opt;
+	t_htr			*h;
+}					t_fc;
+
 typedef struct		s_comp
 {
 	char			*name;
@@ -193,9 +211,9 @@ char				**init_builtin_ref(int c);
 int					exec_builtin(t_struct *s, int c);
 t_lst2				*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c);
 int					exec_command(t_struct *s, char **env);
-int					exec_unsetenv(t_struct *s);
+int					exec_unsetenv(t_struct *s, char **av);
 int					check_auth(char *s);
-int					exec_setenv(t_struct *s, t_lst2 *new);
+int					exec_setenv(t_struct *s, char **av, t_lst2 *new, int i);
 int					exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd);
 int					check_expansion(t_struct *s, int i, t_lst2 *env, int c);
 int					create_path_home(t_struct *s, char *new, int i);
@@ -339,7 +357,7 @@ int					s_command_tab2(char *str, t_comp **l, t_comp **bg,
 int					init_lst2_b4(char buf[701], t_lst **l, int *c);
 int					e_cpt(t_struct *s, t_comp **cmp, t_comp **bcmp);
 int					exec_env(t_struct *s);
-int					exec_export(t_struct *s);
-int					exec_set(t_struct *s);
-int					exec_unset(t_struct *s);
+int					exec_export(t_struct *s, char **av);
+int					exec_set(t_struct *s, char **av);
+int					exec_unset(t_struct *s, char **av);
 #endif

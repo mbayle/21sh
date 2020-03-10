@@ -1,15 +1,15 @@
 #include "../../includes/projectinclude.h"
 
-int		checkenv_export(t_struct s, t_lst2 *l, int i, int c)
+int		checkenv_export(char **av, t_lst2 *l, int i, int c)
 {
-	while (s.av[1][c] && s.av[1][c] != '=')
+	while (av[1][c] && av[1][c] != '=')
 		c++;
 	while (l)
 	{
 		while (l->env[i] && l->env[i] != '=')
 			i++;
 		if (i == c)
-			if (ft_strncmp(s.av[1], l->env, c) == 0)
+			if (ft_strncmp(av[1], l->env, c) == 0)
 			{
 				l->lcl = 0;
 				return (0);
@@ -18,8 +18,8 @@ int		checkenv_export(t_struct s, t_lst2 *l, int i, int c)
 		i = 0;
 	}
 	c = 0;
-	while (s.av[1][c])
-		if (s.av[1][c++] == '=')
+	while (av[1][c])
+		if (av[1][c++] == '=')
 			++i;
 	if (i != 1)
 	{
@@ -72,27 +72,25 @@ int		exec_export3(t_struct *s)
 	return (0);
 }
 
-int		exec_export(t_struct *s)
+int		exec_export(t_struct *s, char **av)
 {
 	t_lst2	*l;
 
-	if ((s->av = ft_splitws(s->cmd)) == NULL)
-		return (1);
-	if (!(*s).av[1])
+	if (!av[1])
 		return (exec_export3(s));
-	else if ((*s).av[1][0] == '=')
+	else if (av[1][0] == '=')
 	{
 		ft_putendl("export: error: bad variable name.");
 		return (1);
 	}
-	else if (!((*s).t = checkenv_export(*s, (*s).env, 0, 0)) || (*s).t == -1)
+	else if (!((*s).t = checkenv_export(av, (*s).env, 0, 0)) || (*s).t == -1)
 		return (s->t);
 	l = s->env;
 	while (l)
-		if (!ft_strcmp(s->av[1], l->varn) && !l->lcl)
+		if (!ft_strcmp(av[1], l->varn) && !l->lcl)
 		{
-			exec_unsetenv(s);
-			exec_setenv(s, NULL);
+			exec_unsetenv(s, av);
+			exec_setenv(s, av, NULL, 0);
 			return (0);
 		}
 		else

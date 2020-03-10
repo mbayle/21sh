@@ -6,7 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/03/09 11:50:29 by mabayle          ###   ########.fr       */
+=======
+/*   Updated: 2020/03/10 02:50:08 by ymarcill         ###   ########.fr       */
+>>>>>>> 4e30c33dbb692d853826ebac24c6635b3221652a
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,3 +150,15 @@ void	ft_lexer(t_lex **lex, char *input)
 	ft_parse(&g_shell->lex);
 	lexdel(lex);
 }
+
+
+
+
+
+
+
+
+
+
+
+
