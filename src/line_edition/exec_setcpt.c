@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:58:15 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 23:17:50 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:53:09 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ int			exec_setcpt(t_struct *s)
 	ft_putendl("Lvl 4 : Automatic completion, effective with a single match\n");
 	exec_setcpt6(s, m);
 	fp("ve", NULL);
-	return (1);
+	return (0);
 }
