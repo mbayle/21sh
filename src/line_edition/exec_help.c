@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 23:01:08 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 23:09:48 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:52:38 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,5 @@ int				exec_sethelp(void)
 	ft_putstr("The copy/paste from an external source does not work");
 	read(0, &buf, 1);
 	fp("ve", "cl");
-	return (1);
+	return (0);
 }
