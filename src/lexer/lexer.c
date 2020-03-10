@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/09 04:54:08 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:50:08 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,3 +146,15 @@ void	ft_lexer(t_lex **lex, char *input)
 	ft_parse(&g_shell->lex);
 	lexdel(lex);
 }
+
+
+
+
+
+
+
+
+
+
+
+

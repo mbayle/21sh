@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:05:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:09:09 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:42:23 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,15 +116,15 @@ char	**parse_redir(char *line, int exec)
 	char	**dst;
 
 	command = fill_redir_tab(line);
+	//if (exec == 0)
+	// EXPANSION SUR DST RETURN DST	
 	dst = dst_redir(command);
 	if (exec)
 	{
-		if (execute_redir(command) == -1)
-		{
+		execute_redir(command);
 			ft_freetab(dst);
 			ft_freetab(command);
 			return (NULL);
-		}
 	}
 //	ft_printtab(dst);
 	ft_freetab(command);

@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 20:58:44 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:45:02 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,13 @@ typedef struct				s_job
 	int						last_j;
 	int						last_ret;
 }							t_job;
+
+typedef struct				s_hash
+{
+	char					*path;
+	int						hits;
+	struct s_hash			*next[256];
+}							t_hash;
 
 typedef struct				s_alias
 {

@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 21:12:26 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:43:30 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,13 +142,14 @@ char			**check_opt_env(char **cmd)
 
 char			**do_red_ass_exp_quo(char **cmd, char **av)
 {
-	cmd = parse_redir(av[g_jobcontrol.i], 1);
-	/*	EXPANSION a faire mtn avant les apres pour char process*/
-	/*cmd = parsing_redir rturn (command) sans exec)*/
-if (g_jobcontrol.sim == 0)
+	char **tmp;
+
+	cmd = parse_redir(av[g_jobcontrol.i], 0);
+	if (g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	else
 		cmd = del_one(cmd, just_ass(cmd));
+	tmp = parse_redir(av[g_jobcontrol.i], 1);
 	if (ft_strcmp(cmd[0], "env") == 0 && is_env_arg(cmd))
 	{
 		del_one(cmd, 1);

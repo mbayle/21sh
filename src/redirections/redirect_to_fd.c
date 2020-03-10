@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:14:15 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 05:39:45 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:40:25 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		write_in(int n, char *file, mode_t mode)
 {
 	int	fd;
 
+	//file = EXPANSION
 	if (access(file, F_OK) == -1)
 	{
 		if ((fd = open(file, O_CREAT, 0644)) < 0)
@@ -38,6 +39,7 @@ int		write_in(int n, char *file, mode_t mode)
 
 int		read_from(int n, char *file)
 {
+	//file = EXPANSION
 	int	fd;
 
 	if (access(file, F_OK) == -1)

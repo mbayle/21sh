@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:01:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 05:39:30 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 02:40:00 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		dup_fd(char *redir, char *file)
 	int n;
 
 	n = dig_to_io(redir);
+	//file = EXPANSION;
 	if (n == 0)
 		n = redir[0] == '>' ? 1 : 0;
 	if (!ft_strcmp(file, "-"))
@@ -79,6 +80,7 @@ int		out_err_redir(char *file)
 	int fd;
 
 	fd = 0;
+	//file = EXPANSION FILE
 	if (!ft_strcmp(file, "-"))
 	{
 		if (close(1) == -1 || close(2) == -1)
