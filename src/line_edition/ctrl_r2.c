@@ -6,11 +6,24 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:14:20 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 02:16:50 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/10 20:07:51 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+int		check_char_ctrl_r(char buf[5], int ret)
+{
+	if (ret > 3 && buf[0] == 27 && buf[3] == 126)
+		return (0);
+	if ((buf[0] == 27 || buf[0] == 3 || buf[0] == 4) && ret == 1)
+		return (1);
+	if (ret > 1)
+		return (1);
+	if (buf[0] < 33 || buf[0] > 127)
+		return (1);
+	return (0);
+}
 
 t_htr	*check_htr(t_htr *t, char *l)
 {
