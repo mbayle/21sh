@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:09:25 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 02:24:02 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 13:08:25 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,16 @@ int		is_strdigit(char *str)
 
 int		check_fd(int fd, int n)
 {
-	if (n == 3 || n == 4 || n == 5)
+	if (n == g_jobcontrol.stdi || n == g_jobcontrol.stdo ||
+		n == g_jobcontrol.stde)
 	{
-		ft_putendl_fd("Shell: fd 3, 4, 5 are reserved by 42sh", 2);
+		ft_putendl_fd("Shell: These fd are reserved by 42sh", 2);
 		return (1);
 	}
-	if (fd == 3 || fd == 4 || fd == 5)
+	if (fd == g_jobcontrol.stdi || fd == g_jobcontrol.stdo ||
+		fd == g_jobcontrol.stde)
 	{
-		ft_putendl_fd("Shell: fd 3, 4, 5 are reserved by 42sh", 2);
+		ft_putendl_fd("Shell: Theses fd are reserved by 42sh", 2);
 		return (1);
 	}
 	return (0);

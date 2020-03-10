@@ -1,0 +1,7 @@
+2
+ls
+echo $PATH
+echo $PQTH
+echo $PATH
+clear
+ls -ls
