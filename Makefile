@@ -212,7 +212,7 @@ all:
 	@make $(NAME)
 
 $(NAME):  $(LIBFT) $(OBJ)
-	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap -fsanitize=address
+	@$(LINKER) $(NAME) $(LDFLAGS) -fsanitize=address $(OBJ) -ltermcap 
 	@echo ""
 	@echo "\033[0;32m42sh build done\033[0m"
 	@echo ""

@@ -198,7 +198,7 @@ void				token_type(t_lex *new, int io_nbr, int assignword);
 */
 int					check_redir(char *input);
 int					check_operator(char *input);
-int					quote_bksl_case(int i, char *input);
+int					quote_brace_case(int i, char *input);
 int					ft_is_separator(char c);
 
 #endif

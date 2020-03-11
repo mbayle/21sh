@@ -60,7 +60,7 @@ int		check_operator(char *input)
 ** Return value : return index of last quote (if match) else return -1 (error)
 */
 
-int		quote_bksl_case(int i, char *input)
+int		quote_brace_case(int i, char *input)
 {
 	if (input[i] == '\'')
 	{

@@ -32,7 +32,7 @@ int		find_end(int i, char *input)
 		if (input[i] == '\'' || input[i] == '"' || (input[i] == '$' 
 				&& input[i + 1] == '{'))
 		{
-			i = quote_bksl_case(i, input);
+			i = quote_brace_case(i, input);
 			break ;
 		}
 		if (input[i])
