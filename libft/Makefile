@@ -15,7 +15,7 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I$(INC_PATH)
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -I$(INC_PATH)
 
 INCS	= ./includes/libft.h
 
@@ -128,7 +128,8 @@ SRC = ft_memset.c \
 	  ft_strev.c \
 	  ft_strncpy.c \
 	  ft_cswap.c \
-	  ft_ipbackc.c
+	  ft_ipbackc.c \
+	  ft_bracket.c
 
 OBJ_PATH = ./.obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))
@@ -146,7 +147,7 @@ $(NAME): $(OBJ_PATH) $(OBJS)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c $(INCS)
 	@echo "\033[0;32m[✓]\033[0m\033[0;33m [lib] Compiling :\033[0m" $<
-	@$(CC) $(CFLAGS) -fsanitize=address -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)

@@ -60,7 +60,7 @@ int		check_operator(char *input)
 ** Return value : return index of last quote (if match) else return -1 (error)
 */
 
-int		quote_case(int i, char *input)
+int		quote_bksl_case(int i, char *input)
 {
 	if (input[i] == '\'')
 	{
@@ -81,7 +81,16 @@ int		quote_case(int i, char *input)
 		}
 		input[i] != 34 ? i = -1 : i++;
 	}
-	return (i);
+	if ((input[i] == '$' && input[i + 1] == '{') 
+		|| (input[i] == '$' && input[i + 1] == '('))
+	{
+		char stack[256];
+		int ret;
+		ret = ft_bracket(input, -1, 0, stack);
+		if (ret > 0)
+			i = i + ret;
+	}	
+	return (i > 0 ? i : -1);
 }
 
 /*

@@ -74,3 +74,18 @@ t_ast	*no_root(t_lex *lex, t_ast *ast)
 	ast->root = new_root;
 	return (ast);
 }
+
+void	astdel(t_ast **ast)
+{
+	if (*ast)
+	{
+		if ((*ast)->left)
+			astdel(&(*ast)->left);
+		if ((*ast)->right)
+			astdel(&(*ast)->right);
+		(*ast)->left = NULL;
+		(*ast)->right = NULL;
+		free(*ast);
+		*ast = NULL;
+	}
+}

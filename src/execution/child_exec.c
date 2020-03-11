@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:23:35 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 05:25:48 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 05:47:59 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,13 @@ int		check_b(char **cmd)
 	if (cmd && cmd[0] && (!ft_strcmp(cmd[0], "jobs") || !ft_strcmp(cmd[0], "fg")
 	|| !ft_strcmp(cmd[0], "bg") || !ft_strcmp(cmd[0], "setcpt")
 	|| !ft_strcmp(cmd[0], "history") || !ft_strcmp(cmd[0], "help")
-	|| !ft_strcmp(cmd[0], "cd") ||// !ft_strcmp(cmd[0], "echo") ||
+	|| !ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "hash") ||
 	!ft_strcmp(cmd[0], "test") || !ft_strcmp(cmd[0], "exit") ||
 	!ft_strcmp(cmd[0], "setenv") || !ft_strcmp(cmd[0], "unsetenv") ||
 	!ft_strcmp(cmd[0], "set") || !ft_strcmp(cmd[0], "unset") ||
 	!ft_strcmp(cmd[0], "export") || !ft_strcmp(cmd[0], "type") ||
 	!ft_strcmp(cmd[0], "alias") || !ft_strcmp(cmd[0], "unalias") ||
+	!ft_strcmp(cmd[0], "env") || 
 	cmd[0][0] == '\r'))
 		return (0);
 	else

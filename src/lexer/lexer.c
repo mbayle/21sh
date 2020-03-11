@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/10 02:50:08 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 03:54:55 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ int		find_end(int i, char *input)
 	{
 		if (input[i] == '\\')
 			i++;
-		if (input[i] == '\'' || input[i] == '"')
+		if (input[i] == '\'' || input[i] == '"' || (input[i] == '$' 
+				&& input[i + 1] == '{'))
 		{
-			i = quote_case(i, input);
+			i = quote_bksl_case(i, input);
 			break ;
 		}
 		if (input[i])
@@ -67,7 +68,7 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 		while (ft_isdigit(input[i]) == 1)
 			i++;
 		!ft_strncmp(input + i, ">", 1) || !ft_strncmp(input + i, "<", 1)
-										? *io_nbr = 1 : (i = find_end(i, input));
+				? *io_nbr = 1 : (i = find_end(i, input));
 	}
 	else if ((i = check_operator(input)))
 		;

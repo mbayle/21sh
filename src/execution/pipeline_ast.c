@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 23:39:14 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 05:21:58 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 12:53:10 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char	**list_to_tab(t_lex *lex)
 		{
 			dst[i] = ft_strdup("\r");
 			dst[i] = ft_strjoinfree(dst[i], lex->value);
+			ft_putnbr(dst[i][0]);
 		}
 		else if (lex->token == IO_NUMBER)
 		{
@@ -103,16 +104,8 @@ void	join_job_line(t_ast *ast, int p_pos)
 	char	*tmp;
 	char	*tmp2;
 
-//	ft_putstr("\n index: ");
-//	ft_putnbr(g_jobcontrol.index);
 	g_jobcontrol.arg[g_jobcontrol.index] = list_to_tab(ast->lex);
-//	ft_putendl("\n\n\nwwwwwwwwwwwwwwwwwwwwwwwww");
-//	ft_printtab(g_jobcontrol.arg[g_jobcontrol.index]);
-//	ft_putendl("wwwwwwwwwwwwwwwwwwwwwwwww\n\n\n");
 	g_jobcontrol.index++;
-//	ft_putstr("\n index: ");
-//	ft_putnbr(g_jobcontrol.index);
-//	cmd[g_jobcontrol.i] = list_to_tab(ast->lext);
 	tmp = ft_strdup(g_jobcontrol.first_job->command);
 	tmp2 = list_to_string(ast->lex);
 	ft_strdel(&g_jobcontrol.first_job->command);
@@ -124,7 +117,6 @@ void	join_job_line(t_ast *ast, int p_pos)
 	ft_strdel(&tmp2);
 	if (p_pos != 1)
 	{
-		ft_putendl("POS != 1");
 		g_jobcontrol.first_job->command =
 			ft_strjoinfree(g_jobcontrol.first_job->command, " | ");
 		if (!(g_jobcontrol.arg[g_jobcontrol.index] = malloc(sizeof(char*) * 2)))
@@ -133,14 +125,7 @@ void	join_job_line(t_ast *ast, int p_pos)
 		g_jobcontrol.arg[g_jobcontrol.index][1] = NULL;
 		g_jobcontrol.index++;
 	}
-//	ft_putstr("\n index: ");
-//	ft_putnbr(g_jobcontrol.index);
 	g_jobcontrol.arg[g_jobcontrol.index] = NULL;
-//	ft_putendl("\n\n\nwwwwwwwwwwwwwwwwwwwwwwwww");
-//	ft_printtab(g_jobcontrol.arg[g_jobcontrol.index]);
-//	ft_putendl("\n\n\nwwwwwwwwwwwwwwwwwwwwwwwww");
-	//cmd[g_jobcontrol.index] = NULL;
-//	return (cmd);
 }
 
 void	check_op_pipe(t_ast *ast, int p_pos)

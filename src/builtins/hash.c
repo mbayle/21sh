@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 23:54:27 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 00:56:51 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 05:49:18 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char				**getpathlist(char *pathvar)
 
 	tmp = pathvar;
 	i = 0;
-	while ((tmp = strchr(tmp, ':')))
+	while (tmp && (tmp = strchr(tmp, ':')))
 	{
 		tmp++;
 		i++;
@@ -42,13 +42,13 @@ char				**getpathlist(char *pathvar)
 		return (NULL);
 	tmp = pathvar;
 	i = 0;
-	while ((tmp = strchr(tmp, ':')))
+	while (tmp && (tmp = strchr(tmp, ':')))
 	{
 		if (!(pathlist[i++] = strndup(pathvar, tmp - pathvar)))
 			return (NULL);
 		pathvar = ++tmp;
 	}
-	if (!(pathlist[i] = strdup(pathvar)))
+	if (pathvar && !(pathlist[i] = strdup(pathvar)))
 		return (NULL);
 	pathlist[i + 1] = NULL;
 	return (pathlist);
@@ -115,7 +115,7 @@ char				*browse_command_path(char *command, char **pathlist)
 
 	if (*pathlist)
 	{
-		if (strlen(*pathlist) + strlen(command) + 1 < PATH_MAX)
+		if (command && ft_strlen(*pathlist) + ft_strlen(command) + 1 < PATH_MAX)
 		{
 			strcpy(buf, *pathlist);
 			strcat(buf, "/");
@@ -286,7 +286,7 @@ int					exec_hash(t_hash **hash, char *pathvar, char **cmd)
 		}
 		cmd++;
 	}
-	if ((*cmd)[0] == '-')
+	if ((*cmd) && (*cmd)[0] == '-')
 		cmd++;
 	if (r_opt)
 		hash_reset(hash);

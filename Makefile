@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/11 05:04:20 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/03/11 05:31:47 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address
 
 CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 -fsanitize=address
 ifeq ($(DEBUG), 1)
-	CFLAGS	:=	$(CFLAGS) -fsanitize=address -ggdb -fno-omit-frame-pointer 
+	CFLAGS	:=	$(CFLAGS) -ggdb -fno-omit-frame-pointer -fsanitize=address
 endif
 
 SRC_PATH	:=	./src/
@@ -203,7 +203,7 @@ SRC		:=	main.c \
 			input/char_handler.c \
 			input/tools.c \
 			input/tools_bis.c \
-			input/signals.c \
+			input/signals.c 
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

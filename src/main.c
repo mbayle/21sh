@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/10 18:13:55 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 13:33:30 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void		init_struct(t_struct *s, char **envp)
 	envp = save;
 	init_start_pwd(s);
 	if (((*s).env_path = search_pathenv((*s).env)) == NULL)
-		ft_eputstr("minishell: "MAGENTA"warning"
+		ft_eputstr("Shell "MAGENTA"warning"
 		WHITE": the PATH environment variable does not exist.\n\0");
 }
 
@@ -102,6 +102,8 @@ void		tmp_free_struct(t_struct *s)
 	(*s).tmp = NULL;
 	free_dchar(&(*s).envi);
 	(*s).av = NULL;
+	sec_free(&s->cmd, 0);
+	s->cmd = NULL;
 }
 
 char		**ft_tabdup(char **av)
@@ -128,6 +130,9 @@ int			main(int ac, char **av, char **envp)
 
 	c = 0;
 	init_shell_sig();
+	g_jobcontrol.ass = NULL;
+	g_jobcontrol.ass_stock = NULL;
+//	ft_bzero(&g_jobcontrol, sizeof(g_jobcontrol));
 	g_jobcontrol.first_job = NULL;
 	g_jobcontrol.alias = NULL;
 	g_jobcontrol.env = ft_tabdup(envp);

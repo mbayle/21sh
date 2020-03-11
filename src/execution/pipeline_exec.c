@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline_exec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 05:27:34 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 05:33:24 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int				execute_builtin(char **cmd)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "alias") == 0)
 		g_jobcontrol.ret = exec_alias(cmd);
+	//if (ft_strcmp(cmd[0], "cd") == 0)
+		//g_jobcontrol.ret = fonction val;
 	if (ft_strcmp(cmd[0], "unalias") == 0)
 		g_jobcontrol.ret = exec_unalias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)
@@ -147,6 +149,8 @@ char			**do_red_ass_exp_quo(char **cmd, char **av)
 
 	cmd = parse_redir(av, 0);
 	/**EXPANDRE CMD**/
+//	cmd = parse_redir(av[g_jobcontrol.i], 0);
+	//INSERT QUOTE_REMOVAL HERE
 	if (g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	else

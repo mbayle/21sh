@@ -214,5 +214,5 @@ automatic_header("./src/parser", "./includes/parser.h", tab_offset=5, recursive_
 automatic_header("./src/parser/grammar", "./includes/grammar.h", tab_offset=5, recursive_discover=False)
 automatic_header("./src/ast", "./includes/mybtree.h", tab_offset=5, recursive_discover=True)
 #automatic_header("./src/line_edition", "./includes/minishell.h", tab_offset=5, recursive_discover=False)
-automatic_header("./libft", "./libft/includes/libft.h", tab_offset=5, recursive_discover=True)
+#automatic_header("./libft", "./libft/includes/libft.h", tab_offset=5, recursive_discover=True)
 #automatic_header("./src", "./include/test.h", tab_offset=5, recursive_discover=True)

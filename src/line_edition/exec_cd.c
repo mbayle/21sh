@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 22:55:09 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/10 03:05:42 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:48:45 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,73 +60,3 @@ int		create_path_home(t_struct *s, char *new, int i)
 	}
 	return (1);
 }
-
-/*int		exec_cd2(t_struct *s, char *cwd, char *ocwd, char *tmp)
-{
-	(*s).prompt = 0;
-	tmp = (*s).av[1];
-	if ((cwd = getcwd(cwd, PATH_MAX)) == NULL)
-		return (0);
-	if (((*s).av[1] = ft_strjoin("PWD=", cwd)) == NULL)
-		return (0);
-	if (tmp)
-		free(tmp);
-	if (cwd)
-		free(cwd);
-	if (exec_unsetenv(&*s) == 0)
-		return (0);
-	if (exec_setenv(&*s, NULL, 0) == 0)
-		return (0);
-	free((*s).av[1]);
-	if (((*s).av[1] = ft_strjoin("OLD_PWD=", ocwd)) == NULL)
-		return (0);
-	if (exec_unsetenv(&*s) == 0)
-		return (0);
-	if (exec_setenv(&*s, NULL, 0) == 0)
-		return (0);
-	return (1);
-}
-
-char	**modif_av(char ***av)
-{
-	char	**new;
-
-	new = NULL;
-	if ((new = (char**)malloc(sizeof(*new) * 3)) == NULL)
-		return (0);
-	if ((new[0] = ft_mstrcpy(new[0], *av[0])) == NULL)
-		return (0);
-	free_dchar(&*av);
-	new[1] = NULL;
-	new[2] = NULL;
-	return (new);
-}
-
-int		exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
-{
-	tmp = (*s).av[1];
-	check_ls(&*s);
-	if (!(*s).av[1])
-	{
-		if (((*s).av = modif_av(&(*s).av)) == NULL)
-			return (0);
-		while (tp && ft_strcmp(tp->varn, "HOME"))
-			tp = tp->next;
-		if (!tp)
-		{
-			tmp = NULL;
-			ft_eputstr("minishell: "MAGENTA"warning"
-					WHITE": the HOME environment variable does not exist.\n\0");
-		}
-		else
-			tmp = tp->var;
-	}
-	if (chdir(tmp) == -1)
-		ft_eputstr("System chdir call failed.\n");
-	else
-	{
-		if (exec_cd2(&*s, NULL, ocwd, NULL) == 0)
-			return (0);
-	}
-	return (1);
-}*/

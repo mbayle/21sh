@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:12:41 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 02:16:50 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/10 20:01:27 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int			ctrl_r(t_struct *s)
 	ft_putstr("bck-i-search: _\n");
 	while ((ret = read(0, &buf, 5)) && buf[0] != '\n')
 	{
-		if (buf[0] == 27 && ret == 1)
+		if (check_char_ctrl_r(buf, ret))
 			return (escape_ctrl_r(&l));
 		buf[ret] = '\0';
 		if (!(ctrl_r2(buf, &t, s, &l)))

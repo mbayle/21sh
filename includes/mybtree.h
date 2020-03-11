@@ -64,7 +64,6 @@ t_ast				*create_ast(t_ast *ast, int priority);
 ** ast.c
 */
 void				sub_split(t_ast *ast, int priority);
-void				print_debug(t_ast *ast, int pad);
 int					is_in_lexer(t_lex *lex, int priority);
 t_ast				*beta_ast(t_ast *ast, int priority);
 void				do_to_ast(char ***tmp);
@@ -76,6 +75,7 @@ int					build_ast(t_lex *lex, t_ast **ast);
 t_ast				*init_node(t_lex *lex, char *root);
 void				init_priority(t_lex *lex);
 t_ast				*no_root(t_lex *lex, t_ast *ast);
+void				astdel(t_ast **ast);
 
 /*
 ** print_ast.c

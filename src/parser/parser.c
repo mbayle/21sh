@@ -6,12 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/09 05:11:39 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 04:03:43 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-#include "stdlib.h" // delete after it's just test getenv
 
 /*
 ** Purpose of the function : Find next token (skip newline)
@@ -53,20 +52,12 @@ char	*check_tokenerror(t_lex *lex)
 		if (lex->token == CONTROL_OPE && (next_tok = next_token(lex))
 				&& next_tok->token == CONTROL_OPE)
 			return (next_tok->value);
+		if (lex->operator == PIPE && (next_tok = next_token(lex))
+				&& next_tok->token == UNKNOWN)
+			return (lex->value);
 		lex = lex->next;
 	}
 	return (NULL);
-}
-
-char	*value_env(char *input, int i)
-{
-	char	*new;
-
-	new = ft_strdup("");
-	while (input[i] && !ft_isspace(input[i]) && input[i] != '$' &&
-			input[i] != ':' && input[i] != '"')
-		new = ft_strjoin_onef(new, input[i++]);
-	return (new);
 }
 
 /*

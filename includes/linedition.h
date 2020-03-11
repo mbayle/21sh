@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/10 16:42:05 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 05:32:29 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,4 +360,8 @@ int					exec_env(t_struct *s);
 int					exec_export(t_struct *s, char **av);
 int					exec_set(t_struct *s, char **av);
 int					exec_unset(t_struct *s, char **av);
+int					exec_export5(char ***tmp, char **av, t_struct *s,
+		t_lst2 **l);
+void				free_tmp_export5(char ***tmp);
+int					check_char_ctrl_r(char buf[5], int ret);
 #endif

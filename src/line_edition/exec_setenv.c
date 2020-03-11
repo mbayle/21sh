@@ -1,19 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_setenv.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/03/10 18:47:35 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/11 05:44:27 by ymarcill         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/projectinclude.h"
 
-int		checkenv_setenv(char **av, t_lst2 *l, int j, int c)
+int		checkenv_setenv(char **av, t_lst2 **l, int j, int c)
 {
 	int		i;
 
 	while (!(i = 0) && av[j][c] && av[j][c] != '=')
 		c++;
-	while (l)
+	while (*l)
 	{
-		while (l->env[i] && l->env[i] != '=')
+		while ((*l)->env[i] && (*l)->env[i] != '=')
 			i++;
 		if (i == c)
-			if (ft_strncmp(av[j], l->env, c) == 0)
+			if (ft_strncmp(av[j], (*l)->env, c) == 0)
 				return (0);
-		l = l->next;
+		*l = (*l)->next;
 		i = 0;
 	}
 	c = 0;
@@ -49,7 +61,7 @@ t_lst2	*exec_setenv2(t_lst2 *l, char *s, int c, t_struct *st)
 	if ((l->nenv = ft_strlen(s)))
 		if ((l->var = ft_mstrcpy(l->var, s)) == NULL)
 			return (NULL);
-	l->lcl = 1;
+	l->lcl = 0;
 	l->size = ft_strlen(l->env);
 	l->nvar = ft_strlen(l->varn);
 	l->next = NULL;
@@ -58,29 +70,35 @@ t_lst2	*exec_setenv2(t_lst2 *l, char *s, int c, t_struct *st)
 	return (l);
 }
 
-int		exec_setenv3(char **av, t_struct *s, int e)
+int		exec_setenv3(char **av, t_struct *s, t_lst2 *l, int i)
 {
-	int		i;
 	char	**tmp;
-	char	**dst;
 
-	i = -1;
-	if (!(dst = malloc(sizeof(char*) * (tab_size(av)+ 1))))
-		return (-1);
-	while (av[++i])
-	{
-		tmp = ft_strsplit(av[i], '=');
-		dst[i] = ft_strdup(tmp[0]);
-		ft_freetab(tmp);
-	}
-	dst[i] = NULL;
 	if (s->t == 0)
 	{
-		e == 0 ? exec_unset(s, dst) : exec_unsetenv(s, av);
-		ft_putendl(dst[0]);
-		ft_putnbr(e);
-		return(0);
-		exec_setenv(s, av, NULL, e);
+		if ((tmp = (char**)malloc(sizeof(*tmp) * 3)) == NULL)
+		{
+			ft_eputendl("setenv: warning: malloc error.");
+			return (0);
+		}
+		if ((tmp[1] = ft_mstrcpy(NULL, av[0])) == NULL)
+		{
+			ft_eputendl("setenv: warning: malloc error");
+			return (0);
+		}
+		printf("Adress S %p\n", s);
+		printf("Adress l %p\n", l);
+		printf("Adress l->lcl %p\n", &l->lcl);
+		if (l->lcl == 0)
+			exec_unsetenv(s, tmp);
+//		printf("Adress S %p\n", s);
+//		printf("Adress l %p\n", l);
+//		printf("Adress l->lcl %p\n", &l->lcl);
+		else if (l && l->lcl == 1)
+			exec_unset(s, tmp);
+		exec_setenv(s, av, NULL, i);
+		free(tmp[1]);
+		free(tmp);
 		return (0);
 	}
 	return (1);
@@ -88,12 +106,15 @@ int		exec_setenv3(char **av, t_struct *s, int e)
 
 int		exec_setenv(t_struct *s, char **av, t_lst2 *new, int i)
 {
+	t_lst2	*l;
+
+	l = (*s).env;
 	if (!av[i])
 		ft_putendl("setenv: error: no variable indicated.");
 	else if (av[i][0] == '=')
 		ft_putendl("setenv: error: bad variable name.");
-	else if (!((*s).t = checkenv_setenv(av, (*s).env, i, 0)) || (*s).t == -1)
-			return (exec_setenv3(av, s, i));
+	else if (!((*s).t = checkenv_setenv(av, &l, i, 0)) || (*s).t == -1)
+		return (exec_setenv3(av, s, l, i));
 	else
 	{
 		if ((new = malloc(sizeof(*new))) == NULL)
@@ -102,8 +123,8 @@ int		exec_setenv(t_struct *s, char **av, t_lst2 *new, int i)
 			return (1);
 		if ((new = exec_setenv2(new, av[i], 0, &*s)) == NULL)
 			return (1);
-		if (i == 1)
-			new->lcl = 0;
+		if (i == 0)
+			new->lcl = 1;
 		if (!(*s).env)
 			(*s).env = new;
 	}
