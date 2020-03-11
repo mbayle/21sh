@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 23:39:14 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/06 23:33:50 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 05:21:58 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,19 @@ int		list_size(t_lex *lex)
 	while (lex && lex->next)
 	{
 		i += ft_strlen(lex->value);
+		lex = lex->next;
+	}
+	return (i);
+}
+
+int		lex_size(t_lex *lex)
+{
+	int	i;
+
+	i = 0;
+	while (lex)
+	{
+		i++;
 		lex = lex->next;
 	}
 	return (i);
@@ -45,11 +58,61 @@ char	*list_to_string(t_lex *lex)
 	return (dst);
 }
 
+char	**list_to_tab(t_lex *lex)
+{
+	int		i;
+	char	**dst;
+
+	i = 0;
+	if (!(dst = malloc(sizeof(char*) * (lex_size(lex) + 1))))
+		return (NULL);
+	while (lex && lex->token != UNKNOWN)
+	{
+		if (lex->token == ASSIGN_WORD)
+		{
+			dst[i] = ft_strdup("\r");
+			dst[i] = ft_strjoinfree(dst[i], lex->value);
+		}
+		else if (lex->token == IO_NUMBER)
+		{
+			dst[i] = ft_strjoin(lex->value, lex->next->value);
+			lex = lex->next;
+		}
+		else
+				dst[i] = ft_strdup(lex->value);
+//		ft_putstr("\nvalue: ");
+//		ft_putendl(dst[i]);
+		lex = lex->next;
+		i++;
+	}
+//	ft_putnbr(i);
+//	ft_putendl("JOIN, dst: ");
+	dst[i] = NULL;
+//	i = 0;
+//	while(dst[i])
+//		ft_putendl(dst[i++]);
+//	ft_putendl("-------------------");i = 0;
+//	ft_printtab(dst);
+	//ft_printtab(dst);
+	return (dst);
+}
+
+
 void	join_job_line(t_ast *ast, int p_pos)
 {
 	char	*tmp;
 	char	*tmp2;
 
+//	ft_putstr("\n index: ");
+//	ft_putnbr(g_jobcontrol.index);
+	g_jobcontrol.arg[g_jobcontrol.index] = list_to_tab(ast->lex);
+//	ft_putendl("\n\n\nwwwwwwwwwwwwwwwwwwwwwwwww");
+//	ft_printtab(g_jobcontrol.arg[g_jobcontrol.index]);
+//	ft_putendl("wwwwwwwwwwwwwwwwwwwwwwwww\n\n\n");
+	g_jobcontrol.index++;
+//	ft_putstr("\n index: ");
+//	ft_putnbr(g_jobcontrol.index);
+//	cmd[g_jobcontrol.i] = list_to_tab(ast->lext);
 	tmp = ft_strdup(g_jobcontrol.first_job->command);
 	tmp2 = list_to_string(ast->lex);
 	ft_strdel(&g_jobcontrol.first_job->command);
@@ -60,8 +123,24 @@ void	join_job_line(t_ast *ast, int p_pos)
 	ft_strdel(&tmp);
 	ft_strdel(&tmp2);
 	if (p_pos != 1)
+	{
+		ft_putendl("POS != 1");
 		g_jobcontrol.first_job->command =
 			ft_strjoinfree(g_jobcontrol.first_job->command, " | ");
+		if (!(g_jobcontrol.arg[g_jobcontrol.index] = malloc(sizeof(char*) * 2)))
+			return;
+		g_jobcontrol.arg[g_jobcontrol.index][0] = ft_strdup("|");
+		g_jobcontrol.arg[g_jobcontrol.index][1] = NULL;
+		g_jobcontrol.index++;
+	}
+//	ft_putstr("\n index: ");
+//	ft_putnbr(g_jobcontrol.index);
+	g_jobcontrol.arg[g_jobcontrol.index] = NULL;
+//	ft_putendl("\n\n\nwwwwwwwwwwwwwwwwwwwwwwwww");
+//	ft_printtab(g_jobcontrol.arg[g_jobcontrol.index]);
+//	ft_putendl("\n\n\nwwwwwwwwwwwwwwwwwwwwwwwww");
+	//cmd[g_jobcontrol.index] = NULL;
+//	return (cmd);
 }
 
 void	check_op_pipe(t_ast *ast, int p_pos)
@@ -75,7 +154,10 @@ void	check_op_pipe(t_ast *ast, int p_pos)
 	{
 		join_job_line(ast, p_pos);
 		if (p_pos == 1)
-			do_to_ast();
+		{
+			g_jobcontrol.arg[g_jobcontrol.index] = NULL;
+			do_to_ast(g_jobcontrol.arg);
+		}
 	}
 	else if ((int)lex->operator == PIPE)
 		manage_pipe_bis(ast);

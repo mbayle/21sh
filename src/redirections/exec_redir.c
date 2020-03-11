@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:01:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 02:40:00 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 02:29:21 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int		myheredoc(char *redir, char *file, int nb)
 	}
 	close(link[1]);
 	ft_strdel(&tmp);
-	if (isatty(0) == 0)
-		ft_putendl("NO TTY BEFORE DUP");
+//	if (isatty(0) == 0)
+//		ft_putendl("NO TTY BEFORE DUP");
 	if (nb == g_jobcontrol.here)
 	{
 		if (dup2(link[0], n) < 0)

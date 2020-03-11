@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:30:39 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:32:39 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 20:04:26 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,8 @@ void	delete_job(t_job *job)
 		delete_job(job->next);
 	delete_process(job->first_process);
 	ft_strdel(&job->command);
-	if (job->pgid != -1)
-	{
+	if (job->pgid != -1 && job->pgid != 0)
 		kill(-(job->pgid), 9);
-	}
 	ft_memdel((void**)job);
 }
 

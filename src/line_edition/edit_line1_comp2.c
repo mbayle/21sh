@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 23:44:42 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/06 02:58:04 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/10 20:14:59 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int			check_part_comp(t_struct *s, int i)
 		if (!i)
 			s->l = s->lbg;
 		else
-			while (!(check_whitespaces(s->l->prev->c)))
+			while (s->l && s->l->prev && !(check_whitespaces(s->l->prev->c)))
 				s->l = s->l->prev;
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 05:49:07 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 22:20:28 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 02:37:57 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		print_value(char *key, int i)
 	tmp = g_jobcontrol.alias;
 	while (tmp->next)
 	{
-		ft_putendl(tmp->value);
+//		ft_putendl(tmp->value);
 		if (i && key && tmp->key && ft_strcmp(tmp->key, key) == 0)
 		{
 			print_k_v(key, tmp->value);
@@ -80,7 +80,7 @@ int		exec_alias(char **cmd)
 	alloc_alias();
 	save = g_jobcontrol.alias;
 	al = last_al();
-	ft_putendl(g_jobcontrol.alias->key);
+//	ft_putendl(g_jobcontrol.alias->key);
 	if (tab_size(cmd) < 2)
 		ret = print_value(NULL, 0);
 	while (tab_size(cmd) >= 2 && cmd[++i])
@@ -92,7 +92,7 @@ int		exec_alias(char **cmd)
 				ret = print_error(tmp[0], -1);
 			else
 				al = set_alias(al, tmp[0], tmp[1]);
-			ft_putendl(g_jobcontrol.alias->key);
+//			ft_putendl(g_jobcontrol.alias->key);
 		}
 		else
 		{
@@ -100,6 +100,6 @@ int		exec_alias(char **cmd)
 		}
 	}
 	g_jobcontrol.alias = save;
-	ft_putendl(g_jobcontrol.alias->key);
+//	ft_putendl(g_jobcontrol.alias->key);
 	return (ret);	
 }

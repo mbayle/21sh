@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 06:12:13 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 05:27:34 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int				execute_builtin(char **cmd)
 {
+	char	*tmp;
+
+	tmp = get_line(g_jobcontrol.env);
 	if (!cmd || !cmd[0])
 	{
 		return (g_jobcontrol.ret = 1);
@@ -41,40 +44,34 @@ int				execute_builtin(char **cmd)
 	if (ft_strcmp(cmd[0], "unalias") == 0)
 		g_jobcontrol.ret = exec_unalias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)
-	{
-		exit_edl(&g_jobcontrol.s);
-		exit(0);
-	}
+		exit_edl(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "env") == 0)
 		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
-//		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
-//		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 	if (ft_strcmp(cmd[0], "set") == 0)
 		g_jobcontrol.ret = exec_set(&g_jobcontrol.s, cmd);
-	if (ft_strcmp(cmd[0], "unset") == 0)
-		g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, cmd);
+	if (ft_strcmp(cmd[0], "hash") == 0)
+		g_jobcontrol.ret = exec_hash(&g_jobcontrol.h_tab, tmp, cmd + 1);
 	else if (ft_strcmp(cmd[0], "fg") == 0)
 		g_jobcontrol.ret = put_in_fg(1, g_jobcontrol.first_mail, cmd);
 	else if (ft_strcmp(cmd[0], "bg") == 0)
 		g_jobcontrol.ret = put_in_bg(g_jobcontrol.first_mail, 1, cmd,
 				g_jobcontrol.first_job->first_process);
+	ft_strdel(&tmp);
 	return (0);
 }
 
 int				child_process(int oldlink[2], int newlink[2], char *mypath,
 		char **cmd)
 {
-	char	**av;
 	pid_t	pid;
 
 	pid = -1;
-	av = tab_copy(g_jobcontrol.av);
 	if (mypath && (((ft_strcmp(mypath, "b") != 0) || (ft_strcmp(mypath, "b")
 					== 0 && g_jobcontrol.sim == 1))) && (pid = fork()) == 0)
 	{
-		do_in_child(oldlink, newlink, av);
+		do_in_child(oldlink, newlink, g_jobcontrol.arg);
 		if (g_jobcontrol.sim == 1)
 		{
 			cmd = check_assign(cmd);
@@ -89,7 +86,6 @@ int				child_process(int oldlink[2], int newlink[2], char *mypath,
 		if (ft_strcmp(mypath, "b") != -1 && ft_strcmp(mypath, "b") != 0)
 			execve(mypath, cmd, g_jobcontrol.env);
 	}
-	ft_freetab(av);
 	return (pid);
 }
 
@@ -149,12 +145,13 @@ char			**do_red_ass_exp_quo(char **cmd, char **av)
 {
 	char **tmp;
 
-	cmd = parse_redir(av[g_jobcontrol.i], 0);
+	cmd = parse_redir(av, 0);
+	/**EXPANDRE CMD**/
 	if (g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	else
 		cmd = del_one(cmd, just_ass(cmd));
-	tmp = parse_redir(av[g_jobcontrol.i], 1);
+	tmp = parse_redir(av, 1);
 	if (ft_strcmp(cmd[0], "env") == 0 && is_env_arg(cmd))
 	{
 		del_one(cmd, 1);
@@ -194,12 +191,27 @@ char			**env_copy(t_lst2 *menv)
 	return (dst);
 }
 
+char	*concat_tab(char **cmd)
+{
+	int		i;
+	char	*dst;
+
+	i = 0;
+	if (!(dst = ft_strnew(1)))
+		return (NULL);
+	while (cmd[i])
+		dst = ft_strjoinfree(dst, cmd[i++]);
+	return (dst);
+}
+
 t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		int newlink[2])
 {
 	pid_t	pid;
 	char	**cmd;
 	char	*mypath;
+	char	*tmp;
+
 
 	cmd = NULL;
 	if (g_jobcontrol.ao == 1)
@@ -208,9 +220,11 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		return (NULL);
 	}
 	save_fd();
+	//ft_putstr("In father process avant dapl les redir \n");
+	//ft_printtab(av);
 	cmd = do_red_ass_exp_quo(cmd, av);;
 	mypath = my_path(cmd, g_jobcontrol.env);
-	if (mypath && ft_strcmp(mypath, "b") == 0 && !av[g_jobcontrol.i + 1])
+	if (g_jobcontrol.sim == 0)
 	{
 		execute_builtin(cmd);
 		ft_putendl_fd("IN NO FORK", 2);
@@ -226,13 +240,17 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		exec_ass(g_jobcontrol.ass_stock);
 		g_jobcontrol.assi = 0;
 	}
+	tmp = concat_tab(av);
 	if (mypath)
-		pro = fill_jc_struc(pid, av[g_jobcontrol.i], pro);
+		pro = fill_jc_struc(pid, tmp, pro);
 	ft_strdel(&mypath);
+	ft_strdel(&tmp);
+//	printf("%s %p\n", "IN EXEC av ", av);
+//	printf("%s %p\n\n", "exec av[i] ", av[0]);
 	return (pro);
 }
 
-void			exec_process(char **av, int i)
+void			exec_process(char ***av, int i)
 {
 	int			oldlink[2];
 	int			newlink[2];
@@ -243,41 +261,61 @@ void			exec_process(char **av, int i)
 	newlink[1] = -1;
 	while (av && av[i])
 	{
-		if (ft_strcmp(av[i], "|") == 0)
+	//	printf("%s %p\n", "IN PIPE av ", av);
+	//	printf("%s %p\n", "arg[y] ", av[i]);
+	//	printf("%s %p\n", "arg[y][0] ", av[i][0]);
+		if (av && av[i] && av[i][0] && ft_strcmp(av[i][0], "|") == 0)
 			i++;
 		else
 		{
 			oldlink[0] = newlink[0];
-			if (av[i + 1] && ft_strcmp(av[i + 1], "|") == 0)
+			if (av && av[i] &&  av[i + 1] && av[i + 1][0] && ft_strcmp(av[i + 1][0], "|") == 0)
 				if (pipe(newlink) < 0)
 					ft_putendl_fd("Could not create the pipe", 2);
 			g_jobcontrol.i = i;
-			if (!(pro = father_process(av, pro, oldlink, newlink)))
+			if (!(pro = father_process(av[i], pro, oldlink, newlink)))
 				return ;
 			i++;
 		}
 	}
 }
 
-int				pipe_exec(char **av, char **env, int fg)
+int				pipe_exec(char ***av, char **env, int fg)
 {
 	int	i;
+//	int	y = 0;
+	//char	***tmp;
 
-	i = 0;
+//	tmp = malloc(sizeof(char**) * 4096);
+//	while (av[y])
+//	{
+//		printf("%s %p %p\n", "add av[y]", av[y], &av[y]);
+//		ft_putendl("\n----------------");
+//		ft_printtab(av[y]);
+//		ft_putendl("----------------\n");
+//		tmp[y] = tab_copy(av[y]);
+//		y++;
+//	}
+//	tmp[y] = NULL;
 	(void)env;
+	i = 0;
+//	ft_putendl("In pipeline EX");
+//	ft_printtab(tmp[0]);
+//	ft_putendl("--------------");
+	//ft_putendl(tmp[0][6]);
 	if (g_jobcontrol.env)
 		ft_freetab(g_jobcontrol.env);
 	g_jobcontrol.env = env_copy(g_jobcontrol.s.env);
 	g_jobcontrol.first_job->first_process = NULL;
 	g_jobcontrol.first_job->fg = fg;
-	g_jobcontrol.av = tab_copy(av);
+//	ft_putendl("--------------");
+//	ft_putendl(tmp[0][6]);
 	exec_process(av, i);
 	if (fg)
 		put_in_fg(0, g_jobcontrol.first_mail, NULL);
 	else
 		put_in_bg(g_jobcontrol.first_job, 0, NULL,
 				g_jobcontrol.first_job->first_process);
-	ft_freetab(av);
 	ft_freetab(g_jobcontrol.av);
 	ft_putstr("\nRET: ");
 	ft_putnbr(g_jobcontrol.ret);

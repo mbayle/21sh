@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:24:29 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 21:33:19 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 02:17:58 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void		wait_for_job(t_process *pro, t_job *job, int fg)
 		process_status(pro->lpid, status, pro);
 		pro = pro->next;
 	}
+//	ft_putendl("FINISHE TO WAIt");
 	pro = save;
 	check_if_stop(pro, job);
 }

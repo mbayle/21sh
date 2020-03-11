@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 04:08:35 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 07:10:30 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 00:49:07 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*mypath(char *cmd)
 	path = NULL;
 	if (cmd)
 	{
-		tmp = get_line(g_jobcontrol.env);
+		tmp = get_line2(g_jobcontrol.env);
 		ft_strdel(&path);
 		path = get_pathh(cmd, tmp);
 		if (path)

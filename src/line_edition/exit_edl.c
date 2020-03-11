@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:48:48 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/06 02:58:06 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/10 20:03:36 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	ft_exit3(t_struct *s)
 	free_dchar(&(*s).builtin_ref);
 }
 
-void		exit_edl(t_struct *s)
+void		exit_edl(t_struct *s, char **cmd)
 {
 	t_lst	*del;
 
@@ -80,4 +80,10 @@ void		exit_edl(t_struct *s)
 	}
 	file_history(s->h, &s->h, s, 0);
 	ft_exit3(&*s);
+	reset_attr();
+	delete_job(g_jobcontrol.first_mail);
+	if (cmd[1])
+		exit(ft_atoi(cmd[1]));
+	else
+		exit(g_jobcontrol.ret);
 }

@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 22:50:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 06:09:17 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 02:51:46 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	save_ass_stock(char **ass)
 		i++;
 	}
 	g_jobcontrol.ass_stock[y] = NULL;
-	ft_printtab(g_jobcontrol.ass_stock);
+	//ft_printtab(g_jobcontrol.ass_stock);
 }
 
 char	**ass_arg(char **ass, int i)
@@ -160,7 +160,7 @@ char	**ass_arg(char **ass, int i)
 		save_ass_stock(ass);
 		save_ass(ass);// jenreigstre mes assig de command
 		exec_ass(ass);
-		ft_printtab(ass);
+//		ft_printtab(ass);
 	}
 	ass = del_one(ass, just_ass(ass));
 	return (ass);

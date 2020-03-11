@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:37:24 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 06:04:20 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 18:33:09 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	close_fd(void)
 	close(g_jobcontrol.stdo);
 }
 
-void	do_in_child(int oldlink[2], int newlink[2], char **av)
+void	do_in_child(int oldlink[2], int newlink[2], char ***av)
 {
 	(void)oldlink;
 	(void)newlink;

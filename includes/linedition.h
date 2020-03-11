@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 23:49:06 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/10 16:42:05 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,7 +294,7 @@ void				fp(char *s, char *s2);
 void				do_m(int m);
 void				ft_putstr_anim(char *s, int c);
 void				ps(char *s);
-void				exit_edl(t_struct *s);
+void				exit_edl(t_struct *s, char **cmd);
 int					show_list_poss(t_struct *s);
 int					no_match(t_struct s, t_comp *bcmp);
 int					init_list_poss(t_struct *s, int *co, t_comp **cmp,

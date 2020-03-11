@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 12:40:19 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 21:27:53 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 02:35:32 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ void	sig_handler(int i)
 	if (i == SIGINT || i == SIGTERM || i == SIGKILL)
 	{
 		reset_attr();
-		ft_putendl("GOT SIG");
 		exit(128 + i);
-		//ft_exit();
 	}
 	else if (i == SIGCONT)
 		init_shell_sig();
