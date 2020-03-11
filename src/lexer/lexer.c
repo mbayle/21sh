@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/10 03:54:55 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:36:02 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,56 @@ void	valid(t_lex **lex, char *input, int io, int i)
 **			5 - Free my linked list
 ** Return value : no return
 */
+
+
+char	**lex_to_tab(t_lex *lex)
+{
+	int		i;
+	char	**dst;
+
+	i = 0;
+	if (!(dst = malloc(sizeof(char*) * (lex_size(lex) + 1))))
+		return (NULL);
+	while (lex && lex->token != UNKNOWN)
+	{
+		if (lex->token == IO_NUMBER)
+		{
+			dst[i] = ft_strjoin(lex->value, lex->next->value);
+			lex = lex->next;
+		}
+		else
+        	dst[i] = ft_strdup(lex->value);
+		i++;
+		lex = lex->next;
+	}
+	dst[i] = NULL;
+	return (dst);
+}
+
+/*void	do_heredoc(char **cmd)
+{
+	int	i;
+	int	ret;
+	int	nb;
+
+	i = 0;
+	nb= 0;
+	g_jobcontrol.here = 0;
+	nb_heredoc(cmd);
+	while (cmd[i])
+	{
+		if (ft_seq_occur(cmd[i], "<<"))
+		{
+	//		printf("%s %s\n", "cmd[i]", cmd[i]);
+	//		printf("%s %s\n", "cmd[i + 1]", cmd[i + 1]);
+			nb++;
+			ret = myheredoc(cmd[i], cmd[i + 1], nb);
+		}
+		if (ret == -1)// && (g_jobcontrol.ret = 1) == 1)
+			return ;
+		i++;
+	}
+}*/
 
 void	ft_lexer(t_lex **lex, char *input)
 {

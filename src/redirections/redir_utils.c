@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:09:25 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 13:08:25 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 17:52:06 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int		check_fd(int fd, int n)
 	if (fd == g_jobcontrol.stdi || fd == g_jobcontrol.stdo ||
 		fd == g_jobcontrol.stde)
 	{
+		ft_putnbr(fd);
 		ft_putendl_fd("Shell: Theses fd are reserved by 42sh", 2);
 		return (1);
 	}

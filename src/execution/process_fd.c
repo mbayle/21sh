@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:37:24 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 18:33:09 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 18:45:55 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	save_fd(void)
 {
+	g_jobcontrol.f = 1;
 	g_jobcontrol.stdi = dup(0);
 	g_jobcontrol.stdo = dup(1);
 	g_jobcontrol.stde = dup(2);
@@ -21,6 +22,7 @@ void	save_fd(void)
 
 void	reset_fd(void)
 {
+	g_jobcontrol.f = 0;
 	dup2(g_jobcontrol.stdi, 0);
 	close(g_jobcontrol.stdi);
 	dup2(g_jobcontrol.stdo, 1);

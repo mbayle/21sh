@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 00:48:27 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:36:27 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct				s_jobcontrol
 	char					**av;
 	char					**ass_stock;
 	char					**ass;
+	char					*heredoc;
 	t_hash					*h_tab;
 //	char					**env_cmd;
 	struct termios			term_attr;
@@ -100,7 +101,7 @@ typedef struct				s_jobcontrol
 	struct s_struct			s;
 	int						here;
 	int						index;
-//	int						env;
+	int						f;
 }							t_jobcontrol;
 
 typedef struct				s_read
@@ -123,6 +124,15 @@ typedef	struct				s_index
 }							t_index;
 
 struct s_jobcontrol				g_jobcontrol;
+
+/**
+assign
+**/
+char					**del_one(char **tabl, int pos);
+int						just_ass(char **ass);
+void					exec_ass(char **ass);
+char					**get_key(char **ass);
+char					**move_char(char **ass);
 
 /**
 expansion
@@ -151,6 +161,12 @@ int						exec_unalias(char **cmd);
 /**
  redir
  **/
+
+//void					do_heredoc(char *cmd);
+char					**lex_to_tab(t_lex *lex);
+int						myheredoc(char *redir, char *file, int nb);
+void					nb_heredoc(char **cmd);
+int						lex_size(t_lex *lex);
 int						check_fd(int fd, int n);
 int						size_tab(char *line);
 int						ft_seq_occur(char *str, char *seq);
@@ -170,6 +186,7 @@ char						**parse_redir(char **line, int exec);
 /**
 Utils
 **/
+
 char						*ft_strdupt(char *str, char c);
 char						**del_one(char **tabl, int pos);
 int							just_ass(char **ass);

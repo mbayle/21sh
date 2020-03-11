@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 05:33:24 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 20:58:57 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int				child_process(int oldlink[2], int newlink[2], char *mypath,
 					== 0 && g_jobcontrol.sim == 1))) && (pid = fork()) == 0)
 	{
 		do_in_child(oldlink, newlink, g_jobcontrol.arg);
+		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		if (g_jobcontrol.sim == 1)
 		{
 			cmd = check_assign(cmd);
@@ -145,18 +146,15 @@ char			**check_opt_env(char **cmd)
 
 char			**do_red_ass_exp_quo(char **cmd, char **av)
 {
-	char **tmp;
-
+	/**EXPANDRE av**/
 	cmd = parse_redir(av, 0);
-	/**EXPANDRE CMD**/
 //	cmd = parse_redir(av[g_jobcontrol.i], 0);
 	//INSERT QUOTE_REMOVAL HERE
 	if (g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	else
 		cmd = del_one(cmd, just_ass(cmd));
-	tmp = parse_redir(av, 1);
-	if (ft_strcmp(cmd[0], "env") == 0 && is_env_arg(cmd))
+	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0 && is_env_arg(cmd))
 	{
 		del_one(cmd, 1);
 		cmd = check_opt_env(cmd);
@@ -223,7 +221,8 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		g_jobcontrol.ao = 0;
 		return (NULL);
 	}
-	save_fd();
+	//if (g_jobcontrol.f == 0)
+//	save_fd();
 	//ft_putstr("In father process avant dapl les redir \n");
 	//ft_printtab(av);
 	cmd = do_red_ass_exp_quo(cmd, av);;
@@ -234,16 +233,21 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		ft_putendl_fd("IN NO FORK", 2);
 	}
 	pid = child_process(oldlink, newlink, mypath, cmd);
-	ft_freetab(cmd);
 	close_fd_father(oldlink, newlink);
 	g_jobcontrol.red = 0;
-	reset_fd();
-	if (g_jobcontrol.assi == 1 && g_jobcontrol.sim == 0)
+//	reset_fd();
+	if (g_jobcontrol.assi == 1)// && g_jobcontrol.sim == 0)
 	{
+		ft_putendl("COMMAND: ");
+		ft_putendl(cmd[0]);
 		unexec_ass(g_jobcontrol.ass);
+		ft_putendl("\nASS STOCK");
+		ft_printtab(g_jobcontrol.ass_stock);
+		ft_putendl("-------------");
 		exec_ass(g_jobcontrol.ass_stock);
 		g_jobcontrol.assi = 0;
 	}
+	ft_freetab(cmd);
 	tmp = concat_tab(av);
 	if (mypath)
 		pro = fill_jc_struc(pid, tmp, pro);
@@ -263,6 +267,7 @@ void			exec_process(char ***av, int i)
 	pro = NULL;
 	newlink[0] = -1;
 	newlink[1] = -1;
+	save_fd();
 	while (av && av[i])
 	{
 	//	printf("%s %p\n", "IN PIPE av ", av);
@@ -282,38 +287,21 @@ void			exec_process(char ***av, int i)
 			i++;
 		}
 	}
+	reset_fd();
 }
 
 int				pipe_exec(char ***av, char **env, int fg)
 {
 	int	i;
-//	int	y = 0;
-	//char	***tmp;
-
-//	tmp = malloc(sizeof(char**) * 4096);
-//	while (av[y])
-//	{
-//		printf("%s %p %p\n", "add av[y]", av[y], &av[y]);
-//		ft_putendl("\n----------------");
-//		ft_printtab(av[y]);
-//		ft_putendl("----------------\n");
-//		tmp[y] = tab_copy(av[y]);
-//		y++;
-//	}
-//	tmp[y] = NULL;
 	(void)env;
 	i = 0;
-//	ft_putendl("In pipeline EX");
-//	ft_printtab(tmp[0]);
-//	ft_putendl("--------------");
-	//ft_putendl(tmp[0][6]);
+
+//	g_jobcontrol.assi = 1;
 	if (g_jobcontrol.env)
 		ft_freetab(g_jobcontrol.env);
 	g_jobcontrol.env = env_copy(g_jobcontrol.s.env);
 	g_jobcontrol.first_job->first_process = NULL;
 	g_jobcontrol.first_job->fg = fg;
-//	ft_putendl("--------------");
-//	ft_putendl(tmp[0][6]);
 	exec_process(av, i);
 	if (fg)
 		put_in_fg(0, g_jobcontrol.first_mail, NULL);
@@ -323,6 +311,5 @@ int				pipe_exec(char ***av, char **env, int fg)
 	ft_freetab(g_jobcontrol.av);
 	ft_putstr("\nRET: ");
 	ft_putnbr(g_jobcontrol.ret);
-	//close_fd();
 	return (0);
 }

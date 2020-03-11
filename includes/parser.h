@@ -31,6 +31,7 @@ int					ft_parse(t_lex **lex);
 */
 t_lex				*next_token(t_lex *lex);
 char				*check_tokenerror(t_lex *lex);
+t_lex				*check_heredoc(t_lex *lex);
 int					ft_parse(t_lex **lex);
 
 #endif

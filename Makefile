@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/11 05:31:47 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/03/11 16:06:09 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +68,10 @@ SRC		:=	main.c \
 			execution/pipeline_ast.c \
 			execution/get_path.c \
 			execution/assign.c\
+			execution/assign_bis.c\
 			execution/child_exec.c\
 			utils/ft_freetab.c\
+			utils/tab_utils.c\
 			utils/ft_strdupn.c\
 			utils/ft_strlenu.c\
 			redirections/redirect_to_fd.c \

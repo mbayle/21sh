@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/11 13:33:30 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:04:26 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,20 @@ char		**ft_tabdup(char **av)
 	return (dst);
 }
 
+void		init_jc()
+{
+	g_jobcontrol.heredoc = ft_strnew(1);
+	g_jobcontrol.f = 0;
+	g_jobcontrol.stdi = -1;
+	g_jobcontrol.stde = -1;
+	g_jobcontrol.stdo = -1;
+	g_jobcontrol.ass = NULL;
+	g_jobcontrol.ass_stock = NULL;
+//	ft_bzero(&g_jobcontrol, sizeof(g_jobcontrol));
+	g_jobcontrol.first_job = NULL;
+	g_jobcontrol.alias = NULL;
+}
+
 int			main(int ac, char **av, char **envp)
 {
 	t_struct	s;
@@ -130,11 +144,7 @@ int			main(int ac, char **av, char **envp)
 
 	c = 0;
 	init_shell_sig();
-	g_jobcontrol.ass = NULL;
-	g_jobcontrol.ass_stock = NULL;
-//	ft_bzero(&g_jobcontrol, sizeof(g_jobcontrol));
-	g_jobcontrol.first_job = NULL;
-	g_jobcontrol.alias = NULL;
+	init_jc();
 	g_jobcontrol.env = ft_tabdup(envp);
 	init_struct(&s, envp);
 	g_shell = init_shell(0);

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/10 04:03:43 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:45:34 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,30 @@ char	*check_tokenerror(t_lex *lex)
 ** Return value : If an error is found return 0, else return 1
 */
 
+t_lex	*check_heredoc(t_lex *lex)
+{
+	char	*tmp;
+
+	while (lex)
+	{
+		if (lex->operator == DLESS)
+		{
+			lex = lex->next;;
+			tmp = heredoc(lex->value);
+			ft_strdel(&lex->value);
+			lex->value = ft_strdup(tmp);
+			ft_strdel(&tmp);
+		}
+		if (lex)
+			lex = lex->next;  
+	}
+	return (lex);
+//	save_fd();
+//	tmp = lex_to_tab(lex);
+//	do_heredoc(tmp);
+//	ft_freetab(tmp);
+}
+
 int		ft_parse(t_lex **lex)
 {
 	t_lex	*current;
@@ -92,6 +116,9 @@ int		ft_parse(t_lex **lex)
 		ft_putstr(WHITE);
 	}
 	else
+	{
+		check_heredoc(g_shell->lex);
 		build_ast(g_shell->lex, &g_shell->ast);
+	}
 	return (1);
 }

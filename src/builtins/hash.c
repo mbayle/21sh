@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 23:54:27 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 05:49:18 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 15:43:52 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ char				*browse_command_path(char *command, char **pathlist)
 
 	if (*pathlist)
 	{
-		if (command && ft_strlen(*pathlist) + ft_strlen(command) + 1 < PATH_MAX)
+		if (command && *pathlist && ft_strlen(*pathlist) + ft_strlen(command) + 1 < PATH_MAX)
 		{
 			strcpy(buf, *pathlist);
 			strcat(buf, "/");

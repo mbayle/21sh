@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:05:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 05:23:02 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:13:17 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,24 +123,52 @@ void	ft_printtab(char **tt)
 	}
 }
 
+char	**dst_no_heredoc(char **command)
+{
+	int		i;
+	int		y;
+	char	**dst;
+
+	i = 0;
+	y = 0;
+	if (!(dst = malloc(sizeof(char *) * (tab_size(command) + 1))))
+		return (NULL);
+	while (command && command[i])
+	{
+	//	ft_putendl(command[i]);
+	//	printf("VAL: %s   ADDRESS DST REDIR: %p\n", command[i], command[i]);
+		if (command[i] && ft_seq_occur(command[i], "<<"))
+		{
+		//	ft_putendl(command[i]);
+			if (command[i + 1])
+				i += 2;
+			else
+				i++;
+		}
+		else if (command[i])
+			dst[y++] = ft_strdup(command[i++]);
+	}
+	dst[y] = NULL;
+	return (dst);
+}
+
 char	**parse_redir(char **line, int exec)
 {
 	char	**dst;
+	char	**ex;
 
-//	command = fill_redir_tab(line);
-	//if (exec == 0)
-	// EXPANSION SUR DST RETURN DST	
-//	ft_putstr("\nuuuuuuuuuuuuuuuuuuuuuuuuuuuu : ");
-//	ft_printtab(line);
+	ex = dst_no_heredoc(line);
+	//ft_putendl("NO HEREDOC");
+	//ft_printtab(ex);
 	dst = dst_redir(line);
-//	ft_putendl("\nooooooooooooooooooooooooooo");
-//	ft_printtab(dst);
 	if (exec)
 	{
 		execute_redir(line);
 			ft_freetab(dst);
+			ft_freetab(ex);
 			return (NULL);
 	}
+	ft_freetab(ex);
 //	ft_printtab(dst);
 	//ft_freetab(command);
 	return (dst);
