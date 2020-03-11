@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 23:00:21 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 23:43:21 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/11 05:39:35 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	exec_unsetenv2(t_struct *s, t_lst2 **new, t_lst2 **cp, int c)
 		if ((*cp)->nvar)
 			free((*cp)->varn);
 		free(*cp);
+		*cp = NULL;
 	}
 }
 

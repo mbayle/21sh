@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/10 04:01:46 by mabayle          ###   ########.fr        #
+#    Updated: 2020/03/11 05:31:47 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ INCS		=	./includes/get_next_line.h \
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft 
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address
 
-CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 
+CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 -fsanitize=address
 ifeq ($(DEBUG), 1)
 	CFLAGS	:=	$(CFLAGS) -ggdb -fno-omit-frame-pointer -fsanitize=address
 endif
@@ -45,6 +45,7 @@ OBJ_PATH	:=	./obj/
 
 SRC		:=	main.c \
 			builtins/type.c\
+			builtins/hash.c\
 			builtins/alias.c\
 			builtins/alias_bis.c\
 			builtins/unalias.c\

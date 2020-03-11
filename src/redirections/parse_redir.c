@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:05:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 02:42:23 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 05:23:02 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ char	*for_if(char *line, int *i)
 	*i -= 1;
 	return (command);
 }
+
+//char	*for_quotes()
+//{
+	
+//}
 
 char	*for_else(char *line, int *i)
 {
@@ -60,6 +65,10 @@ char	**fill_redir_tab(char *line)
 		return (NULL);
 	while (line && line[i])
 	{
+	//	if (line[i] == '\"' || line[i] == '\'')
+///		{
+			
+//		}
 		if (line[i] != ' ' && line[i] != '<' && line[i] != '>' &&
 			line[i] != '&')
 			command[y++] = for_if(line, &i);
@@ -81,10 +90,13 @@ char	**dst_redir(char **command)
 	y = 0;
 	if (!(dst = malloc(sizeof(char *) * (tab_size(command) + 1))))
 		return (NULL);
-	while (command[i])
+	while (command && command[i])
 	{
-		if (ft_occur(command[i], '<') || ft_occur(command[i], '>'))
+	//	ft_putendl(command[i]);
+	//	printf("VAL: %s   ADDRESS DST REDIR: %p\n", command[i], command[i]);
+		if (command[i] && (ft_occur(command[i], '<') || ft_occur(command[i], '>')))
 		{
+		//	ft_putendl(command[i]);
 			if (command[i + 1])
 				i += 2;
 			else
@@ -103,30 +115,33 @@ void	ft_printtab(char **tt)
 	int i;
 
 	i = 0;
-	while (tt[i])
+	while (tt && tt[i])
 	{
-		ft_putendl_fd(tt[i], 2);
+		printf("%s %p\n   ", "Mon address: ", tt[i]);
+		ft_putendl_fd(tt[i], 0);
 		i++;
 	}
 }
 
-char	**parse_redir(char *line, int exec)
+char	**parse_redir(char **line, int exec)
 {
-	char	**command;
 	char	**dst;
 
-	command = fill_redir_tab(line);
+//	command = fill_redir_tab(line);
 	//if (exec == 0)
 	// EXPANSION SUR DST RETURN DST	
-	dst = dst_redir(command);
+//	ft_putstr("\nuuuuuuuuuuuuuuuuuuuuuuuuuuuu : ");
+//	ft_printtab(line);
+	dst = dst_redir(line);
+//	ft_putendl("\nooooooooooooooooooooooooooo");
+//	ft_printtab(dst);
 	if (exec)
 	{
-		execute_redir(command);
+		execute_redir(line);
 			ft_freetab(dst);
-			ft_freetab(command);
 			return (NULL);
 	}
 //	ft_printtab(dst);
-	ft_freetab(command);
+	//ft_freetab(command);
 	return (dst);
 }

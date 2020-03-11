@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 10:35:07 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 22:42:59 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 02:28:26 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,20 @@ int		del_alias(char *key)
 	t_alias *link;
 
 	link = g_jobcontrol.alias;
-	if (link)
-	{
-		ft_putstr("linkkey -->");
-		ft_putendl(link->key);
-		ft_putstr("kkey -->");
-		ft_putendl(key);
-	}
+//	if (link)
+//	{
+//		ft_putstr("linkkey -->");
+//		ft_putendl(link->key);
+//		ft_putstr("kkey -->");
+//		ft_putendl(key);
+//	}
 	if (link && link->key && key && ft_strcmp(link->key, key) == 0)
 		return (del_first(link));
 	while (link)
 	{
 		if (link->next && ft_strcmp(link->next->key, key) == 0)
 		{
-			ft_putendl("I FOUND IT");
+//			ft_putendl("I FOUND IT");
 			ft_putendl(link->next->key);
 			ft_strdel(&link->next->key);
 			ft_strdel(&link->next->value);
@@ -77,8 +77,8 @@ int		del_alias(char *key)
 
 void	del_all(t_alias *al)
 {
-	printf("%s %p\n", "adressde g_alias: ", g_jobcontrol.alias);
-	printf("%s %p\n", "adressde al: ", al);
+//	printf("%s %p\n", "adressde g_alias: ", g_jobcontrol.alias);
+//	printf("%s %p\n", "adressde al: ", al);
 	if (!al)
 		return ;
 	if (al->next)
@@ -106,7 +106,7 @@ int		exec_unalias(char **cmd)
 	}
 	else if (cmd[i])
 	{
-		ft_putendl("In my loop");
+//		ft_putendl("In my loop");
 		while (cmd[i])
 			ret = del_alias(cmd[i++]);	
 	}

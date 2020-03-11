@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 22:50:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 15:48:31 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/11 13:40:21 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,30 +79,66 @@ void	exec_ass(char **ass)
 	char	*tmp;
 
 	i = 0;
-	while (ass[i] && ass[i][0] == '\r')
+	while (ass && ass[i] && ass[i][0] == '\r')
 	{
 		tmp = ft_strdup(ass[i]);
 		free(ass[i]);
 		ass[i] = ft_strdup(tmp + 1);
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		i++;
 	}
+	if (ass)
+	{
+		ft_putendl("\n\nEXEC ASS");
+		ft_printtab(ass);
+		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
+	}
+}
+
+char	**get_key(char **ass)
+{
+	int		i;
+	int		y;
+	char	**tmp;
+	char	**dst;
+
+	i = 0;
+	y = 1;
+	if (!(dst = malloc(sizeof(char*) * (tab_size(ass) + 2))))
+		return (NULL);
+	dst[0] = ft_strdup("unset");
+	while (ass[i])
+	{
+		tmp = ft_strsplit(ass[i], '=');
+		dst[y] = ft_strdup(tmp[0]);
+		ft_freetab(tmp);
+		i++;
+		y++;
+	}
+	dst[y] = NULL;
+	ft_putendl("IN GET KEY ASS");
+	ft_printtab(dst);
+	return (dst);
 }
 
 void	unexec_ass(char **ass)
 {
 	int		i;
 	char	*tmp;
+	char	**dst;
 
 	i = 0;
-	while (ass[i] && ass[i][0] == '\r')
+	while (ass && ass[i] && ass[i][0] == '\r')
 	{
 		tmp = ft_strdup(ass[i]);
 		free(ass[i]);
 		ass[i] = ft_strdup(tmp + 1);
-				g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		i++;
 	}
+	dst = get_key(ass);
+	ft_putendl("IN EXEC ASS");
+	ft_printtab(dst);
+	g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, dst);
+	ft_freetab(dst);
 }
 
 void	save_ass(char **ass)
@@ -112,6 +148,8 @@ void	save_ass(char **ass)
 
 	i = 0;
 	y = 0;
+	if (g_jobcontrol.ass)
+		ft_freetab(g_jobcontrol.ass);
 	if (!(g_jobcontrol.ass = malloc(sizeof(char *) * (just_ass(ass) + 1))))
 		return ;
 	while (ass[i] && ass[i][0] == '\r')
@@ -129,6 +167,8 @@ void	save_ass_stock(char **ass)
 	i = 0;
 	y = 0;
 	menv = g_jobcontrol.s.env;
+	if (g_jobcontrol.ass_stock)
+		ft_freetab(g_jobcontrol.ass_stock);
 	if (!(g_jobcontrol.ass_stock = malloc(sizeof(char*) * (just_ass(ass) + 1))))
 		return ;
 	while (ass[i] && i < just_ass(ass))
@@ -136,7 +176,7 @@ void	save_ass_stock(char **ass)
 		while (menv) // ta struct de var locale
 		{
 	 		tmp = ft_strsplit(menv->env, '=');
-			if (menv->lcl == 1 && ft_strcmp(tmp[0], ass[i]) == 0)
+			if (menv->lcl == 0 && ft_strcmp(tmp[0], ass[i]) == 0)
 				g_jobcontrol.ass_stock[y++] = ft_strdup(menv->env);
 			ft_freetab(tmp);
 			menv = menv->next;
@@ -145,7 +185,13 @@ void	save_ass_stock(char **ass)
 		i++;
 	}
 	g_jobcontrol.ass_stock[y] = NULL;
+	ft_putnbr(y);
+	ft_putendl("IN SAVE ASS STOCK");
 	ft_printtab(g_jobcontrol.ass_stock);
+	ft_putendl("-----------");
+	if (y == 0)
+		ft_memdel((void**)&g_jobcontrol.ass_stock);
+	//ft_printtab(g_jobcontrol.ass_stock);
 }
 
 char	**move_char(char **ass)
@@ -170,23 +216,46 @@ char	**move_char(char **ass)
 char	**ass_arg(char **ass, int i)
 {
 	char	**tmp;
+	int		t;
 
+	t = just_ass(ass);
 	tmp = tab_copy(ass);
 	if ((i = just_ass(ass)) == -1)/*&& pas de ARGV)*/
 	{
+		g_jobcontrol.assi = 0;
 		ass= move_char(ass);
 		g_jobcontrol.ret= exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		return (tmp);
 	}
 	else /*ex: a=b c=d ls -l*/
 	{
+//		ft_putendl("ARG");
+//		ft_putnbr(ass[0][0]);
+//		ft_putendl("-----");
+//		ft_putnbr(just_ass(ass));
+//		ft_putendl("-----");
+//		ft_putnbr(just_ass(ass));
 		g_jobcontrol.assi = i;
 		save_ass_stock(ass);
+//		ft_putnbr(ass[0][0]);
+//		ft_putstr("  ");
 		save_ass(ass);// jenreigstre mes assig de command
+//		ft_putnbr(ass[0][0]);
+//		ft_putstr("  ");
 		exec_ass(ass);
-		ft_printtab(ass);
+//		ft_putnbr(ass[0][0]);
+//		ft_putstr("  ");
+//		ft_printtab(ass);
 	}
-	ass = del_one(ass, just_ass(ass));
+	ft_putendl("SAVE ASS");
+	ft_printtab(g_jobcontrol.ass);
+	ft_putendl("SAVE ASS SOTCK");
+	ft_printtab(g_jobcontrol.ass_stock);
+//	ft_putnbr(ass[0][0]);
+//		ft_putnbr(just_ass(ass));
+	ass = del_one(ass, t);
+//	ft_putendl("print ASS");
+//	ft_printtab(ass);
 	return (ass);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 01:20:24 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/10 16:42:07 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/11 05:34:03 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ t_ast	*beta_ast(t_ast *ast, int priority)
 ** Return value : return ast
 */
 
-void	do_to_ast()
+void	do_to_ast(char ***tmp)
 {
-	char	**tmp;
-
-	tmp = quick_tab_cmd(g_jobcontrol.first_job->command);
+//	char	**tmp;
+//(void)tmp;
+//	tmp = quick_tab_cmd(g_jobcontrol.first_job->command);
 	pipe_exec(tmp, g_jobcontrol.env, g_jobcontrol.g_fg);
 }
 

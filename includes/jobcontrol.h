@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 02:45:02 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 00:48:27 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,12 @@ typedef struct				s_alias
 
 typedef struct				s_jobcontrol
 {
+	char					***arg;
 	char					**env;
 	char					**av;
 	char					**ass_stock;
 	char					**ass;
+	t_hash					*h_tab;
 //	char					**env_cmd;
 	struct termios			term_attr;
 	struct termios			save_attr;
@@ -97,6 +99,7 @@ typedef struct				s_jobcontrol
 	int						sim;
 	struct s_struct			s;
 	int						here;
+	int						index;
 //	int						env;
 }							t_jobcontrol;
 
@@ -122,8 +125,19 @@ typedef	struct				s_index
 struct s_jobcontrol				g_jobcontrol;
 
 /**
+expansion
+**/
+char					*check_exp_hashper(char *exp, char c);
+char					*simple_hash_word(char *exp, char c);
+char					*simple_hash(char *exp, char c);
+char					*simple_exp(char *exp);
+char					**get_param_word(char *exp, char c);
+char					*check_match(char *param, char *word, char c);
+/**
 builtuin
 **/
+int						exec_hash(t_hash **hash, char *pathvar, char **cmd);
+t_hash					*browse_command(char *command, char *pathvar, t_hash **hash);
 void					unexec_ass(char **ass);
 void					exec_ass(char **ass);
 void					alloc_alias(void);
@@ -152,7 +166,7 @@ int						dig_to_io(char *str);
 /**
 parse ast
 **/
-char						**parse_redir(char *line, int exec);
+char						**parse_redir(char **line, int exec);
 /**
 Utils
 **/
@@ -191,7 +205,7 @@ jocontrol / execution
 void						save_fd(void);
 void						reset_fd(void);
 void						close_fd(void);
-void						do_in_child(int oldlink[2], int newlink[2], char **av);
+void						do_in_child(int oldlink[2], int newlink[2], char ***av);
 t_job						*if_bg_stp(t_job *job, t_job *save);
 t_job						*if_bg(t_job *job, t_job *save, char *av);
 t_job						*if_parser(char **av, t_job *job);
@@ -207,7 +221,7 @@ int							check_if_stop(t_process *p, t_job *job);
 void						to_do_if_stp(t_job *job, t_job *save, int i);
 int							check_jb_nb();
 void						set_id_sign(int foreground);
-void						fill_pipe(int oldlink[2], int newlink[2], char **av, int i)
+void						fill_pipe(int oldlink[2], int newlink[2], char ***av, int i)
 ;
 t_process					*fill_jc_struc(pid_t pid, char *cmd, t_process *pro);
 void						wait_for_job(t_process *pro, t_job *job, int fg);
@@ -244,14 +258,15 @@ pid_t						job_nb(int i, t_job *j);
 pid_t						jobs_parser(char *str, t_job *j);
 void						wait_for_job(t_process *pro, t_job *job, int i);
 int							put_in_fg(int cont, t_job *job, char **av);
-int							pipe_exec(char **av, char **env,  int fg);
+int							pipe_exec(char ***av, char **env,  int fg);
 int							init_shell_sig();
 t_process					*init_process_struct();
 t_job						*init_job_struct();
 void						launch_fg(int foreground);
 void						ign_jb_sign(int i);
 void						ft_freetab(char **s1);
-char						**get_line(char **env);
+char						*get_line(char **env);
+char						**get_line2(char **env);
 char						*get_pathh(char *nwav, char **path);
 
 

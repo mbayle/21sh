@@ -66,7 +66,7 @@ t_ast				*create_ast(t_ast *ast, int priority);
 void				sub_split(t_ast *ast, int priority);
 int					is_in_lexer(t_lex *lex, int priority);
 t_ast				*beta_ast(t_ast *ast, int priority);
-void				do_to_ast();
+void				do_to_ast(char ***tmp);
 int					build_ast(t_lex *lex, t_ast **ast);
 
 /*

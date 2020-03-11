@@ -6,12 +6,12 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:23:35 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/09 04:51:56 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 05:47:59 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-
+#include <sys/mman.h>
 void	set_id_sign(int foreground)
 {
 	pid_t	pid;
@@ -27,15 +27,17 @@ void	set_id_sign(int foreground)
 	ign_jb_sign(1);
 }
 
-void	fill_pipe(int oldlink[2], int newlink[2], char **av, int i)
+void	fill_pipe(int oldlink[2], int newlink[2], char ***av, int i)
 {
 	if (i > 0)
 	{
+		ft_putendl_fd("I DUP 0", 2);
 		dup2(oldlink[0], 0);
 		close(oldlink[0]);
 	}
 	if (av[i + 1])
 	{
+		ft_putendl_fd("I DUP 1", 2);
 		dup2(newlink[1], 1);
 		close(newlink[1]);
 		close(newlink[0]);
@@ -89,12 +91,13 @@ int		check_b(char **cmd)
 	if (cmd && cmd[0] && (!ft_strcmp(cmd[0], "jobs") || !ft_strcmp(cmd[0], "fg")
 	|| !ft_strcmp(cmd[0], "bg") || !ft_strcmp(cmd[0], "setcpt")
 	|| !ft_strcmp(cmd[0], "history") || !ft_strcmp(cmd[0], "help")
-	|| !ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "echo") ||
+	|| !ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "hash") ||
 	!ft_strcmp(cmd[0], "test") || !ft_strcmp(cmd[0], "exit") ||
 	!ft_strcmp(cmd[0], "setenv") || !ft_strcmp(cmd[0], "unsetenv") ||
 	!ft_strcmp(cmd[0], "set") || !ft_strcmp(cmd[0], "unset") ||
 	!ft_strcmp(cmd[0], "export") || !ft_strcmp(cmd[0], "type") ||
 	!ft_strcmp(cmd[0], "alias") || !ft_strcmp(cmd[0], "unalias") ||
+	!ft_strcmp(cmd[0], "env") || 
 	cmd[0][0] == '\r'))
 		return (0);
 	else
@@ -104,7 +107,8 @@ int		check_b(char **cmd)
 
 char	*my_path(char **cmd, char **env)
 {
-	char	**tmp;
+	char	*tmp;
+	t_hash	*h_tab;
 	char	*mypath;
 	t_read	rd;
 
@@ -118,13 +122,21 @@ char	*my_path(char **cmd, char **env)
 		ft_strdel(&mypath);
 		if (!(mypath = local_file(cmd[0])))
 		{
-			mypath = get_pathh(cmd[0], tmp);
+//			ft_putendl("NO LOCAL FILE");
+			if ((h_tab = browse_command(cmd[0], tmp, &g_jobcontrol.h_tab)) == MAP_FAILED)
+				return (NULL);
+			if (h_tab && h_tab->path)
+				mypath = ft_strdup(h_tab->path);
+		//	mypath = get_pathh(cmd[0], tmp);
 			if (mypath && permissions(&mypath, rd.rdbuf))
 				g_jobcontrol.ret = 1;
-			else if (!mypath && g_jobcontrol.first_job->last_ret != 1)
+			else if (!mypath)//) && g_jobcontrol.ret != 1)
 				if_not_cmd(cmd[0]);
 		}
+//		else
+//			ft_putendl("IS A LOCALE");
 	}
-	ft_freetab(tmp);
+//	ft_freetab(tmp);
+	ft_strdel(&tmp);
 	return (mypath);
 }

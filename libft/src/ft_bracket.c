@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/10 03:54:55 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/11 06:01:45 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ static int	match(char top, char a)
         return (1);
     return (0);
 }
-
+#include <stdio.h>
 int         ft_bracket(char *str, int top, int a, char *stack)
 {
+	printf("%s %p\n", str, str);
     while (str[a])
     {
         if (str[a] == '(' || str[a] == '{' || str[a] == '[')
