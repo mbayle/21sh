@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/09 09:01:39 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/10 23:57:54 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void		tmp_free_struct(t_struct *s)
 	(*s).tmp = NULL;
 	free_dchar(&(*s).envi);
 	(*s).av = NULL;
+	sec_free(&s->cmd, 0);
+	s->cmd = NULL;
 }
 
 char		**ft_tabdup(char **av)

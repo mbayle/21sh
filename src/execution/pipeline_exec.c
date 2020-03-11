@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 17:23:30 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/11 00:13:52 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int				execute_builtin(char **cmd)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "alias") == 0)
 		g_jobcontrol.ret = exec_alias(cmd);
+	if (ft_strcmp(cmd[0], "cd") == 0)
+		g_jobcontrol.ret = //fonction val;
 	if (ft_strcmp(cmd[0], "unalias") == 0)
 		g_jobcontrol.ret = exec_unalias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)
