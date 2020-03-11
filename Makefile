@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/11 17:46:31 by frameton         ###   ########.fr        #
+#    Updated: 2020/03/11 19:46:06 by frameton         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -192,6 +192,7 @@ SRC		:=	main.c \
 			line_edition/exec_export.c\
 			line_edition/exec_set.c\
 			line_edition/exec_unset.c\
+			line_edition/check_quotes2.c \
 			input/line_edition.c \
 			input/term_mode.c \
 			input/get_cursor_pos.c \
