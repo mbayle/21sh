@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/11 05:31:47 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/03/11 17:46:31 by frameton         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,6 +108,7 @@ SRC		:=	main.c \
 			ast/process_ast.c \
 			ast/print_ast.c \
 			ast/ast_utils.c \
+			line_edition/bsls.c \
 			line_edition/check_auth.c \
 			line_edition/check_builtin.c \
 			line_edition/check_command.c \
