@@ -1,5 +1,7 @@
 2
 exit
+ls |
+exit
 echo ${{{}}}
 exit
 echo ${{{}}}e

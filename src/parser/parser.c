@@ -52,6 +52,9 @@ char	*check_tokenerror(t_lex *lex)
 		if (lex->token == CONTROL_OPE && (next_tok = next_token(lex))
 				&& next_tok->token == CONTROL_OPE)
 			return (next_tok->value);
+		if (lex->operator == PIPE && (next_tok = next_token(lex))
+				&& next_tok->token == UNKNOWN)
+			return (lex->value);
 		lex = lex->next;
 	}
 	return (NULL);
