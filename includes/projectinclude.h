@@ -25,6 +25,5 @@
 # include "grammar.h"
 # include "parser.h"
 # include "mybtree.h"
-# include "expansion.h"
 
 #endif

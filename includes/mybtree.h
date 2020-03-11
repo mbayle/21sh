@@ -75,6 +75,7 @@ int					build_ast(t_lex *lex, t_ast **ast);
 t_ast				*init_node(t_lex *lex, char *root);
 void				init_priority(t_lex *lex);
 t_ast				*no_root(t_lex *lex, t_ast *ast);
+void				astdel(t_ast **ast);
 
 /*
 ** print_ast.c

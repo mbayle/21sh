@@ -37,7 +37,7 @@ LDFLAGS		:=	-L$(dir $(LIBFT)) -lft
 
 CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 
 ifeq ($(DEBUG), 1)
-	CFLAGS	:=	$(CFLAGS) -fsanitize=address -ggdb -fno-omit-frame-pointer 
+	CFLAGS	:=	$(CFLAGS) -ggdb -fno-omit-frame-pointer -fsanitize=address
 endif
 
 SRC_PATH	:=	./src/
@@ -202,9 +202,7 @@ SRC		:=	main.c \
 			input/char_handler.c \
 			input/tools.c \
 			input/tools_bis.c \
-			input/signals.c \
-			expansion/expansion.c \
-			expansion/param_expand.c
+			input/signals.c 
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

@@ -111,7 +111,7 @@ int			print_prompt(int p, t_struct *s, int i)
 	free((*s).env_path);
 	if (((*s).env_path = search_pathenv((*s).env)) == NULL)
 		if (c == -1)
-			ft_eputstr("minishell: "MAGENTA"warning"
+			ft_eputstr("Shell "MAGENTA"warning"
 					WHITE": the PATH environment variable doesn't exist.\n\0");
 	(*s).envi[i] = 0;
 	print_prompt2(p, (*s).env, s);

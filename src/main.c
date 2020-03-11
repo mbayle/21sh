@@ -84,7 +84,7 @@ void		init_struct(t_struct *s, char **envp)
 	envp = save;
 	init_start_pwd(s);
 	if (((*s).env_path = search_pathenv((*s).env)) == NULL)
-		ft_eputstr("minishell: "MAGENTA"warning"
+		ft_eputstr("Shell "MAGENTA"warning"
 		WHITE": the PATH environment variable does not exist.\n\0");
 }
 

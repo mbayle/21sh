@@ -1,5 +1,133 @@
 2
 exit
+echo ${{{}}}
+exit
+echo ${{{}}}e
+echo ${{{}}}
+echo ${}}}
+exit
+echo ${}}}
+exit
+echo ${}}}
+echo $}}}
+exit
+echo ${({{}})}
+echo ${({{}}))
+echo ${({{}})))))))))))))
+exit
+echo ${({{}})))))))))))))
+echo ${({{}}))
+echo ${({{}})
+echo ${({{}})}
+exit
+echo ${({{}})}
+echo ${({{}}})
+echo ${{{}}}
+echo ${{{}}\}
+echo ${{{}}}}}
+echo ${{{}}}
+echo ${{{}}}}
+exit
+exi
+echo ${{{}}}}
+echo ${{{}}}
+echo ${{{}}
+echo ${}${}${}$}
+echo ${}${}${}${}
+exit
+echo ${}${}${}${}
+exit
+echo ${}${}${}${}
+exit
+echo ${}${}${}${}
+exit
+echo ${}${}${}${}
+exit
+echo ${}${}${}${}
+echo ${}${}${}$}
+exit
+echo ${}${}${}$}
+exit
+echo ${}${}${}$}
+echo ${}${}${}${}
+exit
+echo ${}${}${}${}
+echo ${}${}${}$}
+exit
+echo ${}${}${}$}
+echo ${}${}${}${}
+exit
+exi
+echo {{{lol}} okok
+echo ${{{lol}} okok
+echo ${{{lol}}}
+echo $((test))
+echo ${test}
+exit
+echo ${test}
+echo ""
+echo 
+echo ''
+echo \\\
+exit
+echo ${we}
+exit
+echo ${we}
+exit
+echo ${ceci est un test}
+exit
+echo ${ceci est un test}
+make
+echo ${ceci est un test}
+ls ; ls ; ls
+exit
+ls ; ls ; ls
+ls
+exit
+ls
+ls ; la ; lo
+ls ; ls ; ls
+exit
+ls ; ls ; ls
+ls ; la ; lo
+exit
+ls ; la ; lo
+exit
+ls ; ls ; ls
+exit
+ls ; ls ; ls
+exit
+ls ; ls ; ls
+exit
+echo ${ceci est un test}
+exit
+echo ${ceci est un test}
+exit
+echo ${ceci est un test}
+exit
+echo ${ceci est un test}
+exit
+echo ${ceci est un test}
+exit
+echo ${ceci est un test}
+exit
+echo ${ceci est un test}
+echo "${ceci est un test}"
+exit
+echo "${ceci est un test}"
+exit
+echo "${ceci est un test}"
+echo ${ceci est un test}
+exit
+echo ${ceci est un test}
+exit
+cat test
+echo $PQTATH >> test
+echo $PQTATH
+env && unsetenv TEST && env
+env && export TEST="Toto" && env
+clear
+exit
 ls "-l \" dd" && cd test
 ls "-l dd" && \" cd test\"
 ls "-l dd" && \" cd test

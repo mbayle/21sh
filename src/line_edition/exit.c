@@ -89,12 +89,12 @@ void		ft_exit(int i, t_struct *s)
 		if (ft_strcmp((*s).av[0], " ") == 0)
 			(*s).prompt = 0;
 		else
-			ft_2eputendl("minishell: command not found: ", s->av[0]);
+			ft_2eputendl("Shell command not found: ", s->av[0]);
 	}
 	if (i == -3)
-		ft_2eputendl("minishell: permission denied: ", (*s).av[0]);
+		ft_2eputendl("Shell permission denied: ", (*s).av[0]);
 	if (i == -4)
-		ft_2eputendl("minishell: it's a directory: ", (*s).av[0]);
+		ft_2eputendl("Shell it's a directory: ", (*s).av[0]);
 	if (i == 2)
 		ft_eputstr("System fork call failed.\n");
 	if (i == 5)
