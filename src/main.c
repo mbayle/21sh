@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/11 17:40:57 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:12:59 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	init_term(t_struct *s)
 	s->edq = 0;
 	s->cpt_p3 = 0;
 	s->cpt_p = 0;
+	s->b = 0;
+	s->p = 0;
 	s->bs = 0;
 	s->cpt_p2 = 0;
 	s->exit = 0;

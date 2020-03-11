@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/11 19:45:17 by frameton         ###   ########.fr       */
+/*   Created: 2020/03/11 20:02:16 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/11 20:02:36 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,4 +369,5 @@ void				free_tmp_export5(char ***tmp);
 int					check_char_ctrl_r(char buf[5], int ret);
 int					bsls(t_struct *s, char buf[701]);
 void				check_bslash(char **save);
+int					check_bracket(t_struct *s, char buf[701]);
 #endif

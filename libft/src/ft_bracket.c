@@ -6,27 +6,27 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/11 06:01:45 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:51:17 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-
-static int	match(char top, char a)
+static int  match(char top, char a)
 {
-    if (top == '(' && a == ')')
-        return (1);
-    if (top == '{' && a == '}')
-        return (1);
-    if (top == '[' && a == ']')
-        return (1);
+    if (top)
+    {
+        if (top == '(' && a == ')')
+            return (1);
+        if (top == '{' && a == '}')
+            return (1);
+        if (top == '[' && a == ']')
+            return (1);
+    }
     return (0);
 }
-#include <stdio.h>
 int         ft_bracket(char *str, int top, int a, char *stack)
 {
-	printf("%s %p\n", str, str);
     while (str[a])
     {
         if (str[a] == '(' || str[a] == '{' || str[a] == '[')
@@ -37,9 +37,23 @@ int         ft_bracket(char *str, int top, int a, char *stack)
         if (str[a] == ')' || str[a] == '}' || str[a] == ']')
         {
             if (stack[top] == 0)
+            {
+                write(1, "Case 1\n", 7);
+                if (str[a] == '}')
+                    return (-1);
+                if (str[a] == ')')
+                    return (-2);
                 return (0);
+            }
             else if (!(match(stack[top], str[a])))
+            {
+                write(1, "Case 2\n", 7);
+                if (str[a] == '}')
+                    return (-1);
+                if (str[a] == ')')
+                    return (-2);
                 return (0);
+            }
             else
             {
                 stack[top] = 0;
