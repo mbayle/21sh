@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:54:59 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/09 01:18:01 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 20:06:34 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int			init_lst(t_struct *s, int i, int r, int ret)
 		if (!init_lst_b4(s, &sz, buf))
 			return (1);
 		if ((s->col = sz.ws_col) && ((buf[0] == '\n' && !history_exp(s, 0, NULL)
-					&& check_quotes(s, buf)) || (buf[0] == 12 && ret == 1)))
+		&& check_quotes(s, buf) && bsls(s, buf)) || (buf[0] == 12 && ret == 1)))
 			break ;
 		if (!(r = recup_stdin(&*s, buf, &i, ret)))
 			return (0);

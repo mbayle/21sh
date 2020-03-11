@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 20:58:57 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 21:49:01 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,10 +221,6 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		g_jobcontrol.ao = 0;
 		return (NULL);
 	}
-	//if (g_jobcontrol.f == 0)
-//	save_fd();
-	//ft_putstr("In father process avant dapl les redir \n");
-	//ft_printtab(av);
 	cmd = do_red_ass_exp_quo(cmd, av);;
 	mypath = my_path(cmd, g_jobcontrol.env);
 	if (g_jobcontrol.sim == 0)
@@ -235,15 +231,9 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	pid = child_process(oldlink, newlink, mypath, cmd);
 	close_fd_father(oldlink, newlink);
 	g_jobcontrol.red = 0;
-//	reset_fd();
 	if (g_jobcontrol.assi == 1)// && g_jobcontrol.sim == 0)
 	{
-		ft_putendl("COMMAND: ");
-		ft_putendl(cmd[0]);
 		unexec_ass(g_jobcontrol.ass);
-		ft_putendl("\nASS STOCK");
-		ft_printtab(g_jobcontrol.ass_stock);
-		ft_putendl("-------------");
 		exec_ass(g_jobcontrol.ass_stock);
 		g_jobcontrol.assi = 0;
 	}
@@ -253,8 +243,6 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		pro = fill_jc_struc(pid, tmp, pro);
 	ft_strdel(&mypath);
 	ft_strdel(&tmp);
-//	printf("%s %p\n", "IN EXEC av ", av);
-//	printf("%s %p\n\n", "exec av[i] ", av[0]);
 	return (pro);
 }
 

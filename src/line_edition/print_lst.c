@@ -6,25 +6,38 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:24:43 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 05:34:47 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/11 19:16:58 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
+
+static void		print_lst3(t_struct s)
+{
+	if (s.l->sel)
+		ft_putstr(BWHITE);
+	if (s.eq || s.edq)
+		fp("bl", NULL);
+	if (s.eq && s.l->c == '\'')
+		ft_putstr(RED);
+	if (s.edq && s.l->c == '"')
+		ft_putstr(RED);
+	if (s.l->c == '\\' && !s.l->next)
+		ft_putstr(RED);
+	if (s.l->c == '\\' && !s.l->next && s.bs)
+		ft_putstr(SRED);
+	if ((s.l->c == '{' || s.l->c == '}') && s.b)
+		ft_putstr(RED);
+	if ((s.l->c == '(' || s.l->c == ')') && s.p)
+		ft_putstr(RED);
+}
 
 static t_lst	*print_lst2(t_struct s, int *c, int *i, int *nl)
 {
 	s.l = s.lbg;
 	while (s.l)
 	{
-		if (s.l->sel)
-			ft_putstr(BWHITE);
-		if (s.eq || s.edq)
-			fp("bl", NULL);
-		if (s.eq && s.l->c == '\'')
-			ft_putstr(RED);
-		if (s.edq && s.l->c == '"')
-			ft_putstr(RED);
+		print_lst3(s);
 		write(1, &s.l->c, 1);
 		ft_putstr(WHITE);
 		*c = s.l->plc;

@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/11 16:06:09 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/03/11 21:27:23 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,8 @@ SRC		:=	main.c \
 			ast/process_ast.c \
 			ast/print_ast.c \
 			ast/ast_utils.c \
+			line_edition/bsls.c \
+			line_edition/check_bracket.c \
 			line_edition/check_auth.c \
 			line_edition/check_builtin.c \
 			line_edition/check_command.c \
@@ -193,6 +195,7 @@ SRC		:=	main.c \
 			line_edition/exec_export.c\
 			line_edition/exec_set.c\
 			line_edition/exec_unset.c\
+			line_edition/check_quotes2.c \
 			input/line_edition.c \
 			input/term_mode.c \
 			input/get_cursor_pos.c \

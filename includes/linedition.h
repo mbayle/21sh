@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/17 01:07:38 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/11 05:32:29 by ymarcill         ###   ########.fr       */
+/*   Created: 2020/03/11 20:02:16 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/11 20:02:36 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,9 @@ typedef struct		s_struct
 	int				set_cpt;
 	int				eq;
 	int				edq;
+	int				bs;
+	int				b;
+	int				p;
 	int				mp;
 	int				env_i;
 	int				cpt5;
@@ -364,4 +367,7 @@ int					exec_export5(char ***tmp, char **av, t_struct *s,
 		t_lst2 **l);
 void				free_tmp_export5(char ***tmp);
 int					check_char_ctrl_r(char buf[5], int ret);
+int					bsls(t_struct *s, char buf[701]);
+void				check_bslash(char **save);
+int					check_bracket(t_struct *s, char buf[701]);
 #endif
