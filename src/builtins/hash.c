@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hash.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/10 23:54:27 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 04:04:55 by ymarcill         ###   ########.fr       */
+/*   Created: 2020/03/10 23:54:27 by geargenc          #+#    #+#             */
+/*   Updated: 2020/03/12 11:01:48 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,46 @@ char				*getpathvar(char **envp)
 	return (NULL);
 }
 
+int					getpathnumber(char *pathvar)
+{
+	char			*tmp;
+	int				i;
+
+	tmp = pathvar;
+	i = 1;
+	while (tmp && (tmp = strchr(tmp, ':')))
+	{
+		tmp++;
+		i++;
+	}
+	return (i);
+}
+
+char				*getpath(char *start, char *end)
+{
+	if (start && !end)
+		end = strchr(start, '\0');
+	return ((end - start) ? ft_strsub(start, 0, end - start) : ft_strdup("."));
+}
+
 char				**getpathlist(char *pathvar)
 {
 	char			**pathlist;
 	char			*tmp;
 	int				i;
 
-	tmp = pathvar;
-	i = 0;
-	while (tmp && (tmp = strchr(tmp, ':')))
-	{
-		tmp++;
-		i++;
-	}
-	if (!(pathlist = (char **)malloc((i + 2) * sizeof(char *))))
+	if (!(pathlist = (char **)malloc((getpathnumber(pathvar) + 1) *
+		sizeof(char *))))
 		return (NULL);
 	tmp = pathvar;
 	i = 0;
 	while (tmp && (tmp = strchr(tmp, ':')))
 	{
-		if (!(pathlist[i++] = strndup(pathvar, tmp - pathvar)))
+		if (!(pathlist[i++] = getpath(pathvar, tmp)))
 			return (NULL);
 		pathvar = ++tmp;
 	}
-	if (pathvar && !(pathlist[i] = strdup(pathvar)))
+	if (!(pathlist[i] = getpath(pathvar, tmp)))
 		return (NULL);
 	pathlist[i + 1] = NULL;
 	return (pathlist);
@@ -115,7 +131,7 @@ char				*browse_command_path(char *command, char **pathlist)
 
 	if (pathlist && *pathlist)
 	{
-		if (command && ft_strlen(*pathlist) + ft_strlen(command) + 1 < PATH_MAX)
+		if (ft_strlen(*pathlist) + ft_strlen(command) + 1 < PATH_MAX)
 		{
 			strcpy(buf, *pathlist);
 			strcat(buf, "/");
@@ -159,7 +175,7 @@ t_hash				*browse_command(char *command, char *pathvar, t_hash **hash)
 	if (!(pathlist = getpathlist(pathvar)))
 		return (MAP_FAILED);
 	path = browse_command_path(command, pathlist);
-	free_pathlist(pathlist);;
+	free_pathlist(pathlist);
 	if (path == MAP_FAILED || path == NULL)
 		return ((t_hash *)path);
 	if (hashhit)
@@ -265,7 +281,6 @@ int					hash_add(t_hash **hash, char *pathvar, char **cmd)
 	}
 	return (ret_value);
 }
-
 
 int					exec_hash(t_hash **hash, char *pathvar, char **cmd)
 {
