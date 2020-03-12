@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 23:00:21 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/11 05:39:35 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:53:31 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ int		exec_unsetenv(t_struct *s, char **av)
 		return (1);
 	else
 		exec_unsetenv2(&*s, &new, &cp, c);
+	if (!ft_strcmp(av[1], "PATH") || !ft_strncmp(av[1], "PATH", 4))
+		hash_reset(&g_jobcontrol.h_tab);
 	return (0);
 }

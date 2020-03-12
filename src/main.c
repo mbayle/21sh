@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/11 21:27:38 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:21:21 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void		tmp_free_struct(t_struct *s)
 		(*s).lbg = (*s).lbg->next;
 		free(del);
 	}
+	s->cpt = g_jobcontrol.s.cpt;
 	(*s).l = NULL;
 	(*s).lbg = NULL;
 	(*s).tmp = NULL;

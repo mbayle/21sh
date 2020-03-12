@@ -6,11 +6,11 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:58:15 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/10 02:53:09 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:17:12 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 void		exec_setcpt3(t_struct *s, int m)
 {

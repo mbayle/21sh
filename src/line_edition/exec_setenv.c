@@ -6,7 +6,7 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 18:47:35 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/11 05:44:27 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:51:03 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,30 +70,45 @@ t_lst2	*exec_setenv2(t_lst2 *l, char *s, int c, t_struct *st)
 	return (l);
 }
 
+int		exec_setenv4(t_lst2 *l, char ***tmp, char **av)
+{
+	if (l->lcl)
+	{
+		if ((*tmp = (char**)malloc(sizeof(**tmp) * 3)) == NULL)
+		{
+			ft_eputendl("setenv: warning: malloc error.");
+			return (1);
+		}
+		if (((*tmp)[1] = ft_mstrcpy(NULL, av[0])) == NULL)
+		{
+			ft_eputendl("setenv: warning: malloc error");
+			return (1);
+		}
+		return (0);
+	}
+	if ((*tmp = (char**)malloc(sizeof(**tmp) * 3)) == NULL)
+	{
+		ft_eputendl("setenv: warning: malloc error.");
+		return (1);
+	}
+	if (((*tmp)[1] = ft_mstrcpy(NULL, av[1])) == NULL)
+	{
+		ft_eputendl("setenv: warning: malloc error");
+		return (1);
+	}
+	return (0);
+}
+
 int		exec_setenv3(char **av, t_struct *s, t_lst2 *l, int i)
 {
 	char	**tmp;
 
 	if (s->t == 0)
 	{
-		if ((tmp = (char**)malloc(sizeof(*tmp) * 3)) == NULL)
-		{
-			ft_eputendl("setenv: warning: malloc error.");
+		if (exec_setenv4(l, &tmp, av))
 			return (0);
-		}
-		if ((tmp[1] = ft_mstrcpy(NULL, av[0])) == NULL)
-		{
-			ft_eputendl("setenv: warning: malloc error");
-			return (0);
-		}
-		printf("Adress S %p\n", s);
-		printf("Adress l %p\n", l);
-		printf("Adress l->lcl %p\n", &l->lcl);
 		if (l->lcl == 0)
 			exec_unsetenv(s, tmp);
-//		printf("Adress S %p\n", s);
-//		printf("Adress l %p\n", l);
-//		printf("Adress l->lcl %p\n", &l->lcl);
 		else if (l && l->lcl == 1)
 			exec_unset(s, tmp);
 		exec_setenv(s, av, NULL, i);
@@ -127,6 +142,8 @@ int		exec_setenv(t_struct *s, char **av, t_lst2 *new, int i)
 			new->lcl = 1;
 		if (!(*s).env)
 			(*s).env = new;
+//		if (!ft_strcmp(new->varn, "PATH"))
+//			hash_reset(&g_jobcontrol.h_tab);
 	}
 	return (0);
 }
