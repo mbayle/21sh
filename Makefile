@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/11 21:27:23 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/03/12 03:20:12 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,10 @@ SRC		:=	main.c \
 			execution/assign.c\
 			execution/assign_bis.c\
 			execution/child_exec.c\
+			execution/manage_path_cmd.c\
+			execution/tab_exec.c\
+			execution/exec_utils.c\
+			execution/exec_utils2.c\
 			utils/ft_freetab.c\
 			utils/tab_utils.c\
 			utils/ft_strdupn.c\

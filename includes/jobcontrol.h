@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 19:36:27 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 03:26:18 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ char					*check_match(char *param, char *word, char c);
 /**
 builtuin
 **/
+void					hash_reset(t_hash **hash);
 int						exec_hash(t_hash **hash, char *pathvar, char **cmd);
 t_hash					*browse_command(char *command, char *pathvar, t_hash **hash);
 void					unexec_ass(char **ass);
@@ -186,7 +187,13 @@ char						**parse_redir(char **line, int exec);
 /**
 Utils
 **/
-
+char						**check_opt_env(char **cmd);
+int							is_env_arg(char **cmd);
+char						**env_copy(t_lst2 *menv);
+void						unexec_asign(void);
+int							should_i_exec(void);
+char						*concat_tab(char **tmp);
+char						**copy_u(char **cmd, int pos);
 char						*ft_strdupt(char *str, char c);
 char						**del_one(char **tabl, int pos);
 int							just_ass(char **ass);
@@ -197,7 +204,7 @@ char						*ft_strjoinnf(char const *s1, char const *s2);
 char						*ft_strjoinfree(char *s1, char *s2);
 int							ft_strlenu(char *str);
 char						**quick_tab_cmd(char *line);
-int							permissions(char **str, struct stat buf);
+int							permissions(char **str);
 char						*ft_strdupn(char *str, char c);
 char						*ft_strldup(char *str, char c);
 /**

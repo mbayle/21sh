@@ -6,18 +6,17 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:31:23 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 01:06:08 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 01:59:04 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
-int		permissions(char **str, struct stat buf)
+int		permissions(char **str)
 {
 	int	i;
 
 	i = 0;
-	(void)buf;
 	if (access(*str, X_OK) == -1)
 	{
 		ft_putstr_fd("Shell: Permission denied: ", 2);

@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:29:07 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 05:26:47 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 02:06:03 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,7 @@ void	manage_pipe(t_ast *ast)
 
 	y = 0;
 	while (g_jobcontrol.arg && g_jobcontrol.arg[y] && y < g_jobcontrol.index)
-	{
-//		printf("%s %p\n", "av ", g_jobcontrol.arg);
-//		printf("%s %p\n", "av[i] ", g_jobcontrol.arg[y]);
-		ft_freetab(g_jobcontrol.arg[y]);
-		y++;
-	}
+		ft_freetab(g_jobcontrol.arg[y++]);
 	g_jobcontrol.index = 0;
 	if (!(g_jobcontrol.arg = malloc(sizeof(char**) * 4097)))
 		return ;
