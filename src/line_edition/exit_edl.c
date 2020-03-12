@@ -82,6 +82,8 @@ void		exit_edl(t_struct *s, char **cmd)
 	ft_exit3(&*s);
 	reset_attr();
 	delete_job(g_jobcontrol.first_mail);
+	astdel(&g_shell->ast);
+	lexdel(&g_shell->lex);
 	if (cmd[1])
 		exit(ft_atoi(cmd[1]));
 	else

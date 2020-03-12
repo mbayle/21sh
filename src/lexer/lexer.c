@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/10 03:54:55 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/12 05:17:23 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		find_end(int i, char *input)
 	{
 		if (input[i] == '\\')
 			i++;
-		if (input[i] == '\'' || input[i] == '"' || (input[i] == '$' 
+		if (input[i] == '\'' || input[i] == '"' || (input[i] == '$'
 				&& input[i + 1] == '{'))
 		{
 			i = quote_brace_case(i, input);
@@ -83,6 +83,25 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 	return (i);
 }
 
+/*static char	*create_token(char *input, int i)
+{
+	char	*token;
+	char	*tmp;
+
+	if (ft_strchr(input, '\\') != NULL)
+	{
+		while (input[i] != '\\')
+			i++;
+		tmp = ft_strsub(input, 0, i);
+		i++;
+	}
+	else
+	{
+		ft_strsub(input, 0, i);
+	}
+	return (token);
+}*/
+
 /*
 ** Purpose of the function : Fill in my node and add it to my list
 ** Steps  : 1 - get value for my future lexeme
@@ -93,7 +112,7 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 **			6 - Upgrade lex_size
 ** Retrun value : no return
 */
-// Malloc not protected
+
 void	valid(t_lex **lex, char *input, int io, int i)
 {
 	char	*token;
@@ -101,8 +120,10 @@ void	valid(t_lex **lex, char *input, int io, int i)
 	int		aword;
 
 	aword = 0;
-	token = ft_strsub(input, 0, i);
+	//token = ft_strsub(input, 0, i);
+	token = create_token(input, i);
 	new = list_new(token);
+	inserer gestion inhib ici
 	token_type(new, io, aword);
 	list_add(lex, new);
 	ft_strdel(&token);
@@ -138,6 +159,7 @@ void	ft_lexer(t_lex **lex, char *input)
 		else
 		{
 			lexdel(lex);
+			ft_putendl("[DEBUG] Exception");
 			return ;
 		}
 		input = input + i++;
@@ -147,15 +169,3 @@ void	ft_lexer(t_lex **lex, char *input)
 	ft_parse(&g_shell->lex);
 	lexdel(lex);
 }
-
-
-
-
-
-
-
-
-
-
-
-

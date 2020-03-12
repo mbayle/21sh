@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/11 17:46:31 by frameton         ###   ########.fr        #
+#    Updated: 2020/03/12 05:30:36 by mabayle          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,9 +33,9 @@ INCS		=	./includes/get_next_line.h \
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft
 
-CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3 -fsanitize=address
+CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3
 ifeq ($(DEBUG), 1)
 	CFLAGS	:=	$(CFLAGS) -ggdb -fno-omit-frame-pointer -fsanitize=address
 endif
@@ -214,7 +214,7 @@ all:
 	@make $(NAME)
 
 $(NAME):  $(LIBFT) $(OBJ)
-	@$(LINKER) $(NAME) $(LDFLAGS) -fsanitize=address $(OBJ) -ltermcap 
+	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap 
 	@echo ""
 	@echo "\033[0;32m42sh build done\033[0m"
 	@echo ""

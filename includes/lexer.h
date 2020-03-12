@@ -87,6 +87,7 @@ typedef struct		s_lex
 {
 	char			*value;
 	char			*hdoc;
+	int				escape;
 	int				pos;
 	int				hdoc_delim;
 	enum e_tok_type	token;
@@ -114,47 +115,6 @@ typedef struct		s_21sh
 
 t_21sh				*g_shell;
 
-/*
-** lexer.c
-*/
-int					find_end(int i, char *input);
-int					end_case_index(t_lex *lex, char *input, int *io_nbr);
-void				valid(t_lex **lex, char *input, int io, int i);
-void				ft_lexer(t_lex **lex, char *input);
-
-/*
-** list_utils.c
-*/
-t_lex				*list_new(char *input);
-void				list_add(t_lex **alst, t_lex *new);
-t_lex				*lex_last(t_lex *lst);
-void				lex_suppr_elem(t_lex **elem);
-void				lexdel(t_lex **alst);
-
-/*
-** print_debug.c
-*/
-void				ft_print_header(t_lex **lex);
-void				ft_print_control_op(enum e_operator op);
-void				ft_print_redir_op(enum e_operator op);
-void				ft_print_token(t_lex **lex);
-void				ft_print_debug(t_lex **lex);
-
-/*
-** type_token.c
-*/
-void				is_operator(t_lex *new);
-void				is_redirection(t_lex *new);
-void				is_assignword(t_lex *new);
-void				token_type(t_lex *new, int io_nbr, int assignword);
-
-/*
-** utils.c
-*/
-int					check_redir(char *input);
-int					check_operator(char *input);
-int					quote_case(int i, char *input);
-int					ft_is_separator(char c);
 /*
 ********************************************************************************
 */

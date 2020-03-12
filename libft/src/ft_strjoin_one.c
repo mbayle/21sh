@@ -6,7 +6,7 @@
 /*   By: mabayle <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 06:44:58 by mabayle           #+#    #+#             */
-/*   Updated: 2019/06/27 06:50:55 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/12 05:24:00 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*ft_strjoin_one(char *s1, char c)
 	else
 	{
 		i = -1;
-//		ft_putendl("HERERER");
 		len = ft_strlen(s1);
 		result = ft_strnew(len + 1);
 		while (++i < len)

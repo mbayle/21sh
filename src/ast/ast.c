@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 01:20:24 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/11 05:34:03 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 05:18:12 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_ast	*beta_ast(t_ast *ast, int priority)
 		return (NULL);
 	if (ast)
 	{
-		while(priority >= 1)
+		while (priority >= 1)
 		{
 			if (is_in_lexer(ast->lex, priority))
 				sub_split(ast, priority);
