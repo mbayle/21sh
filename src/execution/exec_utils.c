@@ -6,26 +6,32 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 02:44:01 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 03:26:10 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 04:02:51 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/projectinclude.h"
 
-char	**env_copy(t_lst2 *menv)
+int		lst_size(t_lst2 *menv)
 {
-	int     i;
-	int     nb;
-	char    **dst;
+	int	nb;
 
-	i = 0;
 	nb = 0;
 	while (menv)
 	{
 		nb++;
 		menv = menv->next;
 	}
-	if (!(dst = malloc(sizeof(char*) * ((nb + 1)))))
+	return (nb);
+}
+
+char	**env_copy(t_lst2 *menv)
+{
+	int     i;
+	char    **dst;
+
+	i = 0;
+	if (!(dst = malloc(sizeof(char*) * ((lst_size(menv) + 1)))))
 		return (NULL);
 	while (menv)
 	{

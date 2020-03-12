@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:26:01 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:30:26 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 04:19:54 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,14 @@ int		process_status(pid_t pid, int status, t_process *p)
 	{
 		g_jobcontrol.first_job->first_process->status = status ? status : 2;
 		g_jobcontrol.ret = status > 1 ? 1 : status;
+		g_jobcontrol.first_job->first_process->r_value = status;
 	}
 	else if (WIFSIGNALED(status) == TRUE)
 		set_ret(status);
 	else if (WIFSTOPPED(status) == TRUE)
 	{
 		g_jobcontrol.first_job->first_process->status = 1;
-		g_jobcontrol.first_job->first_process->r_value = 128 + WSTOPSIG(status);
+		g_jobcontrol.first_job->first_process->r_value = status;
 		g_jobcontrol.ret = 128 + WSTOPSIG(status);
 	}
 	g_jobcontrol.first_job->first_process = pro;

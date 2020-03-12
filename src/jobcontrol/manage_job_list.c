@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:30:39 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 20:04:26 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 04:07:06 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	delete_process(t_process *pro)
 
 void	delete_job(t_job *job)
 {
+	ft_putnbr(job->pgid);
 	if (!job)
 		return ;
 	if (job->next)

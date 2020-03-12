@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:14:55 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:16:52 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 04:11:41 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	status_builtin(t_process *pro)
 	p = pro;
 	while (p)
 	{
+		ft_putnbr(p->r_value);
 		if (p->lpid < 0)
 			p->status = p->r_value;
 		p = p->next;

@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 02:00:37 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 02:20:12 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 03:37:08 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ char	*my_path(char **cmd, char **env)
 		ft_strdel(&mypath);
 		if (!(mypath = local_file(cmd[0])))
 		{
+			ft_putendl(cmd[0]);
 			if ((h_tab = browse_command(cmd[0], tmp, &g_jobcontrol.h_tab))
 			== MAP_FAILED)
 				return (NULL);
