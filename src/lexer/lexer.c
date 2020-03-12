@@ -123,7 +123,7 @@ void	valid(t_lex **lex, char *input, int io, int i)
 	//token = ft_strsub(input, 0, i);
 	token = create_token(input, i);
 	new = list_new(token);
-	inserer gestion inhib ici
+	//inserer gestion inhib ici
 	token_type(new, io, aword);
 	list_add(lex, new);
 	ft_strdel(&token);

@@ -6,18 +6,17 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 23:31:23 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 01:06:08 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 03:57:22 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
-int		permissions(char **str, struct stat buf)
+int		permissions(char **str)
 {
 	int	i;
 
 	i = 0;
-	(void)buf;
 	if (access(*str, X_OK) == -1)
 	{
 		ft_putstr_fd("Shell: Permission denied: ", 2);
@@ -62,9 +61,11 @@ char	**get_line2(char **env)
 	i = 0;
 	tmp = NULL;
 	path = NULL;
+	ft_putendl("IM A CALLED");
 	while (env && env[i])
 	{
 		tmp = ft_strsplit(env[i], '=');
+		ft_putendl(tmp[0]);
 		if (tmp[0] && (ft_strcmp(tmp[0], "PATH")) == 0)
 		{
 			path = ft_strsplit(tmp[1], ':');
@@ -100,5 +101,7 @@ char	*get_pathh(char *nwav, char **path)
 		}
 		ptr ? closedir(ptr) : 0;
 	}
+	ft_putendl("COMMAND");
+	ft_putendl(command);
 	return (command);
 }

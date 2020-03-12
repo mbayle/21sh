@@ -6,22 +6,20 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:01:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 02:29:21 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:36:45 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
-int		myheredoc(char *redir, char *file, int nb)
+int		exec_heredoc(char *redir, char *file)
 {
-	int		n;
 	int		link[2];
-	char	*tmp;
-
+	int		n;
+	
+	n = dig_to_io(redir);
 	link[0] = -1;
 	link[1] = -1;
-	n = dig_to_io(redir);
-	ft_putnbr(n);
 	if (pipe(link) < 0)
 	{
 		write(2, "Shell: pipe error", 17);
@@ -29,28 +27,30 @@ int		myheredoc(char *redir, char *file, int nb)
 	}
 	if (check_fd(0, n))
 		return (-1);
-	tmp = heredoc(file);
-	if (write(link[1], tmp, (ft_strlen(tmp))) < 0)
+	if (write(link[1], file, (ft_strlen(file))) < 0)
 	{
-		ft_strdel(&tmp);
 		write(2, "Shell: write error", 18);
 		return (-1);
 	}
 	close(link[1]);
-	ft_strdel(&tmp);
-//	if (isatty(0) == 0)
-//		ft_putendl("NO TTY BEFORE DUP");
-	if (nb == g_jobcontrol.here)
+	if (dup2(link[0], n) < 0)
 	{
-		if (dup2(link[0], n) < 0)
-		{
-			write(2, "Shell: bad fd", 14);
-			return (-1);
-		}
-		close(link[0]);
+		write(2, "Shell: bad fd", 14);
+		return (-1);
 	}
 	return (0);
 }
+
+//int		myheredoc(char *redir, char *file, int nb)
+//{
+//	char	*tmp;
+//
+//	tmp = heredoc(file);
+//	if (nb == g_jobcontrol.here)
+//		g_jobcontrol.heredoc = ft_strjoinfree(g_jobcontrol.heredoc, tmp);
+//	ft_strdel(&tmp);
+//	return (0);
+//}
 
 int		dup_fd(char *redir, char *file)
 {
@@ -132,22 +132,22 @@ int		execute_redir(char **cmd)
 {
 	int i;
 	int ret;
-	int	nb;
+//	int	nb;
 
 	i = -1;
 	ret = 0;
-	nb = 0;
+//	nb = 0;
 	g_jobcontrol.here = 0;
-	nb_heredoc(cmd);
+//	nb_heredoc(cmd);
 	while (cmd[++i])
 	{
 		if (ft_seq_occur(cmd[i], ">>"))
 			ret = redirect_to_file(cmd[i], cmd[i + 1], O_APPEND, 1);
 		else if (ft_seq_occur(cmd[i], "<<"))
 		{
-			nb++;
+	//		nb++;
 		//  ft_putendl("O \"<<\" has occur");
-			ret = myheredoc(cmd[i], cmd[i + 1], nb);
+			ret = exec_heredoc(cmd[i], cmd[i + 1]);
 		}
 		else if (ft_seq_occur(cmd[i], ">&"))
 			ret = dup_fd(cmd[i], cmd[i + 1]);

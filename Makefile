@@ -6,7 +6,11 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2020/03/12 05:30:36 by mabayle          ###   ########.fr        #
+=======
+#    Updated: 2020/03/12 03:20:12 by ymarcill         ###   ########.fr        #
+>>>>>>> c75267e474f665a1f4b85261bfe21ecb43e44d5d
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,8 +72,14 @@ SRC		:=	main.c \
 			execution/pipeline_ast.c \
 			execution/get_path.c \
 			execution/assign.c\
+			execution/assign_bis.c\
 			execution/child_exec.c\
+			execution/manage_path_cmd.c\
+			execution/tab_exec.c\
+			execution/exec_utils.c\
+			execution/exec_utils2.c\
 			utils/ft_freetab.c\
+			utils/tab_utils.c\
 			utils/ft_strdupn.c\
 			utils/ft_strlenu.c\
 			redirections/redirect_to_fd.c \
@@ -109,6 +119,7 @@ SRC		:=	main.c \
 			ast/print_ast.c \
 			ast/ast_utils.c \
 			line_edition/bsls.c \
+			line_edition/check_bracket.c \
 			line_edition/check_auth.c \
 			line_edition/check_builtin.c \
 			line_edition/check_command.c \
@@ -192,6 +203,7 @@ SRC		:=	main.c \
 			line_edition/exec_export.c\
 			line_edition/exec_set.c\
 			line_edition/exec_unset.c\
+			line_edition/check_quotes2.c \
 			input/line_edition.c \
 			input/term_mode.c \
 			input/get_cursor_pos.c \

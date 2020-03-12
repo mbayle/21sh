@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_env.c                                         :+:      :+:    :+:   */
+/*   check_quotes2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/10 18:48:08 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/11 20:19:18 by frameton         ###   ########.fr       */
+/*   Created: 2020/03/11 19:44:04 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/11 19:44:45 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/projectinclude.h"
 
-int		exec_env(t_struct *s)
+void	check_bslash(char **save)
 {
-	t_lst2		*l;
+	int		c;
 
-	l = s->env;
-	while (l)
+	c = 0;
+	while (**save && **save == '\\')
 	{
-		if (!l->lcl)
-			ft_putendl(l->env);
-		l = l->next;
+		++c;
+		(*save)++;
 	}
-	return (0);
+	if (**save && (**save == '"' || **save == '\'') && (c % 2))
+		(*save)++;
 }

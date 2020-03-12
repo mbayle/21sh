@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 04:08:35 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 00:49:07 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 03:52:09 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ char	*mypath(char *cmd)
 {
 	char    **tmp;
 	char    *path;
-	t_read  rd;
 
 	tmp = NULL;
 	path = NULL;
 	if (cmd)
 	{
 		tmp = get_line2(g_jobcontrol.env);
-		ft_strdel(&path);
+		//ft_strdel(&path);
 		path = get_pathh(cmd, tmp);
+		ft_putendl(path);
 		if (path)
-			permissions(&path, rd.rdbuf);
+			permissions(&path);
 		else if (!path)
 			return (NULL);
 		ft_freetab(tmp);

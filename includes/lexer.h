@@ -125,6 +125,7 @@ t_21sh				*g_shell;
 int					find_end(int i, char *input);
 int					end_case_index(t_lex *lex, char *input, int *io_nbr);
 void				valid(t_lex **lex, char *input, int io, int i);
+char				**lex_to_tab(t_lex *lex);
 void				ft_lexer(t_lex **lex, char *input);
 
 /*

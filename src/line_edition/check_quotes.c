@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 00:07:50 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/11 17:21:13 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/12 04:17:32 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,39 +71,7 @@ static void	check_quotes2_b(t_struct *st, char buf[6], int s, int d)
 	indicator_quotes(st, buf, s, d);
 }
 
-/*static int	check_bslash(char *save, char *tmp, int sz)
-{
-	int		c;
-
-	c = 0;
-	tmp = save;
-	puts("1");
-	while (sz-- && *tmp == '\\')
-	{
-		++c;
-		tmp--;
-	}
-	puts("2");
-	if (c % 2)
-		return (1);
-	return (0);
-}*/
-
-static void	check_bslash(char **save)
-{
-	int		c;
-
-	c = 0;
-	while (**save && **save == '\\')
-	{
-		++c;
-		(*save)++;
-	}
-	if (**save && (**save == '"' || **save == '\'') && (c % 2))
-		(*save)++;
-}
-
-static int	check_quotes2(t_struct *st, char **str, char buf[6], int s)
+static int	check_quotes2(t_struct *st, char **str, char buf[701], int s)
 {
 	char	*save;
 	int		d;
@@ -126,6 +94,8 @@ static int	check_quotes2(t_struct *st, char **str, char buf[6], int s)
 		check_quotes2_b(st, buf, s, d);
 		return (sec_free(str, 0));
 	}
+	if (check_bracket(st, buf))
+		return (sec_free(str, 0));
 	return (sec_free(str, 1));
 }
 

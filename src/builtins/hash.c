@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/10 23:54:27 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 05:49:18 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 04:04:55 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ char				*browse_command_path(char *command, char **pathlist)
 	char			buf[PATH_MAX];
 	char			*tmp;
 
-	if (*pathlist)
+	if (pathlist && *pathlist)
 	{
 		if (command && ft_strlen(*pathlist) + ft_strlen(command) + 1 < PATH_MAX)
 		{
@@ -137,7 +137,7 @@ void				free_pathlist(char **pathlist)
 	int				i;
 
 	i = 0;
-	while(pathlist[i])
+	while (pathlist[i])
 	{
 		free(pathlist[i]);
 		i++;

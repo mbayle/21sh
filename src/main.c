@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/11 17:40:57 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/12 13:21:21 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ static void	init_term(t_struct *s)
 	s->edq = 0;
 	s->cpt_p3 = 0;
 	s->cpt_p = 0;
+	s->b = 0;
+	s->p = 0;
 	s->bs = 0;
 	s->cpt_p2 = 0;
 	s->exit = 0;
@@ -98,6 +100,7 @@ void		tmp_free_struct(t_struct *s)
 		(*s).lbg = (*s).lbg->next;
 		free(del);
 	}
+	s->cpt = g_jobcontrol.s.cpt;
 	(*s).l = NULL;
 	(*s).lbg = NULL;
 	(*s).tmp = NULL;
@@ -124,6 +127,20 @@ char		**ft_tabdup(char **av)
 	return (dst);
 }
 
+void		init_jc()
+{
+	g_jobcontrol.heredoc = ft_strnew(1);
+	g_jobcontrol.f = 0;
+	g_jobcontrol.stdi = -1;
+	g_jobcontrol.stde = -1;
+	g_jobcontrol.stdo = -1;
+	g_jobcontrol.ass = NULL;
+	g_jobcontrol.ass_stock = NULL;
+//	ft_bzero(&g_jobcontrol, sizeof(g_jobcontrol));
+	g_jobcontrol.first_job = NULL;
+	g_jobcontrol.alias = NULL;
+}
+
 int			main(int ac, char **av, char **envp)
 {
 	t_struct	s;
@@ -131,11 +148,7 @@ int			main(int ac, char **av, char **envp)
 
 	c = 0;
 	init_shell_sig();
-	g_jobcontrol.ass = NULL;
-	g_jobcontrol.ass_stock = NULL;
-//	ft_bzero(&g_jobcontrol, sizeof(g_jobcontrol));
-	g_jobcontrol.first_job = NULL;
-	g_jobcontrol.alias = NULL;
+	init_jc();
 	g_jobcontrol.env = ft_tabdup(envp);
 	init_struct(&s, envp);
 	g_shell = init_shell(0);

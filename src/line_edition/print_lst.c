@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:24:43 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/11 17:59:46 by frameton         ###   ########.fr       */
+/*   Updated: 2020/03/11 19:16:58 by frameton         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ static void		print_lst3(t_struct s)
 		ft_putstr(RED);
 	if (s.l->c == '\\' && !s.l->next && s.bs)
 		ft_putstr(SRED);
+	if ((s.l->c == '{' || s.l->c == '}') && s.b)
+		ft_putstr(RED);
+	if ((s.l->c == '(' || s.l->c == ')') && s.p)
+		ft_putstr(RED);
 }
 
 static t_lst	*print_lst2(t_struct s, int *c, int *i, int *nl)
