@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:24:29 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 02:17:58 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 05:01:41 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_process	*fill_jc_struc(pid_t pid, char *cmd, t_process *pro)
 {
 	pro = process_alloc(pro);
 	if (pid == -1)
-		pro->r_value = g_jobcontrol.ret;
+		pro->r_value = g_jobcontrol.ret + 2;
 	pro->lpid = pid;
 	pro->cmd = ft_strdup(cmd);
 	if (g_jobcontrol.shell_is_int)
