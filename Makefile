@@ -6,7 +6,7 @@
 #    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/12 03:20:12 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/03/13 01:35:46 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRC		:=	main.c \
 			builtins/alias.c\
 			builtins/alias_bis.c\
 			builtins/unalias.c\
+			builtins/echo.c\
+			jobcontrol/jc_utils.c\
 			jobcontrol/init_interactive_shell.c \
 			jobcontrol/put_in_fg.c \
 			jobcontrol/ft_job.c\
@@ -69,11 +71,14 @@ SRC		:=	main.c \
 			execution/get_path.c \
 			execution/assign.c\
 			execution/assign_bis.c\
+			execution/assign_ter.c\
 			execution/child_exec.c\
 			execution/manage_path_cmd.c\
 			execution/tab_exec.c\
 			execution/exec_utils.c\
 			execution/exec_utils2.c\
+			execution/exec_utils3.c\
+			execution/execute_builtin.c\
 			utils/ft_freetab.c\
 			utils/tab_utils.c\
 			utils/ft_strdupn.c\

@@ -6,107 +6,73 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:05:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 19:13:17 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:16:48 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
-char	*for_if(char *line, int *i)
+int		char_pos(char *str, char c)
 {
-	int		x;
-	char	*command;
+	int	i;
 
-	x = 0;
-	if (!(command = ft_strnew(ft_strlen(line))))
-		return (NULL);
-	while (line && line[*i] && line[*i] != ' ')
-	{
-		command[x++] = line[*i];
-		*i += 1;
-	}
-	command[x] = '\0';
-	*i -= 1;
-	return (command);
-}
-
-//char	*for_quotes()
-//{
-	
-//}
-
-char	*for_else(char *line, int *i)
-{
-	int		x;
-	char	*command;
-
-	x = 0;
-	if (!(command = ft_strnew(ft_strlen(line))))
-		return (NULL);
-	while (line[*i] == '<' || line[*i] == '>' || line[*i] == '&')
-	{
-		command[x++] = line[*i];
-		*i += 1;
-	}
-	command[x] = '\0';
-	*i -= 1;
-	return (command);
-}
-
-char	**fill_redir_tab(char *line)
-{
-	int		i;
-	int		y;
-	char	**command;
-
-	y = 0;
 	i = 0;
-	if (!line || !(command = malloc(sizeof(char*) * (size_tab(line) + 1))))
-		return (NULL);
-	while (line && line[i])
+	while (str && str[i])
 	{
-	//	if (line[i] == '\"' || line[i] == '\'')
-///		{
-			
-//		}
-		if (line[i] != ' ' && line[i] != '<' && line[i] != '>' &&
-			line[i] != '&')
-			command[y++] = for_if(line, &i);
-		else if (line[i] == '<' || line[i] == '>' || line[i] == '&')
-			command[y++] = for_else(line, &i);
+		if (str[i] == c)
+			return (i);
 		i++;
 	}
-	command[y] = NULL;
-	return (command);
+	return (0);
+}
+
+int		i_val(char **str, int i)
+{
+	int	pos;
+	int	pos2;
+
+	pos = char_pos(str[i], '<');
+	pos2 = char_pos(str[i], '>');
+	if (str[i] && (ft_occur(str[i], '<') || ft_occur(str[i], '>')))
+	{
+		if ((pos > 0 && str[i][pos - 1] != 92) ||
+		(pos2 > 0 && str[i][pos2 - 1] != 92) || (ft_occur(str[i], '<')
+		&& pos == 0) || (ft_occur(str[i], '>') && pos2 == 0))
+		{
+			if (str[i + 1])
+				i += 2;
+			else
+				i++;
+			return (i);
+		}
+		return (-1);
+	}
+	return (i);
 }
 
 char	**dst_redir(char **command)
 {
 	int		i;
 	int		y;
+	int		t;
 	char	**dst;
 
 	i = 0;
 	y = 0;
+	t = 0;
 	if (!(dst = malloc(sizeof(char *) * (tab_size(command) + 1))))
 		return (NULL);
 	while (command && command[i])
 	{
-	//	ft_putendl(command[i]);
-	//	printf("VAL: %s   ADDRESS DST REDIR: %p\n", command[i], command[i]);
-		if (command[i] && (ft_occur(command[i], '<') || ft_occur(command[i], '>')))
-		{
-		//	ft_putendl(command[i]);
-			if (command[i + 1])
-				i += 2;
-			else
-				i++;
-		}
-		else if (command[i] && !ft_occur(command[i], '<') &&
-		!ft_occur(command[i], '>'))
+		t = i_val(command, i);
+		if (t != -1)
+			i = t;
+		if (((command[i] && !ft_occur(command[i], '<') &&
+		!ft_occur(command[i], '>') && (t = 0) == 0)) || t == -1)
 			dst[y++] = ft_strdup(command[i++]);
 	}
 	dst[y] = NULL;
+	ft_printtab(dst);
 	return (dst);
 }
 
@@ -123,53 +89,16 @@ void	ft_printtab(char **tt)
 	}
 }
 
-char	**dst_no_heredoc(char **command)
-{
-	int		i;
-	int		y;
-	char	**dst;
-
-	i = 0;
-	y = 0;
-	if (!(dst = malloc(sizeof(char *) * (tab_size(command) + 1))))
-		return (NULL);
-	while (command && command[i])
-	{
-	//	ft_putendl(command[i]);
-	//	printf("VAL: %s   ADDRESS DST REDIR: %p\n", command[i], command[i]);
-		if (command[i] && ft_seq_occur(command[i], "<<"))
-		{
-		//	ft_putendl(command[i]);
-			if (command[i + 1])
-				i += 2;
-			else
-				i++;
-		}
-		else if (command[i])
-			dst[y++] = ft_strdup(command[i++]);
-	}
-	dst[y] = NULL;
-	return (dst);
-}
-
 char	**parse_redir(char **line, int exec)
 {
 	char	**dst;
-	char	**ex;
 
-	ex = dst_no_heredoc(line);
-	//ft_putendl("NO HEREDOC");
-	//ft_printtab(ex);
 	dst = dst_redir(line);
 	if (exec)
 	{
 		execute_redir(line);
-			ft_freetab(dst);
-			ft_freetab(ex);
-			return (NULL);
+		ft_freetab(dst);
+		return (NULL);
 	}
-	ft_freetab(ex);
-//	ft_printtab(dst);
-	//ft_freetab(command);
 	return (dst);
 }

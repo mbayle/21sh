@@ -6,31 +6,11 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 22:50:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 21:46:33 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 22:58:22 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-
-void	unexec_ass(char **ass)
-{
-	int		i;
-	char	*tmp;
-	char	**dst;
-
-	i = 0;
-	while (ass && ass[i] && ass[i][0] == '\r')
-	{
-		tmp = ft_strdup(ass[i]);
-		free(ass[i]);
-		ass[i] = ft_strdup(tmp + 1);
-		i++;
-	}
-	dst = get_key(ass);
-	ft_printtab(dst);
-	g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, dst);
-	ft_freetab(dst);
-}
 
 void	save_ass(char **ass)
 {

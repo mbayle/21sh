@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:26:01 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 04:19:54 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:36:54 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,17 +114,4 @@ int		process_status(pid_t pid, int status, t_process *p)
 	}
 	g_jobcontrol.first_job->first_process = pro;
 	return (status);
-}
-
-int		process_nb(t_process *pro)
-{
-	int i;
-
-	i = 0;
-	while (pro && pro->next)
-	{
-		i++;
-		pro = pro->next;
-	}
-	return (i);
 }

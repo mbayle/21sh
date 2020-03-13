@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 20:16:02 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 21:30:01 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:21:56 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@ char	*get_cursor_position(void)
 	int		ret;
 	char	*tmp;
 
-//	if (isatty(0) == 0)
-//	{
-//		return (0);
-//	}
 	write(1, "\033[6n", 4);
 	tmp = ft_strnew(1);
 	if ((ret = read(1, buf, 254)) == -1)

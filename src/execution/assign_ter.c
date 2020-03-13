@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   assign_ter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 12:43:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 05:43:42 by ymarcill         ###   ########.fr       */
+/*   Created: 2020/03/12 22:57:02 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/12 22:58:16 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/projectinclude.h"
 
-int 	exec_echo(char **cmd)
+void	unexec_ass(char **ass)
 {
-	int	i;
-	int	ret;
-	int	e;
+	int		i;
+	char	*tmp;
+	char	**dst;
 
-	i = 1;
-	e = 0;
-	ret = 0;
-	if (cmd && cmd[i] && ft_strcmp(cmd[i], "-n") == 0)
-		e = 1;
-	while (cmd && cmd[i + e])
+	i = 0;
+	while (ass && ass[i] && ass[i][0] == '\r')
 	{
-		if ((ret = write(1, (cmd[i + e]), ft_strlen(cmd[i + e]))) == -1)
-			return (-1);
-		if (cmd[i + e + 1] && (ret = write(1, " ", 1)) == -1)
-			return (-1);
+		tmp = ft_strdup(ass[i]);
+		free(ass[i]);
+		ass[i] = ft_strdup(tmp + 1);
 		i++;
 	}
-	if (e == 1)
-		ft_putendl("\x1b[30;47m%\x1b[0m");
-	else
-		ft_putchar('\n');
-	return (ret);
+	dst = get_key(ass);
+	ft_printtab(dst);
+	g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, dst);
+	ft_freetab(dst);
 }

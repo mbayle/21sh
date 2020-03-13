@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:34:34 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/07 00:38:14 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:39:26 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@ t_job	*right_job(int cont, char **av, t_job *job)
 	else
 		tjob = g_jobcontrol.first_job;
 	return (tjob);
-}
-
-void	norme(t_job *comp2, int i, t_job *save)
-{
-	g_jobcontrol.first_job = comp2;
-	g_jobcontrol.first_job->last_j = i;
-	g_jobcontrol.first_job = save;
 }
 
 void	put_last_fg(t_job *job, int i, int l)

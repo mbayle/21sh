@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   jc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/11 12:43:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 05:43:42 by ymarcill         ###   ########.fr       */
+/*   Created: 2020/03/13 01:28:01 by ymarcill          #+#    #+#             */
+/*   Updated: 2020/03/13 01:38:12 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/projectinclude.h"
 
-int 	exec_echo(char **cmd)
+int		process_nb(t_process *pro)
 {
-	int	i;
-	int	ret;
-	int	e;
+	int i;
 
-	i = 1;
-	e = 0;
-	ret = 0;
-	if (cmd && cmd[i] && ft_strcmp(cmd[i], "-n") == 0)
-		e = 1;
-	while (cmd && cmd[i + e])
+	i = 0;
+	while (pro && pro->next)
 	{
-		if ((ret = write(1, (cmd[i + e]), ft_strlen(cmd[i + e]))) == -1)
-			return (-1);
-		if (cmd[i + e + 1] && (ret = write(1, " ", 1)) == -1)
-			return (-1);
 		i++;
+		pro = pro->next;
 	}
-	if (e == 1)
-		ft_putendl("\x1b[30;47m%\x1b[0m");
-	else
-		ft_putchar('\n');
-	return (ret);
+	return (i);
+}
+
+void	norme(t_job *comp2, int i, t_job *save)
+{
+	g_jobcontrol.first_job = comp2;
+	g_jobcontrol.first_job->last_j = i;
+	g_jobcontrol.first_job = save;
 }

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:48:48 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/10 20:03:36 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 20:39:32 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void		exit_edl(t_struct *s, char **cmd)
 {
 	t_lst	*del;
 
+	ft_putendl_fd("exit", 2);
 	while ((del = (*s).lbg))
 	{
 		(*s).lbg = (*s).lbg->next;

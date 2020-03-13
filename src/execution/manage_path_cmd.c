@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 02:00:37 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 03:37:08 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:22:54 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		check_b(char **cmd)
 	!ft_strcmp(cmd[0], "set") || !ft_strcmp(cmd[0], "unset") ||
 	!ft_strcmp(cmd[0], "export") || !ft_strcmp(cmd[0], "type") ||
 	!ft_strcmp(cmd[0], "alias") || !ft_strcmp(cmd[0], "unalias") ||
-	!ft_strcmp(cmd[0], "env") ||
+	!ft_strcmp(cmd[0], "env") || !ft_strcmp(cmd[0], "echo") ||
 	cmd[0][0] == '\r'))
 		return (0);
 	else
@@ -72,6 +72,8 @@ char	*get_hashed_mypath(t_hash *h_tab)
 	mypath = NULL;
 	if (h_tab && h_tab->path)
 		mypath = ft_strdup(h_tab->path);
+	if (mypath && permissions(&mypath))
+		g_jobcontrol.ret = 1;
 	return (mypath);
 }
 
@@ -81,13 +83,10 @@ char	*my_path(char **cmd, char **env)
 	t_hash	*h_tab;
 	char	*mypath;
 
-	mypath = ft_strdup("b");
-	if (!check_b(cmd))
-		return (mypath);
-	else if (cmd && cmd[0])
+	mypath = NULL;
+	if (cmd && cmd[0])
 	{
 		tmp = get_line(env);
-		ft_strdel(&mypath);
 		if (!(mypath = local_file(cmd[0])))
 		{
 			ft_putendl(cmd[0]);
@@ -95,9 +94,7 @@ char	*my_path(char **cmd, char **env)
 			== MAP_FAILED)
 				return (NULL);
 			mypath = get_hashed_mypath(h_tab);
-			if (mypath && permissions(&mypath))
-				g_jobcontrol.ret = 1;
-			else if (!mypath)
+			if (!mypath)
 				if_not_cmd(cmd[0]);
 		}
 		ft_strdel(&tmp);

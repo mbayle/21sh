@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:14:15 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/10 02:40:25 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:20:00 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int		write_in(int n, char *file, mode_t mode)
 
 int		read_from(int n, char *file)
 {
-	//file = EXPANSION
 	int	fd;
 
+	//file = EXPANSION
 	if (access(file, F_OK) == -1)
 	{
 		ft_putendl_fd("No such file or directory", 2);

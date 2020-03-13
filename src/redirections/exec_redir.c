@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:01:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 19:36:45 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:17:56 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		exec_heredoc(char *redir, char *file)
 {
 	int		link[2];
 	int		n;
-	
+
 	n = dig_to_io(redir);
 	link[0] = -1;
 	link[1] = -1;
@@ -40,17 +40,6 @@ int		exec_heredoc(char *redir, char *file)
 	}
 	return (0);
 }
-
-//int		myheredoc(char *redir, char *file, int nb)
-//{
-//	char	*tmp;
-//
-//	tmp = heredoc(file);
-//	if (nb == g_jobcontrol.here)
-//		g_jobcontrol.heredoc = ft_strjoinfree(g_jobcontrol.heredoc, tmp);
-//	ft_strdel(&tmp);
-//	return (0);
-//}
 
 int		dup_fd(char *redir, char *file)
 {
@@ -80,7 +69,7 @@ int		out_err_redir(char *file)
 	int fd;
 
 	fd = 0;
-	//file = EXPANSION FILE
+//	file = EXPANSION FILE
 	if (!ft_strcmp(file, "-"))
 	{
 		if (close(1) == -1 || close(2) == -1)
@@ -107,55 +96,32 @@ int		redir_to_file(char **cmd, int i, int ret)
 {
 	if (ft_seq_occur(cmd[i], "&>"))
 		ret = out_err_redir(cmd[i + 1]);
-	else if (ft_seq_occur(cmd[i], ">"))
+	else if (ft_seq_occur(cmd[i], ">") && !ft_seq_occur(cmd[i], "\\>"))
 		ret = redirect_to_file(cmd[i], cmd[i + 1], O_TRUNC, 1);
 	return (ret);
-}
-
-void	nb_heredoc(char **cmd)
-{
-	int	i;
-	int	nb;
-
-	i = 0;
-	nb = 0;
-	while (cmd[i])
-	{
-		if (ft_seq_occur(cmd[i], "<<"))
-			nb++;
-		i++;
-	}
-	g_jobcontrol.here = nb;
 }
 
 int		execute_redir(char **cmd)
 {
 	int i;
 	int ret;
-//	int	nb;
 
 	i = -1;
 	ret = 0;
-//	nb = 0;
 	g_jobcontrol.here = 0;
-//	nb_heredoc(cmd);
 	while (cmd[++i])
 	{
 		if (ft_seq_occur(cmd[i], ">>"))
 			ret = redirect_to_file(cmd[i], cmd[i + 1], O_APPEND, 1);
 		else if (ft_seq_occur(cmd[i], "<<"))
-		{
-	//		nb++;
-		//  ft_putendl("O \"<<\" has occur");
 			ret = exec_heredoc(cmd[i], cmd[i + 1]);
-		}
 		else if (ft_seq_occur(cmd[i], ">&"))
 			ret = dup_fd(cmd[i], cmd[i + 1]);
 		else if (ft_seq_occur(cmd[i], "&>") || ft_seq_occur(cmd[i], ">"))
 			ret = redir_to_file(cmd, i, ret);
 		else if (ft_seq_occur(cmd[i], "<&"))
 			ret = dup_fd(cmd[i], cmd[i + 1]);
-		else if (ft_seq_occur(cmd[i], "<"))
+		else if (ft_seq_occur(cmd[i], "<") && !ft_seq_occur(cmd[i], "\\<"))
 			ret = redirect_to_file(cmd[i], cmd[i + 1], O_RDONLY, 0);
 		if (ret == -1 && (g_jobcontrol.ret = 1) == 1)
 			return (g_jobcontrol.red = -1);

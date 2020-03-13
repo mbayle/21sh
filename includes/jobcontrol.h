@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 03:26:18 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:38:57 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ struct s_jobcontrol				g_jobcontrol;
 /**
 assign
 **/
+void					unexec_ass(char **ass);
 char					**del_one(char **tabl, int pos);
 int						just_ass(char **ass);
 void					exec_ass(char **ass);
@@ -146,6 +147,8 @@ char					*check_match(char *param, char *word, char c);
 /**
 builtuin
 **/
+int						check_b(char **cmd);
+int						exec_echo(char **cmd);
 void					hash_reset(t_hash **hash);
 int						exec_hash(t_hash **hash, char *pathvar, char **cmd);
 t_hash					*browse_command(char *command, char *pathvar, t_hash **hash);
@@ -187,6 +190,7 @@ char						**parse_redir(char **line, int exec);
 /**
 Utils
 **/
+int							elst_size(t_lst2 *menv);
 char						**check_opt_env(char **cmd);
 int							is_env_arg(char **cmd);
 char						**env_copy(t_lst2 *menv);
@@ -225,7 +229,9 @@ void						delete_job(t_job *job);
 /**
 jocontrol / execution
 **/
-
+void						norme(t_job *comp2, int i, t_job *save);
+int							process_nb(t_process *pro);
+int							execute_builtin(char **cmd);
 void						save_fd(void);
 void						reset_fd(void);
 void						close_fd(void);

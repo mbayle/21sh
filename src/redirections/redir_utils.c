@@ -6,40 +6,11 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:09:25 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/11 17:52:06 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:19:25 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
-
-int		size_tab(char *line)
-{
-	int i;
-	int nb;
-
-	i = -1;
-	nb = 0;
-	while (line && line[++i])
-	{
-		if (line[i] != ' ' && line[i] != '<' && line[i] != '>' &&
-			line[i] != '&')
-		{
-			nb++;
-			while (line[i] && line[i] != ' ' && line[i] != '<' && line[i] != '>'
-					&& line[i] != '&')
-				i++;
-			i--;
-		}
-		else if (line[i] == '<' || line[i] == '>' || line[i] == '&')
-		{
-			nb++;
-			while (line[i] == '<' || line[i] == '>' || line[i] == '&')
-				i++;
-			i--;
-		}
-	}
-	return (nb);
-}
 
 int		ft_seq_occur(char *str, char *seq)
 {
@@ -122,7 +93,7 @@ int		check_fd(int fd, int n)
 
 int		if_digit(char *file, int n)
 {
-	int 	fd;
+	int		fd;
 
 	fd = dig_to_io(file);
 	if (check_fd(fd, n))

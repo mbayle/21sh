@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/17 19:14:13 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/08 21:00:43 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:21:36 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int		get_row(int r, int i, int pc)
 {
-	int tmp;
-	int *coord;
-	struct winsize  ws;
+	int				tmp;
+	int				*coord;
+	struct winsize	ws;
 
 	ioctl(0, TIOCGWINSZ, &ws);
 	g_w.ws_col = ws.ws_col;

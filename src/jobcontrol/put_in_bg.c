@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:32:56 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 04:44:04 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 05:08:06 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	update_bg_status(void)
 		cpy = check_bg_status(cpy);
 		if (cpy)
 		{
-			ft_putendl("HERE");
 			status_builtin(cpy->first_process);
 			cpy = cpy->next;
 		}
