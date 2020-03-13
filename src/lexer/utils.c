@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/25 04:46:09 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/12 05:16:38 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,11 @@ int		check_operator(char *input)
 ** Return value : return index of last quote (if match) else return -1 (error)
 */
 
-int		quote_bksl_case(int i, char *input)
+int		quote_brace_case(int i, char *input)
 {
+	char	stack[256];
+	int		ret;
+
 	if (input[i] == '\'')
 	{
 		i++;
@@ -81,15 +84,13 @@ int		quote_bksl_case(int i, char *input)
 		}
 		input[i] != 34 ? i = -1 : i++;
 	}
-	if ((input[i] == '$' && input[i + 1] == '{') 
+	if ((input[i] == '$' && input[i + 1] == '{')
 		|| (input[i] == '$' && input[i + 1] == '('))
 	{
-		char stack[256];
-		int ret;
 		ret = ft_bracket(input, -1, 0, stack);
 		if (ret > 0)
 			i = i + ret;
-	}	
+	}
 	return (i > 0 ? i : -1);
 }
 

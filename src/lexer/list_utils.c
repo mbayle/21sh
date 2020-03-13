@@ -35,6 +35,7 @@ t_lex	*list_new(char *input)
 	new->operator = 0;
 	new->hdoc_delim = 0;
 	new->priority = 0;
+	new->escape = 0;
 	new->next = NULL;
 	return (new);
 }

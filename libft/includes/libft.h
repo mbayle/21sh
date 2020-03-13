@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:01:11 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/03 23:08:59 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/12 05:25:39 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int					ft_atoi(const char *str);
 /*
 ** ft_bracket.c
 */
-int					 ft_bracket(char *str, int top, int a, char *stack);
+int					ft_bracket(char *str, int top, int a, char *stack);
 
 /*
 ** ft_bzero.c

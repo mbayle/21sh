@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:40:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/19 23:41:08 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/12 05:22:38 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 /*
 ** ast.c
 */
-
 
 void				join_job_line(t_ast *ast, int p_pos);
 void				manage_pipe_bis(t_ast *ast);

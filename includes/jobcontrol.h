@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/13 01:38:57 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:50:30 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,7 @@ struct s_jobcontrol				g_jobcontrol;
 /**
 assign
 **/
+//static char	*create_token(char *input, int i);
 void					unexec_ass(char **ass);
 char					**del_one(char **tabl, int pos);
 int						just_ass(char **ass);

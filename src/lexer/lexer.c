@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/11 19:36:02 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/13 01:50:54 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ int		find_end(int i, char *input)
 	{
 		if (input[i] == '\\')
 			i++;
-		if (input[i] == '\'' || input[i] == '"' || (input[i] == '$' 
+		if (input[i] == '\'' || input[i] == '"' || (input[i] == '$'
 				&& input[i + 1] == '{'))
 		{
-			i = quote_bksl_case(i, input);
+			i = quote_brace_case(i, input);
 			break ;
 		}
 		if (input[i])
@@ -83,6 +83,26 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 	return (i);
 }
 
+static char	*create_token(char *input, int i)
+{
+	char	*token;
+	char	*tmp;
+
+	token = NULL;
+	if (ft_strchr(input, '\\') != NULL)
+	{
+		while (input[i] != '\\')
+			i++;
+		tmp = ft_strsub(input, 0, i);
+		i++;
+	}
+	else
+	{
+		ft_strsub(input, 0, i);
+	}
+	return (token);
+}
+
 /*
 ** Purpose of the function : Fill in my node and add it to my list
 ** Steps  : 1 - get value for my future lexeme
@@ -93,7 +113,7 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 **			6 - Upgrade lex_size
 ** Retrun value : no return
 */
-// Malloc not protected
+
 void	valid(t_lex **lex, char *input, int io, int i)
 {
 	char	*token;
@@ -101,8 +121,10 @@ void	valid(t_lex **lex, char *input, int io, int i)
 	int		aword;
 
 	aword = 0;
-	token = ft_strsub(input, 0, i);
+	//token = ft_strsub(input, 0, i);
+	token = create_token(input, i);
 	new = list_new(token);
+	//inserer gestion inhib ici
 	token_type(new, io, aword);
 	list_add(lex, new);
 	ft_strdel(&token);
@@ -119,56 +141,6 @@ void	valid(t_lex **lex, char *input, int io, int i)
 **			5 - Free my linked list
 ** Return value : no return
 */
-
-
-char	**lex_to_tab(t_lex *lex)
-{
-	int		i;
-	char	**dst;
-
-	i = 0;
-	if (!(dst = malloc(sizeof(char*) * (lex_size(lex) + 1))))
-		return (NULL);
-	while (lex && lex->token != UNKNOWN)
-	{
-		if (lex->token == IO_NUMBER)
-		{
-			dst[i] = ft_strjoin(lex->value, lex->next->value);
-			lex = lex->next;
-		}
-		else
-        	dst[i] = ft_strdup(lex->value);
-		i++;
-		lex = lex->next;
-	}
-	dst[i] = NULL;
-	return (dst);
-}
-
-/*void	do_heredoc(char **cmd)
-{
-	int	i;
-	int	ret;
-	int	nb;
-
-	i = 0;
-	nb= 0;
-	g_jobcontrol.here = 0;
-	nb_heredoc(cmd);
-	while (cmd[i])
-	{
-		if (ft_seq_occur(cmd[i], "<<"))
-		{
-	//		printf("%s %s\n", "cmd[i]", cmd[i]);
-	//		printf("%s %s\n", "cmd[i + 1]", cmd[i + 1]);
-			nb++;
-			ret = myheredoc(cmd[i], cmd[i + 1], nb);
-		}
-		if (ret == -1)// && (g_jobcontrol.ret = 1) == 1)
-			return ;
-		i++;
-	}
-}*/
 
 void	ft_lexer(t_lex **lex, char *input)
 {
@@ -188,6 +160,7 @@ void	ft_lexer(t_lex **lex, char *input)
 		else
 		{
 			lexdel(lex);
+			ft_putendl("[DEBUG] Exception");
 			return ;
 		}
 		input = input + i++;
@@ -197,15 +170,3 @@ void	ft_lexer(t_lex **lex, char *input)
 	ft_parse(&g_shell->lex);
 	lexdel(lex);
 }
-
-
-
-
-
-
-
-
-
-
-
-
