@@ -83,26 +83,6 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 	return (i);
 }
 
-static char	*create_token(char *input, int i)
-{
-	char	*token;
-	char	*tmp;
-
-	token = NULL;
-	if (ft_strchr(input, '\\') != NULL)
-	{
-		while (input[i] != '\\')
-			i++;
-		tmp = ft_strsub(input, 0, i);
-		i++;
-	}
-	else
-	{
-		ft_strsub(input, 0, i);
-	}
-	return (token);
-}
-
 /*
 ** Purpose of the function : Fill in my node and add it to my list
 ** Steps  : 1 - get value for my future lexeme
@@ -121,10 +101,8 @@ void	valid(t_lex **lex, char *input, int io, int i)
 	int		aword;
 
 	aword = 0;
-	//token = ft_strsub(input, 0, i);
-	token = create_token(input, i);
+	token = ft_strsub(input, 0, i);
 	new = list_new(token);
-	//inserer gestion inhib ici
 	token_type(new, io, aword);
 	list_add(lex, new);
 	ft_strdel(&token);
