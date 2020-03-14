@@ -106,8 +106,6 @@ void		tmp_free_struct(t_struct *s)
 	(*s).tmp = NULL;
 	free_dchar(&(*s).envi);
 	(*s).av = NULL;
-	sec_free(&s->cmd, 0);
-	s->cmd = NULL;
 }
 
 char		**ft_tabdup(char **av)
@@ -156,11 +154,11 @@ int			main(int ac, char **av, char **envp)
 	ac == 2 && ft_strcmp(av[1], "DEBUG") == 0 ? g_shell->debug = 1 : 0;
 	while (init_lst(&s, 0, 2, 0))
 	{
+		g_jobcontrol.s = s;
 		if (s.cmd)
 		{
 			update_bg_status();
 			g_shell->line = s.cmd;
-			g_jobcontrol.s = s;
 			ft_lexer(&g_shell->lex, g_shell->line);
 		}
 		tmp_free_struct(&s);
