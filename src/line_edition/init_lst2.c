@@ -60,14 +60,21 @@ static int	init_lst_2_b2(t_struct *s, char buf[6])
 		else
 			tputs(tgetstr("bl", NULL), 1, ft_ptchar);
 	}
-	else
+	if (buf[2] == 80)
 	{
 		if (s->cpt > 1)
 			s->cpt--;
 		else
 			tputs(tgetstr("bl", NULL), 1, ft_ptchar);
 	}
-	s->set_cpt = 1;
+	if ((buf[2] == 82 && !s->clr) || (buf[2] == 83 && s->clr == 13))
+		fp("bl", NULL);
+	else if (buf[2] == 82 && s->clr)
+		s->clr--;
+	else if (buf[2] == 83 && s->clr < 13)
+		s->clr++;
+	if (buf[2] < 82)
+		s->set_cpt = 1;
 	return (1);
 }
 
@@ -97,7 +104,7 @@ int			init_lst_2(t_struct *s, char buf[701], int *i, t_htr **t)
 	if (buf[0] == 27 && buf[1] == 91 && buf[2] == 49 && buf[3] == 59
 			&& buf[4] == 50)
 		return (init_lst_2_b(s, buf));
-	if (buf[0] == 27 && buf[1] == 79 && (buf[2] == 80 || buf[2] == 81))
+	if (buf[0] == 27 && buf[1] == 79 && (buf[2] >= 80 || buf[2] <= 83))
 		return (init_lst_2_b2(s, buf));
 	while (buf[c])
 	{

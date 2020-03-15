@@ -45,11 +45,13 @@ static int		help_ws(int *m)
 static void		write_anim(int i)
 {
 	tputs(tgetstr("im", NULL), 1, ft_ptchar);
-	ft_putstr(CYAN"_");
+	clr_shell(g_jobcontrol.s.clr);
+	ft_putstr("_");
 	fp("ei", "rc");
 	while (i--)
 		tputs(tgetstr("le", NULL), 1, ft_ptchar);
-	ft_putstr(CYAN"_");
+	clr_shell(g_jobcontrol.s.clr);
+	ft_putstr("_");
 	tputs(tgetstr("rc", NULL), 1, ft_ptchar);
 }
 
@@ -58,7 +60,7 @@ static void		anim_cpt(int m, int lr, int c, int i)
 	int		s;
 
 	ft_marge(m + 42);
-	ft_putstr(CYAN);
+	clr_shell(g_jobcontrol.s.clr);
 	s = lr;
 	while (c)
 	{
@@ -96,10 +98,12 @@ int				exec_sethelp(void)
 	anim_cpt(m, 28, 42, 1);
 	exec_help2(m);
 	es7("Search history: ", m + 30);
-	ft_putstr(MAGENTA"ctrl + r"WHITE);
+	clr_shell(g_jobcontrol.s.clr);
+	ft_putstr("ctrl + r"WHITE);
 	ft_putstr("\n\n");
 	ft_marge(m + 10);
-	ft_putstr(CYAN"Warning: "WHITE);
+	clr_shell(g_jobcontrol.s.clr);
+	ft_putstr("Warning: "WHITE);
 	ft_putstr("The copy/paste from an external source does not work");
 	read(0, &buf, 1);
 	fp("ve", "cl");

@@ -17,9 +17,9 @@ void			ps(char *s)
 	ft_putstr(s);
 }
 
-static void		welcome2(int m)
+static void		welcome2(int m, t_struct s)
 {
-	ft_putstr(CYAN);
+	clr_shell(s.clr);
 	bar(m - 5, 1);
 	cline(m);
 	ft_sleep(1);
@@ -92,7 +92,7 @@ int				welcome(t_struct s)
 	tputs(tgetstr("cl", NULL), 1, ft_ptchar);
 	while (h--)
 		tputs(tgetstr("do", NULL), 1, ft_ptchar);
-	welcome2(m);
+	welcome2(m, s);
 	welcome3(m);
 	rbar(m);
 	usleep(500000);

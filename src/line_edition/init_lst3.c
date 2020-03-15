@@ -40,14 +40,21 @@ static int	init_lst_3_b2(t_struct *s, char buf[6])
 		else
 			tputs(tgetstr("bl", NULL), 1, ft_ptchar);
 	}
-	else
+	if (buf[2] == 80)
 	{
 		if (s->cpt > 1)
 			s->cpt--;
 		else
 			tputs(tgetstr("bl", NULL), 1, ft_ptchar);
 	}
-	s->set_cpt = 1;
+	if ((buf[2] == 82 && !s->clr) || (buf[2] == 83 && s->clr == 13))
+		fp("bl", NULL);
+	else if (buf[2] == 82 && s->clr)
+		s->clr--;
+	else if (buf[2] == 83 && s->clr < 13)
+		s->clr++;
+	if (buf[2] < 82)
+		s->set_cpt = 1;
 	return (1);
 }
 

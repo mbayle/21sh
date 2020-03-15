@@ -14,14 +14,17 @@
 
 static void	init_lst_b(struct termios *term, t_struct *s)
 {
-//	static int		wlcm;
+	static int		wlcm;
 
 	(void)term;
 	print_prompt(s->prompt, s, 0);
 	sec_free(&s->cmd, 0);
 	s->nl = 0;
-//	if (!wlcm && isatty(0) && (wlcm = 1) && s->env_i)
-//		welcome(*s);
+	if (!wlcm && isatty(0) && (wlcm = 1) && s->env_i)
+	{
+		welcome(*s);
+		wlcm_msg(s);
+	}
 	fp("ve", NULL);
 }
 

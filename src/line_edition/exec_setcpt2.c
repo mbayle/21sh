@@ -45,7 +45,7 @@ void	exec_setcpt6(t_struct *s, int m)
 {
 	int		ret;
 
-	exec_setcpt2(s, m);
+	exec_setcpt2(s, m, 0);
 	exec_setcpt3(s, m);
 	ft_putchar('\n');
 	ret = 23;
@@ -69,7 +69,8 @@ void	exec_setcpt7(t_struct *s)
 		tputs(tgetstr("nd", NULL), 1, ft_ptchar);
 		tputs(tgetstr("nd", NULL), 1, ft_ptchar);
 		tputs(tgetstr("nd", NULL), 1, ft_ptchar);
-		ft_putstr(WHITE" "MAGENTA);
+		ft_putstr(WHITE" ");
+		clr_shell(s->clr);
 		tputs(tgetstr("rc", NULL), 1, ft_ptchar);
 		tputs(tgetstr("nd", NULL), 1, ft_ptchar);
 	}
@@ -80,7 +81,8 @@ void	exec_setcpt7(t_struct *s)
 		tputs(tgetstr("le", NULL), 1, ft_ptchar);
 		tputs(tgetstr("le", NULL), 1, ft_ptchar);
 		tputs(tgetstr("le", NULL), 1, ft_ptchar);
-		ft_putstr(WHITE" "MAGENTA);
+		ft_putstr(WHITE" ");
+		clr_shell(s->clr);
 		tputs(tgetstr("rc", NULL), 1, ft_ptchar);
 		tputs(tgetstr("nd", NULL), 1, ft_ptchar);
 	}

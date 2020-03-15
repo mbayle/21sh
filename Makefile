@@ -37,7 +37,7 @@ LDFLAGS		:=	-L$(dir $(LIBFT)) -lft
 
 CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3
 ifeq ($(DEBUG), 1)
-	CFLAGS	:=	$(CFLAGS) -ggdb -fno-omit-frame-pointer -fsanitize=address
+	CFLAGS	:=	$(CFLAGS) -ggdb -fno-omit-frame-pointer
 endif
 
 SRC_PATH	:=	./src/
@@ -147,6 +147,8 @@ SRC		:=	main.c \
 			line_edition/exec_cd.c \
 			line_edition/exec_help2.c \
 			line_edition/exec_history.c \
+			line_edition/exec_setclr2.c \
+			line_edition/exec_setclr3.c \
 			line_edition/exec_setcpt.c \
 			line_edition/exec_setcpt2.c \
 			line_edition/exec_setcpt3.c \
@@ -173,6 +175,7 @@ SRC		:=	main.c \
 			line_edition/outils_welcom.c \
 			line_edition/outils_welcom2.c \
 			line_edition/print_lst.c \
+			line_edition/print_lst2.c \
 			line_edition/print_prompt.c \
 			line_edition/print_prompt2.c \
 			line_edition/recup_stdin.c \
@@ -200,11 +203,13 @@ SRC		:=	main.c \
 			line_edition/show_commands_tab3.c\
 			line_edition/init_lst2_b.c\
 			line_edition/exec_setenv.c\
+			line_edition/exec_setclr.c \
 			line_edition/exec_env.c\
 			line_edition/exec_export.c\
 			line_edition/exec_set.c\
 			line_edition/exec_unset.c\
 			line_edition/check_quotes2.c \
+			line_edition/wlcm_msg.c \
 			input/line_edition.c \
 			input/term_mode.c \
 			input/get_cursor_pos.c \
@@ -227,7 +232,7 @@ all:
 	@make $(NAME)
 
 $(NAME):  $(LIBFT) $(OBJ)
-	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap -fsanitize=address
+	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap
 	@echo ""
 	@echo "\033[0;32m42sh build done\033[0m"
 	@echo ""

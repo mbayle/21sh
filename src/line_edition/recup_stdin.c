@@ -23,6 +23,8 @@ static int	recup_stdin2(t_struct *s, int *i, t_htr **t, int ret)
 			*i = 0;
 		*t = NULL;
 	}
+	else if (s->tmp && s->tmp->next && s->tmp != s->lbg)
+		*t = NULL;
 	s->ret = ret;
 	return (2);
 }

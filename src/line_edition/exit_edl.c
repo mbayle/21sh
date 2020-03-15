@@ -24,10 +24,39 @@ static void	file_history2(t_htr **tmp, t_htr **del, t_struct *s)
 	sec_free(&s->cpcl, 0);
 }
 
+static void	file_history3(t_struct *s, int fd)
+{
+	char	c;
+	char	*c2;
+
+	c2 = NULL;
+	c = s->cpt + 48;
+	write(fd, &c, 1);
+	write(fd, "\n", 1);
+	if (s->clr > 9)
+	{
+		c2 = ft_itoa(s->clr);
+		write(fd, c2, ft_strlen(c2));
+		write(fd, "\n", 1);
+		free(c2);
+	}
+	else
+	{
+		c = s->clr + 48;
+		write(fd, &c, 1);
+		write(fd, "\n", 1);
+	}
+	c = s->ci + 48;
+	write(fd, &c, 1);
+	write(fd, "\n", 1);
+	ft_putstr("\n\n");
+	ft_putnbr(s->ci);
+	ft_putstr("\n\n");
+}
+
 static int	file_history(t_htr *h, t_htr **del, t_struct *s, int fd)
 {
 	t_htr	*tmp;
-	char	c;
 	char	*p;
 
 	p = NULL;
@@ -37,9 +66,7 @@ static int	file_history(t_htr *h, t_htr **del, t_struct *s, int fd)
 			return (sec_free(&p, 0));
 		if ((fd = open(p, O_WRONLY | O_CREAT, 0644)) == -1)
 			return (sec_free(&p, 0));
-		c = s->cpt + 48;
-		write(fd, &c, 1);
-		write(fd, "\n", 1);
+		file_history3(s, fd);
 		while (h)
 		{
 			write(fd, h->name, ft_strlen(h->name));

@@ -101,6 +101,8 @@ void		tmp_free_struct(t_struct *s)
 		free(del);
 	}
 	s->cpt = g_jobcontrol.s.cpt;
+	s->clr = g_jobcontrol.s.clr;
+	s->ci = g_jobcontrol.s.ci;
 	(*s).l = NULL;
 	(*s).lbg = NULL;
 	(*s).tmp = NULL;

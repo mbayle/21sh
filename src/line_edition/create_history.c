@@ -40,6 +40,26 @@ static int	create_history3(t_struct *s)
 	return (1);
 }
 
+static int	create_history4(t_struct *s, int fd, char **l)
+{
+	get_next_line(fd, l);
+	if (!l && (s->cpt = 2))
+		return (0);
+	s->cpt = (*l)[0] - 48;
+	free(*l);
+	get_next_line(fd, l);
+	if (!l && (s->clr = 1))
+		return (0);
+	s->clr = ft_atoi(*l);
+	free(*l);
+	get_next_line(fd, l);
+	if (!l && (s->ci = 1))
+		return (0);
+	s->ci = (*l)[0] - 48;
+	free(*l);
+	return (1);
+}
+
 t_htr		*create_history(t_htr *h, t_htr *new, t_htr *bg, t_struct *s)
 {
 	char	*l;
@@ -50,14 +70,8 @@ t_htr		*create_history(t_htr *h, t_htr *new, t_htr *bg, t_struct *s)
 		return (NULL);
 	if ((fd = open("./.history", O_RDONLY)) == -1)
 		return (NULL);
-	get_next_line(fd, &l);
-	if (!l)
-	{
-		s->cpt = 2;
+	if (!create_history4(s, fd, &l))
 		return (NULL);
-	}
-	s->cpt = l[0] - 48;
-	free(l);
 	while (get_next_line(fd, &l))
 	{
 		if ((new = malloc(sizeof(*new))) == NULL)

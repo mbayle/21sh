@@ -28,10 +28,9 @@ int			lst2_size(t_lst2 *l)
 static void	print_prompt4(t_struct *s, char *h, char *pw)
 {
 	g_lined ? s->cpt = g_lined->cpt : 0;
-	ft_putstr(BLUE);
-	if (pw)
+	clr_shell(s->clr);
+	if (pw && (h = pw))
 	{
-		h = pw;
 		pw = ft_pstrback(pw);
 		while (*pw != '/')
 			pw--;
@@ -40,15 +39,18 @@ static void	print_prompt4(t_struct *s, char *h, char *pw)
 		ft_putstr(pw);
 		s->coprompt = ft_strlen(pw);
 	}
-	else
-	{
+	if (!pw && (s->coprompt = 9))
 		ft_putstr("Minishell");
-		s->coprompt = 9;
-	}
 	ft_putstr(" -");
 	ft_putnbr(s->cpt);
 	ft_putchar('-');
-	ft_putstr(RED" > "WHITE);
+	if (s->ci)
+		ft_putstr(RED" > "WHITE);
+	else
+	{
+		clr_shell(s->clr);
+		ft_putstr(" > "WHITE);
+	}
 	s->coprompt = s->coprompt + 8;
 }
 
@@ -61,10 +63,17 @@ static void	print_prompt3(char *h, char **pw, t_struct *s)
 	s->coprompt = 0;
 	if ((*pw && h) && strcmp(h, *pw) == 0)
 	{
-		ft_putstr(BLUE"~ -");
+		clr_shell(s->clr);
+		ft_putstr("~ -");
 		ft_putnbr(s->cpt);
 		ft_putchar('-');
-		ft_putstr(RED" > "WHITE);
+		if (s->ci)
+			ft_putstr(RED" > "WHITE);
+		else
+		{
+			clr_shell(s->clr);
+			ft_putstr(" > "WHITE);
+		}
 		s->coprompt = 9;
 	}
 	else

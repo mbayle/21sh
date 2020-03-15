@@ -21,15 +21,14 @@ static void	exec_setcpt2_b(t_struct *s, int ret, int m)
 	fp("le", "sc");
 	ft_putstr("\n");
 	ft_marge(m);
-	ft_putstr(CYAN"_________________________________________________________");
+	clr_shell(s->clr);
+	ft_putstr("_________________________________________________________");
 	ft_putendl("___________________________"WHITE);
 	tputs(tgetstr("rc", NULL), 1, ft_ptchar);
 }
 
-void		exec_setcpt2(t_struct *s, int m)
+void		exec_setcpt2(t_struct *s, int m, int ret)
 {
-	int		ret;
-
 	ft_marge(m + 9);
 	ft_putendl("Lvl 5 : Automatic completion, effective with multiple matches");
 	ft_putstr("\n\n");
@@ -39,14 +38,15 @@ void		exec_setcpt2(t_struct *s, int m)
 	ft_2putstr(RED"> ", WHITE"l     42sh ");
 	ft_2putstr(GREEN"> ", WHITE"ls\n\n");
 	es9("The paste option does not work with levels 4 and 5\n", m + 15);
-	ft_marge(m + 10);
-	ft_putendl("For a quick change in the completion level, use fn + < or >\n");
+	ft_marge(m + 14);
+	ft_putendl("For a quick change in the completion level, use f1/f2\n");
 	ft_mputstr(WHITE
 			"                        Current level of completion : "MAGENTA, m);
 	ft_putnbr(s->cpt);
 	ft_putstr("\n\n\n");
 	ft_mputstr(WHITE
-			"                Choose the level of completion you want ("CYAN, m);
+			"                Choose the level of completion you want (", m);
+	clr_shell(s->clr);
 	ft_2putstr("1 - 5", WHITE")\n\n");
 	ft_mputstr("                                     <  ", m);
 	ft_putstr("   >"MAGENTA);

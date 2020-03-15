@@ -14,21 +14,34 @@
 
 static void		print_lst3(t_struct s)
 {
+	int		b;
+	int		q;
+
+	b = check_bracket2(s);
+	q = check_quotes_b(s);
 	if (s.l->sel)
 		ft_putstr(BWHITE);
 	if (s.eq || s.edq)
 		fp("bl", NULL);
 	if (s.eq && s.l->c == '\'')
+		ft_putstr(SRED);
+	if (!s.eq && s.l->c == '\'' && q == -1)
 		ft_putstr(RED);
 	if (s.edq && s.l->c == '"')
+		ft_putstr(SRED);
+	if (!s.edq && s.l->c == '"' && q == -2)
 		ft_putstr(RED);
 	if (s.l->c == '\\' && !s.l->next)
 		ft_putstr(RED);
 	if (s.l->c == '\\' && !s.l->next && s.bs)
 		ft_putstr(SRED);
 	if ((s.l->c == '{' || s.l->c == '}') && s.b)
+		ft_putstr(SRED);
+	if ((s.l->c == '{' || s.l->c == '}') && b == -1 && !s.b)
 		ft_putstr(RED);
 	if ((s.l->c == '(' || s.l->c == ')') && s.p)
+		ft_putstr(SRED);
+	if ((s.l->c == '(' || s.l->c == ')') && b == -2 && !s.p)
 		ft_putstr(RED);
 }
 

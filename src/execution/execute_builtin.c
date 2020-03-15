@@ -22,6 +22,8 @@ void	exec_b(char **cmd)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "alias") == 0)
 		g_jobcontrol.ret = exec_alias(cmd);
+	if (ft_strcmp(cmd[0], "setclr") == 0)
+		g_jobcontrol.ret = exec_setclr(&g_jobcontrol.s, 1);
 //  if (ft_strcmp(cmd[0], "cd") == 0)
 //      g_jobcontrol.ret = fonction val;
 	if (ft_strcmp(cmd[0], "unalias") == 0)
