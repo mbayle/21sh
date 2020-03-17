@@ -40,7 +40,10 @@ int			recup_stdin(t_struct *s, char buf[701], int *i, int ret)
 	if (s->comp.name && !(init_lst_comp(buf, &*s, NULL, NULL)))
 		return (0);
 	if (!s->lbg && s->tmp)
+	{
+//		ft_putendl("NO S->LBG RECUP STDIN");
 		r = init_lst_4(s, buf, 0, NULL);
+	}
 	else if (!s->tmp || !s->tmp->next)
 		r = init_lst_2(&*s, buf, &*i, &t);
 	else if (s->lbg && s->tmp && s->tmp->next)

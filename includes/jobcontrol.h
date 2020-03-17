@@ -90,6 +90,7 @@ typedef struct				s_jobcontrol
 	int						repere;
 	int						ret;
 	int						i;
+	int						cm;
 	int						stdi;
 	int						stdo;
 	int						stde;

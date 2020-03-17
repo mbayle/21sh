@@ -45,6 +45,7 @@ void	if_not_cmd(char *cmd)
 	ft_putstr_fd("Shell : No cmd found: ", 2);
 	ft_putendl_fd(cmd, 2);
 	g_jobcontrol.ret = 1;
+	g_jobcontrol.cm = 1;
 }
 
 int		check_b(char **cmd)
@@ -70,6 +71,7 @@ char	*get_hashed_mypath(t_hash *h_tab)
 	char	*mypath;
 
 	mypath = NULL;
+	g_jobcontrol.cm = 0;
 	if (h_tab && h_tab->path)
 		mypath = ft_strdup(h_tab->path);
 	if (mypath && permissions(&mypath))

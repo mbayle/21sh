@@ -44,11 +44,17 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 
 char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 {
+	*mypath = NULL;
 	cmd = parse_redir(av, 0);
+	my_path(cmd, g_jobcontrol.env);
+	ft_putnbr(g_jobcontrol.ret);
 	if (!check_b(cmd))
 		*mypath = ft_strdup("b");
-	else
+	else if (g_jobcontrol.cm != 1)
+	{
 		*mypath = ft_strdup("i");
+		ft_putendl("I ALLOC");
+	}
 //	if (g_jobcontrol.sim == 0 && mypath)
 //  EXPANDRE
 //	INSERT QUOTE_REMOVAL HERE
