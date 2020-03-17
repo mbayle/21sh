@@ -15,7 +15,7 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I$(INC_PATH)
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -I$(INC_PATH)
 
 INCS	= ./includes/libft.h
 
