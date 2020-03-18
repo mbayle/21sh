@@ -70,8 +70,8 @@ int			init_lst_4(t_struct *s, char buf[701], int c, t_lst *l)
 	l->c = buf[0];
 	l->sel = 0;
 	l->next = s->tmp;
-/*	*/if ((s->tmp = malloc(sizeof(*l))) == NULL)
-		return (-1);
+/*if ((s->tmp = malloc(sizeof(*l))) == NULL)
+		return (-1);*/
 	s->tmp->prev = l;
 	l->prev = NULL;
 	s->lbg = l;

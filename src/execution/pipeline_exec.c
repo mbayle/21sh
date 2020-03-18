@@ -58,8 +58,8 @@ char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 //	if (g_jobcontrol.sim == 0 && mypath)
 //  EXPANDRE
 //	INSERT QUOTE_REMOVAL HERE
-	ft_putendl("C M D");
-	ft_printtab(cmd);
+//	ft_putendl("C M D");
+//	ft_printtab(cmd);
 	if (g_jobcontrol.sim == 0 && g_jobcontrol.g_fg)
 		cmd = check_assign(cmd);
 	else

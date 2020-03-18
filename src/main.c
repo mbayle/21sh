@@ -48,6 +48,7 @@ static void	init_term(t_struct *s)
 	s->cpcl = NULL;
 	s->env = NULL;
 	s->l = NULL;
+	s->tmp = NULL;
 	s->lbg = NULL;
 }
 

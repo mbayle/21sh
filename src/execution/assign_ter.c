@@ -27,7 +27,7 @@ void	unexec_ass(char **ass)
 		i++;
 	}
 	dst = get_key(ass);
-	ft_printtab(dst);
+//	ft_printtab(dst);
 	g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, dst);
 	ft_freetab(dst);
 }

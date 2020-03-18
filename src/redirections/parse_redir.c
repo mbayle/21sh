@@ -72,7 +72,7 @@ char	**dst_redir(char **command)
 			dst[y++] = ft_strdup(command[i++]);
 	}
 	dst[y] = NULL;
-	ft_printtab(dst);
+//	ft_printtab(dst);
 	return (dst);
 }
 
