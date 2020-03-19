@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/19 01:08:13 by admin            ###   ########.fr        #
+#    Updated: 2020/03/19 22:43:15 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ INCS		=	./includes/get_next_line.h \
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
 LDFLAGS		:=	-L$(dir $(LIBFT)) -lft
 
-CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3
+CFLAGS		:=	-Wall -Wextra -Werror -g3 -I$(INCLUDES)
 ifeq ($(DEBUG), 1)
 	CFLAGS	:=	$(CFLAGS) -ggdb -fno-omit-frame-pointer
 endif

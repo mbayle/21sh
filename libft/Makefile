@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/19 01:08:30 by admin            ###   ########.fr        #
+#    Updated: 2020/03/19 22:42:49 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,7 +129,8 @@ SRC = ft_memset.c \
 	  ft_strncpy.c \
 	  ft_cswap.c \
 	  ft_ipbackc.c \
-	  ft_bracket.c
+	  ft_bracket.c \
+	  ft_is_space.c
 
 OBJ_PATH = ./.obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))

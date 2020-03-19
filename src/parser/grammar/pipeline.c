@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipeline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/02 02:15:41 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/19 21:50:39 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		pipeline(t_lex *lex)
 
 int		pipeline1(t_lex *lex)
 {
-	return (lex->value[0] == '!' && pipe_sequence(lex) == 1 ? 1 : 0);
+	return (lex->value && (lex->value[0] == '!' && pipe_sequence(lex) == 1) ? 1 : 0);
 }
 
 /*

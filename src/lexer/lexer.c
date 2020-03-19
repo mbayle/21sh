@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/19 01:55:41 by admin            ###   ########.fr       */
+/*   Updated: 2020/03/19 22:48:51 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	ft_lexer(t_lex **lex, char *input)
 	int		i;
 	int		io_nbr;
 
-	if (!lex || !input)
+	if (!lex || !input || ft_is_space(input) == 0)
 		return ;
 	while (*input)
 	{
