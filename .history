@@ -10,3 +10,7 @@ ls
 echo test && echo coucou
 ls
 echo test && echo coucou
+ls
+echo test && echo coucou
+ls
+echo test && echo coucou
