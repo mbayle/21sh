@@ -25,9 +25,9 @@ int 	exec_echo(char **cmd)
 		e = 1;
 	while (cmd && cmd[i + e])
 	{
-		if ((ret = write(1, (cmd[i + e]), ft_strlen(cmd[i + e]))) == -1)
+		if (write(1, (cmd[i + e]), ft_strlen(cmd[i + e])) == -1)
 			return (-1);
-		if (cmd[i + e + 1] && (ret = write(1, " ", 1)) == -1)
+		if (cmd[i + e + 1] && write(1, " ", 1) == -1)
 			return (-1);
 		i++;
 	}

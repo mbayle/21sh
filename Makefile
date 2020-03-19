@@ -50,6 +50,7 @@ SRC		:=	main.c \
 			builtins/alias_bis.c\
 			builtins/unalias.c\
 			builtins/echo.c\
+			builtins/malloc_exit.c\
 			jobcontrol/jc_utils.c\
 			jobcontrol/init_interactive_shell.c \
 			jobcontrol/put_in_fg.c \

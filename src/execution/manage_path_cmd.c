@@ -86,12 +86,12 @@ char	*my_path(char **cmd, char **env)
 	char	*mypath;
 
 	mypath = NULL;
-	if (cmd && cmd[0])
+	if (cmd && cmd[0] && check_b(cmd) == 1)
 	{
 		tmp = get_line(env);
 		if (!(mypath = local_file(cmd[0])))
 		{
-			ft_putendl(cmd[0]);
+//			ft_putendl(cmd[0]);
 			if ((h_tab = browse_command(cmd[0], tmp, &g_jobcontrol.h_tab))
 			== MAP_FAILED)
 				return (NULL);

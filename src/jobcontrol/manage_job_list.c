@@ -19,7 +19,7 @@ void	delete_process(t_process *pro)
 	if (pro && pro->next)
 		delete_process(pro->next);
 	ft_strdel(&pro->cmd);
-	ft_memdel((void**)pro);
+	ft_memdel((void**)&pro);
 }
 
 void	delete_job(t_job *job)
@@ -32,7 +32,7 @@ void	delete_job(t_job *job)
 	ft_strdel(&job->command);
 	if (job->pgid != -1 && job->pgid != 0)
 		kill(-(job->pgid), 9);
-	ft_memdel((void**)job);
+	ft_memdel((void**)&job);
 }
 
 t_job	*delete_first(t_job *first)
@@ -43,12 +43,15 @@ t_job	*delete_first(t_job *first)
 	ft_strdel(&first->command);
 	tmp = first;
 	first = first->next;
-	ft_memdel((void**)tmp);
-	ft_memdel((void**)&g_jobcontrol.first_mail);
+	ft_memdel((void**)&tmp);
+//	ft_memdel((void**)&g_jobcontrol.first_mail);
 	if (first)
 		g_jobcontrol.first_mail = first;
 	else
+	{
 		g_jobcontrol.first_job = NULL;
+		g_jobcontrol.first_mail = NULL;
+	}
 	return (first);
 }
 
@@ -58,6 +61,7 @@ t_job	*delete_link(pid_t pgid)
 	t_job	*tmp;
 	t_job	*save;
 
+//	ft_putendl("\n\nI DELETE LINK\n\n");
 	first = g_jobcontrol.first_mail;
 	if (first->pgid == pgid)
 		return (delete_first(first));
@@ -72,7 +76,7 @@ t_job	*delete_link(pid_t pgid)
 			if (first->next->next == NULL)
 				g_jobcontrol.first_job = first;
 			first->next = first->next->next;
-			ft_memdel((void**)tmp);
+			ft_memdel((void**)&tmp);
 			break ;
 		}
 		first = first->next;

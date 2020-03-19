@@ -22,11 +22,13 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 	&& (pid = fork()) == 0)
 	{
 		do_in_child(oldlink, newlink, g_jobcontrol.arg);
+		//EXPANDRE DANS REDIR
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		if (ft_strcmp(path, "i") == 0)
 			path = my_path(cmd, g_jobcontrol.env);
 		if (g_jobcontrol.sim == 1 && g_jobcontrol.g_fg)
 		{
+			//EXPANDRE DANS ASSIGN
 			cmd = check_assign(cmd);
 			path = my_path(cmd, g_jobcontrol.env);
 		}
@@ -44,23 +46,19 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 
 char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 {
+	char *tmp;
+
 	*mypath = NULL;
 	cmd = parse_redir(av, 0);
-	my_path(cmd, g_jobcontrol.env);
-	ft_putnbr(g_jobcontrol.ret);
+	if ((tmp = my_path(cmd, g_jobcontrol.env)))
+		ft_strdel(&tmp);
+//	ft_putnbr(g_jobcontrol.ret);
 	if (!check_b(cmd))
 		*mypath = ft_strdup("b");
 	else if (g_jobcontrol.cm != 1)
-	{
 		*mypath = ft_strdup("i");
-		ft_putendl("I ALLOC");
-	}
-//	if (g_jobcontrol.sim == 0 && mypath)
-//  EXPANDRE
-//	INSERT QUOTE_REMOVAL HERE
-//	ft_putendl("C M D");
-//	ft_printtab(cmd);
 	if (g_jobcontrol.sim == 0 && g_jobcontrol.g_fg)
+	//EXPANDRE DANS ASSIGN
 		cmd = check_assign(cmd);
 	else
 		cmd = del_one(cmd, just_ass(cmd));
@@ -86,7 +84,11 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
 //	mypath = my_path(cmd, g_jobcontrol.env);
 	if (g_jobcontrol.sim == 0 && mypath)
+	{
+		//EXPANDRE DANS ASSIGN
+		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		execute_builtin(cmd);
+	}
 	pid = child_process(oldlink, newlink, mypath, cmd);
 	close_fd_father(oldlink, newlink);
 	g_jobcontrol.red = 0;

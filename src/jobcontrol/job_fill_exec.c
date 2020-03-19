@@ -39,14 +39,16 @@ t_process	*process_alloc(t_process *pro)
 {
 	if (!g_jobcontrol.first_job->first_process)
 	{
-		g_jobcontrol.first_job->first_process = ft_memalloc(sizeof(
-					*g_jobcontrol.first_job->first_process));
+		if ((g_jobcontrol.first_job->first_process = ft_memalloc(sizeof(
+					*g_jobcontrol.first_job->first_process))) == NULL)
+				malloc_exit();
 		pro = g_jobcontrol.first_job->first_process;
 		pro->next = NULL;
 	}
 	else
 	{
-		pro->next = ft_memalloc(sizeof(*g_jobcontrol.first_job->first_process));
+		if ((pro->next = ft_memalloc(sizeof(*g_jobcontrol.first_job->first_process))) == NULL)
+			malloc_exit();
 		pro = pro->next;
 		pro->next = NULL;
 	}
