@@ -14,15 +14,14 @@
 
 int		checkenv_export(char **av, t_lst2 *l, int i, int c)
 {
-	(void)i;
-	while (av[1][c] && av[1][c] != '=')
+	while (av[i][c] && av[i][c] != '=')
 		c++;
-	if (av[1][c])
+	if (av[i][c])
 		return (1);
 	c = 0;
 	while (l)
 	{
-		if (ft_strcmp(av[1], l->varn) == 0)
+		if (ft_strcmp(av[i], l->varn) == 0)
 		{
 			l->lcl = 0;
 			return (0);
@@ -31,7 +30,9 @@ int		checkenv_export(char **av, t_lst2 *l, int i, int c)
 	}
 	if (!l)
 	{
-		ft_eputendl("setenv: variable not found.\n");
+		ft_eputstr("export: "RED);
+		ft_eputstr(av[i]);
+		ft_eputendl(WHITE": variable not found.\n");
 		return (-1);
 	}
 	return (1);
@@ -79,15 +80,17 @@ int		exec_export3(t_struct *s)
 	return (0);
 }
 
-int		exec_export4(t_struct *s, int c, char **av, t_lst2 *l)
+int		exec_export4(t_struct *s, int c, char **av, int i)
 {
 	char	**tmp;
 	char	*tm;
+	t_lst2	*l;
 
+	l = NULL;
 	if (!(exec_export5(&tmp, av, s, &l)))
 		return (0);
 	while (l)
-		if (!ft_strncmp(av[1], l->varn, c))
+		if (!ft_strncmp(av[i], l->varn, c))
 		{
 			tm = ft_mstrcpy(NULL, l->varn);
 			exec_setenv(s, tmp, NULL, 0);
@@ -105,28 +108,51 @@ int		exec_export4(t_struct *s, int c, char **av, t_lst2 *l)
 		else
 			l = l->next;
 	free_tmp_export5(&tmp);
-	return (exec_setenv(s, av, NULL, 1));
+	return (exec_setenv_b(s, av, i, 1));
 }
 
-int		exec_export(t_struct *s, char **av)
+int		exec_export_b(t_struct *s, char **av, int i)
 {
 	int		c;
 
 	c = 0;
-	if (!av[1])
+	if (!av[i])
 		return (exec_export3(s));
-	else if (av[1][0] == '=' || ft_isnum(av[1][0]))
+	else if (av[i][0] == '=' || ft_isnum(av[i][0]))
 	{
-		ft_putendl("export: error: bad variable name.");
+		ft_eputstr("export: "RED);
+		ft_eputstr(av[i]);
+		ft_eputendl(WHITE": bad variable name.");
 		return (1);
 	}
-	else if (!((*s).t = checkenv_export(av, (*s).env, 0, 0)) || (*s).t == -1)
+	else if (!((*s).t = checkenv_export(av, (*s).env, i, 0)) || (*s).t == -1)
 	{
 		if ((*s).t == -1)
 			return (1);
 		return (s->t);
 	}
-	while (av[1][c] != '=')
+	while (av[i][c] != '=')
 		++c;
-	return (exec_export4(s, c, av, NULL));
+	return (exec_export4(s, c, av, i));
+}
+
+int		exec_export(t_struct *s, char **av)
+{
+	int		c;
+	int		i;
+
+	c = 1;
+	i = 0;
+	if (!av[1])
+	{
+		ft_putendl("export: error: no variable indicated.");
+		return (1);
+	}
+	while (av[c])
+	{
+		if (exec_export_b(s, av, c))
+			i = 1;
+		++c;
+	}
+	return (i);
 }

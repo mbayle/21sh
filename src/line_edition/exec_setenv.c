@@ -35,7 +35,7 @@ int		checkenv_setenv(char **av, t_lst2 **l, int j, int c)
 	if (i != 1)
 	{
 		ft_2eputendl("setenv: bad variable declaration.\n",
-		"usage: [variable environnement name]=[variable...]");
+				"usage: [variable environnement name]=[variable...]");
 		return (-1);
 	}
 	return (1);
@@ -70,80 +70,72 @@ t_lst2	*exec_setenv2(t_lst2 *l, char *s, int c, t_struct *st)
 	return (l);
 }
 
-int		exec_setenv4(t_lst2 *l, char ***tmp, char **av)
+int		exec_setenv3(char **av, t_struct *s, t_lst2 *l, int c)
 {
-	if (l->lcl)
-	{
-		if ((*tmp = (char**)malloc(sizeof(**tmp) * 3)) == NULL)
-		{
-			ft_eputendl("setenv: warning: malloc error.");
-			return (1);
-		}
-		if (((*tmp)[1] = ft_mstrcpy(NULL, av[0])) == NULL)
-		{
-			ft_eputendl("setenv: warning: malloc error");
-			return (1);
-		}
-		return (0);
-	}
-	if ((*tmp = (char**)malloc(sizeof(**tmp) * 3)) == NULL)
-	{
-		ft_eputendl("setenv: warning: malloc error.");
-		return (1);
-	}
-	if (((*tmp)[1] = ft_mstrcpy(NULL, av[1])) == NULL)
-	{
-		ft_eputendl("setenv: warning: malloc error");
-		return (1);
-	}
-	return (0);
-}
-
-int		exec_setenv3(char **av, t_struct *s, t_lst2 *l, int i)
-{
-	char	**tmp;
-
 	if (s->t == 0)
 	{
-		if (exec_setenv4(l, &tmp, av))
-			return (0);
 		if (l->lcl == 0)
-			exec_unsetenv(s, tmp);
+			exec_unsetenv_b(s, av, c);
 		else if (l && l->lcl == 1)
-			exec_unset(s, tmp);
-		exec_setenv(s, av, NULL, i);
-		free(tmp[1]);
-		free(tmp);
+			exec_unset_b(s, av, c);
+		exec_setenv_b(s, av, c, g_jobcontrol.s.i);
 		return (0);
 	}
 	return (1);
 }
 
-int		exec_setenv(t_struct *s, char **av, t_lst2 *new, int i)
+int		exec_setenv_b(t_struct *s, char **av, int c, int i)
 {
 	t_lst2	*l;
+	t_lst2	*new;
 
+	new = NULL;
 	l = (*s).env;
-	if (!av[i])
-		ft_putendl("setenv: error: no variable indicated.");
-	else if (av[i][0] == '=')
-		ft_putendl("setenv: error: bad variable name.");
-	else if (!((*s).t = checkenv_setenv(av, &l, i, 0)) || (*s).t == -1)
-		return (exec_setenv3(av, s, l, i));
+	if (av[c][0] == '=')
+	{
+		ft_eputstr("setenv: "RED);
+		ft_eputstr(av[c]);
+		ft_eputendl(WHITE": bad variable name.");
+		return (1);
+	}
+	else if (!((*s).t = checkenv_setenv(av, &l, c, 0)) || (*s).t == -1)
+		return (exec_setenv3(av, s, l, c));
 	else
 	{
 		if ((new = malloc(sizeof(*new))) == NULL)
 			return (1);
-		if ((new->env = ft_mstrcpy(new->env, av[i])) == NULL)
+		if ((new->env = ft_mstrcpy(new->env, av[c])) == NULL)
 			return (1);
-		if ((new = exec_setenv2(new, av[i], 0, &*s)) == NULL)
+		if ((new = exec_setenv2(new, av[c], 0, &*s)) == NULL)
 			return (1);
 		if (i == 0)
 			new->lcl = 1;
 		if (!(*s).env)
 			(*s).env = new;
-//		if (!ft_strcmp(new->varn, "PATH"))
-//			hash_reset(&g_jobcontrol.h_tab);
+		if (!ft_strcmp(new->varn, "PATH"))
+			hash_reset(&g_jobcontrol.h_tab);
 	}
 	return (0);
+}
+
+int		exec_setenv(t_struct *s, char **av, t_lst2 *new, int i)
+{
+	int		c;
+
+	(void)new;
+	c = i;
+	if (!av[1] && i)
+	{
+		ft_eputendl("setenv: error: no variable indicated.");
+		return (1);
+	}
+	g_jobcontrol.s.i = 0;
+	if (i)
+		g_jobcontrol.s.i = 1;
+	while (av[c])
+	{
+		exec_setenv_b(s, av, c, i);
+		++c;
+	}
+	return (1);
 }
