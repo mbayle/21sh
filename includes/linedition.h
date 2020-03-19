@@ -183,6 +183,7 @@ typedef struct		s_struct
 	int				p;
 	int				mp;
 	int				env_i;
+	int				i;
 	int				cpt5;
 	int				ctrl_d;
 	int				ci;
@@ -380,4 +381,7 @@ void				anim_cpt2(int *lr, int *s, int m);
 void				wlcm_msg(t_struct *s);
 int					check_bracket2(t_struct s);
 int					check_quotes_b(t_struct s);
+int					exec_unset_b(t_struct *s, char **av, int i);
+int					exec_unsetenv_b(t_struct *s, char **av, int i);
+int					exec_setenv_b(t_struct *s, char **av, int c, int i);
 #endif
