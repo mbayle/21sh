@@ -3,27 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   print_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 02:44:11 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/12 05:19:36 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/19 01:22:27 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "projectinclude.h"
 
-void	ft_print_value(t_ast *ast, char *side, int lvl)
+void	ft_print_value(t_ast *ast)
 {
 	t_lex *tmp;
 
 	tmp = ast->lex;
 	ft_putstr(RED);
-	if (ft_strcmp(side, "root") == 0)
-	{
-		ft_putstr(ast->lex->value);
-		ft_padding(lvl);
-		return ;
-	}
 	if (!ast->left && !ast->right)
 	{
 		while (tmp)
@@ -55,7 +49,7 @@ void	ft_print_node(t_ast *ast, char *side, int lvl)
 	ft_putstr(WHITE);
 	ft_putendl(" **");
 	ft_padding(lvl);
-	ft_print_value(ast, side, lvl);
+	ft_print_value(ast);
 	ft_putendl(WHITE);
 	ft_padding(lvl);
 	ft_putendl("***********");

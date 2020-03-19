@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type_token.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:19:31 by mabayle           #+#    #+#             */
-/*   Updated: 2020/02/25 04:45:06 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/19 01:10:28 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ void	is_assignword(t_lex *new)
 	int		i;
 
 	i = 0;
+	if (!new->value)
+		return ;
 	if (new->token != 0 || ft_strchr(new->value, '=') == 0
 			|| (new->value[i] >= '0' && new->value[i] <= '9'))
 		return ;
@@ -114,7 +116,7 @@ void	token_type(t_lex *new, int io_nbr, int assignword)
 {
 	if (io_nbr != 0)
 		new->token = IO_NUMBER;
-	if (*new->value == '\n')
+	if (new->value != NULL && *new->value == '\n')
 	{
 		new->token = NEW_LINE;
 		ft_strdel(&new->value);
@@ -131,7 +133,7 @@ void	token_type(t_lex *new, int io_nbr, int assignword)
 	}
 	if (new->token == CONTROL_OPE)
 		assignword = 0;
-	if (ft_strlen(new->value) == 0)
+	if (new->value == NULL)
 	{
 		new->token = UNKNOWN;
 		new->value = ft_strdup("_EOI_");

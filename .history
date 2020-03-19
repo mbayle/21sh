@@ -1,6 +1,65 @@
 2
-0
-e
+7
+1
+exit
+echo coucou && echo test
+exit
+echo coucou && ls
+exit
+echo coucou && echo test
+echo coucou
+exit
+echo coucou
+ls
+exit
+ls && cd
+exit
+echo "ceci est un test"
+exit
+ls && cd
+echo "ceci est un test"
+exit
+mkdir test && cd test ; echo "Ceci est un test"
+ls && cd
+echo "ceci est un test"
+exit
+mkdir test && cd test ; echo "Ceci est un test"
+ls && cd
+echo "ceci est un test"
+exit
+mkdir test && cd test ; echo "Ceci est un test"
+ls && cd
+echo "ceci est un test"
+exit
+mkdir test && cd test ; echo "Ceci est un test"
+ls && cd
+echo "ceci est un test"
+exit
+mkdir test && cd test ; echo "Ceci est un test"
+ls && cd
+echo "ceci est un test"
+exit
+echo "ceci est un test"
+exit
+ls && cd
+echo "ceci est un test"
+exit
+echo "ceci est un test"
+ls
+exit
+ls && cd
+exit
+ls && cd
+exit
+ls && cd
+exit
+ls
+help
+exit
+ls
+exit
+ls
+setclr
 s
 swswsws
 s

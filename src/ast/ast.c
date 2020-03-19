@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 01:20:24 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/12 05:18:12 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/19 01:13:55 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		build_ast(t_lex *lex, t_ast **ast)
 		init_priority(lex);
 		*ast = init_node(lex, lex->value);
 		*ast = beta_ast(*ast, 3);
-		!(*ast)->right && !(*ast)->left ? no_root(lex, (*ast)) : 0;
+		//!(*ast)->right && !(*ast)->left ? no_root(lex, (*ast)) : 0;
 		browse_ast(*ast);
 		ast && g_shell->debug == 1 ? ft_putast(*ast) : 0;
 		astdel(ast);

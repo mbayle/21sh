@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
+#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/13 01:45:04 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/03/19 01:08:13 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ INCS		=	./includes/get_next_line.h \
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft #-fsanitize=address
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft
 
 CFLAGS		:=	-Wall -Wextra -Werror -I$(INCLUDES) -g3
 ifeq ($(DEBUG), 1)

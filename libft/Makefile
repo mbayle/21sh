@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+         #
+#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/12 05:31:07 by mabayle          ###   ########.fr        #
+#    Updated: 2020/03/19 01:08:30 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -I$(INC_PATH)
+CFLAGS = -Wall -Werror -Wextra -g3 -I$(INC_PATH)
 
 INCS	= ./includes/libft.h
 

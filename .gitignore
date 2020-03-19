@@ -1,7 +1,8 @@
-/21sh
-/.vscode
+42sh
+.vscode
 *.o
 *.a
 *.dSYM
 obj
 *.swp
+.DS_Store
