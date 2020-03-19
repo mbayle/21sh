@@ -14,6 +14,7 @@
 
 void	exec_b(char **cmd)
 {
+	
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
 	if (ft_strcmp(cmd[0], "echo") == 0)
@@ -22,8 +23,6 @@ void	exec_b(char **cmd)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "alias") == 0)
 		g_jobcontrol.ret = exec_alias(cmd);
-	if (ft_strcmp(cmd[0], "setclr") == 0)
-		g_jobcontrol.ret = exec_setclr(&g_jobcontrol.s, 1);
 //  if (ft_strcmp(cmd[0], "cd") == 0)
 //      g_jobcontrol.ret = fonction val;
 	if (ft_strcmp(cmd[0], "unalias") == 0)
@@ -66,6 +65,8 @@ int		execute_builtin(char **cmd)
 		g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "hash") == 0)
 		g_jobcontrol.ret = exec_hash(&g_jobcontrol.h_tab, tmp, cmd + 1);
+	if (ft_strcmp(cmd[0], "setclr") == 0)
+		g_jobcontrol.ret = exec_setclr(&g_jobcontrol.s, 1);
 	exec_b(cmd);
 	ft_strdel(&tmp);
 	return (0);
