@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mybtree.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:40:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/12 05:22:38 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/19 01:22:48 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_ast				*no_root(t_lex *lex, t_ast *ast);
 /*
 ** print_ast.c
 */
-void				ft_print_value(t_ast *ast, char *side, int lvl);
+void				ft_print_value(t_ast *ast);
 void				ft_print_node(t_ast *ast, char *side, int lvl);
 void				ft_print_ast(t_ast *ast, char *side, int lvl);
 void				ft_putast(t_ast *ast);
@@ -73,13 +73,12 @@ int					build_ast(t_lex *lex, t_ast **ast);
 */
 t_ast				*init_node(t_lex *lex, char *root);
 void				init_priority(t_lex *lex);
-t_ast				*no_root(t_lex *lex, t_ast *ast);
 void				astdel(t_ast **ast);
 
 /*
 ** print_ast.c
 */
-void				ft_print_value(t_ast *ast, char *side, int lvl);
+void				ft_print_value(t_ast *ast);
 void				ft_print_node(t_ast *ast, char *side, int lvl);
 void				ft_print_ast(t_ast *ast, char *side, int lvl);
 void				ft_putast(t_ast *ast);

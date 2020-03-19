@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:01:11 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/12 05:25:39 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/19 22:41:13 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -660,5 +660,10 @@ int					get_next_line(int fd, char **line);
 ** putendl_dchar.c
 */
 void				putendl_dchar(char **s);
+
+/*
+** ft_is_space.c
+*/
+int					ft_is_space(char *input);
 
 #endif
