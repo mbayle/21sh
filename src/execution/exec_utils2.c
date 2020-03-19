@@ -35,7 +35,7 @@ char	**check_opt_env(char **cmd)
 	i = 0;
 	y = 0;
 	if (!(dst = malloc(sizeof(char*) * (tab_size(cmd) + 1))))
-		return (NULL);
+		malloc_exit();
 	while (cmd[i])
 	{
 		if (ft_occur(cmd[i], '-') || ft_occur(cmd[i], '='))

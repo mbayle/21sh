@@ -22,7 +22,7 @@ void	save_ass(char **ass)
 	if (g_jobcontrol.ass)
 		ft_freetab(g_jobcontrol.ass);
 	if (!(g_jobcontrol.ass = malloc(sizeof(char *) * (just_ass(ass) + 1))))
-		return ;
+		return (malloc_exit());
 	while (ass[i] && ass[i][0] == '\r')
 		g_jobcontrol.ass[y++] = ft_strdup(ass[i++]);
 	g_jobcontrol.ass[y] = NULL;
@@ -58,7 +58,7 @@ void	save_ass_stock(char **ass)
 	if (g_jobcontrol.ass_stock)
 		ft_freetab(g_jobcontrol.ass_stock);
 	if (!(g_jobcontrol.ass_stock = malloc(sizeof(char*) * (just_ass(ass) + 1))))
-		return ;
+		return (malloc_exit());
 	while (ass[++i] && i < just_ass(ass))
 	{
 		y = fill_tab_stock(ass[i], y);

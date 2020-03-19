@@ -61,11 +61,11 @@ char	**get_line2(char **env)
 	i = 0;
 	tmp = NULL;
 	path = NULL;
-	ft_putendl("IM A CALLED");
+//	ft_putendl("IM A CALLED");
 	while (env && env[i])
 	{
 		tmp = ft_strsplit(env[i], '=');
-		ft_putendl(tmp[0]);
+//		ft_putendl(tmp[0]);
 		if (tmp[0] && (ft_strcmp(tmp[0], "PATH")) == 0)
 		{
 			path = ft_strsplit(tmp[1], ':');

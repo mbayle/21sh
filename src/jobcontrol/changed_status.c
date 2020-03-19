@@ -47,6 +47,8 @@ t_job	*print_and_del(t_job *job, int i, int check)
 		save = delete_link(job->pgid);
 		if (!save && g_jobcontrol.first_mail)
 			save = job;
+//		printf("%s %p\n", "save: ", save);
+//		printf("%s %p\n", "first_mail: ", g_jobcontrol.first_mail);
 	}
 	return (save);
 }
@@ -79,8 +81,7 @@ void	status_builtin(t_process *pro)
 	p = pro;
 	while (p)
 	{
-		ft_putnbr(p->r_value);
-		if (p->lpid < 0)
+		if (p && p->lpid < 0)
 			p->status = p->r_value;
 		p = p->next;
 	}

@@ -65,7 +65,7 @@ char	**list_to_tab(t_lex *lex)
 
 	i = 0;
 	if (!(dst = malloc(sizeof(char*) * (lex_size(lex) + 1))))
-		return (NULL);
+		malloc_exit();;
 	while (lex && lex->token != UNKNOWN)
 	{
 		if (lex->token == ASSIGN_WORD)
@@ -108,7 +108,7 @@ void	join_job_line(t_ast *ast, int p_pos)
 		g_jobcontrol.first_job->command =
 		ft_strjoinfree(g_jobcontrol.first_job->command, " | ");
 		if (!(g_jobcontrol.arg[g_jobcontrol.index] = malloc(sizeof(char*) * 2)))
-			return ;
+			return (malloc_exit());
 		g_jobcontrol.arg[g_jobcontrol.index][0] = ft_strdup("|");
 		g_jobcontrol.arg[g_jobcontrol.index][1] = NULL;
 		g_jobcontrol.index++;

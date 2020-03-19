@@ -47,11 +47,11 @@ static void	file_history3(t_struct *s, int fd)
 		write(fd, "\n", 1);
 	}
 	c = s->ci + 48;
-	write(fd, &c, 1);
-	write(fd, "\n", 1);
-	ft_putstr("\n\n");
-	ft_putnbr(s->ci);
-	ft_putstr("\n\n");
+//	write(fd, &c, 1);
+//	write(fd, "\n", 1);
+//	ft_putstr("\n\n");
+//	ft_putnbr(s->ci);
+//	ft_putstr("\n\n");
 }
 
 static int	file_history(t_htr *h, t_htr **del, t_struct *s, int fd)

@@ -54,9 +54,10 @@ void	manage_pipe(t_ast *ast)
 		ft_freetab(g_jobcontrol.arg[y]);
 		y++;
 	}
+	ft_memdel((void**)&g_jobcontrol.arg);
 	g_jobcontrol.index = 0;
 	if (!(g_jobcontrol.arg = malloc(sizeof(char**) * 4097)))
-		return ;
+		return (malloc_exit());
 	g_jobcontrol.sim = 1;
 	allocate_job_loop(0);
 	p_pos = 0;

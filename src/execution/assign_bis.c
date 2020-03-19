@@ -21,11 +21,12 @@ char	**del_one(char **tabl, int pos)
 	i = 0;
 	j = 0;
 	if (!(dst = malloc(sizeof(char*) * (tab_size(tabl) + 1))))
-		return (NULL);
+		malloc_exit();
 	while (tabl[i] && i < pos)
 		i++;
 	while (tabl[i])
 		dst[j++] = ft_strdup(tabl[i++]);
+	ft_freetab(tabl);
 	dst[j] = NULL;
 	return (dst);
 }
@@ -71,7 +72,7 @@ char	**get_key(char **ass)
 	i = 0;
 	y = 1;
 	if (!(dst = malloc(sizeof(char*) * (tab_size(ass) + 2))))
-		return (NULL);
+		malloc_exit();
 	dst[0] = ft_strdup("unset");
 	while (ass[i])
 	{

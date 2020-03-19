@@ -149,6 +149,7 @@ char					*check_match(char *param, char *word, char c);
 /**
 builtuin
 **/
+void					malloc_exit(void);
 int						check_b(char **cmd);
 int						exec_echo(char **cmd);
 void					hash_reset(t_hash **hash);

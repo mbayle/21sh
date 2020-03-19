@@ -1,6 +1,238 @@
 2
 0
-e
+env
+setenv a=b
+env
+setenv
+fg
+top
+setenv a=b
+echo lol
+ecjo
+ls
+echo 123 && echo 345
+echo 123 || echo 345
+echo 123
+echo 345 && echo lol
+ECHO lol
+LS
+ls
+echo lol && echo lsls
+echo lol || echo lsls
+echo lol
+cat test1
+echo loool > test1
+cat /dev/urandom &
+fg
+
+
+fg
+
+
+
+cat /dev/urandom &
+g
+fg
+cat /dev/urandom &
+jobs
+ls
+
+
+
+
+fgf
+
+
+
+
+fg
+
+
+
+fg
+
+
+fg
+
+
+fg
+
+fg
+
+fg
+
+
+fg
+
+
+
+
+
+
+
+fg
+
+
+fg
+
+fg[?62;4c
+
+
+
+
+
+
+
+
+
+
+fg
+
+
+
+pwd
+dfsdf
+
+
+cat /dev/random &
+fg
+
+
+
+
+
+fg
+
+
+fg
+
+
+
+
+
+
+
+
+ls
+fg
+
+
+
+
+
+
+
+
+
+
+fg
+
+
+
+
+fg
+
+
+
+
+
+
+
+
+
+
+fg
+
+
+
+
+
+
+cat /dev/random &
+jobs
+fg
+
+
+
+
+q
+
+fg
+
+
+fg
+
+
+
+
+
+fg
+
+cat /dev/random &
+fg
+
+
+cat /dev/random &
+fg
+cat /dev/random &
+fg
+
+cat /dev/random &
+fg
+cat /dev/random &
+fg
+
+cat /dev/random &
+fg
+
+cat /dev/random &
+pwd
+ls
+fg
+
+
+fg
+ls
+fg
+cat /dev/random &
+pwd
+ls
+top
+ls
+la
+ls
+fg
+top
+fg
+cat /dev/zero &
+fg
+cat /dev/zero &
+jobs
+cat /dev/zero &
+fg
+jobs
+cat /dev/zero &
+fg
+jobs
+cat /dev/zero &
+fg
+jobs
+ls
+cat /dev/zero &
+cat
+sdfsd
+ls 
+cat
+sfsfd
+pwd
+ls
+cat
+sl
+ls
+cat 
+dfsd
+sdfsdf
+ls
 s
 swswsws
 s
@@ -460,3 +692,4 @@ echo $PQTH
 echo $PATH
 clear
 ls -ls
+s
