@@ -26,9 +26,10 @@ void	simple_exec(t_ast *ast)
 		ft_freetab(g_jobcontrol.arg[y]);
 		y++;
 	}
+	ft_memdel((void**)&g_jobcontrol.arg);
 	g_jobcontrol.index = 0;
 	if (!(g_jobcontrol.arg = malloc(sizeof(char**) * 4097)))
-		return ;
+		return (malloc_exit());
 	join_job_line(ast, 1);
 	do_to_ast(g_jobcontrol.arg);
 }

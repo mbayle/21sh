@@ -61,7 +61,7 @@ char	**dst_redir(char **command)
 	y = 0;
 	t = 0;
 	if (!(dst = malloc(sizeof(char *) * (tab_size(command) + 1))))
-		return (NULL);
+		malloc_exit();
 	while (command && command[i])
 	{
 		t = i_val(command, i);

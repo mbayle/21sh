@@ -19,7 +19,7 @@ char	**env_copy(t_lst2 *menv)
 
 	i = 0;
 	if (!(dst = malloc(sizeof(char*) * ((elst_size(menv) + 1)))))
-		return (NULL);
+		malloc_exit();
 	while (menv)
 	{
 		if (menv->lcl == 0)
