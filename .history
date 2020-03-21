@@ -1,6 +1,8 @@
 2
 0
+echo 42 && echo 23
 env
+setenv a=b c=d
 setenv a=b
 env
 setenv
