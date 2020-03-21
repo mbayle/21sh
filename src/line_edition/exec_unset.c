@@ -12,7 +12,7 @@
 
 #include "../../includes/projectinclude.h"
 
-int		checkenv_unset(char **av, t_lst2 *l)
+int		checkenv_unset(char **av, t_lst2 *l, int j)
 {
 	int		c;
 	int		lc;
@@ -21,7 +21,7 @@ int		checkenv_unset(char **av, t_lst2 *l)
 	c = 0;
 	i = 0;
 	lc = 0;
-	while (av[1][c] && av[1][c] != '=')
+	while (av[j][c] && av[j][c] != '=')
 		c++;
 	while (l)
 	{
@@ -30,7 +30,7 @@ int		checkenv_unset(char **av, t_lst2 *l)
 			i++;
 		if (i == c)
 		{
-			if (ft_strncmp(av[1], l->varn, c) == 0 && l->lcl)
+			if (ft_strncmp(av[j], l->varn, c) == 0 && l->lcl)
 				return (lc);
 		}
 		l = l->next;
@@ -67,7 +67,7 @@ void	exec_unset2(t_struct *s, t_lst2 **new, t_lst2 **cp, int c)
 	}
 }
 
-int		exec_unset(t_struct *s, char **av)
+int		exec_unset_b(t_struct *s, char **av, int i)
 {
 	t_lst2	*new;
 	t_lst2	*cp;
@@ -75,13 +75,37 @@ int		exec_unset(t_struct *s, char **av)
 
 	new = (*s).env;
 	cp = (*s).env;
-	if (!av[1])
-		ft_putendl("unset: error: no variable indicated.");
-	else if (av[1][0] == '=')
-		ft_putendl("unset: error: bad variable name.");
-	else if ((c = checkenv_unset(av, (*s).env)) == -1)
+	if (av[i][0] == '=')
+	{
+		ft_eputstr("unset: "RED);
+		ft_eputstr(av[i]);
+		ft_eputendl(WHITE": bad variable name.");
+		return (1);
+	}
+	else if ((c = checkenv_unset(av, (*s).env, i)) == -1)
 		return (1);
 	else
 		exec_unset2(&*s, &new, &cp, c);
 	return (0);
+}
+
+int		exec_unset(t_struct *s, char **av)
+{
+	int		c;
+	int		i;
+
+	c = 1;
+	i = 0;
+	if (!av[1])
+	{
+		ft_eputendl("unset: error: no variable indicated.");
+		return (1);
+	}
+	while (av[c])
+	{
+		if (exec_unset_b(s, av, c))
+			i = 1;
+		++c;
+	}
+	return (i);
 }

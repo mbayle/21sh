@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/13 01:50:54 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/19 22:48:51 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ void	ft_lexer(t_lex **lex, char *input)
 	int		i;
 	int		io_nbr;
 
-	if (!lex || !input)
+	if (!lex || !input || ft_is_space(input) == 0)
 		return ;
 	while (*input)
 	{
@@ -143,7 +143,7 @@ void	ft_lexer(t_lex **lex, char *input)
 		}
 		input = input + i++;
 	}
-	g_shell->lex_size != 0 ? valid(lex, "__EOI__", io_nbr, 0) : 0;
+	g_shell->lex_size != 0 ? valid(lex, NULL, io_nbr, 0) : 0;
 	g_shell->lex && g_shell->debug == 1 ? ft_print_header(&(g_shell->lex)) : 0;
 	ft_parse(&g_shell->lex);
 	lexdel(lex);

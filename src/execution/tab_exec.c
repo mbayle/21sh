@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tab_exec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 02:08:05 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 02:20:45 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/19 22:12:00 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**list_to_tab(t_lex *lex)
 
 	i = 0;
 	if (!(dst = malloc(sizeof(char*) * (lex_size(lex) + 1))))
-		malloc_exit();;
+		malloc_exit();
 	while (lex && lex->token != UNKNOWN)
 	{
 		if (lex->token == ASSIGN_WORD)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 02:44:00 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/12 05:19:59 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/03/19 22:48:29 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,6 @@ void	init_priority(t_lex *lex)
 	}
 }
 
-/*
-** Purpose of the function : Special case, input is a simple command
-** Return value : return AST (with only root node)
-*/
-
-t_ast	*no_root(t_lex *lex, t_ast *ast)
-{
-	char *new_root;
-
-	new_root = ft_strdup("");
-	while (lex && lex->token != UNKNOWN)
-	{
-		new_root = ft_strjoin(new_root, lex->value);
-		new_root = ft_strjoin(new_root, " ");
-		lex = lex->next;
-	}
-	ast->root = new_root;
-	return (ast);
-}
-
 void	astdel(t_ast **ast)
 {
 	if (*ast)
@@ -83,6 +63,7 @@ void	astdel(t_ast **ast)
 			astdel(&(*ast)->left);
 		if ((*ast)->right)
 			astdel(&(*ast)->right);
+		//lexdel(&(*ast)->lex);
 		(*ast)->left = NULL;
 		(*ast)->right = NULL;
 		free(*ast);
