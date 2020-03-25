@@ -79,8 +79,9 @@ void	status_builtin(t_process *pro)
 	t_process *p;
 
 	p = pro;
-	return ; // IF PIPE CRASH
-	while (p)
+	
+//	return ; // IF PIPE CRASH
+	while (pro && p)
 	{
 		if (p && p->lpid < 0)
 			p->status = p->r_value;

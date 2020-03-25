@@ -20,6 +20,7 @@ void	delete_process(t_process *pro)
 		delete_process(pro->next);
 	ft_strdel(&pro->cmd);
 	ft_memdel((void**)&pro);
+//	printf("%s %p\n", "adreess de pro delete_prp", pro);
 }
 
 void	delete_job(t_job *job)
@@ -44,6 +45,10 @@ t_job	*delete_first(t_job *first)
 	tmp = first;
 	first = first->next;
 	ft_memdel((void**)&tmp);
+//	printf("%s %p\n", "addr tmp dlete first", tmp);
+//	printf("%s %p\n", "addr first dlete first", first);
+	if (first)
+		ft_putendl(first->command);
 //	ft_memdel((void**)&g_jobcontrol.first_mail);
 	if (first)
 		g_jobcontrol.first_mail = first;
@@ -65,10 +70,15 @@ t_job	*delete_link(pid_t pgid)
 	first = g_jobcontrol.first_mail;
 	if (first->pgid == pgid)
 		return (delete_first(first));
+//	ft_putendl("NO THE FISRT");
 	while (first && first->next)
 	{
+//			ft_putendl(first->command);
 		if (first->next->pgid == pgid)
 		{
+//			ft_putendl("------");
+//			ft_putendl(first->next->command);
+//			ft_putendl("------");
 			save = first;
 			ft_strdel(&first->next->command);
 			delete_process(first->next->first_process);
@@ -77,6 +87,7 @@ t_job	*delete_link(pid_t pgid)
 				g_jobcontrol.first_job = first;
 			first->next = first->next->next;
 			ft_memdel((void**)&tmp);
+//		printf("%s %p\n", "addr tmp deletelink", tmp);
 			break ;
 		}
 		first = first->next;

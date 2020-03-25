@@ -1,6 +1,76 @@
 2
 0
 <
+cat toto
+echo olo > toto
+echo olo
+ls ; echo coucou && ls | cat -e
+ls
+
+ls
+echo lol
+ls ; echo coucou && ls | cat -e
+ls ; echo coucou && ls | cat
+ls | cat | grep
+ls | cat | grep auteur
+ls | cat
+ls | cat | grep   
+ls | cat | grep 
+ls | cat | grep
+ls | cat | grep 
+ls | cat | grep dfgdfgdfgdfg
+ls | cat | grep
+ls | cat | grep dfdfg
+ls | cat | grep
+ls | cat | grep 
+ls | cat | grep auteur
+ls -l
+ls
+ls 
+ls | grep 
+ls | cat | grep 
+ls | cat | grep auteur
+ls | cat | grep 
+ls | cat | grep auteur
+ls | cat | grep 
+ls | cat | grep auteur
+ls | grep
+ls | grep auteur
+ls
+ls -l
+ls
+ls | cat | grep 
+ls | cat | grep auteur
+ls | cat
+ls
+ls | cat | grep 
+ls | cat | grep auteur
+ls | cat | grep
+ls | cat
+ls
+ls | cat 
+ls | cat | grep 
+ls | cat | grep auteur
+ls
+ls | cat | grep auteur
+ls | cat
+ls | cat | grep auteur
+ls | cat
+ls | cat | grep auteur
+ls | cat
+ls | cat | grep auteur
+ls | cat
+ls | cat | grep auteur
+ls
+pwd
+ls
+ls | cat | grep auteur
+ls | cat | grep
+ls | cat
+ls
+ls 
+ls | cat 
+ls | cat | grep auteur 
 ls | cat
 echo 42 && echo 23
 env

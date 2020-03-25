@@ -16,17 +16,23 @@ void	update_bg_status(void)
 {
 	t_job		*cpy;
 	t_process	*pro;
+	char		*tmp;
 
 	cpy = g_jobcontrol.first_mail;
 	while (cpy)
 	{
+//		ft_putendl("+++++++++");
+//		ft_putendl(cpy->command);
+//		ft_putendl("++++++++++");
 		pro = cpy->first_process;
 		browse_process(pro, cpy);
+		tmp = ft_strdup(cpy->command);
 		cpy = check_bg_status(cpy);
 		if (cpy)
 		{
 			status_builtin(cpy->first_process);
-			cpy = cpy->next;
+			if (ft_strcmp(tmp, cpy->command) == 0)
+				cpy = cpy->next;
 		}
 	}
 }
