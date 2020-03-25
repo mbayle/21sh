@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
-int				ft_expparam_sharp_noparam(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_sharp_noparam(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	char		*var;
@@ -33,7 +33,7 @@ int				ft_expparam_sharp_noparam(t_txtlist *txt, t_42sh *shell,
 			return (ft_exp_brace_error(txt));
 		}
 	}
-	var = ft_getvar(expparam->word, shell);
+	var = ft_getvar(expparam->word);
 	param_len = var ? ft_strlen(var) : 0;
 	txt->data = ft_itoa((int)param_len);
 	free(var);
@@ -66,21 +66,21 @@ char			*ft_match_rmslprefix(char *param, char *word)
 	return (ret);
 }
 
-int				ft_expparam_sharp(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_sharp(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	char		*tmp;
 
 	if (!expparam->param)
-		return (ft_expparam_sharp_noparam(txt, shell, expparam));
-	if (!(tmp = ft_simple_expanse(expparam->word, shell)))
+		return (ft_expparam_sharp_noparam(txt, expparam));
+	if (!(tmp = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
 	free(expparam->word);
 	expparam->word = tmp;
-	tmp = ft_getvar(expparam->param, shell);
+	tmp = ft_getvar(expparam->param);
 	if (!tmp)
 		tmp = ft_strdup("");
 	free(expparam->param);
@@ -113,19 +113,19 @@ char			*ft_match_rmlgprefix(char *param, char *word)
 	return (ret);
 }
 
-int				ft_expparam_dsharp(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_dsharp(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	char		*tmp;
 
-	if (!expparam->param || !(tmp = ft_simple_expanse(expparam->word, shell)))
+	if (!expparam->param || !(tmp = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
 	free(expparam->word);
 	expparam->word = tmp;
-	tmp = ft_getvar(expparam->param, shell);
+	tmp = ft_getvar(expparam->param);
 	if (!tmp)
 		tmp = ft_strdup("");
 	free(expparam->param);

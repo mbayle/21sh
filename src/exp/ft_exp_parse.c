@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 void			ft_parse_error(t_txtlist *list)
 {

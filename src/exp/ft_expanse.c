@@ -9,8 +9,8 @@
 /*   Updated: 2020/03/21 07:38:11 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "sh.h"
+#include "../../includes/ft_global.h"
+#include "../../includes/projectinclude.h"
 
 // char			**ft_init_args(t_node *current)
 // {
@@ -35,15 +35,15 @@
 // 	return (args);
 // }
 
-char			*ft_expanse_word(char *word, t_42sh *shell)
+char			*ft_expanse_word(char *word)
 {
 	t_txtlist	*list;
 	char		*result;
 
 	list = ft_parse_word(word);
-	if (ft_exp(list, shell))
+	if (ft_exp(list))
 	{
-		shell->stopexe = true; // En cas d'erreur d'expension liee a une faute de syntaxe ou un test ${param:?word} stopexe mis a true
+		g_jobcontrol.stopexe = true; // En cas d'erreur d'expension liee a une faute de syntaxe ou un test ${param:?word} stopexe mis a true
 		return (NULL);
 	}
 	result = ft_txt_join(list);
@@ -62,20 +62,20 @@ char			*ft_expanse_word(char *word, t_42sh *shell)
 // 	return (args);
 // }
 
-char			**ft_command_to_args(char **args, t_42sh *shell)
+char			**ft_command_to_args(char **args)
 {
-	if (!ft_expanse_args(args, shell))
+	if (!ft_expanse_args(args))
 		return (NULL);
-	args = ft_field_split(args, shell);
+	args = ft_field_split(args);
 	ft_rmquotes_args(args);
 	return (args);
 }
 
-char			*ft_simple_expanse(char *word, t_42sh *shell)
+char			*ft_simple_expanse(char *word)
 {
 	char		*new;
 
-	if ((new = ft_expanse_word(word, shell)))
+	if ((new = ft_expanse_word(word)))
 		ft_rmquotes_word(new);
 	return (new);
 }

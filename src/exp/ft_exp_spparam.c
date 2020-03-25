@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 // char		*ft_spparam_dollar(t_42sh *shell)
 // {
 // 	return (ft_itoa(shell->pid));
 // }
 
-char		*ft_spparam_qmark(t_42sh *shell)
+char		*ft_spparam_qmark(void)
 {
-	return (ft_itoa(shell->retval)); // Retourne la valeur de $?
+	return (ft_itoa(g_jobcontrol.ret)); // Retourne la valeur de $?
 }
 
 // char		*ft_spparam_bang(t_42sh *shell)
@@ -36,7 +36,7 @@ char		*ft_spparam_qmark(t_42sh *shell)
 // 	return (ft_strdup("42sh"));
 // }
 
-char		*(*ft_get_spparam(char c))(t_42sh *)
+char		*(*ft_get_spparam(char c))(void)
 {
 	int		i;
 

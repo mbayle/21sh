@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 int			ft_count_quotes(char *word, bool dquote)
 {
@@ -37,7 +37,7 @@ char		*ft_backslash_quotes(char *word, bool dquote)
 	quotes = ft_count_quotes(word, dquote);
 	if (!quotes)
 		return (word);
-	res = (char *)malloc_exit((ft_strlen(word) + quotes + 1) * sizeof(char));
+	res = (char *)ft_malloc_exit((ft_strlen(word) + quotes + 1) * sizeof(char));
 	i = 0;
 	quotes = 0;
 	while (word[i])

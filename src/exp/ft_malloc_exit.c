@@ -6,11 +6,11 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 00:05:27 by jolabour          #+#    #+#             */
-/*   Updated: 2020/03/21 06:57:24 by geargenc         ###   ########.fr       */
+/*   Updated: 2019/04/25 03:46:07 by jolabour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/projectinclude.h"
 
 static void		ft_putulglg_fd(unsigned long long nbr, int fd)
 {
@@ -19,7 +19,7 @@ static void		ft_putulglg_fd(unsigned long long nbr, int fd)
 	ft_putchar_fd(nbr % 10 + '0', fd);
 }
 
-void			*malloc_exit(size_t size)
+void			*ft_malloc_exit(size_t size)
 {
 	void		*addr;
 

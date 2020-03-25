@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 char			*ft_match_rmslsuffix(char *param, char *word)
 {
@@ -35,19 +35,19 @@ char			*ft_match_rmslsuffix(char *param, char *word)
 	return (ret);
 }
 
-int				ft_expparam_pcent(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_pcent(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	char		*tmp;
 
-	if (!expparam->param || !(tmp = ft_simple_expanse(expparam->word, shell)))
+	if (!expparam->param || !(tmp = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
 	free(expparam->word);
 	expparam->word = tmp;
-	tmp = ft_getvar(expparam->param, shell);
+	tmp = ft_getvar(expparam->param);
 	if (!tmp)
 		tmp = ft_strdup("");
 	free(expparam->param);
@@ -78,19 +78,19 @@ char			*ft_match_rmlgsuffix(char *param, char *word)
 	return (ret);
 }
 
-int				ft_expparam_dpcent(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_dpcent(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	char		*tmp;
 
-	if (!expparam->param || !(tmp = ft_simple_expanse(expparam->word, shell)))
+	if (!expparam->param || !(tmp = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
 	free(expparam->word);
 	expparam->word = tmp;
-	tmp = ft_getvar(expparam->param, shell);
+	tmp = ft_getvar(expparam->param);
 	if (!tmp)
 		tmp = ft_strdup("");
 	free(expparam->param);

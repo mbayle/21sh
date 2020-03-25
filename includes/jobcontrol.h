@@ -18,6 +18,7 @@
 #include <sys/wait.h>
 #include <termios.h>
 #include <unistd.h>
+#include <stdbool.h>
 #include <fcntl.h>
 #include <signal.h>
 #include <sys/errno.h>
@@ -103,6 +104,7 @@ typedef struct				s_jobcontrol
 	int						here;
 	int						index;
 	int						f;
+	bool					stopexe;
 }							t_jobcontrol;
 
 typedef struct				s_read
@@ -140,6 +142,8 @@ char					**move_char(char **ass);
 /**
 expansion
 **/
+
+char					**ft_command_to_args(char **args);
 char					*check_exp_hashper(char *exp, char c);
 char					*simple_hash_word(char *exp, char c);
 char					*simple_hash(char *exp, char c);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 int				ft_expparam_getvar(char *exp, t_expparam *expparam)
 {

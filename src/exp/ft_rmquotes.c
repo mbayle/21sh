@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 int			ft_rmquotes_backslash_condition(char *word, int i, char quote)
 {

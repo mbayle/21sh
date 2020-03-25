@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 size_t		ft_count_field_size(char *word, char *sep)
 {
@@ -59,7 +59,7 @@ char		**ft_field_split_word(char *word, char *sep)
 	int		fields;
 	size_t	field_size;
 
-	split = (char **)malloc_exit((ft_count_fields(word, sep) + 1)
+	split = (char **)ft_malloc_exit((ft_count_fields(word, sep) + 1)
 		* sizeof(char *));
 	i = 0;
 	fields = 0;
@@ -79,7 +79,7 @@ char		**ft_field_split_word(char *word, char *sep)
 	return (split);
 }
 
-char		**ft_field_split(char **args, t_42sh *shell)
+char		**ft_field_split(char **args)
 {
 	char	***splits;
 	char	*sep;
@@ -88,8 +88,8 @@ char		**ft_field_split(char **args, t_42sh *shell)
 	i = 0;
 	while (args[i])
 		i++;
-	splits = (char ***)malloc_exit((i + 1) * sizeof(char **));
-	sep = ft_getvar("IFS", shell);
+	splits = (char ***)ft_malloc_exit((i + 1) * sizeof(char **));
+	sep = ft_getvar("IFS");
 	if (!sep)
 		sep = ft_strdup(" \t\n");
 	i = 0;

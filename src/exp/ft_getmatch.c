@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 t_matchlist			*ft_new_match(t_matchtok token)
 {
 	t_matchlist		*new;
 
-	new = (t_matchlist *)malloc_exit(sizeof(t_matchlist));
+	new = (t_matchlist *)ft_malloc_exit(sizeof(t_matchlist));
 	ft_bzero(new, sizeof(t_matchlist));
 	new->token = token;
 	return (new);

@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 t_txtlist		*ft_new_txtlist(void)
 {
 	t_txtlist	*new;
 
-	if (!(new = (t_txtlist *)malloc_exit(sizeof(t_txtlist))))
+	if (!(new = (t_txtlist *)ft_malloc_exit(sizeof(t_txtlist))))
 		return (NULL);
 	new->token = TXT_NONE;
 	new->data = NULL;

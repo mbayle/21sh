@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 int				ft_exp_brace_error(t_txtlist *txt)
 {
@@ -20,7 +20,7 @@ int				ft_exp_brace_error(t_txtlist *txt)
 	return (-1);
 }
 
-int				ft_exp_brace(t_txtlist *txt, t_42sh *shell)
+int				ft_exp_brace(t_txtlist *txt)
 {
 	t_expparam	expparam;
 	int			i;
@@ -30,5 +30,5 @@ int				ft_exp_brace(t_txtlist *txt, t_42sh *shell)
 	i = i + ft_expparam_getvar(txt->data + txt->start + i, &expparam);
 	i = i + ft_expparam_getfunc(txt->data + txt->start + i, &expparam);
 	expparam.word = ft_strsub(txt->data, txt->start + i, txt->len - i - 1);
-	return (expparam.f(txt, shell, &expparam));
+	return (expparam.f(txt, &expparam));
 }

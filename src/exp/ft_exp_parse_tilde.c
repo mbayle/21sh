@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 int			ft_parse_tilde(char *word, size_t *index,
 			t_txtlist **current, bool *dquote)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 // int			ft_exp_sub(t_txtlist *txt, t_42sh *shell)
 // {
@@ -28,12 +28,12 @@
 // 	return (0);
 // }
 
-int			ft_exp_sub(t_txtlist *txt, t_42sh *shell)
+int			ft_exp_sub(t_txtlist *txt)
 {
 	char	*exp;
 
 	txt->data = ft_strsub(txt->data, txt->start + 2, txt->len - 3);
-	if (!(exp = ft_simple_expanse(txt->data, shell)))
+	if (!(exp = ft_simple_expanse(txt->data)))
 		return (-1);
 	free(txt->data);
 	txt->data = exp;

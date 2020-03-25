@@ -10,23 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
-int			ft_exp_text(t_txtlist *txt, t_42sh *shell)
+int			ft_exp_text(t_txtlist *txt)
 {
-	(void)shell;
 	txt->data = ft_strsub(txt->data, txt->start, txt->len);
 	return (0);
 }
 
-int			ft_exp_var(t_txtlist *txt, t_42sh *shell)
+int			ft_exp_var(t_txtlist *txt)
 {
 	char	*var;
 
 	if (txt->len == 1)
-		return (ft_exp_text(txt, shell));
+		return (ft_exp_text(txt));
 	var = ft_strsub(txt->data, txt->start + 1, txt->len - 1);
-	txt->data = ft_getvar(var, shell);
+	txt->data = ft_getvar(var);
 	free(var);
 	txt->data = txt->data ? ft_backslash_quotes(txt->data, txt->dquote)
 		: ft_strdup("");
@@ -68,12 +67,12 @@ int			ft_exp_var(t_txtlist *txt, t_42sh *shell)
 // 	return (0);
 // }
 
-int			ft_exp_expr(t_txtlist *txt, t_42sh *shell)
+int			ft_exp_expr(t_txtlist *txt)
 {
 		char	*exp;
 
 	txt->data = ft_strsub(txt->data, txt->start + 3, txt->len - 5);
-	if (!(exp = ft_simple_expanse(txt->data, shell)))
+	if (!(exp = ft_simple_expanse(txt->data)))
 		return (-1);
 	free(txt->data);
 	txt->data = exp;

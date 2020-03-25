@@ -10,22 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
-char		*ft_getvar(char *var, t_42sh *shell)
+char		*getvar(char *var)
+{
+	t_lst2	*menv;
+
+	menv = g_jobcontrol.s.env;
+	while (menv)
+	{
+		if (ft_strcmp(menv->varn, var) == 0)
+			return (menv->var);
+		menv = menv->next;
+	}
+	return (NULL);
+}
+
+char		*ft_getvar(char *var)
 {
 	void	*ptr;
-	char	*varenv;
 
 	ptr = ft_get_spparam(*var);
 	if (ptr)
-		return (((char *(*)(t_42sh *))ptr)(shell));
-	varenv = ft_strjoin(var, "="); // A partir de cette ligne tu peux faire comme tu sens...
-	ptr = ft_getenv(shell->env, varenv, ft_strlen(varenv), NULL); // Ici cette fonction recherche la variable dans l'environnement
-	free(varenv);
-	if (ptr)
-		return (ft_strdup(ptr));
-	ptr = get_var(shell, var); // Ici dans les variables locales, Jordan avait séparé en deux listes donc fallait check les deux
+		return ((char *)ptr);
+	ptr = getvar(var);
 	if (ptr)
 		return ((char *)ptr);
 	return (NULL);

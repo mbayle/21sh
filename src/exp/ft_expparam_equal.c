@@ -10,39 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
-void			ft_expparam_assign(t_expparam *expparam, t_42sh *shell)
+void			ft_expparam_assign(t_expparam *expparam)
 {
 	char		*assign;
+	char		**tmp;
 	size_t		param_len;
 
+	if (!(tmp = malloc(sizeof(char*) * 2)))
+		malloc_exit();
 	if (ft_isalpha(expparam->param[0]) || expparam->param[0] == '_')
 	{
 		param_len = ft_strlen(expparam->param);
-		assign = (char *)malloc_exit((param_len + ft_strlen(expparam->word)
+		assign = (char *)ft_malloc_exit((param_len + ft_strlen(expparam->word)
 			+ 2) * sizeof(char));
 		ft_strcpy(assign, expparam->param);
 		assign[param_len] = '=';
 		ft_strcpy(assign + param_len + 1, expparam->word);
-		check_local_variable(shell, assign);
+		tmp[0] = ft_strdup(assign);
+		tmp[1] = NULL;
+		exec_setenv(&g_jobcontrol.s, tmp, NULL, 0);
+//		check_local_variable(shell, assign);
 		free(assign);
 	}
 }
 
-int				ft_expparam_cnequal(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_cnequal(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	char		*word;
 
-	if (!expparam->param || !(word = ft_simple_expanse(expparam->word, shell)))
+	if (!expparam->param || !(word = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
 	free(expparam->word);
 	expparam->word = word;
-	txt->data = ft_getvar(expparam->param, shell);
+	txt->data = ft_getvar(expparam->param);
 	if (txt->data && !txt->data[0])
 	{
 		free(txt->data);
@@ -52,7 +58,7 @@ int				ft_expparam_cnequal(t_txtlist *txt, t_42sh *shell,
 		txt->data = ft_backslash_quotes(txt->data, txt->dquote);
 	else
 	{
-		ft_expparam_assign(expparam, shell);
+		ft_expparam_assign(expparam);
 		txt->data = ft_backslash_quotes(expparam->word, txt->dquote);
 		expparam->word = NULL;
 	}
@@ -60,24 +66,24 @@ int				ft_expparam_cnequal(t_txtlist *txt, t_42sh *shell,
 	return (0);
 }
 
-int				ft_expparam_equal(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_equal(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	char		*word;
 
-	if (!expparam->param || !(word = ft_simple_expanse(expparam->word, shell)))
+	if (!expparam->param || !(word = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
 	free(expparam->word);
 	expparam->word = word;
-	txt->data = ft_getvar(expparam->param, shell);
+	txt->data = ft_getvar(expparam->param);
 	if (txt->data)
 		txt->data = ft_backslash_quotes(txt->data, txt->dquote);
 	else
 	{
-		ft_expparam_assign(expparam, shell);
+		ft_expparam_assign(expparam);
 		txt->data = ft_backslash_quotes(expparam->word, txt->dquote);
 		expparam->word = NULL;
 	}

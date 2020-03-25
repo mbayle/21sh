@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
-int				ft_expparam_nofunc(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_nofunc(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	if (!expparam->param || expparam->word[0])
@@ -20,7 +20,7 @@ int				ft_expparam_nofunc(t_txtlist *txt, t_42sh *shell,
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
-	txt->data = ft_getvar(expparam->param, shell);
+	txt->data = ft_getvar(expparam->param);
 	txt->data = txt->data ? ft_backslash_quotes(txt->data, txt->dquote)
 		: ft_strdup("");
 	ft_expparam_free(expparam);

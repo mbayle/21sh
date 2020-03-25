@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 int				ft_exp_error(t_txtlist *list, t_txtlist *error)
 {
@@ -32,14 +32,14 @@ int				ft_exp_error(t_txtlist *list, t_txtlist *error)
 	return (-1);
 }
 
-int				ft_exp(t_txtlist *list, t_42sh *shell)
+int				ft_exp(t_txtlist *list)//, t_42sh *shell)
 {
 	t_txtlist	*tmp;
 
 	tmp = list;
 	while (tmp)
 	{
-		if (g_exptab[tmp->token](tmp, shell))
+		if (g_exptab[tmp->token](tmp))
 			return (ft_exp_error(list, tmp));
 		tmp = tmp->next;
 	}

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 int				ft_expparam_qmark_error(t_expparam *expparam, char *error)
 {
@@ -26,19 +26,19 @@ int				ft_expparam_qmark_error(t_expparam *expparam, char *error)
 	return (-1);
 }
 
-int				ft_expparam_cnqmark(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_cnqmark(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	char		*word;
 
-	if (!expparam->param || !(word = ft_simple_expanse(expparam->word, shell)))
+	if (!expparam->param || !(word = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
 	free(expparam->word);
 	expparam->word = word;
-	txt->data = ft_getvar(expparam->param, shell);
+	txt->data = ft_getvar(expparam->param);
 	if (txt->data && !txt->data[0])
 	{
 		free(txt->data);
@@ -52,19 +52,19 @@ int				ft_expparam_cnqmark(t_txtlist *txt, t_42sh *shell,
 	return (0);
 }
 
-int				ft_expparam_qmark(t_txtlist *txt, t_42sh *shell,
+int				ft_expparam_qmark(t_txtlist *txt,
 				t_expparam *expparam)
 {
 	char		*word;
 
-	if (!expparam->param || !(word = ft_simple_expanse(expparam->word, shell)))
+	if (!expparam->param || !(word = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
 	free(expparam->word);
 	expparam->word = word;
-	txt->data = ft_getvar(expparam->param, shell);
+	txt->data = ft_getvar(expparam->param);
 	if (txt->data)
 		txt->data = ft_backslash_quotes(txt->data, txt->dquote);
 	else

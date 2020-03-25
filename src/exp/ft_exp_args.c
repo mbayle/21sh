@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 char		**ft_exp_args_error(char **args)
 {
@@ -32,7 +32,7 @@ char		**ft_exp_args_error(char **args)
 	return (NULL);
 }
 
-char		**ft_expanse_args(char **args, t_42sh *shell)
+char		**ft_expanse_args(char **args)//, t_42sh *shell)
 {
 	char	*tmp;
 	int		i;
@@ -41,7 +41,7 @@ char		**ft_expanse_args(char **args, t_42sh *shell)
 	while (args[i])
 	{
 		tmp = args[i];
-		args[i] = ft_expanse_word(args[i], shell);
+		args[i] = ft_expanse_word(args[i]);//, shell);
 		free(tmp);
 		if (!args[i])
 			return (ft_exp_args_error(args));

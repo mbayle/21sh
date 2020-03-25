@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 size_t			ft_txt_len(t_txtlist *list)
 {
@@ -32,7 +32,7 @@ char			*ft_txt_join(t_txtlist *list)
 	char		*word;
 	size_t		size;
 
-	word = (char *)malloc_exit((ft_txt_len(list) + 1) * sizeof(char));
+	word = (char *)ft_malloc_exit((ft_txt_len(list) + 1) * sizeof(char));
 	word[0] = '\0';
 	size = 0;
 	while (list)

@@ -1,6 +1,7 @@
 2
 0
-exit
+e
+sleep 10 ; echo ok
 echo test && echo coucou
 ls
 echo test && echo coucou

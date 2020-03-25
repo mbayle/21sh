@@ -45,11 +45,11 @@ typedef	struct		s_coord
 	int				mainindex;
 }					t_coord;
 
-typedef struct		s_norm
+/*typedef struct		s_norm
 {
 	int				quotes;
 	char			c;
-}					t_norm;
+}					t_norm;*/
 
 typedef	struct		s_getprompt_pos
 {

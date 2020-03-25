@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
-char				*ft_tilde_alone(t_42sh *shell)
+char				*ft_tilde_alone(void)
 {
 	char			*path;
 	struct passwd	*pw;
 
-	path = ft_getvar("HOME", shell);
+	path = ft_getvar("HOME");
 	if (!path)
 	{
 		pw = getpwnam(getlogin());
@@ -43,24 +43,24 @@ char				*ft_tilde_user(t_txtlist *txt)
 	return (NULL);
 }
 
-int					ft_exp_tilde(t_txtlist *txt, t_42sh *shell)
+int					ft_exp_tilde(t_txtlist *txt)
 {
 	char			*res;
 
 	if (txt->data[txt->start + txt->len]
 		&& txt->data[txt->start + txt->len] != '/'
 		&& txt->data[txt->start + txt->len] != ':')
-		return (ft_exp_text(txt, shell));
+		return (ft_exp_text(txt));
 	if (txt->len == 1)
-		res = ft_tilde_alone(shell);
+		res = ft_tilde_alone();
 	else if (txt->data[txt->start + 1] == '+')
-		res = ft_getvar("PWD", shell);
+		res = ft_getvar("PWD");
 	else if (txt->data[txt->start + 1] == '-')
-		res = ft_getvar("OLDPWD", shell);
+		res = ft_getvar("OLDPWD");
 	else
 		res = ft_tilde_user(txt);
 	if (!res)
-		return (ft_exp_text(txt, shell));
+		return (ft_exp_text(txt));
 	txt->data = res;
 	return (0);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/projectinclude.h"
 
 int			ft_count_args(char ***splits)
 {
@@ -40,7 +40,7 @@ char		**ft_gather_splits(char ***splits)
 	int		i;
 	int		j;
 
-	args = (char **)malloc_exit((ft_count_args(splits) + 1)
+	args = (char **)ft_malloc_exit((ft_count_args(splits) + 1)
 		* sizeof(char *));
 	size = 0;
 	j = 0;
