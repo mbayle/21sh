@@ -1,6 +1,7 @@
 2
 0
-<<<<<<< HEAD
+<
+ls | cat
 echo 42 && echo 23
 env
 setenv a=b c=d
@@ -437,3 +438,4 @@ ls
 echo test && echo coucou
 ls
 echo test && echo coucou
+u
