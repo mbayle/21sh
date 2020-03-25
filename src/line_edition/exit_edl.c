@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_edl.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/03 23:48:48 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/12 20:39:32 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/25 00:56:05 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void		exit_edl(t_struct *s, char **cmd)
 	reset_attr();
 	delete_job(g_jobcontrol.first_mail);
 	astdel(&g_shell->ast);
-	lexdel(&g_shell->lex);
+	//lexdel(&g_shell->lex);
 	if (cmd[1])
 		exit(ft_atoi(cmd[1]));
 	else
