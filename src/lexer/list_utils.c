@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:17:16 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/25 00:51:56 by admin            ###   ########.fr       */
+/*   Updated: 2020/03/25 01:25:54 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,10 @@ void	lex_suppr_elem(t_lex **elem)
 
 	suppr = *elem;
 	*elem = (*elem)->next;
-	ft_2eputendl("DEBUG SUPPR VALUE FREE -> ", suppr->value);
-	(*elem) ? ft_2eputendl("DEBUG ELEM VALUE FREE -> ", (*elem)->value) : 0;
 	if (suppr->value)
 		ft_strdel(&suppr->value);
 	if (suppr->hdoc)
 		ft_strdel(&suppr->hdoc);
-	//suppr->next = NULL;
 	if (suppr)
 	{
 		free(suppr);
