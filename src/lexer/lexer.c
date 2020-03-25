@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/25 00:54:00 by admin            ###   ########.fr       */
+/*   Updated: 2020/03/25 16:58:57 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,14 @@ void	valid(t_lex **lex, char *input, int io, int i)
 
 	aword = 0;
 	token = ft_strsub(input, 0, i);
-	new = list_new(token);
-	token_type(new, io, aword);
-	list_add(lex, new);
+	if ((token && ft_is_space(token) == -1) || token == NULL)
+	{
+		new = list_new(token);
+		token_type(new, io, aword);
+		list_add(lex, new);
+		g_shell->lex_size++;
+	}	
 	ft_strdel(&token);
-	g_shell->lex_size++;
 }
 
 /*
