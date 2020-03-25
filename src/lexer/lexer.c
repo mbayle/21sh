@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/19 22:48:51 by admin            ###   ########.fr       */
+/*   Updated: 2020/03/25 00:54:00 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,5 @@ void	ft_lexer(t_lex **lex, char *input)
 	g_shell->lex_size != 0 ? valid(lex, NULL, io_nbr, 0) : 0;
 	g_shell->lex && g_shell->debug == 1 ? ft_print_header(&(g_shell->lex)) : 0;
 	ft_parse(&g_shell->lex);
-	lexdel(lex);
+	g_shell->lex ? lexdel(&g_shell->lex) : 0;
 }

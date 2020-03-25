@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   changed_status.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:14:55 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 04:11:41 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/25 01:03:22 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	status_builtin(t_process *pro)
 	t_process *p;
 
 	p = pro;
+	return ; // IF PIPE CRASH
 	while (p)
 	{
 		if (p && p->lpid < 0)

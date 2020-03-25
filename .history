@@ -1,6 +1,20 @@
 2
 0
 exit
+echo test && echo coucou ; ls | cat -e
+ls
+echo test && echo coucou
+ls
+echo test && echo coucou ; ls | cat -e
+ls
+echo test && echo coucou ; ls | cat -e
+ls
+echo test && echo coucou ; ls | cat -e
+ls
+echo test && echo coucou
+ls
+echo test && echo coucou
+ls
 echo test && echo coucou
 ls
 echo test && echo coucou
