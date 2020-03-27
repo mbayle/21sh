@@ -61,7 +61,7 @@ static void	print_prompt3(char *h, char **pw, t_struct *s)
 	g_lined ? s->cpt = g_lined->cpt : 0;
 	l = *pw;
 	s->coprompt = 0;
-	if ((*pw && h) && strcmp(h, *pw) == 0)
+	if ((*pw && h) && ft_strcmp(h, *pw) == 0)
 	{
 		clr_shell(s->clr);
 		ft_putstr("~ -");

@@ -100,6 +100,7 @@ char	**check_assign(char **ass)
 
 	i = 0;
 	tmp = NULL;
+//	ass = ft_command_to_args(ass);
 	if (!ass || !ass[i])
 		return (NULL);
 	if (ass[i][0] == '\r')

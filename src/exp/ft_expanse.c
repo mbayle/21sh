@@ -64,6 +64,7 @@ char			*ft_expanse_word(char *word)
 
 char			**ft_command_to_args(char **args)
 {
+//	ft_printtab(args);
 	if (!ft_expanse_args(args))
 		return (NULL);
 	args = ft_field_split(args);

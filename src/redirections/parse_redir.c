@@ -26,6 +26,32 @@ int		char_pos(char *str, char c)
 	return (0);
 }
 
+int		between_quotes(char *str)
+{
+	int		i;
+	int		q;
+	char	c;
+
+	i = 0;
+	q = 0;
+	c = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			if (q == 0 )
+				q = 1;
+			else if (c == str[i])
+				q = 0;
+			c = str[i];
+		}
+		if ((str[i] == '<' || str[i] == '>') && !q)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int		i_val(char **str, int i)
 {
 	int	pos;
@@ -33,19 +59,23 @@ int		i_val(char **str, int i)
 
 	pos = char_pos(str[i], '<');
 	pos2 = char_pos(str[i], '>');
-	if (str[i] && (ft_occur(str[i], '<') || ft_occur(str[i], '>')))
+	ft_putendl(str[i]);
+	if (str[i] && (ft_occur(str[i], '<') || ft_occur(str[i], '>')) )
 	{
-		if ((pos > 0 && str[i][pos - 1] != 92) ||
-		(pos2 > 0 && str[i][pos2 - 1] != 92) || (ft_occur(str[i], '<')
+		ft_putendl(str[i]);
+		if ((pos > 0 && str[i][pos - 1] == 92) ||
+		(pos2 > 0 && str[i][pos2 - 1] == 92) || !between_quotes(str[i]))
+			return (-1);
+		else if ((ft_occur(str[i], '<')
 		&& pos == 0) || (ft_occur(str[i], '>') && pos2 == 0))
 		{
+//			ft_putendl("HELLO");
 			if (str[i + 1])
 				i += 2;
 			else
 				i++;
 			return (i);
 		}
-		return (-1);
 	}
 	return (i);
 }

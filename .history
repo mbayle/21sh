@@ -1,6 +1,121 @@
 2
 0
 e
+ls
+$a
+a="ls -l"
+"ls > q"
+$a
+set
+a="ls '>q"
+$a
+set
+a="ls >q"
+$a
+set
+$a
+set
+a="ls > q"
+a="ls >f"
+a="ls > q"
+a="ls > e"
+a="ls >q"
+a="ls > tot"
+cat tut
+cat tutu
+"ls > tut"
+a="ls -l > er"
+a=ol
+set
+st
+a="ls -l > er"
+a="ls -l > tata"
+$a
+set
+a="ls -l > kaka"
+$a
+a="ls -l > colo"
+cat toto
+ls
+$a
+a="ls -l > toto"
+$a
+a="ls -l"
+$plplpl
+$b
+b=
+${a:=toto}
+set
+echo $lol
+env
+setenv lol='$as'
+env
+echo $a
+set
+a='$olp'
+ls
+$l
+ls
+$ol
+ls
+$l
+echo $a
+set
+a='$lol'
+set
+a='$lol'
+echo $a
+set
+a='$ol'
+set
+a=$olp
+echo $a
+set
+a='$lol'
+echo $a
+set
+a='$lol'
+echo $a
+set
+a='$lol'
+echo $a
+a='pol'
+echo $HOME
+echo $a
+set
+a='$lol'
+set
+a='$lol'
+env
+setenv b='$pol'
+set
+${a:=lol}
+set
+cat toto
+ls
+ls > $a
+a=toto
+set
+echo $a
+a='$lol'
+cat << $HOME
+ls << $HOME
+set
+a=$HOME
+set
+l=$HOME
+set
+c=v
+set
+env
+a=v
+set
+env
+set
+a=b
+ls
+echo $HOME
+ls
 sleep 10 ; echo ok
 echo test && echo coucou
 ls

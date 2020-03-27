@@ -142,7 +142,7 @@ char					**move_char(char **ass);
 /**
 expansion
 **/
-
+int						between_quotes(char *str);
 char					**ft_command_to_args(char **args);
 char					*check_exp_hashper(char *exp, char c);
 char					*simple_hash_word(char *exp, char c);

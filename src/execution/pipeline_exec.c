@@ -18,10 +18,14 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 	pid_t	pid;
 
 	pid = -1;
+	if (((!ft_strcmp(path, "b") && g_jobcontrol.sim) || !ft_strcmp(path, "i")))
+		ft_putendl("I AM A BIN");
 	if (((!ft_strcmp(path, "b") && g_jobcontrol.sim) || !ft_strcmp(path, "i"))
 	&& (pid = fork()) == 0)
 	{
 		do_in_child(oldlink, newlink, g_jobcontrol.arg);
+//		cmd = ft_command_to_args(cmd);
+//		ft_printtab(cmd);
 		//EXPANDRE DANS REDIR
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		if (ft_strcmp(path, "i") == 0)
@@ -49,14 +53,19 @@ char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 	char *tmp;
 
 	*mypath = NULL;
+	ft_printtab(cmd);
+	ft_putendl("-----------");
 	cmd = parse_redir(av, 0);
-	if ((tmp = my_path(cmd, g_jobcontrol.env)))
-		ft_strdel(&tmp);
+	cmd = ft_command_to_args(cmd);
+	ft_printtab(cmd);
+	tmp = my_path(cmd, g_jobcontrol.env);
 //	ft_putnbr(g_jobcontrol.ret);
 	if (!check_b(cmd))
 		*mypath = ft_strdup("b");
-	else if (g_jobcontrol.cm != 1)
+	else if (tmp && g_jobcontrol.cm != 1)
 		*mypath = ft_strdup("i");
+	if (tmp)	
+		ft_strdel(&tmp);
 	if (g_jobcontrol.sim == 0 && g_jobcontrol.g_fg)
 	//EXPANDRE DANS ASSIGN
 		cmd = check_assign(cmd);
@@ -83,9 +92,11 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 		return (NULL);
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
 //	mypath = my_path(cmd, g_jobcontrol.env);
-	if (g_jobcontrol.sim == 0 && mypath)
+	if (g_jobcontrol.sim == 0 && mypath && ft_strcmp(mypath, "b") == 0)
 	{
-		//EXPANDRE DANS ASSIGN
+		ft_putendl("IM AM A BUILTIN");
+//		cmd = ft_command_to_args(cmd);
+		//EXPANDRE DANS REDIR
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		execute_builtin(cmd);
 	}

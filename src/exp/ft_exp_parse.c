@@ -46,7 +46,7 @@ t_txtlist		*ft_parse_word(char *word)
 	list[1] = list[0];
 	index = 0;
 	dquote = false;
-	while (word[index])
+	while (word && word[index])
 	{
 		i = 0;
 		while ((ret = g_txttab[i](word, &index, &(list[1]), &dquote)) == 1)

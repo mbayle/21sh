@@ -38,7 +38,7 @@ char		**ft_expanse_args(char **args)//, t_42sh *shell)
 	int		i;
 
 	i = 0;
-	while (args[i])
+	while (args && args[i])
 	{
 		tmp = args[i];
 		args[i] = ft_expanse_word(args[i]);//, shell);

@@ -27,6 +27,7 @@ int		exec_heredoc(char *redir, char *file)
 	}
 	if (check_fd(0, n))
 		return (-1);
+	file = ft_simple_expanse(file);
 	if (write(link[1], file, (ft_strlen(file))) < 0)
 	{
 		write(2, "Shell: write error", 18);
@@ -45,6 +46,7 @@ int		dup_fd(char *redir, char *file)
 {
 	int n;
 
+	file = ft_simple_expanse(file);
 	n = dig_to_io(redir);
 	//file = EXPANSION;
 	if (n == 0)
@@ -69,6 +71,7 @@ int		out_err_redir(char *file)
 	int fd;
 
 	fd = 0;
+	file = ft_simple_expanse(file);
 //	file = EXPANSION FILE
 	if (!ft_strcmp(file, "-"))
 	{
@@ -94,9 +97,9 @@ int		out_err_redir(char *file)
 
 int		redir_to_file(char **cmd, int i, int ret)
 {
-	if (ft_seq_occur(cmd[i], "&>"))
+	if (ft_seq_occur(cmd[i], "&>")&& between_quotes(cmd[i]))
 		ret = out_err_redir(cmd[i + 1]);
-	else if (ft_seq_occur(cmd[i], ">") && !ft_seq_occur(cmd[i], "\\>"))
+	else if (ft_seq_occur(cmd[i], ">") && !ft_seq_occur(cmd[i], "\\>")&& between_quotes(cmd[i]))
 		ret = redirect_to_file(cmd[i], cmd[i + 1], O_TRUNC, 1);
 	return (ret);
 }
@@ -111,17 +114,17 @@ int		execute_redir(char **cmd)
 	g_jobcontrol.here = 0;
 	while (cmd[++i])
 	{
-		if (ft_seq_occur(cmd[i], ">>"))
+		if (ft_seq_occur(cmd[i], ">>") && between_quotes(cmd[i]))
 			ret = redirect_to_file(cmd[i], cmd[i + 1], O_APPEND, 1);
-		else if (ft_seq_occur(cmd[i], "<<"))
+		else if (ft_seq_occur(cmd[i], "<<")&& between_quotes(cmd[i]))
 			ret = exec_heredoc(cmd[i], cmd[i + 1]);
-		else if (ft_seq_occur(cmd[i], ">&"))
+		else if (ft_seq_occur(cmd[i], ">&")&& between_quotes(cmd[i]))
 			ret = dup_fd(cmd[i], cmd[i + 1]);
-		else if (ft_seq_occur(cmd[i], "&>") || ft_seq_occur(cmd[i], ">"))
+		else if ((ft_seq_occur(cmd[i], "&>") || ft_seq_occur(cmd[i], ">")))
 			ret = redir_to_file(cmd, i, ret);
-		else if (ft_seq_occur(cmd[i], "<&"))
+		else if (ft_seq_occur(cmd[i], "<&")&& between_quotes(cmd[i]))
 			ret = dup_fd(cmd[i], cmd[i + 1]);
-		else if (ft_seq_occur(cmd[i], "<") && !ft_seq_occur(cmd[i], "\\<"))
+		else if (ft_seq_occur(cmd[i], "<") && !ft_seq_occur(cmd[i], "\\<")&& between_quotes(cmd[i]))
 			ret = redirect_to_file(cmd[i], cmd[i + 1], O_RDONLY, 0);
 		if (ret == -1 && (g_jobcontrol.ret = 1) == 1)
 			return (g_jobcontrol.red = -1);

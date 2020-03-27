@@ -40,9 +40,12 @@ char			*ft_txt_join(t_txtlist *list)
 		ft_strcpy(word + size, list->data);
 		size = size + list->len;
 		tmp = list;
+//		printf("%s %p\n", "tmp = list", tmp);
 		list = list->next;
-		free(tmp->data);
-		free(tmp);
+		//ft_memdel((void**)&tmp->data);
+//		printf("%p\n", tmp->data);
+		//ft_memdel((void**)&tmp);
+//		printf("%s %p\n", "free tmp", tmp);
 	}
 	return (word);
 }
