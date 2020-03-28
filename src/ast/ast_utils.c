@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 02:44:00 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/19 22:48:29 by admin            ###   ########.fr       */
+/*   Updated: 2020/03/25 00:43:50 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ void	astdel(t_ast **ast)
 			astdel(&(*ast)->left);
 		if ((*ast)->right)
 			astdel(&(*ast)->right);
-		//lexdel(&(*ast)->lex);
+		(*ast)->lex ? lexdel(&(*ast)->lex) : 0;
+		(*ast)->lex = NULL;
 		(*ast)->left = NULL;
 		(*ast)->right = NULL;
 		free(*ast);

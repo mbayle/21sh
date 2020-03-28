@@ -82,6 +82,9 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	if (!should_i_exec())
 		return (NULL);
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
+//	ft_putendl("------------------");
+//	ft_printtab(cmd);
+//	ft_putendl("------------------");
 //	mypath = my_path(cmd, g_jobcontrol.env);
 	if (g_jobcontrol.sim == 0 && mypath)
 	{
