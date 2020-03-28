@@ -60,7 +60,8 @@ int		check_b(char **cmd)
 	!ft_strcmp(cmd[0], "export") || !ft_strcmp(cmd[0], "type") ||
 	!ft_strcmp(cmd[0], "alias") || !ft_strcmp(cmd[0], "unalias") ||
 	!ft_strcmp(cmd[0], "env") || !ft_strcmp(cmd[0], "echo") ||
-	!ft_strcmp(cmd[0], "setclr") || cmd[0][0] == '\r'))
+	!ft_strcmp(cmd[0], "setclr") || !ft_strcmp(cmd[0], "cd") ||
+	cmd[0][0] == '\r'))
 		return (0);
 	else
 		return (1);

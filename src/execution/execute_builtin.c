@@ -14,7 +14,11 @@
 
 void	exec_b(char **cmd)
 {
-	
+	char	**s;
+	int		i;
+
+	s = cmd;
+	i = 0;
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
 	if (ft_strcmp(cmd[0], "echo") == 0)
@@ -23,8 +27,9 @@ void	exec_b(char **cmd)
 		g_jobcontrol.ret = exec_export(&g_jobcontrol.s, cmd);
 	if (ft_strcmp(cmd[0], "alias") == 0)
 		g_jobcontrol.ret = exec_alias(cmd);
-//  if (ft_strcmp(cmd[0], "cd") == 0)
-//      g_jobcontrol.ret = fonction val;
+	if (ft_strcmp(cmd[0], "cd") == 0 && (g_jobcontrol.s.av = cpy_tab(cmd)))
+		g_jobcontrol.ret = exec_cd(&g_jobcontrol.s, g_jobcontrol.s.env,
+		NULL, NULL);
 	if (ft_strcmp(cmd[0], "unalias") == 0)
 		g_jobcontrol.ret = exec_unalias(cmd);
 	if (ft_strcmp(cmd[0], "exit") == 0)

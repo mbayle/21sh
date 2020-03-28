@@ -384,4 +384,5 @@ int					check_quotes_b(t_struct s);
 int					exec_unset_b(t_struct *s, char **av, int i);
 int					exec_unsetenv_b(t_struct *s, char **av, int i);
 int					exec_setenv_b(t_struct *s, char **av, int c, int i);
+char				**cpy_tab(char **src);
 #endif
