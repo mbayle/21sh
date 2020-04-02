@@ -12,29 +12,44 @@
 
 #include "../../includes/projectinclude.h"
 
+char			*is_b(char **cmd)
+{
+	char	*mypath;
+	char	*tmp;
+
+	mypath = NULL;
+	tmp = my_path(cmd, g_jobcontrol.env);
+	if (!check_b(cmd))
+		mypath = ft_strdup("b");
+	else if (tmp && g_jobcontrol.cm != 1)
+		mypath = ft_strdup("i");
+	if (tmp)	
+		ft_strdel(&tmp);
+
+	return (mypath);
+}
+
 int				child_process(int oldlink[2], int newlink[2], char *path,
 		char **cmd)
 {
 	pid_t	pid;
 
 	pid = -1;
-	if (((!ft_strcmp(path, "b") && g_jobcontrol.sim) || !ft_strcmp(path, "i")))
-		ft_putendl("I AM A BIN");
 	if (((!ft_strcmp(path, "b") && g_jobcontrol.sim) || !ft_strcmp(path, "i"))
 	&& (pid = fork()) == 0)
 	{
 		do_in_child(oldlink, newlink, g_jobcontrol.arg);
-//		cmd = ft_command_to_args(cmd);
-//		ft_printtab(cmd);
-		//EXPANDRE DANS REDIR
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		if (ft_strcmp(path, "i") == 0)
 			path = my_path(cmd, g_jobcontrol.env);
 		if (g_jobcontrol.sim == 1 && g_jobcontrol.g_fg)
 		{
-			//EXPANDRE DANS ASSIGN
 			cmd = check_assign(cmd);
-			path = my_path(cmd, g_jobcontrol.env);
+			if ((path = is_b(cmd)) && !ft_strcmp(path, "i"))
+			{
+				ft_strdel(&path);
+				path = my_path(cmd, g_jobcontrol.env);
+			}
 		}
 		g_jobcontrol.red == -1 ? exit(g_jobcontrol.ret = 1) : 0;
 		if (ft_strcmp(path, "b") == 0)
@@ -48,33 +63,25 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 	return (pid);
 }
 
+
 char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 {
-	char *tmp;
-
 	*mypath = NULL;
-	ft_printtab(cmd);
-	ft_putendl("-----------");
 	cmd = parse_redir(av, 0);
 	cmd = ft_command_to_args(cmd);
-	ft_printtab(cmd);
-	tmp = my_path(cmd, g_jobcontrol.env);
-//	ft_putnbr(g_jobcontrol.ret);
-	if (!check_b(cmd))
-		*mypath = ft_strdup("b");
-	else if (tmp && g_jobcontrol.cm != 1)
-		*mypath = ft_strdup("i");
-	if (tmp)	
-		ft_strdel(&tmp);
+	*mypath = is_b(cmd);
 	if (g_jobcontrol.sim == 0 && g_jobcontrol.g_fg)
-	//EXPANDRE DANS ASSIGN
 		cmd = check_assign(cmd);
 	else
 		cmd = del_one(cmd, just_ass(cmd));
-	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0 && is_env_arg(cmd))
+	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0)
 	{
-		del_one(cmd, 1);
-		cmd = check_opt_env(cmd);
+		if (cmd[1])
+		{
+			ft_freetab(cmd);
+			cmd = NULL;
+			ft_strdel(mypath);
+		}
 	}
 	return (cmd);
 }
@@ -94,7 +101,6 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 //	mypath = my_path(cmd, g_jobcontrol.env);
 	if (g_jobcontrol.sim == 0 && mypath && ft_strcmp(mypath, "b") == 0)
 	{
-		ft_putendl("IM AM A BUILTIN");
 //		cmd = ft_command_to_args(cmd);
 		//EXPANDRE DANS REDIR
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
@@ -147,6 +153,12 @@ int				pipe_exec(char ***av, char **env, int fg)
 
 	(void)env;
 	i = 0;
+	int y = 0;
+	while (av[y])
+	{
+		ft_printtab(av[y++]);
+		ft_putendl("--------------");
+	}
 	save_fd();
 	if (g_jobcontrol.env)
 		ft_freetab(g_jobcontrol.env);

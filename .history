@@ -1,6 +1,72 @@
 2
 0
 e
+ls | echo lol | cat -e
+pwd
+ls
+ls | env ls | cat
+jobs
+echo lol &
+ls | env ls
+ls | env
+ls | echo lol
+ls | echo olp
+ls | echo ol
+ls | echo lol
+ls | echo olp
+ls | echo lol
+env
+env ls
+env | cat
+env
+env | cat
+env
+ls | env
+exit
+ls | env 
+ls | env ls | cat
+ls | env ls
+env ls
+ls | env ls | cat
+env ls | cat
+ls | env ls | cat
+env ls | cat
+sdsd | cat
+env ls | cat
+./
+make
+env ls | cat
+env -i ls | cat
+env -i bash
+env a=b
+env
+env ls
+env
+env -i ls
+env a=b
+env
+ls
+set
+a=5 a=6
+set
+a=b c=r b=t
+make
+set fr
+set
+se
+env
+set a b c 
+ls \/polpol
+ls /polpol
+ls //////
+ls
+"coucou l" || echo lol
+"coucou l" && echo lol
+"coucou l"
+ls "\ls"
+cat toto
+ls \>> toto
+ls "\ls"
 ls
 $a
 a="ls -l"
@@ -130,3 +196,21 @@ ls
 echo test && echo coucou
 ls
 echo test && echo coucou
+oucou
+
+ucou
+
+ucou
+
+ucou
+
+ucou
+
+ucou
+
+ucou
+
+ucou
+
+ucou
+

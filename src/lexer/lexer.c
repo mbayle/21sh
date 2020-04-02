@@ -103,6 +103,7 @@ void	valid(t_lex **lex, char *input, int io, int i)
 	aword = 0;
 	token = ft_strsub(input, 0, i);
 	new = list_new(token);
+//	ft_putendl(new->value);
 	token_type(new, io, aword);
 	list_add(lex, new);
 	ft_strdel(&token);

@@ -46,6 +46,7 @@ int		execute_builtin(char **cmd)
 {
 	char	*tmp;
 
+	ft_putendl("BUUUILTIN");
 	tmp = get_line(g_jobcontrol.env);
 	if (!cmd || !cmd[0])
 		return (g_jobcontrol.ret = 1);
