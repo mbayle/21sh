@@ -24,7 +24,7 @@
 
 int		find_end(int i, char *input)
 {
-	while (input[i] && input[i] != '\n' && !ft_is_separator(input[i])
+	while (input[i] /*&& input[i] != '\n'*/ && !ft_is_separator(input[i])
 			&& !check_operator(input + i))
 	{
 		if (input[i] == '\\')

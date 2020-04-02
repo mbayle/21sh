@@ -1,6 +1,24 @@
 2
 0
 <
+fg
+cat /dev/random &
+jobs
+cat &
+pwd
+ls
+sh b
+ls ; echo 0 || ls
+ls ; echwe || ls
+kill 77134
+jobs
+cat &
+ls ; echi 42 || ls
+ls ; echo 42 && ls
+ls | cat -e
+jobs
+cat &
+ls
 cat toto
 echo olo > toto
 echo olo

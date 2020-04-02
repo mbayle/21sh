@@ -160,8 +160,11 @@ int			main(int ac, char **av, char **envp)
 		g_jobcontrol.s = s;
 		if (s.cmd)
 		{
-			update_bg_status();
+//			update_bg_status();
 			g_shell->line = s.cmd;
+			ft_putendl("-----");
+			ft_putendl(g_shell->line);
+			ft_putendl("-----");
 			ft_lexer(&g_shell->lex, g_shell->line);
 		}
 		tmp_free_struct(&s);

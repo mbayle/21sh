@@ -45,7 +45,7 @@ void	check_op(t_ast *ast)
 	if ((int)lex->token == WORD || lex->token == REDIR_OPE ||
 		lex->token == ASSIGN_WORD || lex->token == IO_NUMBER)
 		manage_word(ast);
-	if ((int)lex->operator == 1)
+	if ((int)lex->operator == 1 || lex->token == NEW_LINE)
 		manage_semic(ast, 1);
 	else if ((int)lex->operator == 3)
 		manage_pipe(ast);

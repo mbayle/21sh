@@ -82,7 +82,8 @@ int			init_lst_b4(t_struct *s, struct winsize *sz, char buf[701])
 {
 	if (isatty(0) == 0)
 	{
-		s->cmd = ft_strdupt(buf, '\n');
+	//	s->cmd = ft_strdupt(buf, '\n');
+		s->cmd = ft_strdup(buf);
 		return (0);
 	}
 	ioctl(0, TIOCGWINSZ, sz);
@@ -102,6 +103,9 @@ int			init_lst(t_struct *s, int i, int r, int ret)
 		sret = ret;
 		while (sret < 701)
 			buf[sret++] = '\0';
+		//ft_putendl("-------");
+	//	ft_putendl(buf);
+//		ft_putendl("-------");
 		if (!init_lst_b4(s, &sz, buf))
 			return (1);
 		if ((s->col = sz.ws_col) && ((buf[0] == '\n' && !history_exp(s, 0, NULL)

@@ -47,8 +47,8 @@ t_job	*delete_first(t_job *first)
 	ft_memdel((void**)&tmp);
 //	printf("%s %p\n", "addr tmp dlete first", tmp);
 //	printf("%s %p\n", "addr first dlete first", first);
-	if (first)
-		ft_putendl(first->command);
+//	if (first)
+//		ft_putendl(first->command);
 //	ft_memdel((void**)&g_jobcontrol.first_mail);
 	if (first)
 		g_jobcontrol.first_mail = first;
@@ -92,5 +92,8 @@ t_job	*delete_link(pid_t pgid)
 		}
 		first = first->next;
 	}
-	return (NULL);
+	if (first->next)
+		return (first->next);
+	else 
+		return (first);
 }

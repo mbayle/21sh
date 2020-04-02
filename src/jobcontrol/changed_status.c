@@ -45,9 +45,10 @@ t_job	*print_and_del(t_job *job, int i, int check)
 	else if (job->fg == 1 && job->stop != 1)
 	{
 		save = delete_link(job->pgid);
+//		printf("%s %p\n", "save: ", save);
 		if (!save && g_jobcontrol.first_mail)
 			save = job;
-//		printf("%s %p\n", "save: ", save);
+//		printf("%s %p\n", "job: ", job);
 //		printf("%s %p\n", "first_mail: ", g_jobcontrol.first_mail);
 	}
 	return (save);
@@ -79,7 +80,7 @@ void	status_builtin(t_process *pro)
 	t_process *p;
 
 	p = pro;
-	
+//	printf("%s %p\n", "ADDR de pro", pro);	
 //	return ; // IF PIPE CRASH
 	while (pro && p)
 	{
