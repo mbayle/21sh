@@ -1,6 +1,13 @@
 2
 0
 <
+ls
+ls | cat | grep          
+ls | cat | grep 
+pwd && echo 43 && lkjlkj || echo 78
+ls | cat | grep 
+ls | cat | grep auteur 
+ls auteur 
 fg
 cat /dev/random &
 jobs
