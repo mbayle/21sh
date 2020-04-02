@@ -101,9 +101,6 @@ void		tmp_free_struct(t_struct *s)
 		(*s).lbg = (*s).lbg->next;
 		free(del);
 	}
-	s->cpt = g_jobcontrol.s.cpt;
-	s->clr = g_jobcontrol.s.clr;
-	s->ci = g_jobcontrol.s.ci;
 	(*s).l = NULL;
 	(*s).lbg = NULL;
 	(*s).tmp = NULL;
@@ -144,30 +141,30 @@ void		init_jc()
 
 int			main(int ac, char **av, char **envp)
 {
-	t_struct	s;
 	int			c;
 
 	c = 0;
 	init_shell_sig();
 	init_jc();
 	g_jobcontrol.env = ft_tabdup(envp);
-	init_struct(&s, envp);
+	init_struct(&g_jobcontrol.s, envp);
 	g_shell = init_shell(0);
-	s.h = create_history(NULL, NULL, NULL, &s);
+	g_jobcontrol.s.h = create_history(NULL, NULL, NULL, &g_jobcontrol.s);
 	ac == 2 && ft_strcmp(av[1], "DEBUG") == 0 ? g_shell->debug = 1 : 0;
-	while (init_lst(&s, 0, 2, 0))
+	while (init_lst(&g_jobcontrol.s, 0, 2, 0))
 	{
-		g_jobcontrol.s = s;
-		if (s.cmd)
+		if (g_jobcontrol.s.cmd)
 		{
 //			update_bg_status();
-			g_shell->line = s.cmd;
+			g_shell->line = g_jobcontrol.s.cmd;
 			ft_putendl("-----");
 			ft_putendl(g_shell->line);
 			ft_putendl("-----");
+			update_bg_status();
+			g_shell->line = g_jobcontrol.s.cmd;
 			ft_lexer(&g_shell->lex, g_shell->line);
 		}
-		tmp_free_struct(&s);
+		tmp_free_struct(&g_jobcontrol.s);
 		update_bg_status();
 		if (isatty(0) == 0)
 			break ;
