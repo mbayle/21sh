@@ -24,7 +24,7 @@
 
 int		find_end(int i, char *input)
 {
-	while (input[i] /*&& input[i] != '\n'*/ && !ft_is_separator(input[i])
+	while (input[i] && input[i] != '\n' && !ft_is_separator(input[i])
 			&& !check_operator(input + i))
 	{
 		if (input[i] == '\\')
@@ -130,6 +130,8 @@ void	ft_lexer(t_lex **lex, char *input)
 
 	if (!lex || !input || ft_is_space(input) == 0)
 		return ;
+    ft_putendl("DEBUG valeur recu par ft_lexer : ");
+    ft_putendl(input);
 	while (*input)
 	{
 		while (ft_is_separator(*input) == 1)

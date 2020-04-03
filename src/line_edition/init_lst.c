@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lst.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 00:54:59 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/13 00:11:34 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/03/30 18:49:22 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int			init_lst_b4(t_struct *s, struct winsize *sz, char buf[701])
 {
 	if (isatty(0) == 0)
 	{
-	//	s->cmd = ft_strdupt(buf, '\n');
+		//s->cmd = ft_strdupt(buf, '\n');
 		s->cmd = ft_strdup(buf);
 		return (0);
 	}

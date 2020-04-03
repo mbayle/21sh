@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 02:44:00 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/25 00:43:50 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/04 00:01:13 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,9 @@ void	init_priority(t_lex *lex)
 		return ;
 	while (lex)
 	{
-		if (lex->operator == OTHER)
-			lex->priority = 0;
-		else if (lex->operator == PIPE)
+		if (lex->operator == PIPE)
 			lex->priority = 1;
-		else if (lex->operator == SEMIC || lex->operator == AND)
+		else if (lex->operator == SEMIC || lex->operator == AND || lex->token == NEW_LINE)
 			lex->priority = 3;
 		else if (lex->operator == DAND || lex->operator == DPIPE)
 			lex->priority = 2;
