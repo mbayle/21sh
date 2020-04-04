@@ -73,7 +73,6 @@ int			init_lst_4(t_struct *s, char buf[701], int c, t_lst *l)
 	s->tmp->prev = l;
 	l->prev = NULL;
 	s->lbg = l;
-	s->lbg->next = 0;
 	s->tmp = s->lbg;
 	if (ft_strlen(buf) > 1)
 		return (init_lst_3(s, buf, 1, NULL));

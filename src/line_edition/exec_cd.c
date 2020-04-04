@@ -157,6 +157,8 @@ int			exec_cd_ex(t_struct *s, char **tmp, char **ocwd)
 
 int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 {
+	int		r;
+
 	exec_cd_ex(s, &tmp, &ocwd);
 	if (!(*s).av[1])
 	{
@@ -173,11 +175,28 @@ int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 		else
 			tmp = tp->var;
 	}
-	if (chdir(tmp) == -1)
-		ft_eputstr("System chdir call failed.\n");
+	if ((r = chdir(tmp)) == -1)
+	{
+		//ft_eputstr("System chdir call failed.\n");
+		;
+	}
 	else
 		if (exec_cd2(&*s, NULL, ocwd, NULL) == 0)
 			return (0);
+	if (r == -1)
+	{
+		fp("mb", NULL);
+		ft_putstr(RED);
+		ft_2eputstr(ocwd, " -X ");
+		ft_eputendl(s->av[1]);
+	}
+	else
+	{
+		ft_putstr(GREEN);
+		ft_2putstr(ocwd, "  ➜  ");
+		ft_putendl(tmp);
+	}
+	ft_putstr(WHITE);
 	free_dchar(&s->av);
 	return (1);
 }

@@ -80,7 +80,7 @@ static int	check_sign(t_struct *s, char buf[6], t_lst *del, int c)
 	return (1);
 }
 
-int			edit_line3(t_struct *s, char buf[6])
+int			edit_line3(t_struct *s, char buf[701])
 {
 	if (buf[0] == 27 && buf[1] == 27 && buf[2] == 91
 	&& (buf[3] == 67 || buf[3] == 68 || buf[3] == 65 || buf[3] == 66))
