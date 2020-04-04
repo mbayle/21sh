@@ -84,8 +84,8 @@ int		check_fd(int fd, int n)
 	if (fd == g_jobcontrol.stdi || fd == g_jobcontrol.stdo ||
 		fd == g_jobcontrol.stde)
 	{
-		ft_putnbr(fd);
-		ft_putendl_fd("Shell: Theses fd are reserved by 42sh", 2);
+	//	ft_putnbr(fd);
+		ft_putendl_fd("Shell: fd reserved by 42sh", 2);
 		return (1);
 	}
 	return (0);

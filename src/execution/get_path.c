@@ -17,10 +17,16 @@ int		permissions(char **str)
 	int	i;
 
 	i = 0;
+	int errno;
+	errno = 0;
+//	ft_putendl(*str);
 	if (access(*str, X_OK) == -1)
 	{
+//		ft_putendl("ERRNO ERR");
+//		perror(strerror(errno));
 		ft_putstr_fd("Shell: Permission denied: ", 2);
 		ft_putendl_fd(*str, 2);
+		g_jobcontrol.perm = 1;
 		i = 1;
 		ft_strdel(str);
 		*str = NULL;
@@ -49,6 +55,8 @@ char	*get_line(char **env)
 		i++;
 		ft_freetab(tmp);
 	}
+//	ft_putendl("path : ");
+//	ft_putendl(path);
 	return (path);
 }
 
@@ -101,7 +109,7 @@ char	*get_pathh(char *nwav, char **path)
 		}
 		ptr ? closedir(ptr) : 0;
 	}
-	ft_putendl("COMMAND");
-	ft_putendl(command);
+//	ft_putendl("COMMAND");
+//	ft_putendl(command);
 	return (command);
 }

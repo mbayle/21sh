@@ -32,7 +32,7 @@ int		checkenv_setenv(char **av, t_lst2 **l, int j, int c)
 	while (av[j][c])
 		if (av[j][c++] == '=')
 			++i;
-	if (i != 1)
+	if (i != 1 && g_jobcontrol.assi != 1)
 	{
 		ft_2eputendl("setenv: bad variable declaration.\n",
 				"usage: [variable environnement name]=[variable...]");
@@ -134,8 +134,9 @@ int		exec_setenv(t_struct *s, char **av, t_lst2 *new, int i)
 		g_jobcontrol.s.i = 1;
 	while (av[c])
 	{
-		exec_setenv_b(s, av, c, i);
+		if (exec_setenv_b(s, av, c, i) == 1)
+			return (1);
 		++c;
 	}
-	return (1);
+	return (0);
 }

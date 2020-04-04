@@ -56,6 +56,7 @@ void	to_do_if_stp(t_job *job, t_job *save, int i)
 	else
 		ft_putstr_fd("  running ", 2);
 	ft_putendl_fd(g_jobcontrol.first_job->command, 2);
+	ft_putchar_fd('\n', 2);
 	g_jobcontrol.first_job = save;
 }
 
@@ -100,7 +101,7 @@ int		process_status(pid_t pid, int status, t_process *p)
 	g_jobcontrol.ret = status;
 	if (WIFEXITED(status) == TRUE)
 	{
-		g_jobcontrol.first_job->first_process->status = status ? status : 2;
+		g_jobcontrol.first_job->first_process->status = status ? status : -1;
 		g_jobcontrol.ret = status > 1 ? 1 : status;
 		g_jobcontrol.first_job->first_process->r_value = status;
 	}

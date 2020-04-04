@@ -18,13 +18,15 @@ char	*local_file(char *str)
 	t_read	read;
 	char	*dst;
 
+	g_jobcontrol.perm = 0;
 	dst = NULL;
 	read.path = ft_strldup(str, '/');
-	read.ptr = read.path ? opendir(read.path) : opendir(".");
+	read.ptr = /*read.path ? */opendir(read.path) /*: opendir(".")*/;
 	ft_strdel(&read.path);
 	while (read.ptr && (read.file = readdir(read.ptr)))
 	{
 		read.tmp = ft_strdupn(str, '/');
+	ft_putendl(read.path);
 		if (read.tmp && ft_strcmp(read.tmp, read.file->d_name) == 0)
 		{
 			dst = ft_strdup(str);
@@ -80,6 +82,37 @@ char	*get_hashed_mypath(t_hash *h_tab)
 	return (mypath);
 }
 
+char	**set_copy(t_lst2 *menv)
+{
+	int     i;
+	char    **dst;
+
+	i = 0;
+	if (!(dst = malloc(sizeof(char*) * ((elst_size(menv) + 1)))))
+		malloc_exit();
+	while (menv)
+ 	{
+		if (menv->lcl == 1)
+			dst[i++] = ft_strdup(menv->env);
+		menv = menv->next;
+	}
+	dst[i] = NULL;
+ 	return (dst);
+}
+
+char	*get_set(char **tenv)
+{
+	char	*tmp;
+	char	**env;
+
+	env = set_copy(g_jobcontrol.s.env);
+	tmp = get_line(tenv);
+	if (!tmp)
+		tmp = get_line(env);
+	ft_freetab(env);
+	return (tmp);
+}
+
 char	*my_path(char **cmd, char **env)
 {
 	char	*tmp;
@@ -87,20 +120,29 @@ char	*my_path(char **cmd, char **env)
 	char	*mypath;
 
 	mypath = NULL;
+//	ft_putendl("iam in path");
 	if (cmd && cmd[0] && check_b(cmd) == 1)
 	{
-		tmp = get_line(env);
-		if (!(mypath = local_file(cmd[0])))
+	//	tmp = get_line(env);
+		tmp = get_set(env);
+		//ft_printtab(env);
+		if (!(mypath = local_file(cmd[0])) && g_jobcontrol.perm != 1)
 		{
-//			ft_putendl(cmd[0]);
+		//	ft_putendl("CMD[0] : ");
+		//	ft_putendl(cmd[0]);
+		//	ft_putendl(tmp);
 			if ((h_tab = browse_command(cmd[0], tmp, &g_jobcontrol.h_tab))
 			== MAP_FAILED)
+			{
+				if_not_cmd(cmd[0]);
 				return (NULL);
+			}
 			mypath = get_hashed_mypath(h_tab);
 			if (!mypath)
 				if_not_cmd(cmd[0]);
 		}
 		ft_strdel(&tmp);
 	}
+//	ft_putendl(mypath);
 	return (mypath);
 }

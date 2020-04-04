@@ -127,7 +127,7 @@ char		**ft_tabdup(char **av)
 
 void		init_jc()
 {
-	g_jobcontrol.heredoc = ft_strnew(1);
+//	g_jobcontrol.heredoc = ft_strnew(1);
 	g_jobcontrol.f = 0;
 	g_jobcontrol.stdi = -1;
 	g_jobcontrol.stde = -1;

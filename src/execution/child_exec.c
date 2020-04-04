@@ -32,13 +32,11 @@ void	fill_pipe(int oldlink[2], int newlink[2], char ***av, int i)
 {
 	if (i > 0)
 	{
-		ft_putendl_fd("I DUP 0", 2);
 		dup2(oldlink[0], 0);
 		close(oldlink[0]);
 	}
 	if (av[i + 1])
 	{
-		ft_putendl_fd("I DUP 1", 2);
 		dup2(newlink[1], 1);
 		close(newlink[1]);
 		close(newlink[0]);

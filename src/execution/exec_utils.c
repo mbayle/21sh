@@ -48,9 +48,13 @@ void	unexec_asign(void)
 	if (g_jobcontrol.assi == 1)
 	{
 		unexec_ass(g_jobcontrol.ass);
-		exec_ass(g_jobcontrol.ass_stock);
+		exec_ass(g_jobcontrol.ass_stock, 0);
 		g_jobcontrol.assi = 0;
 	}
+//	else
+//	{
+//		unexec_ass(g_jobcontrol.ass);
+//	}
 }
 
 int		should_i_exec(void)
@@ -58,6 +62,11 @@ int		should_i_exec(void)
 	if (g_jobcontrol.ao == 1)
 	{
 		g_jobcontrol.ao = 0;
+		return (0);
+	}
+	if (g_jobcontrol.stopexe == true)
+	{
+		g_jobcontrol.stopexe = false;
 		return (0);
 	}
 	return (1);

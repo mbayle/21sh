@@ -13,5 +13,6 @@ void    ft_freetab(char **s1)
     }
     free(s1);
     s1 = NULL;
+	ft_memdel((void**)&s1);
 }
 

@@ -93,11 +93,21 @@ static void	ft_exit3(t_struct *s)
 	free_dchar(&(*s).builtin_ref);
 }
 
+void		error_exit(char *err)
+{
+	g_jobcontrol.ret = 1;
+	ft_putendl_fd(err, 2);
+}
+
 void		exit_edl(t_struct *s, char **cmd)
 {
 	t_lst	*del;
 
-	ft_putendl_fd("exit", 2);
+	if (cmd[1] && (!is_strdigit(cmd[1]) || cmd[1][0] == '-' || cmd[2]))
+	{
+		error_exit("exit: 1 only arg : unsigned digit");
+		return ;
+	}
 	while ((del = (*s).lbg))
 	{
 		(*s).lbg = (*s).lbg->next;
@@ -109,6 +119,7 @@ void		exit_edl(t_struct *s, char **cmd)
 	delete_job(g_jobcontrol.first_mail);
 	astdel(&g_shell->ast);
 	//lexdel(&g_shell->lex);
+	
 	if (cmd[1])
 		exit(ft_atoi(cmd[1]));
 	else

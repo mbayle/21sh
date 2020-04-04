@@ -12,6 +12,22 @@
 
 #include "../../includes/projectinclude.h"
 
+char		*is_b(char **cmd)
+{
+	char	*mypath;
+	char	*tmp;
+
+	mypath = NULL;
+	tmp = my_path(cmd, g_jobcontrol.env);
+	if (!check_b(cmd))
+		mypath = ft_strdup("b");
+	else if (tmp && g_jobcontrol.cm != 1)
+		mypath = ft_strdup("i");
+	if (tmp)
+		ft_strdel(&tmp);
+	return (mypath);
+}
+
 int				child_process(int oldlink[2], int newlink[2], char *path,
 		char **cmd)
 {
@@ -30,7 +46,11 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 		{
 			//EXPANDRE DANS ASSIGN
 			cmd = check_assign(cmd);
-			path = my_path(cmd, g_jobcontrol.env);
+			if ((path = is_b(cmd)) && !ft_strcmp(path, "i"))
+			{
+				ft_strdel(&path);
+				path = my_path(cmd, g_jobcontrol.env);
+			}
 		}
 		g_jobcontrol.red == -1 ? exit(g_jobcontrol.ret = 1) : 0;
 		if (ft_strcmp(path, "b") == 0)
@@ -39,33 +59,42 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 			exit(g_jobcontrol.ret);
 		}
 		if (ft_strcmp(path, "b") != -1 && ft_strcmp(path, "b") != 0)
+		{
 			execve(path, cmd, g_jobcontrol.env);
+			ft_putendl_fd("Execve error", 2);
+			g_jobcontrol.ret = 42;
+			reset_attr();
+			exit(1);
+		}
+
 	}
 	return (pid);
 }
 
 char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 {
-	char *tmp;
-
 	*mypath = NULL;
 	cmd = parse_redir(av, 0);
-	if ((tmp = my_path(cmd, g_jobcontrol.env)))
-		ft_strdel(&tmp);
-//	ft_putnbr(g_jobcontrol.ret);
-	if (!check_b(cmd))
-		*mypath = ft_strdup("b");
-	else if (g_jobcontrol.cm != 1)
-		*mypath = ft_strdup("i");
-	if (g_jobcontrol.sim == 0 && g_jobcontrol.g_fg)
-	//EXPANDRE DANS ASSIGN
+//	ft_printtab(cmd);
+//	ft_putchar('\n');
+	cmd = ft_command_to_args(cmd);
+//	ft_putendl("\nBEFOR ASSIGN");
+//	ft_printtab(cmd);
+	if (g_jobcontrol.g_fg)
 		cmd = check_assign(cmd);
 	else
 		cmd = del_one(cmd, just_ass(cmd));
-	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0 && is_env_arg(cmd))
+//	ft_putendl("\n AFTER ASSIGN");
+//	ft_printtab(cmd);
+	*mypath = is_b(cmd);
+	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0) //&& is_env_arg(cmd))
 	{
-		del_one(cmd, 1);
-		cmd = check_opt_env(cmd);
+		if (cmd[1])
+		{
+			ft_freetab(cmd);
+			cmd = NULL;
+			ft_strdel(mypath);
+		}
 	}
 	return (cmd);
 }
@@ -78,28 +107,28 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	char	*mypath;
 	char	*tmp;
 
+//	ft_printtab(av);
 	cmd = NULL;
 	if (!should_i_exec())
 		return (NULL);
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
-//	ft_putendl("------------------");
-//	ft_printtab(cmd);
-//	ft_putendl("------------------");
-//	mypath = my_path(cmd, g_jobcontrol.env);
-	if (g_jobcontrol.sim == 0 && mypath)
+	if (g_jobcontrol.sim == 0 && mypath && !ft_strcmp(mypath, "b"))
 	{
-		//EXPANDRE DANS ASSIGN
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		execute_builtin(cmd);
 	}
 	pid = child_process(oldlink, newlink, mypath, cmd);
 	close_fd_father(oldlink, newlink);
 	g_jobcontrol.red = 0;
-	unexec_asign();
+//	ft_putendl(cmd[0]);
 	ft_freetab(cmd);
 	tmp = concat_tab(av);
-	if (mypath)
+//	ft_putnbr(g_jobcontrol.ret);
+	if (mypath && g_jobcontrol.ret != 42)
+	{
+//		ft_putendl("I CREATE PROCESS");
 		pro = fill_jc_struc(pid, tmp, pro);
+	}
 	ft_strdel(&mypath);
 	ft_strdel(&tmp);
 	return (pro);
@@ -116,6 +145,8 @@ void			exec_process(char ***av, int i)
 	newlink[1] = -1;
 	while (av && av[i])
 	{
+		ft_freetab(g_jobcontrol.env);
+		g_jobcontrol.env = env_copy(g_jobcontrol.s.env);
 		if (av && av[i] && av[i][0] && ft_strcmp(av[i][0], "|") == 0)
 			i++;
 		else
@@ -133,16 +164,13 @@ void			exec_process(char ***av, int i)
 	}
 }
 
-int				pipe_exec(char ***av, char **env, int fg)
+int				pipe_exec(char ***av, int fg)
 {
 	int	i;
 
-	(void)env;
 	i = 0;
 	save_fd();
-	if (g_jobcontrol.env)
-		ft_freetab(g_jobcontrol.env);
-	g_jobcontrol.env = env_copy(g_jobcontrol.s.env);
+//	if (g_jobcontrol.env)
 	g_jobcontrol.first_job->first_process = NULL;
 	g_jobcontrol.first_job->fg = fg;
 	exec_process(av, i);
@@ -152,6 +180,8 @@ int				pipe_exec(char ***av, char **env, int fg)
 		put_in_bg(g_jobcontrol.first_job, 0, NULL,
 				g_jobcontrol.first_job->first_process);
 	ft_freetab(g_jobcontrol.av);
+//	ft_freetab(g_jobcontrol.env);
 	reset_fd();
+	unexec_asign();
 	return (0);
 }

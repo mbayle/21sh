@@ -44,13 +44,19 @@ char				**getpathlist(char *pathvar)
 	i = 0;
 	while (tmp && (tmp = strchr(tmp, ':')))
 	{
-		if (!(pathlist[i++] = strndup(pathvar, tmp - pathvar)))
+		if (!(pathlist[i] = strndup(pathvar, tmp - pathvar)))
 			return (NULL);
+//		printf("%s %p\n","pathlist[i] : ", pathlist[i]);
 		pathvar = ++tmp;
+		i++;
 	}
-	if (pathvar && !(pathlist[i] = strdup(pathvar)))
+//		printf("%s %p\n","pathvar : ", pathvar);
+	if (!pathvar || !(pathlist[i] = ft_strdup(pathvar)))
 		return (NULL);
+//		printf("%s %p\n","pathvar : ", pathvar);
+//		printf("%s %p\n","pathlist[i] : ", pathlist[i]);
 	pathlist[i + 1] = NULL;
+//	printf("%s %p\n","pathlist[0] : ", pathlist[0]);
 	return (pathlist);
 }
 
@@ -158,6 +164,11 @@ t_hash				*browse_command(char *command, char *pathvar, t_hash **hash)
 		hashhit->path = NULL;
 	if (!(pathlist = getpathlist(pathvar)))
 		return (MAP_FAILED);
+//	ft_putendl("in hash command: ");
+//	ft_putendl(command);
+//	ft_putendl("in hash pathlist: ");
+	//ft_printtab(pathlist);
+//	printf("%p\n", pathlist);
 	path = browse_command_path(command, pathlist);
 	free_pathlist(pathlist);;
 	if (path == MAP_FAILED || path == NULL)

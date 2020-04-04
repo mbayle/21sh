@@ -45,10 +45,33 @@ int		just_ass(char **ass)
 	return (-1);
 }
 
-void	exec_ass(char **ass)
+char	**cpy_env_plus(char **ass)
+{
+	int	i;
+	int	y;
+	char **tmp2;
+
+	i = 1;
+	y = 0;
+	tmp2 = NULL;
+	if (!(tmp2 = malloc(sizeof(char*) * (tab_size(ass) + 1))))
+        malloc_exit();
+	if (ass)
+	{
+//		ft_putendl("ASS");
+		tmp2[0] = ft_strdup("setenv");
+		while (ass[y])
+			tmp2[i++] = ft_strdup(ass[y++]);
+		tmp2[i] = NULL;
+	}
+	return (tmp2);
+}
+
+void	exec_ass(char **ass, int env)
 {
 	int		i;
 	char	*tmp;
+	char	**tmp2;
 
 	i = 0;
 	while (ass && ass[i] && ass[i][0] == '\r')
@@ -59,7 +82,13 @@ void	exec_ass(char **ass)
 		i++;
 	}
 	if (ass)
+	{
+		tmp2 = cpy_env_plus(ass);
 		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
+		if (env)
+			g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, tmp2, NULL, 1);
+//		ft_freetab(tmp2);
+	}
 }
 
 char	**get_key(char **ass)

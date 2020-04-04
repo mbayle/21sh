@@ -84,6 +84,8 @@ char	**init_tab_path(char *s)
 
 	c = 0;
 	bg = NULL;
+	if (!s)
+		return (NULL);
 	while (*s && *s != '=')
 		s++;
 	s++;

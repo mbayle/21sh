@@ -1,6 +1,545 @@
 2
 0
 <
+a=def
+echo \"
+echo \'
+echo "\\'abcd\\'"
+cat
+cat 
+fg
+cat 
+sh sig.sh
+vim sig.sh
+python -c 'import os, signal;os.kill(os.getpid(), 4)'
+vim sig.sh
+python -c 'import os, signal;os.kill(os.getpid(), signal.4)'
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGILL)'
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGQUIT)'
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGINT)'
+fg
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGHUP)'
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGKILL)'
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGSEGV)'
+cat
+ls
+cat
+ls
+cat
+ls
+cat
+ls
+cat
+ls
+cat
+ls
+echo $?
+ls
+cat
+make
+cat
+echo $?
+cat
+ls | python -c 'import os, signal;os.kill(os.getpid(), signal.SIGSEGV)'
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGKILL)'
+jobs
+fg
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGSEGV)'
+cat
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGSEGV)'
+ls
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGSEGV)'
+python3 -c 'import os, signal;os.kill(os.getpid(), signal.SIGSEGV)'
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGSEGV)'
+python3 -c 'import os, signal;os.kill(os.getpid(), signal.SIGSEGV)'
+python -c 'import os, signal;os.kill(os.getpid(), signal.SIGSEGV)'
+ps a | grep "ls -Rl /" | grep -v 'grep'
+jobs
+kill -9 82661
+jobs
+ps a | grep "ls -Rl /" | grep -v 'grep' | cut -d ' ' -f 2
+ps
+ps a | grep "ls -Rl /" | grep -v 'grep' | cut -d ' ' -f 2
+jobs
+fg %1
+jobs
+ls -Rl / 2>&1
+jobs
+cat -e
+jobs
+fg
+jobs
+fg
+jobs
+fg %2
+jobs
+emacs -nw &
+jobs
+ls -lR /usr >fifo 2>&1 &
+mkfifo fifo
+rm fifo
+mkfifo fifo
+jobs
+emacs -nw &
+jobs
+ls -lR /usr >fifo 2>&1 &
+mkfifo fifo
+true; echo $?; false; echo $?
+true; echo ${?}; false; echo ${?}
+ls -1 | grep testdir
+echo ${?}
+mkdir testdir
+PATH=/bin:/usr/bin
+echo lol
+l	
+l
+ls
+unset PATH
+l
+l	.gitignore
+ls
+unset PATH
+set | grep PATH
+env | grep PATH
+
+rm -rf lol
+ls
+mkdir lol
+set
+unset PATH
+set
+unset PATH
+mkdir testdir
+unset PATH
+env
+set
+ls
+env
+/bin/ls
+ls
+mkdir test
+echo $PATH
+mkdir testdir
+PATH=/bin:/usr/bin
+unset PATH
+ls -1 | grep testdir
+echo ${?}
+mkdir testdir
+PATH=/bin:/usr/bin
+unset PATH
+set
+set | grep -E '(a|b)='
+env | grep -E '(a|b)='
+unset a b
+b=mdr
+a=lol
+env | grep ONESHOT
+ONESHOT= env | grep ONESHOT
+ls
+ONESHOT= env | grep ONESHOT
+set
+coucou=2 set | grep coucou
+coucou=1
+coucou=2 set | grep coucou
+coucou=1
+coucou=2 set | grep coucou
+coucou=1
+coucou=2 set
+coucou=1
+coucou=2 set
+coucou=1
+coucou=2 set | grep coucou
+coucou=1
+coucou=2 set
+coucou=1
+coucou=2 set | grep coucou
+set
+coucou=1
+coucou=lolo set | grep coucou
+coucou=lolo set 
+coucou=lolo set | grep coucou
+coucou=coco
+cat myset
+coucou=pol set > myset
+coucou=pol set 
+coucou=pol set | grep coucou
+set
+coucou=cac
+ONESHOT= env | grep ONESHOT
+coucou=tsts set | grep coucou
+set
+se
+coucou=caca set
+set
+coucou=lol
+COC=papa set | grep COC
+set | grep COC
+set
+COC=ol
+COC=ol set
+COC=ol set | grep COC
+a=b
+set
+ONESHOT= set | grep ONESHOT
+ONESHOT= set 
+ONESHOT= env 
+ONESHOT= env | grep ONESHOT
+make
+ONESHOT= env 
+ONESHOT= env | grep ONESHOT
+env
+ONESHOT= env
+ONESHOT= env | grep ONESHOT
+COUCOU=lol env | grep COUCOU
+COUCOU=lol set | grep COUCOU
+COUCOU=lol set 
+env
+COUCOU=lol
+env
+ONESHOT= env 
+ONESHOT= env | grep ONESHOT
+set
+a=v set
+set
+a=r
+ONESHOT= set | grep ONESHOT
+ONESHOT= env | grep ONESHOT
+ONESHOT= env 
+ONESHOT= env | grep ONESHOT
+set
+env
+a=t env
+a=b set
+a=r
+ONESHOT= set | grep ONESHOT
+ONESHOT= env | grep ONESHOT
+set
+a=b set
+set
+a=b ls
+set
+a=r 
+COU=cou env | grep COU
+env | grep SHLVL
+env
+COU=cou env | grep COU
+env
+COU=cou env
+ONESHOT= env 
+ONESHOT= env | grep ONESHOT
+set
+env
+a=yy ls
+set
+env
+a=t env
+set
+a=t set
+env
+set
+se
+a=r 
+env
+set
+myvar=test ls
+env
+set
+env
+set
+myvar=test
+env
+set
+env
+b=ert
+env
+set
+env
+set
+a=qko env
+set
+env
+set
+a=pl 
+set
+a=pl set
+set
+a=t
+set
+a=e
+env
+set
+a=r env
+set
+a=r set
+set
+a=b
+set
+env
+a=rt env
+env
+a=r env
+set
+a=w
+env
+a=b env
+a=r set
+a=r se
+A=QUOI env
+a=tt env
+env
+set
+a=r 
+a=r set
+set
+a=t
+set
+a=b set
+a=b env
+a= env
+a= set
+a=b set
+set
+a=g ls
+set
+a=b set
+set
+a=o ls 
+a=o set
+set
+a=o set
+a=o ls
+a=e ls
+a=g ls
+a=sdfsdf ls
+apl=er ls
+acoucou=er ls
+set
+acoucou= set
+ad= set
+set
+ad=
+echo $?
+setenv a=r
+a=yy echo $a
+a=b
+setenv dsfsdf sdfsdf
+setenv dsfsdf
+setenv a==y
+setenv a=o i=4
+setenv
+setenv fdldlkfj
+a=lolplplp echo $a
+echo $a
+a=b
+env a=rt
+env a=t
+env a=g
+env a=b
+ls a=b
+env a=b
+ls a=b
+set
+env a=sdf
+a=pour echo $a
+set
+a=b set
+a=hello b=world; b=42 echo ${a}_${b} && echo ${b}
+a=hello b=world
+a=hello b=world; b=42 echo ${a}_${b} && echo ${b}
+./a.out
+ls
+$a
+a="ls -l"
+echo $a
+set
+a=~/etienne
+echo $a
+a=~
+echo $a
+a=~/etienne
+echo $a
+a=~/etienne
+$a
+a="~/etienne"
+echo $?
+exit lol
+exit abc
+echo sdf ; exit
+exit
+echo sdf
+exit ; ls
+exit
+echo abc; exit; echo def
+exit
+exit 999999999999999999999999999999999999999999
+echo ${?}
+echo abc; exit; echo def
+cat -e << FIN | sort
+cat /tmp/heredoc-append
+cat -e >> /tmp/heredoc-append << FIN
+cat > /tmp/heredoc-append << FIN
+cat << END
+echo out >&- || echo out2
+echo out >&- && echo out2
+echo out >&- | echo out2
+echo out >&-; echo out2
+exit 1 | exit 2 | exit 3; echo "stayin' alive"
+ls -1; touch test_file; ls -1
+ps a | grep 'base64' | grep -v 'grep'
+base64 < /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e s/1/Yes/g -e s/0/No/g
+ls | sort -rn | cat -e
+ls doesnotexist . >/dev/null 2>&1
+ls doesnotexist . 2>&1 >/dev/null
+cat < auteur
+cat <&- auteur
+cat <&- abc
+cat 9 abc$
+echo abc >redir_one_to_all
+cat <&4
+cat 4 non-standard fd$
+echo non-standard fd > dup_fd
+cat out
+cat err
+echo 2 >out 2>err
+echo 1 >out >&2 2>err
+cat /tmp/ftsh_ls_out
+< /tmp/ftsh_ls_out cat -e >> /tmp/ftsh_ls_out
+cat /tmp/ftsh_ls_out
+ls > /tmp/ftsh_ls_out /
+$a
+a="ls > pol"
+'ls > toto'
+"ls > toto"
+echo 1 >out >&2 2>err
+echo $?
+ls
+echo $?
+ls
+ls """"""
+ls $HOME$PATH
+ls "" "" ""
+echo $?
+ls """"""
+cat """"""""""
+echo """"""""""""""""""""""
+ls """"""""""""""""""""""""
+lsdmflsdf
+sfsdfkj
+pld
+./
+..
+pwd
+echo $??
+echo $?
+lssdf
+echo $?
+ls
+echo $?
+echo $HOME
+echo $
+ls
+echo $sdfsdf | ls
+echo $sdfsdf
+echo $PATH
+echo $?
+echo $a
+e
+a=b
+echo $PATH
+echo $a
+a=b
+echo $PATH
+ls $?
+echo $?
+ls
+echo $?
+bash
+echo $?
+fsdfsdf
+echo $?
+ls
+echo $?
+ls \ls
+./././.
+dfsdf
+../quote.sh
+..
+../quote.sh
+pwd
+../
+..
+ls
+././././
+...
+./
+.
+jobs
+pwd
+..
+make
+pwd
+ls
+..
+ls
+..
+:q
+..
+ls
+..
+../
+ls
+..
+ls
+..
+ls
+..
+.
+..
+ls
+..
+echo $?
+ls
+echo $?
+..
+./poission_davril
+make
+vim src/execution/manage_path_cmd.c
+./poission_davril
+vim /Users/moi/quote.sh
+sh ~/quote.sh
+
+~/quote.sh
+~/quotes.sh
+~/quote.sh
+/Users/moi/quote.sh
+/Users/moi/quotes.sh
+~/quotes.sh
+./poission_davril
+./a.out
+../quote.sh
+~/quote.sh
+type ls
+ls
+type ls
+type pol
+ls
+type lol
+type
+ls
+echo lol | ls
+pwd
+ls
+echo "lol'\""
+echo "lol'"
+echo "lol"""
+echo "lol"
+ls "pol"
+cat popo
+echo lol > popo
+$a
+a=b
+env ls
+env
 ls
 ls | cat | grep          
 ls | cat | grep 

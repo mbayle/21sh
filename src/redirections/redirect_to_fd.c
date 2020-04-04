@@ -16,7 +16,7 @@ int		write_in(int n, char *file, mode_t mode)
 {
 	int	fd;
 
-	//file = EXPANSION
+	file = ft_simple_expanse(file);
 	if (access(file, F_OK) == -1)
 	{
 		if ((fd = open(file, O_CREAT, 0644)) < 0)
@@ -41,7 +41,7 @@ int		read_from(int n, char *file)
 {
 	int	fd;
 
-	//file = EXPANSION
+	file = ft_simple_expanse(file);
 	if (access(file, F_OK) == -1)
 	{
 		ft_putendl_fd("No such file or directory", 2);

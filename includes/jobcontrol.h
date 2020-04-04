@@ -103,6 +103,8 @@ typedef struct				s_jobcontrol
 	int						here;
 	int						index;
 	int						f;
+	int						perm;
+	bool					stopexe;
 }							t_jobcontrol;
 
 typedef struct				s_read
@@ -129,17 +131,20 @@ struct s_jobcontrol				g_jobcontrol;
 /**
 assign
 **/
+char					**cpy_env_plus(char **ass);
 //static char	*create_token(char *input, int i);
 void					unexec_ass(char **ass);
 char					**del_one(char **tabl, int pos);
 int						just_ass(char **ass);
-void					exec_ass(char **ass);
+void					exec_ass(char **ass, int env);
 char					**get_key(char **ass);
 char					**move_char(char **ass);
 
 /**
 expansion
 **/
+int						between_quotes(char *str);
+char					**ft_command_to_args(char **args);
 char					*check_exp_hashper(char *exp, char c);
 char					*simple_hash_word(char *exp, char c);
 char					*simple_hash(char *exp, char c);
@@ -155,8 +160,6 @@ int						exec_echo(char **cmd);
 void					hash_reset(t_hash **hash);
 int						exec_hash(t_hash **hash, char *pathvar, char **cmd);
 t_hash					*browse_command(char *command, char *pathvar, t_hash **hash);
-void					unexec_ass(char **ass);
-void					exec_ass(char **ass);
 void					alloc_alias(void);
 t_alias					*set_value(t_alias *al, char *key, char *value);
 t_alias					*set_alias(t_alias *al, char *key, char *value);
@@ -217,7 +220,7 @@ char						*ft_strldup(char *str, char c);
 /**
 Manage job list
 **/
-void						if_stp(t_job *job);
+void						if_stp(t_job *job, int i);
 t_job						*print_and_del(t_job *job, int i, int check);
 t_job						*check_bg_status(t_job *job);
 void						status_builtin(t_process *pro);
@@ -291,7 +294,7 @@ pid_t						job_nb(int i, t_job *j);
 pid_t						jobs_parser(char *str, t_job *j);
 void						wait_for_job(t_process *pro, t_job *job, int i);
 int							put_in_fg(int cont, t_job *job, char **av);
-int							pipe_exec(char ***av, char **env,  int fg);
+int							pipe_exec(char ***av, int fg);
 int							init_shell_sig();
 t_process					*init_process_struct();
 t_job						*init_job_struct();

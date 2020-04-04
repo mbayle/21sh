@@ -52,20 +52,24 @@ char	*mypath(char *cmd)
 {
 	char    **tmp;
 	char    *path;
+//	char	**tmp2;
 
+//	tmp2 = NULL;
 	tmp = NULL;
 	path = NULL;
 	if (cmd)
 	{
+	//	tmp2 = env_copy(g_jobcontrol.s.env);
 		tmp = get_line2(g_jobcontrol.env);
+	//	ft_freetab(tmp2);
 		//ft_strdel(&path);
 		path = get_pathh(cmd, tmp);
-		ft_putendl(path);
+		ft_freetab(tmp);
+		//ft_putendl(path);
 		if (path)
 			permissions(&path);
 		else if (!path)
 			return (NULL);
-		ft_freetab(tmp);
 	}
 	return (path);
 }

@@ -68,11 +68,49 @@ void	save_ass_stock(char **ass)
 	y == 0 ? ft_memdel((void**)&g_jobcontrol.ass_stock) : 0;
 }
 
+char	**exp_ass(char **ass)
+{
+	int		i;
+	int		y;
+	char	**tmp;
+	char	**dst;
+
+	i = 0;
+	y = 0;
+	tmp = NULL;
+	if (!(dst = malloc(sizeof(char*) * (tab_size(ass) + 1))))
+		malloc_exit();
+	while (ass[i])
+	{
+		if (ass[i][0] == '\r')
+		{
+			tmp = ft_strsplit(ass[i], '=');
+			tmp[1] = ft_simple_expanse(tmp[1]);
+			dst[y] = ft_strjoin(tmp[0], "=");
+			dst[y] = ft_strjoinfree(dst[y], tmp[1]);
+			y++;
+			i++;
+			ft_strdel(&tmp[0]);
+			ft_strdel(&tmp[1]);
+			ft_memdel((void**)&tmp);
+		}
+		else
+			dst[y++] = ass[i++];
+	}
+	dst[y] = NULL;
+//	ft_freetab(ass);
+	return (dst);
+
+}
+
 char	**ass_arg(char **ass, int i)
 {
 	char	**tmp;
 	int		t;
 
+	ass = exp_ass(ass);
+//	ft_putendl("IN ASS_ARG: ");
+//	ft_printtab(ass);
 	t = just_ass(ass);
 	tmp = tab_copy(ass);
 	if ((i = just_ass(ass)) == -1)
@@ -87,7 +125,7 @@ char	**ass_arg(char **ass, int i)
 		g_jobcontrol.assi = 1;
 		save_ass_stock(ass);
 		save_ass(ass);
-		exec_ass(ass);
+		exec_ass(g_jobcontrol.ass, 1);
 	}
 	ass = del_one(ass, t);
 	return (ass);

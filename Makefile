@@ -33,7 +33,7 @@ INCS		=	./includes/get_next_line.h \
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft #-fsanitize=address
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft -fsanitize=address
 
 CFLAGS		:=	-Wall -Wextra -Werror -g3 -I$(INCLUDES)
 ifeq ($(DEBUG), 1)
@@ -223,7 +223,41 @@ SRC		:=	main.c \
 			input/char_handler.c \
 			input/tools.c \
 			input/tools_bis.c \
-			input/signals.c 
+			input/signals.c \
+			exp/ft_backslash_quotes.c \
+			exp/ft_exp.c \
+			exp/ft_exp_args.c \
+			exp/ft_exp_brace.c \
+			exp/ft_exp_cmdsub.c \
+			exp/ft_exp_others.c \
+			exp/ft_exp_parse.c \
+			exp/ft_exp_parse_text.c \
+			exp/ft_exp_parse_tilde.c \
+			exp/ft_exp_parse_tools.c \
+			exp/ft_exp_parse_var.c \
+			exp/ft_exp_spparam.c \
+			exp/ft_exp_tilde.c \
+			exp/ft_expanse.c \
+			exp/ft_expparam_equal.c \
+			exp/ft_expparam_minus.c \
+			exp/ft_expparam_nofunc.c \
+			exp/ft_expparam_pcent.c \
+			exp/ft_expparam_plus.c \
+			exp/ft_expparam_qmark.c \
+			exp/ft_expparam_sharp.c \
+			exp/ft_expparam_tools.c \
+			exp/ft_field_split.c \
+			exp/ft_gather_splits.c \
+			exp/ft_getmatch.c \
+			exp/ft_getmatch_free.c \
+			exp/ft_getmatch_hook.c \
+			exp/ft_getvar.c \
+			exp/ft_malloc_exit.c \
+			exp/ft_match.c \
+			exp/ft_match_hook.c \
+			exp/ft_revmatch.c \
+			exp/ft_rmquotes.c \
+			exp/ft_txt_join.c \
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

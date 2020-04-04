@@ -93,7 +93,7 @@ void	do_to_ast(char ***tmp)
 //	char	**tmp;
 //(void)tmp;
 //	tmp = quick_tab_cmd(g_jobcontrol.first_job->command);
-	pipe_exec(tmp, g_jobcontrol.env, g_jobcontrol.g_fg);
+	pipe_exec(tmp, g_jobcontrol.g_fg);
 }
 
 int		build_ast(t_lex *lex, t_ast **ast)

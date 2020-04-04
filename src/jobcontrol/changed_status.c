@@ -12,22 +12,24 @@
 
 #include "projectinclude.h"
 
-void	if_stp(t_job *job)
+void	if_stp(t_job *job, int i)
 {
-	if (job->stop == 1 || job->fg == 0)
+	if (i)
 	{
 		ft_putchar_fd('[', 2);
 		ft_putnbr_fd(job->j_nb, 2);
 		ft_putstr_fd("]  ", 2);
-		ft_putnbr_fd(job->pgid, 2);
-		ft_putchar_fd(' ', 2);
-		ft_putstr_fd(job->command, 2);
-		ft_putstr_fd("  Terminated ", 2);
-		if (job->first_process->status > 2)
-			ft_putnbr_fd(job->first_process->status, 2);
-		ft_putchar_fd('\n', 2);
-		put_last_fg(put_last_stp(job, 2, 1), 1, 0);
 	}
+	else
+		ft_putstr_fd("[", 2);
+	ft_putnbr_fd(job->pgid, 2);
+		i ? 0 : ft_putstr_fd("]  ", 2);
+	ft_putchar_fd(' ', 2);
+	i ? ft_putstr_fd(job->command, 2) : 0;
+	ft_putstr_fd("  Terminated ", 2);
+	ft_putnbr_fd(job->first_process->status, 2);
+	ft_putchar_fd('\n', 2);
+	put_last_fg(put_last_stp(job, 2, 1), 1, 0);
 }
 
 t_job	*print_and_del(t_job *job, int i, int check)
@@ -37,13 +39,16 @@ t_job	*print_and_del(t_job *job, int i, int check)
 	save = job;
 	if (i != 0 && i == check)
 	{
-		if_stp(job);
+		if (job->stop == 1 || job->fg == 0)
+			if_stp(job, 1);
 		save = delete_link(job->pgid);
 		if (!save && g_jobcontrol.first_mail)
 			save = job;
 	}
-	else if (job->fg == 1 && job->stop != 1)
+	else if (job && job->fg == 1 && job->stop != 1)
 	{
+		if (job->first_process->status > 0)
+			if_stp(job, 0);
 		save = delete_link(job->pgid);
 //		printf("%s %p\n", "save: ", save);
 		if (!save && g_jobcontrol.first_mail)
