@@ -1,6 +1,8 @@
 2
 0
 <
+env
+setenv A=ol B=pol
 a=def
 echo \"
 echo \'
