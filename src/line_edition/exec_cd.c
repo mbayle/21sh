@@ -84,14 +84,15 @@ int             create_path_home(t_struct *s, char *new, int i)
 int             exec_cd2(t_struct *s, char *cwd, char *ocwd, char *tmp)
 {
 	(*s).prompt = 0;
-	tmp = (*s).av[1];
+	if ((*s).av[1])
+		tmp = ft_strdup((*s).av[1]);
 	g_jobcontrol.s.i = 1;
 	if ((cwd = getcwd(cwd, PATH_MAX)) == NULL)
 		return (0);
 	if (((*s).av[1] = ft_strjoin("PWD=", cwd)) == NULL)
 		return (0);
 	if (tmp)
-		free(tmp);
+		ft_strdel(&tmp);
 	if (cwd)
 		free(cwd);
 	if (exec_setenv_b(&*s, s->av, 1, 1))
@@ -115,6 +116,7 @@ char    **modif_av(char ***av)
 	if ((new[0] = ft_mstrcpy(new[0], *av[0])) == NULL)
 		return (0);
 	free_dchar(&*av);
+	*av = NULL;
 	new[1] = NULL;
 	new[2] = NULL;
 	return (new);
@@ -136,14 +138,15 @@ int			exec_cd_ex(t_struct *s, char **tmp, char **ocwd)
 			free((*s).av[1]);
 			if (((*s).av[1] = ft_mstrcpy((*s).av[1], env->var)) == NULL)
 			{
-				*tmp = s->av[1];
+				*tmp = ft_strdup(s->av[1]);
 				return (0);
 			}
 		}
 		else
 			ft_eputendl(MAGENTA"Warning"WHITE": OLDPWD var. doesn't exist.");
 	}
-	*tmp = s->av[1];
+	if (s->av && s->av[0] && s->av[1])
+		*tmp = ft_strdup(s->av[1]);
 	return (0);
 	/*if ((*s).av[i][0] && (*s).av[i][0] == '~')
 		if ((c = create_path_home(&*s, NULL, i)) < 1)
@@ -162,18 +165,21 @@ int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 	exec_cd_ex(s, &tmp, &ocwd);
 	if (!(*s).av[1])
 	{
+//		printf("%p\n", s->av);
 		if (((*s).av = modif_av(&(*s).av)) == NULL)
 			return (0);
+//		printf("%p\n", s->av);
 		while (tp && ft_strcmp(tp->varn, "HOME"))
 			tp = tp->next;
 		if (!tp)
 		{
+			ft_strdel(&tmp);
 			tmp = NULL;
 			ft_eputstr("minishell: "MAGENTA"warning"
 					WHITE": the HOME environment variable does not exist.\n\0");
 		}
 		else
-			tmp = tp->var;
+			tmp = ft_strdup(tp->var);
 	}
 	if ((r = chdir(tmp)) == -1)
 	{
@@ -197,6 +203,14 @@ int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 		ft_putendl(tmp);
 	}
 	ft_putstr(WHITE);
-	free_dchar(&s->av);
+//	printf("%p\n", ocwd);
+	ft_freetab(s->av);
+	s->av = NULL;
+	ft_strdel(&ocwd);
+//	ocwd = NULL;
+//	free_dchar(&s->av);
+	ft_strdel(&tmp);
+//	printf("%p\n", tmp);
+//	printf("%p\n", s->av);
 	return (1);
 }

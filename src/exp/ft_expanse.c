@@ -47,7 +47,7 @@ char			*ft_expanse_word(char *word)
 		return (NULL);
 	}
 	result = ft_txt_join(list);
-//	ft_memdel((void**)&list->data);
+	ft_memdel((void**)&list->data);
 	ft_memdel((void**)&list);
 	return (result);
 }
@@ -80,5 +80,6 @@ char			*ft_simple_expanse(char *word)
 
 	if ((new = ft_expanse_word(word)))
 		ft_rmquotes_word(new);
+	ft_strdel(&word);
 	return (new);
 }

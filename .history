@@ -1,6 +1,114 @@
 2
 0
 <
+sdfsdfsdfsdf
+cd gdfg
+ls
+cd dsdf
+env
+pwd
+ls
+a=b env
+a=b e=r
+a=b
+a=b g=e
+a=b
+a=b env
+make
+a=b env
+a=c
+a=b
+
+a=b
+a=b env
+env
+a=b env
+a=c env
+a=b env
+a=d env
+a=c
+a=b
+a=c env
+a=b
+type ls
+echo $?
+lsk;lk
+pwd
+cat
+fg
+jobs
+cat &
+pwd
+ld
+$dsfsd
+echo $loll
+sdfsdf
+pwd
+ls
+$sdfsdf
+asasd
+coucou
+ls
+pwd
+ls
+echo ${PATH}
+cou
+ls 1>&$a | grep lol
+ls 1>&$a
+set
+a=-
+ls pol 2>&$a | grep :
+a=1
+ls $a>&-
+ls $1>&-
+a=1
+ls
+rm 0
+ls fsdf
+ls
+d
+ls
+grep
+cat sdfs
+ls sdfsdfs
+ls
+ls dfg >&-
+ls $c>&-
+c=1
+c=0
+$c
+ls
+ls > $c
+c="ls -l"
+cat 0
+ls
+ls > $c
+set
+c="$?"
+echo $c
+set
+c="\$?"
+set
+c="\$?"
+c="$?"
+set
+c=~/etienne
+env
+setenv c="$?"
+env
+setenv c="\$?"
+set
+c="\$PATH"
+set
+c="\$?"
+set
+echo "\$?"
+ls
+echo "$?"
+ls "a""u""t"eur
+echo "ls'"
+echo "'"
+echo '\''
 env
 setenv A=ol B=pol
 a=def

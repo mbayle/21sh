@@ -75,17 +75,11 @@ char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 {
 	*mypath = NULL;
 	cmd = parse_redir(av, 0);
-//	ft_printtab(cmd);
-//	ft_putchar('\n');
-	cmd = ft_command_to_args(cmd);
-//	ft_putendl("\nBEFOR ASSIGN");
-//	ft_printtab(cmd);
 	if (g_jobcontrol.g_fg)
 		cmd = check_assign(cmd);
 	else
 		cmd = del_one(cmd, just_ass(cmd));
-//	ft_putendl("\n AFTER ASSIGN");
-//	ft_printtab(cmd);
+	cmd = ft_command_to_args(cmd);
 	*mypath = is_b(cmd);
 	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0) //&& is_env_arg(cmd))
 	{

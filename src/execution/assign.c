@@ -90,15 +90,17 @@ char	**exp_ass(char **ass)
 			dst[y] = ft_strjoinfree(dst[y], tmp[1]);
 			y++;
 			i++;
-			ft_strdel(&tmp[0]);
-			ft_strdel(&tmp[1]);
-			ft_memdel((void**)&tmp);
+			ft_freetab(tmp);
 		}
 		else
-			dst[y++] = ass[i++];
+			dst[y++] = ft_strdup(ass[i++]);
 	}
 	dst[y] = NULL;
-//	ft_freetab(ass);
+	ft_putendl("----------");
+	ft_printtab(dst);
+	ft_putendl("----------");
+
+	ft_freetab(ass);
 	return (dst);
 
 }
@@ -106,18 +108,16 @@ char	**exp_ass(char **ass)
 char	**ass_arg(char **ass, int i)
 {
 	char	**tmp;
-	int		t;
 
+	tmp = NULL;
 	ass = exp_ass(ass);
-//	ft_putendl("IN ASS_ARG: ");
-//	ft_printtab(ass);
-	t = just_ass(ass);
-	tmp = tab_copy(ass);
 	if ((i = just_ass(ass)) == -1)
 	{
+		tmp = tab_copy(ass);
 		g_jobcontrol.assi = 0;
 		ass = move_char(ass);
 		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
+		ft_freetab(ass);
 		return (tmp);
 	}
 	else
@@ -127,7 +127,7 @@ char	**ass_arg(char **ass, int i)
 		save_ass(ass);
 		exec_ass(g_jobcontrol.ass, 1);
 	}
-	ass = del_one(ass, t);
+	ass = del_one(ass, i);
 	return (ass);
 }
 

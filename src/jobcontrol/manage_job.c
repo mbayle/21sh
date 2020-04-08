@@ -101,7 +101,7 @@ int		process_status(pid_t pid, int status, t_process *p)
 	g_jobcontrol.ret = status;
 	if (WIFEXITED(status) == TRUE)
 	{
-		g_jobcontrol.first_job->first_process->status = status ? status : -1;
+		g_jobcontrol.first_job->first_process->status = status ?50 : -1;
 		g_jobcontrol.ret = status > 1 ? 1 : status;
 		g_jobcontrol.first_job->first_process->r_value = status;
 	}

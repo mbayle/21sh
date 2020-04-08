@@ -47,7 +47,7 @@ t_job	*print_and_del(t_job *job, int i, int check)
 	}
 	else if (job && job->fg == 1 && job->stop != 1)
 	{
-		if (job->first_process->status > 0)
+		if (job->first_process && job->first_process->status > 0 && job->first_process->status < 50)
 			if_stp(job, 0);
 		save = delete_link(job->pgid);
 //		printf("%s %p\n", "save: ", save);

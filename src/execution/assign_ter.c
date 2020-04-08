@@ -18,6 +18,7 @@ void	unexec_ass(char **ass)
 	char	*tmp;
 	char	**dst;
 	char	**tmp2;
+	char	**tmp3;
 
 	i = 0;
 	while (ass && ass[i] && ass[i][0] == '\r')
@@ -27,12 +28,12 @@ void	unexec_ass(char **ass)
 		ass[i] = ft_strdup(tmp + 1);
 		i++;
 	}
-	tmp2 = get_key(cpy_env_plus(ass));
+	tmp3 = cpy_env_plus(ass);
+	tmp2 = get_key(tmp3);
 	dst = get_key(ass);
-//	ft_printtab(dst);
-//	if (ass)
-		g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, dst);
+	g_jobcontrol.ret = exec_unset(&g_jobcontrol.s, dst);
 	g_jobcontrol.ret = exec_unsetenv(&g_jobcontrol.s, tmp2);
 	ft_freetab(dst);
 	ft_freetab(tmp2);
+	ft_freetab(tmp3);
 }

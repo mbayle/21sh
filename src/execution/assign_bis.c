@@ -36,7 +36,7 @@ int		just_ass(char **ass)
 	int i;
 
 	i = 0;
-	while (ass[i])
+	while (ass && ass[i])
 	{
 		if (ass[i][0] != '\r')
 			return (i);
@@ -53,9 +53,10 @@ char	**cpy_env_plus(char **ass)
 
 	i = 1;
 	y = 0;
-	tmp2 = NULL;
-	if (!(tmp2 = malloc(sizeof(char*) * (tab_size(ass) + 1))))
+	if (!(tmp2 = malloc(sizeof(char*) * (tab_size(ass) + 2))))
         malloc_exit();
+	tmp2[0] = NULL;
+//	ft_putnbr(tab_size(ass));
 	if (ass)
 	{
 //		ft_putendl("ASS");
@@ -80,6 +81,7 @@ void	exec_ass(char **ass, int env)
 		free(ass[i]);
 		ass[i] = ft_strdup(tmp + 1);
 		i++;
+		ft_strdel(&tmp);
 	}
 	if (ass)
 	{
@@ -87,7 +89,7 @@ void	exec_ass(char **ass, int env)
 		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		if (env)
 			g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, tmp2, NULL, 1);
-//		ft_freetab(tmp2);
+		ft_freetab(tmp2);
 	}
 }
 
@@ -118,18 +120,22 @@ char	**get_key(char **ass)
 char	**move_char(char **ass)
 {
 	int		i;
-	char	*tmp;
+	int		y;
+	char	**dst;
 
 	i = 0;
+	y = 0;
+	if (!(dst = malloc(sizeof(char*) * (tab_size(ass) + 1))))
+		malloc_exit();
 	while (ass[i])
 	{
 		if (ass[i][0] == '\r')
-		{
-			tmp = ft_strdup(ass[i]);
-			ft_strdel(&ass[i]);
-			ass[i] = ft_strdup(tmp + 1);
-		}
+			dst[y++] = ft_strdup(ass[i] + 1);
+		else
+			dst[y++] = ft_strdup(ass[i]);
 		i++;
 	}
-	return (ass);
+	dst[y] = NULL;
+	ft_freetab(ass);
+	return (dst);
 }

@@ -21,7 +21,7 @@ char	*local_file(char *str)
 	g_jobcontrol.perm = 0;
 	dst = NULL;
 	read.path = ft_strldup(str, '/');
-	read.ptr = /*read.path ? */opendir(read.path) /*: opendir(".")*/;
+	read.ptr = read.path ? opendir(read.path) : opendir(".");
 	ft_strdel(&read.path);
 	while (read.ptr && (read.file = readdir(read.ptr)))
 	{
