@@ -98,9 +98,9 @@ void	do_to_ast(char ***tmp)
 
 int		build_ast(t_lex *lex, t_ast **ast)
 {
-	int depth_max;
+//	int depth_max;
 
-	depth_max = 0;
+//	depth_max = 0;
 	if (!ast)
 		return (-1);
 	*ast = NULL;

@@ -48,8 +48,6 @@
 # include <grp.h>
 # include <time.h>
 # include <termcap.h>
-# include <uuid/uuid.h>
-# include <sys/acl.h>
 # include <sys/xattr.h>
 # include <sys/ioctl.h>
 # include <curses.h>

@@ -39,7 +39,7 @@ int		and_or1(t_lex *lex)
 {
 	if (lex->next)
 	{
-		if (pipeline(lex) == 1 && lex->next->token == DAND && linebreak(lex)
+		if (pipeline(lex) == 1 && lex->next->operator == DAND && linebreak(lex)
 				&& pipeline(lex) == 1)
 			return (1);
 		else
@@ -59,7 +59,7 @@ int		and_or2(t_lex *lex)
 {
 	if (lex->next)
 	{
-		if (pipeline(lex) == 1 && lex->next->token == DPIPE && linebreak(lex)
+		if (pipeline(lex) == 1 && lex->next->operator == DPIPE && linebreak(lex)
 				&& pipeline(lex) == 1)
 			return (1);
 		else

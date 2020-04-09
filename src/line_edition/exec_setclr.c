@@ -89,7 +89,7 @@ int			exec_setclr2(t_struct *s, int *m)
 
 int			exec_setclr(t_struct *s, int i)
 {
-	int		ret;
+//	int		ret;
 	int		m;
 
 	if (s->clr == 14 && (s->clr = 13))
@@ -98,7 +98,7 @@ int			exec_setclr(t_struct *s, int i)
 		fp("bl", NULL);
 	fp("cl", "vi");
 	m = 0;
-	ret = tgetent(NULL, getenv("TERM"));
+	tgetent(NULL, getenv("TERM"));
 	if (!(clr_ws(&m)))
 		return (1);
 	anim_cpt(m, 28, i, s);

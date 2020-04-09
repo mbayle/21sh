@@ -74,13 +74,13 @@ static	int			ft_fill(int fd, char **buff, char **line)
 
 int					get_next_line(int fd, char **line)
 {
-	static char		*buff[OPEN_MAX];
+	static char		*buff[_SC_OPEN_MAX];
 	char			*fd_error;
 	int				ret;
 
 	if (!(fd_error = (char *)malloc(sizeof(char) * 1)))
 		return (-1);
-	if (!line || fd < 0 || fd > OPEN_MAX || read(fd, fd_error, 0) < 0)
+	if (!line || fd < 0 || fd > _SC_OPEN_MAX || read(fd, fd_error, 0) < 0)
 	{
 		ft_free((void **)&fd_error);
 		if (line != NULL)

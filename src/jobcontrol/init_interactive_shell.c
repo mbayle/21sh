@@ -42,12 +42,14 @@ void	ign_jb_sign(int i)
 
 int		init_shell_sig(void)
 {
-	if ((g_jobcontrol.shell_is_int = isatty(0)))
+	g_jobcontrol.shell_is_int = isatty(0);
+	if (g_jobcontrol.shell_is_int)
 	{
 		while (tcgetpgrp(0) != (g_jobcontrol.shell_pgid = getpgrp()))
 			kill(-(g_jobcontrol.shell_pgid), SIGTTIN);
 		ign_jb_sign(0);
-		if (setpgid(g_jobcontrol.shell_pgid = getpid(), g_jobcontrol.shell_pgid)
+		g_jobcontrol.shell_pgid = getpid();
+		if (setpgid(g_jobcontrol.shell_pgid, g_jobcontrol.shell_pgid)
 			< 0)
 		{
 			ft_putstr_fd("Could not put the shell in its own process group", 2);

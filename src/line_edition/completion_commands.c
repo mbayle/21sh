@@ -52,7 +52,7 @@ int			completion_commands(char ***path, int c, t_struct *s, int i)
 	t_lst		*tmp;
 	char		**del;
 
-	i = 0;
+	(void)i;
 	s->l = s->lbg;
 	del = *path;
 	if (!(check_whitespaces(s->tmp->c)))

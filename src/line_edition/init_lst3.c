@@ -85,7 +85,7 @@ int			init_lst_3(t_struct *s, char buf[701], int c, t_lst *l)
 		return (init_lst_3_b2(s, buf));
 	while (buf[c])
 	{
-		if (buf[c] < 0 || buf[c] > 127)
+		if (ft_isascii(buf[0]) == 0)
 			return (1);
 		if ((l = malloc(sizeof(*l))) == NULL)
 			return (-1);

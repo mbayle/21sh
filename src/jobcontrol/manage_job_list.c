@@ -68,7 +68,8 @@ t_job	*delete_link(pid_t pgid)
 
 //	ft_putendl("\n\nI DELETE LINK\n\n");
 	first = g_jobcontrol.first_mail;
-	if (first->pgid == pgid)
+	save = first;
+	if (save && first->pgid == pgid )
 		return (delete_first(first));
 //	ft_putendl("NO THE FISRT");
 	while (first && first->next)

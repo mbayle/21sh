@@ -21,8 +21,8 @@ int		program(t_lex *lex)
 {
 	while (lex)
 	{
-		while (lex->token != UNKNOWN && lex->token != SEMIC
-				&& lex->token != AND)
+		while (lex->token != UNKNOWN && lex->operator != SEMIC
+				&& lex->operator != AND)
 		{
 			if (program1(lex) == 1)
 				return (1);

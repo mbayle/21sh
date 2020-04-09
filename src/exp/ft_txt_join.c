@@ -28,7 +28,7 @@ size_t			ft_txt_len(t_txtlist *list)
 
 char			*ft_txt_join(t_txtlist *list)
 {
-	t_txtlist	*tmp;
+//	t_txtlist	*tmp;
 	char		*word;
 	size_t		size;
 
@@ -39,7 +39,7 @@ char			*ft_txt_join(t_txtlist *list)
 	{
 		ft_strcpy(word + size, list->data);
 		size = size + list->len;
-		tmp = list;
+//		tmp = list;
 //		printf("%s %p\n", "tmp = list", tmp);
 		list = list->next;
 		//ft_memdel((void**)&tmp->data);

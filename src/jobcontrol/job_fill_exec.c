@@ -14,12 +14,12 @@
 
 void		wait_for_job(t_process *pro, t_job *job, int fg)
 {
-	pid_t		pid;
+//	pid_t		pid;
 	int			status;
 	t_process	*save;
 
 	save = pro;
-	pid = 0;
+//	pid = 0;
 	if (!pro)
 		return ;
 	status = 0;

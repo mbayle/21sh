@@ -55,11 +55,11 @@ int			putchar_completion(t_struct *s, t_htr **bcom, char **line, int c)
 {
 	t_htr	*com;
 	t_htr	*save;
-	char	*l;
+//	char	*l;
 
 	com = *bcom;
 	save = *bcom;
-	l = NULL;
+///	l = NULL;
 	if (c < 2 || !com)
 		return (sec_free(line, 0));
 	create_line_comp(line, com, *bcom, c);

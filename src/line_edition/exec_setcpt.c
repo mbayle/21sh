@@ -86,11 +86,11 @@ void		anim_cpt(int m, int lr, int c, int clr)
 
 int			exec_setcpt(t_struct *s)
 {
-	int				ret;
+//	int				ret;
 	int				m;
 
 	m = 0;
-	ret = tgetent(NULL, getenv("TERM"));
+	tgetent(NULL, getenv("TERM"));
 	if (!(exec_setcpt8(s, &m)))
 		return (1);
 	anim_cpt(m, 28, 42, s->clr);

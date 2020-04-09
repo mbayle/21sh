@@ -14,11 +14,11 @@
 
 void	exec_b(char **cmd)
 {
-	char	**s;
-	int		i;
+//	char	**s;
+//	int		i;
 
-	s = cmd;
-	i = 0;
+//	s = cmd;
+//	i = 0;
 	if (ft_strcmp(cmd[0], "test") == 0)
 		g_jobcontrol.ret = ft_test(cmd, 0, NULL);
 	if (ft_strcmp(cmd[0], "echo") == 0)

@@ -52,6 +52,7 @@ static	int	init_lst_4_b2(t_struct *s, char buf[701])
 
 int			init_lst_4(t_struct *s, char buf[701], int c, t_lst *l)
 {
+	(void)c;
 	if ((edit_line3(s, buf)) || (buf[0] == 18))
 		return (1);
 	if (buf[0] == 27 && buf[1] == 91 && buf[2] == 49
@@ -63,7 +64,7 @@ int			init_lst_4(t_struct *s, char buf[701], int c, t_lst *l)
 		return (cpc(s, buf[1], 1));
 	if (buf[0] == 27 && buf[1] == 79 && (buf[2] == 80 || buf[2] == 81))
 		return (init_lst_4_b(buf, s));
-	if (buf[c] < 0 || buf[c] > 127)
+	if (ft_isascii(buf[0]) == 0)
 		return (1);
 	if ((l = malloc(sizeof(*l))) == NULL)
 		return (-1);

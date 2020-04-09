@@ -98,14 +98,15 @@ void	status_builtin(t_process *pro)
 void	browse_process(t_process *pro, t_job *cpy)
 {
 	int		status;
-	int		b_pid;
+//	int		b_pid;
 	pid_t	pid;
 
 	status = 0;
 	pid = 0;
+//	b_pid = 0;
 	while (pro)
 	{
-		b_pid = pro->lpid;
+//		b_pid = pro->lpid;
 		if (pro->lpid > 0)
 		{
 			pid = waitpid(pro->lpid, &status, WUNTRACED

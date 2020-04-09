@@ -13,7 +13,7 @@
 NAME		:=	42sh
 
 CC			:=	clang
-LINKER		:=	clang -o
+LINKER		:=	clang -o -v
 
 DEBUG		:=	0
 

@@ -20,17 +20,17 @@ int		check_char_ctrl_r(char buf[5], int ret)
 		return (1);
 	if (ret > 1)
 		return (1);
-	if (buf[0] < 32 || buf[0] > 127)
+	if (buf[0] < 32 || ft_isascii(buf[0]) == 0)
 		return (1);
 	return (0);
 }
 
 t_htr	*check_htr(t_htr *t, char *l)
 {
-	int		c;
+//	int		c;
 	char	*s;
 
-	c = 0;
+//	c = 0;
 	while (t)
 	{
 		s = t->name;

@@ -63,10 +63,10 @@ int		change_string(char **bg, char *t, t_struct s, size_t c)
 
 int		check_expansion3(char **bg, char *t)
 {
-	int		c;
+//	int		c;
 	char	*del;
 
-	c = 0;
+//	c = 0;
 	while (*t && check_whitespaces(*t))
 	{
 		*t = '\0';

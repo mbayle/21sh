@@ -89,7 +89,7 @@ t_hash				*new_hash_entry(char *command, char *path, t_hash **hash)
 	if (*command)
 		return (new_hash_entry(command + 1, path,
 			&((*hash)->next[(int)*command])));
-		(*hash)->path = path;
+	(*hash)->path = path;
 	(*hash)->hits = 1;
 	return (*hash);
 }

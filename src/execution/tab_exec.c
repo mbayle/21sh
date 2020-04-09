@@ -40,10 +40,10 @@ int		lex_size(t_lex *lex)
 
 char	*list_to_string(t_lex *lex)
 {
-	int		i;
+//	int		i;
 	char	*dst;
 
-	i = 0;
+//	i = 0;
 	if (lex == NULL || (dst = ft_strnew(1)) == NULL)
 		return (NULL);
 	while (lex && lex->token != UNKNOWN)

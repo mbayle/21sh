@@ -16,10 +16,10 @@ void	ft_prev_word(int *prompt, int *mainindex, int *pos)
 {
 	int		i;
 	int		*coord;
-	int		r;
+//	int		r;
 
 	i = 0;
-	r = get_row(0, ft_strlenu(g_mainline), prompt[1]);
+//	r = get_row(0, ft_strlenu(g_mainline), prompt[1]);
 	coord = get_coord(get_cursor_position());
 	if ((prompt[1] == coord[1] && coord[0] == prompt[0]))
 	{
@@ -43,13 +43,13 @@ void	ft_prev_word(int *prompt, int *mainindex, int *pos)
 void	ft_next_word(int *prompt, int *mainindex)
 {
 	int		i;
-	char	j;
+//	char	j;
 	int		*coord;
-	int		r;
+//	int		r;
 
-	j = 0;
+//	j = 0;
 	i = 0;
-	r = get_row(0, ft_strlenu(g_mainline), prompt[1]);
+//	r = get_row(0, ft_strlenu(g_mainline), prompt[1]);
 	coord = get_coord(get_cursor_position());
 	if (prompt[0] != coord[0])
 		i = coord[1] + (g_w.ws_col * (coord[0] - prompt[0]) - prompt[1]);

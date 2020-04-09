@@ -13,6 +13,7 @@
 #ifndef JOBCONTROL_H
 # define JOBCONTROL_H
 
+#include "projectinclude.h"
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -99,7 +100,7 @@ typedef struct				s_jobcontrol
 	int						red;
 	int						ao;
 	int						sim;
-	struct s_struct			s;
+	t_struct			s;
 	int						here;
 	int						index;
 	int						f;

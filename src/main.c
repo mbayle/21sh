@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../includes/projectinclude.h"
 
 t_21sh	*init_shell(int debug)
 {
@@ -26,10 +26,10 @@ t_21sh	*init_shell(int debug)
 
 static void	init_term(t_struct *s)
 {
-	int		ret;
+//	int		ret;
 
 	s->env_i = 1;
-	ret = tgetent(NULL, getenv("TERM"));
+	tgetent(NULL, getenv("TERM"));
 	s->prompt = 0;
 	s->cpt3 = 0;
 	s->copy = 0;
@@ -141,9 +141,9 @@ void		init_jc()
 
 int			main(int ac, char **av, char **envp)
 {
-	int			c;
+//	int			c;
 
-	c = 0;
+//	c = 0;
 	init_shell_sig();
 	init_jc();
 	g_jobcontrol.env = ft_tabdup(envp);

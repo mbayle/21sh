@@ -16,11 +16,12 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include "jobcontrol.h"
 # include "input.h"
 # include "get_next_line.h"
 # include "linedition.h"
-# include "libft.h"
+# include "../libft/includes/libft.h"
 # include "lexer.h"
 # include "grammar.h"
 # include "parser.h"

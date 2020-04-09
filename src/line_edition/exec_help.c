@@ -86,13 +86,13 @@ static void		anim_cpt(int m, int lr, int c, int i)
 
 int				exec_sethelp(void)
 {
-	int				ret;
+	//int				ret;
 	int				m;
 	char			buf[1];
 
 	fp("cl", "vi");
 	m = 0;
-	ret = tgetent(NULL, getenv("TERM"));
+	tgetent(NULL, getenv("TERM"));
 	if (!(help_ws(&m)))
 		return (1);
 	anim_cpt(m, 28, 42, 1);
