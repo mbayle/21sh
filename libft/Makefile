@@ -23,6 +23,7 @@ SRC_PATH = ./src/
 SRCS = $(addprefix $(SRC_PATH), $(SRC))
 
 SRC = ft_memset.c \
+	  ft_malloc_exit.c \
 	  ft_bzero.c \
 	  ft_memcpy.c \
 	  ft_memccpy.c \

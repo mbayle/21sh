@@ -1,6 +1,119 @@
 2
 0
 <
+pwd
+ls
+fg
+kill -9 38466
+ls -R / | cat -e
+fg
+jobs
+kill -9 38451
+ls -R / | cat -e
+fg
+jobs
+kill -9 38439
+ls -R / | cat 
+fg
+kill -9 38430
+ls -R / | cat 
+fg
+kill -9 38415
+ls -R / | cat 
+fg
+kill -9 38335
+ps
+ls -R / | cat
+fg
+jobs
+kill -9 38293
+ls -R / | cat 
+ls
+fg
+jobs
+kill -9 38263
+ls -R / | cat -e
+fg            
+cat &
+make
+fg
+kill -9 38222
+jobs
+ls -R / | cat -e
+fg
+cat &
+fg
+cat &
+fg
+cat &
+fg
+cat &
+fg
+cat &
+fg
+kill -9 38053
+jobs 
+ls -R / | cat -e
+
+fg
+kill -9 37994
+jobs
+ls -R / | cat -e
+fg
+cat &
+type ls
+fg
+type dhdhddh
+echo lol
+ls
+type bg
+whereis bg
+bg &
+fg
+bg &
+fg &
+ls
+fg
+ps
+fg
+cat &
+ps
+fg
+cat &
+fg
+cat &
+cat
+fg
+
+cat /dev/random &
+ls &
+ps
+fg
+jobs
+kill -9 37802
+ps
+jobs
+ls -R / | cat -e
+fg
+jobs
+kill -9 37762
+jobs
+ls -R / | cat -e
+ps
+fg
+jobs
+kill -9 37716
+jobs
+ls -R / | cat -e
+jobs
+fg
+jobs
+kill -9 37666
+jobs
+ls -R / | cat -e
+cat toto
+ls > toto
+ls
 sdfsdfsdfsdf
 cd gdfg
 ls

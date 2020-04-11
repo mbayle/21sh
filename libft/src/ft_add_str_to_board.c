@@ -14,8 +14,7 @@
 
 static char	**ft_create(int size_y, char **tab, char *str)
 {
-	if (!(tab = (char **)malloc(sizeof(char *) * (size_y + 1))))
-		return (NULL);
+	tab = (char **)ft_malloc_exit(sizeof(char *) * (size_y + 1));
 	tab[0] = ft_strdup(str);
 	tab[1] = NULL;
 	return (tab);
@@ -27,8 +26,7 @@ static char	**ft_new(int size_y, char **tab, char *str)
 	int		i;
 
 	i = -1;
-	if (!(t = (char **)malloc(sizeof(char *) * (size_y + 1))))
-		return (NULL);
+	t = (char **)ft_malloc_exit(sizeof(char *) * (size_y + 1));
 	t[size_y] = NULL;
 	while (tab[++i])
 		t[i] = ft_strdup(tab[i]);

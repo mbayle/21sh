@@ -34,16 +34,14 @@ char		**ft_splitws(char const *s)
 
 	if (!(i1 = ft_create(&z, &tab, s)) && s)
 	{
-		if ((tab = (char**)malloc(sizeof(*tab)
-						* (ft_nbword((char *)s) + 1))) == NULL)
-			return (NULL);
+		tab = (char**)ft_malloc_exit(sizeof(*tab)
+						* (ft_nbword((char *)s) + 1));
 		while (z--)
 		{
 			i = ft_create1(&s, s);
 			while (!(check_whitespaces(s[i])) && s[i])
 				i++;
-			if ((tab[i1] = (char*)malloc(sizeof(**tab) * (i + 1))) == NULL)
-				return (NULL);
+			tab[i1] = (char*)ft_malloc_exit(sizeof(**tab) * (i + 1));
 			i = 0;
 			while (!(check_whitespaces(*s)) && *s)
 				tab[i1][i++] = *s++;

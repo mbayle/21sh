@@ -20,8 +20,7 @@ char	*ft_mstrcpy(char *dest, const char *src)
 	c = 0;
 	while (src[c])
 		c++;
-	if ((dest = (char*)malloc(sizeof(*dest) * (c + 1))) == NULL)
-		return (NULL);
+	dest = (char*)ft_malloc_exit(sizeof(*dest) * (c + 1));
 	sa = dest;
 	while (*src)
 		*dest++ = *src++;

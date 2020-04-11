@@ -13,7 +13,7 @@
 NAME		:=	42sh
 
 CC			:=	clang
-LINKER		:=	clang -o -v
+LINKER		:=	clang -o 
 
 DEBUG		:=	0
 
@@ -252,7 +252,6 @@ SRC		:=	main.c \
 			exp/ft_getmatch_free.c \
 			exp/ft_getmatch_hook.c \
 			exp/ft_getvar.c \
-			exp/ft_malloc_exit.c \
 			exp/ft_match.c \
 			exp/ft_match_hook.c \
 			exp/ft_revmatch.c \

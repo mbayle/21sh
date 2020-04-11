@@ -49,8 +49,7 @@ static	int			ft_fill(int fd, char **buff, char **line)
 	char			*tmp;
 	int				ret;
 
-	if (!(new_buff = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
-		return (-1);
+	new_buff = (char *)ft_malloc_exit(sizeof(char) * BUFF_SIZE + 1);
 	new_buff[BUFF_SIZE] = 0;
 	while ((ret = read(fd, new_buff, BUFF_SIZE)))
 	{
@@ -78,8 +77,7 @@ int					get_next_line(int fd, char **line)
 	char			*fd_error;
 	int				ret;
 
-	if (!(fd_error = (char *)malloc(sizeof(char) * 1)))
-		return (-1);
+	fd_error = (char *)ft_malloc_exit(sizeof(char) * 1);
 	if (!line || fd < 0 || fd > _SC_OPEN_MAX || read(fd, fd_error, 0) < 0)
 	{
 		ft_free((void **)&fd_error);

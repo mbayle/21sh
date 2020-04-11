@@ -46,7 +46,7 @@ typedef struct		s_list
 /*
 ********************************************************************************
 */
-
+void				*ft_malloc_exit(size_t size);
 /*
 ** check_whitespaces.c
 */
