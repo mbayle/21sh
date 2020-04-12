@@ -19,28 +19,14 @@ void	update_bg_status(void)
 	char		*tmp;
 
 	cpy = g_jobcontrol.first_mail;
-/*	while (cpy)
-	{
-		ft_putendl("-------");
-		ft_putendl(cpy->command);
-		printf("%s %p\n", "cpy", cpy);
-		ft_putendl("-------");
-		cpy = cpy->next;
-	}
-	cpy = g_jobcontrol.first_mail;*/
 	while (cpy)
 	{
-//		ft_putendl("+++++++++");
-//		ft_putendl(cpy->command);
-//		ft_putendl("++++++++++");
 		pro = cpy->first_process;
 		browse_process(pro, cpy);
 		tmp = ft_strdup(cpy->command);
 		cpy = check_bg_status(cpy);
 		if (cpy)
 		{
-//			printf("%s %p\n", "cpy", cpy);
-//			printf("%s %p\n", "cpy->first_pro", cpy->first_process);
 			status_builtin(cpy->first_process);
 			if (ft_strcmp(tmp, cpy->command) == 0)
 				cpy = cpy->next;
