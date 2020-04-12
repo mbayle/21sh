@@ -90,7 +90,10 @@ char	**exp_ass(char **ass)
 			dst[y] = ft_strjoinfree(dst[y], tmp[1]);
 			y++;
 			i++;
-			ft_freetab(tmp);
+			ft_strdel(&tmp[0]);
+			ft_strdel(&tmp[1]);
+			ft_memdel((void**)&tmp);
+			//ft_freetab(tmp);
 		}
 		else
 			dst[y++] = ft_strdup(ass[i++]);

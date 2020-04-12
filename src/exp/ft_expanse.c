@@ -47,7 +47,9 @@ char			*ft_expanse_word(char *word)
 		return (NULL);
 	}
 	result = ft_txt_join(list);
-	ft_memdel((void**)&list->data);
+//	printf("%p\n", list->data);
+	if (list && list->data)
+		ft_memdel((void**)&list->data);
 	ft_memdel((void**)&list);
 	return (result);
 }
