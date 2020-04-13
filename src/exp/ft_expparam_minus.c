@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:45:09 by geargenc          #+#    #+#             */
-/*   Updated: 2019/04/20 05:48:33 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/13 08:24:04 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 int				ft_expparam_cnminus(t_txtlist *txt, t_expparam *expparam)
 {
-	char		*word;
-
-	if (!expparam->param || !(word = ft_simple_expanse(expparam->word)))
+	if (!expparam->param ||
+		!(expparam->word = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
-	free(expparam->word);
-	expparam->word = word;
 	txt->data = ft_getvar(expparam->param);
 	if (txt->data && !txt->data[0])
 	{
@@ -42,15 +39,12 @@ int				ft_expparam_cnminus(t_txtlist *txt, t_expparam *expparam)
 
 int				ft_expparam_minus(t_txtlist *txt, t_expparam *expparam)
 {
-	char		*word;
-
-	if (!expparam->param || !(word = ft_simple_expanse(expparam->word)))
+	if (!expparam->param ||
+		!(expparam->word = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
-	free(expparam->word);
-	expparam->word = word;
 	txt->data = ft_getvar(expparam->param);
 	if (txt->data)
 		txt->data = ft_backslash_quotes(txt->data, txt->dquote);

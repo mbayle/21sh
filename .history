@@ -1,6 +1,10 @@
 2
 0
 <
+echo ${a:=LUL}
+echo $a
+echo ${a:=LOL}
+ls
 pwd
 ls
 fg

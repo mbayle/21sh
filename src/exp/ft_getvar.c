@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:45:41 by geargenc          #+#    #+#             */
-/*   Updated: 2020/03/21 08:02:00 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/13 08:44:50 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char		*getvar(char *var)
 	while (menv)
 	{
 		if (ft_strcmp(menv->varn, var) == 0)
-			return (menv->var);
+			return (ft_strdup(menv->var));
 		menv = menv->next;
 	}
 	return (NULL);

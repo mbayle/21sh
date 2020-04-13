@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:06:39 by geargenc          #+#    #+#             */
-/*   Updated: 2019/04/20 05:49:07 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/13 08:28:20 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,11 @@ int				ft_expparam_sharp(t_txtlist *txt,
 
 	if (!expparam->param)
 		return (ft_expparam_sharp_noparam(txt, expparam));
-	if (!(tmp = ft_simple_expanse(expparam->word)))
+	if (!(expparam->word = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
-	free(expparam->word);
-	expparam->word = tmp;
 	tmp = ft_getvar(expparam->param);
 	if (!tmp)
 		tmp = ft_strdup("");
@@ -118,13 +116,12 @@ int				ft_expparam_dsharp(t_txtlist *txt,
 {
 	char		*tmp;
 
-	if (!expparam->param || !(tmp = ft_simple_expanse(expparam->word)))
+	if (!expparam->param ||
+		!(expparam->word = ft_simple_expanse(expparam->word)))
 	{
 		ft_expparam_free(expparam);
 		return (ft_exp_brace_error(txt));
 	}
-	free(expparam->word);
-	expparam->word = tmp;
 	tmp = ft_getvar(expparam->param);
 	if (!tmp)
 		tmp = ft_strdup("");
