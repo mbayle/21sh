@@ -1,6 +1,14 @@
 2
 0
 <
+echo ${a-lol}
+echo ${a:-lol}
+a=
+echo ${a-lol}
+echo ${a:-lol}
+echo $a
+set
+a=
 echo ${:-haha}
 echo ${haha:-haha}
 echo ${haha:-${}}
