@@ -1,6 +1,41 @@
 2
 0
 <
+echo ${:-haha}
+echo ${haha:-haha}
+echo ${haha:-${}}
+git status
+echo ${:-lol}
+echo ${}
+echo ${:=${}}
+echo ${haha:=${}}
+echo ${haha:-${}}
+echo ${:-${}}
+echo ${:-lol}
+git status
+ls
+echo ${PAT:?}
+ls -z
+echo ${PAT:?}
+echo ${PATH:?}
+ls -z
+echo ${}
+ls -z
+echo ${}
+echo ${PATH:+LOL}
+echo ${PATH:-LOL}
+echo ${PATH}
+ls
+echo ${}
+echo ${lala=${}}
+echo ${lala:=${}}
+echo ${lala=${}}
+echo ${lala:=${}}
+echo ${lala:-${}}
+echo ${lala:-${lala}}
+echo ${lala:-{}}
+echo ${lala:-{lala}}
+echo ${lala:-lala}
 echo ${a:=LUL}
 echo $a
 echo ${a:=LOL}
