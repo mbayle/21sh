@@ -153,6 +153,7 @@ struct s_jobcontrol				g_jobcontrol;
 /**
  env
  **/
+void					fill_struct_env(void);
 int						delete_loc(char *keyval);
 int						replace_loc(char *keyval);
 int						add_loc(char *keyval);
@@ -242,7 +243,7 @@ char						**check_opt_env(char **cmd);
 int							is_env_arg(char **cmd);
 char						**env_copy(t_myenv *menv);
 void						unexec_asign(void);
-int							should_i_exec(void);
+int							should_i_exec(char **cmd, char *mypath);
 char						*concat_tab(char **tmp);
 char						**copy_u(char **cmd, int pos);
 char						*ft_strdupt(char *str, char c);

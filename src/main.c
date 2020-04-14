@@ -222,6 +222,7 @@ int			main(int ac, char **av, char **envp)
 			g_shell->line = g_jobcontrol.s.cmd;
 			ft_lexer(&g_shell->lex, g_shell->line);
 		}
+		fill_struct_env();
 		tmp_free_struct(&g_jobcontrol.s);
 		update_bg_status();
 		if (isatty(0) == 0)

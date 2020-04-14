@@ -38,20 +38,17 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 	&& (pid = fork()) == 0)
 	{
 		do_in_child(oldlink, newlink, g_jobcontrol.arg);
-		//EXPANDRE DANS REDIR
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		if (ft_strcmp(path, "i") == 0)
 			path = my_path(cmd, g_jobcontrol.env);
 		if (g_jobcontrol.sim == 1 && g_jobcontrol.g_fg)
 		{
-			//EXPANDRE DANS ASSIGN
 			cmd = check_assign(cmd);
 			if ((path = is_b(cmd)) && !ft_strcmp(path, "i"))
 			{
 				ft_strdel(&path);
 				path = my_path(cmd, g_jobcontrol.env);
 			}
-//			ft_putendl(path);
 		}
 		g_jobcontrol.red == -1 ? exit(g_jobcontrol.ret = 1) : 0;
 		if (ft_strcmp(path, "b") == 0)
@@ -78,18 +75,11 @@ char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 	cmd = parse_redir(av, 0);
 	cmd = ft_command_to_args(cmd);
 	if (g_jobcontrol.g_fg && g_jobcontrol.sim == 0)
-	{
-//		ft_putendl("IN NO HILE");
 		cmd = check_assign(cmd);
-	}
 	ft_freetab(g_jobcontrol.env);
 	g_jobcontrol.env = env_copy(g_jobcontrol.myenv);
-//	ft_printtab(cmd);
-//	ft_printtab(env_copy(g_jobcontrol.myenv));
-//	else
-//		cmd = del_one(cmd, just_ass(cmd));
 	*mypath = is_b(cmd);
-	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0) //&& is_env_arg(cmd))
+	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0)
 	{
 		if (cmd[1])
 		{
@@ -109,29 +99,22 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	char	*mypath;
 	char	*tmp;
 
-//	ft_printtab(av);
 	cmd = NULL;
-	if (!should_i_exec())
-		return (NULL);
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
+	if (!should_i_exec(cmd, mypath))
+		return (NULL);
 	if (g_jobcontrol.sim == 0 && mypath && !ft_strcmp(mypath, "b"))
 	{
-//		ft_putendl("BUILTIM");
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		execute_builtin(cmd);
 	}
 	pid = child_process(oldlink, newlink, mypath, cmd);
 	close_fd_father(oldlink, newlink);
 	g_jobcontrol.red = 0;
-//	ft_putendl(cmd[0]);
 	ft_freetab(cmd);
 	tmp = concat_tab(av);
-//	ft_putnbr(g_jobcontrol.ret);
 	if (mypath && g_jobcontrol.ret != 42)
-	{
-//		ft_putendl("I CREATE PROCESS");
 		pro = fill_jc_struc(pid, tmp, pro);
-	}
 	ft_strdel(&mypath);
 	ft_strdel(&tmp);
 	return (pro);
@@ -148,15 +131,6 @@ void			exec_process(char ***av, int i)
 	newlink[1] = -1;
 	while (av && av[i])
 	{
-//		t_myenv *env;
-
-//		env = g_jobcontrol.myenv;
-//		ft_printtab(g_jobcontrol.env);
-//		while (env)
-//		{
-//			ft_putendl(env->keyval);
-//			env = env->next;
-//		}
 		if (av && av[i] && av[i][0] && ft_strcmp(av[i][0], "|") == 0)
 			i++;
 		else
@@ -167,11 +141,7 @@ void			exec_process(char ***av, int i)
 				if (pipe(newlink) < 0)
 					ft_putendl_fd("Could not create the pipe", 2);
 			g_jobcontrol.i = i;
-			/*if (!(*/pro = father_process(av[i], pro, oldlink, newlink);//))
-			//{
-			//	unexec_asign();
-			//	return ;
-		//	}
+			pro = father_process(av[i], pro, oldlink, newlink);
 			i++;
 		}
 		unexec_asign();
@@ -184,7 +154,6 @@ int				pipe_exec(char ***av, int fg)
 
 	i = 0;
 	save_fd();
-//	if (g_jobcontrol.env)
 	g_jobcontrol.first_job->first_process = NULL;
 	g_jobcontrol.first_job->fg = fg;
 	exec_process(av, i);
@@ -194,7 +163,6 @@ int				pipe_exec(char ***av, int fg)
 		put_in_bg(g_jobcontrol.first_job, 0, NULL,
 				g_jobcontrol.first_job->first_process);
 	ft_freetab(g_jobcontrol.av);
-//	ft_freetab(g_jobcontrol.env);
 	reset_fd();
 	return (0);
 }

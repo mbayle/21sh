@@ -73,16 +73,14 @@ void	unexec_asign(void)
 //	}
 }
 
-int		should_i_exec(void)
+int		should_i_exec(char ** cmd, char *mypath)
 {
-	if (g_jobcontrol.ao == 1)
+	if (g_jobcontrol.ao  || g_jobcontrol.stopexe)
 	{
 		g_jobcontrol.ao = 0;
-		return (0);
-	}
-	if (g_jobcontrol.stopexe == 1)
-	{
 		g_jobcontrol.stopexe = 0;
+		ft_freetab(cmd);
+		ft_strdel(&mypath);
 		return (0);
 	}
 	return (1);
