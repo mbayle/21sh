@@ -6,7 +6,7 @@
 #    By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/13 10:04:50 by geargenc         ###   ########.fr        #
+#    Updated: 2020/04/14 07:04:18 by geargenc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ INCS		=	./includes/get_next_line.h \
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft  -fsanitize=address
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft  #-fsanitize=address
 
 CFLAGS		:=	-Wall -Wextra -Werror -g3 -I$(INCLUDES)
 ifeq ($(DEBUG), 1)
@@ -224,6 +224,29 @@ SRC		:=	main.c \
 			input/tools.c \
 			input/tools_bis.c \
 			input/signals.c \
+			exp/ft_ari.c \
+			exp/ft_ari_ast.c \
+			exp/ft_ari_ast_operands.c \
+			exp/ft_ari_ast_operators.c \
+			exp/ft_ari_ast_print.c \
+			exp/ft_ari_conv_others.c \
+			exp/ft_ari_conv_value.c \
+			exp/ft_ari_convert.c \
+			exp/ft_ari_exe_as.c \
+			exp/ft_ari_exe_basic.c \
+			exp/ft_ari_exe_basic_as.c \
+			exp/ft_ari_exe_bs.c \
+			exp/ft_ari_exe_bw.c \
+			exp/ft_ari_exe_bwbs_as.c \
+			exp/ft_ari_exe_comp_eq.c \
+			exp/ft_ari_exe_comp_lg.c \
+			exp/ft_ari_exe_db.c \
+			exp/ft_ari_exe_logical.c \
+			exp/ft_ari_exe_others.c \
+			exp/ft_ari_exe_pow.c \
+			exp/ft_ari_lex_others.c \
+			exp/ft_ari_lex_value.c \
+			exp/ft_ari_lexer.c \
 			exp/ft_backslash_quotes.c \
 			exp/ft_exp.c \
 			exp/ft_exp_args.c \
@@ -256,7 +279,7 @@ SRC		:=	main.c \
 			exp/ft_match_hook.c \
 			exp/ft_revmatch.c \
 			exp/ft_rmquotes.c \
-			exp/ft_txt_join.c \
+			exp/ft_txt_join.c
 
 OBJ		:=	$(addprefix $(OBJ_PATH), $(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_PATH), $(SRC))

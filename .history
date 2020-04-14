@@ -1,6 +1,36 @@
 2
 0
 <
+echo "$((32 + 10))"
+echo $((32 + 10))
+git pull
+echo $((-9223372036854775809))
+echo $((9223372036854775809))
+echo $((9223372036854775808))
+echo $((-9223372036854775808))
+echo $((2**63))
+echo $((2**62))
+echo $((2**60))
+echo $((2**32))
+echo $((2**2))
+echo $((2**63))
+echo $((()))
+echo $(())
+echo $((42))
+echo $(($PATH))
+echo $(())
+echo "`haha"
+echo "`haha`"
+echo `haha`
+env
+LANG=ok
+env
+a=lol
+env
+export a
+env
+a=lol
+export a=42
 echo ${a-lol}
 echo ${a:-lol}
 a=
