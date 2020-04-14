@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:29:59 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 06:25:43 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 07:49:58 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,10 @@ int				ft_ari_lex_var(t_ari_lex *lex)
 
 int				ft_ari_lex_badtoken(t_ari_lex *lex)
 {
-	(void)lex;
-	dprintf(2, "Error message lexer\n"); // operateur arithmetique non valable
+	ft_putstr_fd("42sh: ", STDERR_FILENO);
+	ft_putstr_fd(lex->input, STDERR_FILENO);
+	ft_putstr_fd(": illegal character: ", STDERR_FILENO);
+	ft_putchar_fd(lex->input[lex->index], STDERR_FILENO);
+	ft_putchar_fd('\n', STDERR_FILENO);
 	return (-1);
 }

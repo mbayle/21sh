@@ -6,19 +6,19 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:36:54 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 07:01:59 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 09:51:31 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/projectinclude.h"
 
 void			ft_ari_node_add(t_ari_ast *ast, t_aritok token,
-				char *varname, long value)
+				char *text, long value)
 {
 	t_ari_node	*new;
 
 	new = (t_ari_node *)ft_malloc_exit(sizeof(t_ari_node));
-	*new = (t_ari_node){token, varname, value, NULL, NULL, NULL, 0};
+	*new = (t_ari_node){token, text, value, ast->input, NULL, NULL, NULL, 0};
 	if (ast->current)
 		ast->current->right = new;
 	else

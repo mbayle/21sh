@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 12:45:30 by geargenc          #+#    #+#             */
-/*   Updated: 2020/03/21 07:55:40 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 09:02:55 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void		ft_parse_sub_mode(char *word, size_t *index, char *quote)
 {
 	if (*quote != '\'' && word[*index] == '\\')
-		(*index)++;
+	{
+		(*index) += 2;
+		ft_parse_sub_mode(word, index, quote);
+	}
 	else if (*quote != '\'' && word[*index] == '\"')
 		*quote = *quote ? 0 : '\"';
 	else if (*quote != '\"' && word[*index] == '\'')

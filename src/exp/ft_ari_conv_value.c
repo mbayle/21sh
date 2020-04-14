@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:34:45 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 06:26:10 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 07:22:02 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void			ft_ari_conv_dec(t_ari_ast *ast, t_ari_toklist *current,
 		value += input[current->begin + i] - '0';
 		i++;
 	}
-	ft_ari_node_add(ast, current->token, NULL, value);
+	ft_ari_node_add(ast, current->token,
+		ft_strsub(input, current->begin, current->len), value);
 }
 
 void			ft_ari_conv_hex(t_ari_ast *ast, t_ari_toklist *current,
@@ -46,7 +47,8 @@ void			ft_ari_conv_hex(t_ari_ast *ast, t_ari_toklist *current,
 			value += ft_tolower(input[current->begin + i]) - 'a' + 10;
 		i++;
 	}
-	ft_ari_node_add(ast, current->token, NULL, value);
+	ft_ari_node_add(ast, current->token,
+		ft_strsub(input, current->begin, current->len), value);
 }
 
 void			ft_ari_conv_oct(t_ari_ast *ast, t_ari_toklist *current,
@@ -63,5 +65,6 @@ void			ft_ari_conv_oct(t_ari_ast *ast, t_ari_toklist *current,
 		value += input[current->begin + i] - '0';
 		i++;
 	}
-	ft_ari_node_add(ast, current->token, NULL, value);
+	ft_ari_node_add(ast, current->token,
+		ft_strsub(input, current->begin, current->len), value);
 }

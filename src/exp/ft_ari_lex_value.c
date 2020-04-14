@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:29:08 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 06:25:05 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 07:35:36 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int				ft_ari_lex_dec(t_ari_lex *lex)
 {
 	size_t		i;
 
-	if (lex->input[lex->index] && ft_strchr("123456789", lex->input[lex->index]))
+	if (lex->input[lex->index] &&
+		ft_strchr("123456789", lex->input[lex->index]))
 	{
 		i = 1;
 		while (lex->input[lex->index + i] &&

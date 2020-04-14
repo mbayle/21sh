@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:44:45 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 06:21:29 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 08:25:12 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,11 @@ int				ft_ari_ast(t_ari_ast *ast)
 	}
 	if (ast->current &&
 		(g_ari_asttab[ast->current->token].type & ARI_TYPE_OP))
-		return (-1); // operande attendu
+		return (ft_ari_operand_expected(ast->input, ast->current->text));
 	while (ast->current)
 	{
 		if (g_ari_asttab[ast->current->token].type & ARI_TYPE_SUB)
-			return (-1); // " ) " manquante
+			return (ft_ari_missing_parenthesis(ast->input));
 		ast->current = ast->current->parent;
 	}
 	return (0);

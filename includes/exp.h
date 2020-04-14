@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 12:34:36 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 06:44:27 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 09:52:04 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,9 @@ typedef struct				s_ari_lex
 typedef struct				s_ari_node
 {
 	t_aritok				token;
-	char					*varname;
+	char					*text;
 	long					value;
+	char					*input;
 	struct s_ari_node		*parent;
 	struct s_ari_node		*left;
 	struct s_ari_node		*right;
@@ -185,6 +186,7 @@ typedef struct				s_ari_node
 
 typedef struct				s_ari_ast
 {
+	char					*input;
 	t_ari_node				*list;
 	t_ari_node				*begin;
 	t_ari_node				*current;
@@ -299,8 +301,18 @@ void						ft_ari_conv_oct(t_ari_ast *ast,
 */
 
 void						ft_ari_node_add(t_ari_ast *ast, t_aritok token,
-							char *varname, long value);
+							char *text, long value);
 void						ft_ari_convert_lex(t_ari_lex *lex, t_ari_ast *ast);
+
+/*
+**							ft_ari_error.c
+*/
+int							ft_ari_already_incrdecr(char *input, char *varname,
+							char *token);
+int							ft_ari_missing_parenthesis(char *input);
+int							ft_ari_non_variable(char *input, char *token);
+int							ft_ari_operand_expected(char *input, char *token);
+int							ft_ari_syntax_error(char *input, char *token);
 
 /*
 **							ft_ari_exe_as.c
@@ -398,6 +410,7 @@ int							ft_ari_exe_ms_sign(t_ari_node *node, int rec);
 **							ft_ari_exe_pow.c
 */
 
+int							ft_ari_negative_exponent(char *input);
 int							ft_ari_exe_pow(t_ari_node *node, int rec);
 
 /*

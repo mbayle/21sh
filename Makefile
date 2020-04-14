@@ -6,7 +6,7 @@
 #    By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/14 07:04:18 by geargenc         ###   ########.fr        #
+#    Updated: 2020/04/14 07:59:06 by geargenc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -232,6 +232,7 @@ SRC		:=	main.c \
 			exp/ft_ari_conv_others.c \
 			exp/ft_ari_conv_value.c \
 			exp/ft_ari_convert.c \
+			exp/ft_ari_error.c \
 			exp/ft_ari_exe_as.c \
 			exp/ft_ari_exe_basic.c \
 			exp/ft_ari_exe_basic_as.c \
