@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:29:55 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 07:01:09 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 10:21:17 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,34 +66,6 @@ int			ft_exp_var(t_txtlist *txt)
 // 	ft_del_ending_spaces(txt->data);
 // 	return (0);
 // }
-
-char		*ft_lgtoa(long n)
-{
-	char	*result;
-	int		i;
-	long	power;
-
-	power = 1;
-	i = (n < 0) ? 2 : 1;
-	while (n / power >= 10 || n / power <= -10)
-	{
-		power *= 10;
-		i++;
-	}
-	if (!(result = (char *)ft_malloc_exit(i + 1)))
-		return (NULL);
-	if (n < 0)
-		result[0] = '-';
-	i = (n < 0) ? 1 : 0;
-	while (power != 0)
-	{
-		result[i] = n / power % 10 * ((n < 0) ? -1 : 1) + '0';
-		power /= 10;
-		i++;
-	}
-	result[i] = '\0';
-	return (result);
-}
 
 int			ft_exp_expr(t_txtlist *txt)
 {

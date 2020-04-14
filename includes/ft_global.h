@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/24 01:51:22 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 06:43:47 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 10:09:07 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -431,7 +431,7 @@ t_ari_cond			g_ari_condtab[] =
 	&ft_ari_lex_oct,
 	&ft_ari_lex_dec,
 	&ft_ari_lex_var,
-	&ft_ari_lex_badtoken
+	&ft_ari_lex_illegal_char
 };
 
 t_ari_ast_data		g_ari_asttab[] =

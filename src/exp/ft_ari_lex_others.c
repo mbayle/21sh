@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:29:59 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 07:49:58 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 10:08:28 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				ft_ari_lex_var(t_ari_lex *lex)
 	return (0);
 }
 
-int				ft_ari_lex_badtoken(t_ari_lex *lex)
+int				ft_ari_lex_illegal_char(t_ari_lex *lex)
 {
 	ft_putstr_fd("42sh: ", STDERR_FILENO);
 	ft_putstr_fd(lex->input, STDERR_FILENO);

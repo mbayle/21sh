@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/07 15:28:31 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 08:00:05 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 09:59:14 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int				ft_ari(char *expr, long *res, int rec)
 	t_ari_lex	lex;
 	t_ari_ast	ast;
 
-	(void)rec;
 	lex = (t_ari_lex){expr, 0, NULL, NULL};
 	if (ft_ari_lexer(&lex))
 		return (-1);
@@ -29,7 +28,7 @@ int				ft_ari(char *expr, long *res, int rec)
 	*res = 0;
 	if (ast.begin)
 	{
-		if (g_ari_exetab[ast.begin->token](ast.begin, 0))
+		if (g_ari_exetab[ast.begin->token](ast.begin, rec))
 			return (-1);
 		*res = ast.begin->value;
 	}

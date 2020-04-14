@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ari_exe_pow.c                                   :+:      :+:    :+:   */
+/*   ft_lgtoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/14 05:00:11 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 10:03:52 by geargenc         ###   ########.fr       */
+/*   Created: 2020/04/14 10:21:45 by geargenc          #+#    #+#             */
+/*   Updated: 2020/04/14 10:22:00 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/projectinclude.h"
 
-int							ft_ari_exe_pow(t_ari_node *node, int rec)
+char		*ft_lgtoa(long n)
 {
-	long					pow;
+	char	*result;
+	int		i;
+	long	power;
 
-	if (g_ari_exetab[node->left->token](node->left, rec) ||
-		g_ari_exetab[node->right->token](node->right, rec))
-		return (-1);
-	node->value = 1;
-	if ((pow = node->right->value) < 0)
-		return (ft_ari_negative_exponent(node->input));
-	while (pow)
+	power = 1;
+	i = (n < 0) ? 2 : 1;
+	while (n / power >= 10 || n / power <= -10)
 	{
-		node->value *= node->left->value;
-		pow--;
+		power *= 10;
+		i++;
 	}
-	return (0);
+	if (!(result = (char *)ft_malloc_exit(i + 1)))
+		return (NULL);
+	if (n < 0)
+		result[0] = '-';
+	i = (n < 0) ? 1 : 0;
+	while (power != 0)
+	{
+		result[i] = n / power % 10 * ((n < 0) ? -1 : 1) + '0';
+		power /= 10;
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
 }

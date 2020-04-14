@@ -1,6 +1,41 @@
 2
 0
 <
+echo "$((a <<= 1))" $a
+echo "$((a >>= 1))" $a
+echo "$((a >>= 2))" $a
+echo "$((a <<= 2))" $a
+echo "$((a ^= 4))" $a
+echo "$((a ^= 2))" $a
+echo "$((a ^= 3))" $a
+echo "$((a &= 0))" $a
+echo "$((a &= 4))" $a
+echo "$((a |= 2))" $a
+echo "$((a |= 0))" $a
+echo "$((a |= 5))" $a
+echo "$((a %= 5))" $a
+echo "$((a /= 2))" $a
+echo "$((a *= -42))" $a
+echo "$((a -= 43))" $a
+echo "$((a += 43))" $a
+echo $((a += 43)) $a
+echo $((a)) $a
+echo $((a--)) $a
+echo $((--a)) $a
+echo $((++a)) $a
+echo $((a++)) $a
+echo $((a))
+echo $a
+echo $((a=42))
+echo "$((a + 10))"
+echo "$((a))"
+a=a
+echo "$((a + 8))"
+echo $((a + 8))
+echo $((a))
+echo $a
+a=42
+echo $((42))
 echo $((2**-3))
 echo $((2**--3))
 echo $((2**3))
