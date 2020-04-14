@@ -6,10 +6,11 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:26:39 by geargenc          #+#    #+#             */
-/*   Updated: 2020/03/21 07:38:11 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/14 08:45:05 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../includes/ft_global.h"
+
+#include "ft_global.h"
 #include "../../includes/projectinclude.h"
 
 // char			**ft_init_args(t_node *current)
