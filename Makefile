@@ -50,6 +50,13 @@ SRC		:=	main.c \
 			builtins/alias_bis.c\
 			builtins/unalias.c\
 			builtins/echo.c\
+			builtins/mysetenv.c\
+			builtins/unsetenv.c\
+			builtins/setloc.c\
+			builtins/unset.c\
+			builtins/set.c\
+			builtins/env.c\
+			builtins/export.c\
 			builtins/malloc_exit.c\
 			jobcontrol/jc_utils.c\
 			jobcontrol/init_interactive_shell.c \

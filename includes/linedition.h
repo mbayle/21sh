@@ -74,6 +74,7 @@ typedef struct		s_lst2
 	int				nenv;
 	int				size;
 	int				lcl;
+	int				rv;
 	struct s_lst2	*next;
 }					t_lst2;
 

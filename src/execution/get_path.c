@@ -43,8 +43,10 @@ char	*get_line(char **env)
 	i = 0;
 	tmp = NULL;
 	path = NULL;
+//	ft_printtab(env);
 	while (env && env[i])
 	{
+//		ft_putendl(env[i]);
 		tmp = ft_strsplit(env[i], '=');
 		if (tmp[0] && (ft_strcmp(tmp[0], "PATH")) == 0)
 		{
@@ -72,6 +74,7 @@ char	**get_line2(char **env)
 //	ft_putendl("IM A CALLED");
 	while (env && env[i])
 	{
+		ft_printtab(env);
 		tmp = ft_strsplit(env[i], '=');
 //		ft_putendl(tmp[0]);
 		if (tmp[0] && (ft_strcmp(tmp[0], "PATH")) == 0)

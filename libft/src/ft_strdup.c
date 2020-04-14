@@ -18,8 +18,8 @@ char	*ft_strdup(const char *s1)
 	char	*s2;
 
 	c = 0;
-//	if (!s1)
-//		return (NULL);
+	if (!s1)
+		return (NULL);
 	while (s1[c])
 		c++;
 	if ((s2 = ft_strnew(c)) == NULL)

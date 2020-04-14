@@ -82,7 +82,7 @@ char	*get_hashed_mypath(t_hash *h_tab)
 	return (mypath);
 }
 
-char	**set_copy(t_lst2 *menv)
+char	**set_copy(t_myloc *menv)
 {
 	int     i;
 	char    **dst;
@@ -92,8 +92,7 @@ char	**set_copy(t_lst2 *menv)
 		malloc_exit();
 	while (menv)
  	{
-		if (menv->lcl == 1)
-			dst[i++] = ft_strdup(menv->env);
+		dst[i++] = ft_strdup(menv->keyval);
 		menv = menv->next;
 	}
 	dst[i] = NULL;
@@ -105,7 +104,7 @@ char	*get_set(char **tenv)
 	char	*tmp;
 	char	**env;
 
-	env = set_copy(g_jobcontrol.s.env);
+	env = set_copy(g_jobcontrol.myloc);
 	tmp = get_line(tenv);
 	if (!tmp)
 		tmp = get_line(env);

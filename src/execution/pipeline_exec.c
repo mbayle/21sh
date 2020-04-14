@@ -51,6 +51,7 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 				ft_strdel(&path);
 				path = my_path(cmd, g_jobcontrol.env);
 			}
+//			ft_putendl(path);
 		}
 		g_jobcontrol.red == -1 ? exit(g_jobcontrol.ret = 1) : 0;
 		if (ft_strcmp(path, "b") == 0)
@@ -75,11 +76,18 @@ char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 {
 	*mypath = NULL;
 	cmd = parse_redir(av, 0);
-	if (g_jobcontrol.g_fg)
-		cmd = check_assign(cmd);
-	else
-		cmd = del_one(cmd, just_ass(cmd));
 	cmd = ft_command_to_args(cmd);
+	if (g_jobcontrol.g_fg && g_jobcontrol.sim == 0)
+	{
+//		ft_putendl("IN NO HILE");
+		cmd = check_assign(cmd);
+	}
+	ft_freetab(g_jobcontrol.env);
+	g_jobcontrol.env = env_copy(g_jobcontrol.myenv);
+//	ft_printtab(cmd);
+//	ft_printtab(env_copy(g_jobcontrol.myenv));
+//	else
+//		cmd = del_one(cmd, just_ass(cmd));
 	*mypath = is_b(cmd);
 	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0) //&& is_env_arg(cmd))
 	{
@@ -108,6 +116,7 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
 	if (g_jobcontrol.sim == 0 && mypath && !ft_strcmp(mypath, "b"))
 	{
+//		ft_putendl("BUILTIM");
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		execute_builtin(cmd);
 	}
@@ -139,8 +148,15 @@ void			exec_process(char ***av, int i)
 	newlink[1] = -1;
 	while (av && av[i])
 	{
-		ft_freetab(g_jobcontrol.env);
-		g_jobcontrol.env = env_copy(g_jobcontrol.s.env);
+//		t_myenv *env;
+
+//		env = g_jobcontrol.myenv;
+//		ft_printtab(g_jobcontrol.env);
+//		while (env)
+//		{
+//			ft_putendl(env->keyval);
+//			env = env->next;
+//		}
 		if (av && av[i] && av[i][0] && ft_strcmp(av[i][0], "|") == 0)
 			i++;
 		else
@@ -151,10 +167,14 @@ void			exec_process(char ***av, int i)
 				if (pipe(newlink) < 0)
 					ft_putendl_fd("Could not create the pipe", 2);
 			g_jobcontrol.i = i;
-			if (!(pro = father_process(av[i], pro, oldlink, newlink)))
-				return ;
+			/*if (!(*/pro = father_process(av[i], pro, oldlink, newlink);//))
+			//{
+			//	unexec_asign();
+			//	return ;
+		//	}
 			i++;
 		}
+		unexec_asign();
 	}
 }
 
@@ -176,6 +196,5 @@ int				pipe_exec(char ***av, int fg)
 	ft_freetab(g_jobcontrol.av);
 //	ft_freetab(g_jobcontrol.env);
 	reset_fd();
-	unexec_asign();
 	return (0);
 }

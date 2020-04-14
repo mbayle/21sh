@@ -30,7 +30,7 @@ void			ft_expparam_assign(t_expparam *expparam)
 		ft_strcpy(assign + param_len + 1, expparam->word);
 		tmp[0] = ft_strdup(assign);
 		tmp[1] = NULL;
-		exec_setenv(&g_jobcontrol.s, tmp, NULL, 0);
+		setloc(tmp);
 //		check_local_variable(shell, assign);
 		free(assign);
 	}

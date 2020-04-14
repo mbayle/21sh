@@ -14,14 +14,14 @@
 
 char		*getvar(char *var)
 {
-	t_lst2	*menv;
+	t_myloc	*loc;
 
-	menv = g_jobcontrol.s.env;
-	while (menv)
+	loc = g_jobcontrol.myloc;
+	while (loc)
 	{
-		if (ft_strcmp(menv->varn, var) == 0)
-			return (menv->var == NULL ? ft_strdup("") : ft_strdup(menv->var));
-		menv = menv->next;
+		if (ft_strcmp(loc->key, var) == 0)
+			return (loc->val == NULL ? ft_strdup("") : ft_strdup(loc->val));
+		loc = loc->next;
 	}
 	return (NULL);
 }

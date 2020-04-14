@@ -81,6 +81,7 @@ t_lst2		*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c)
 		(*env)++;
 		l->var = NULL;
 		l->lcl = 0;
+		l->rv = 0;
 		if ((l->nenv = ft_strlen(*env)))
 			if ((l->var = ft_mstrcpy(l->var, *env)) == NULL)
 				return (NULL);

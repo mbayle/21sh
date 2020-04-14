@@ -125,8 +125,65 @@ char		**ft_tabdup(char **av)
 	return (dst);
 }
 
-void		init_jc()
+void		init_myenv(char	**envp)
 {
+	int		i;
+	t_myenv	*save;
+	char	**tmp;
+
+	i = 0;
+	g_jobcontrol.myenv = ft_memalloc(sizeof(*g_jobcontrol.myenv));
+	g_jobcontrol.myenv->next = NULL;
+	save = g_jobcontrol.myenv;;
+	while (envp[i])
+	{
+		tmp = ft_strsplit(envp[i], '=');
+		save->keyval = ft_strdup(envp[i]);
+		save->key = ft_strdup(tmp[0]);
+		save->val = ft_strdup(tmp[1]);
+		if (envp[i + 1])
+		{
+			save->next = ft_memalloc(sizeof(*g_jobcontrol.myenv));
+			save = save->next;
+		}
+		ft_freetab(tmp);
+		i++;
+	}
+	save = NULL;
+}
+
+void		init_myloc(char	**envp)
+{
+	int		i;
+	t_myloc	*save;
+	char	**tmp;
+
+	i = 0;
+	g_jobcontrol.myloc = ft_memalloc(sizeof(*g_jobcontrol.myloc));
+	g_jobcontrol.myloc->next = NULL;
+	save = g_jobcontrol.myloc;
+	while (envp[i])
+	{
+		tmp = ft_strsplit(envp[i], '=');
+		save->keyval = ft_strdup(envp[i]);
+		save->key = ft_strdup(tmp[0]);
+		save->val = ft_strdup(tmp[1]);
+		if (envp[i + 1])
+		{
+			save->next = ft_memalloc(sizeof(*g_jobcontrol.myloc));
+			save = save->next;
+		}
+		ft_freetab(tmp);
+		i++;
+	}
+	save = NULL;
+}
+
+void		init_jc(char **envp)
+{
+	init_myenv(envp);
+	init_myloc(envp);
+	g_jobcontrol.env = 0;
 //	g_jobcontrol.heredoc = ft_strnew(1);
 	g_jobcontrol.f = 0;
 	g_jobcontrol.stdi = -1;
@@ -144,9 +201,10 @@ int			main(int ac, char **av, char **envp)
 //	int			c;
 
 //	c = 0;
+
 	init_shell_sig();
-	init_jc();
-	g_jobcontrol.env = ft_tabdup(envp);
+	init_jc(envp);
+//	g_jobcontrol.env = ft_tabdup(envp);
 	init_struct(&g_jobcontrol.s, envp);
 	g_shell = init_shell(0);
 	g_jobcontrol.s.h = create_history(NULL, NULL, NULL, &g_jobcontrol.s);

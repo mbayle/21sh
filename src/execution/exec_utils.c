@@ -12,18 +12,32 @@
 
 #include "../../includes/projectinclude.h"
 
-char	**env_copy(t_lst2 *menv)
+int		envlst_size(t_myenv *env)
+{
+	int	i;
+
+	i = 0;
+	while (env)
+	{
+		i++;
+		env = env->next;
+	}
+	return (i);
+}
+
+char	**env_copy(t_myenv *menv)
 {
 	int		i;
 	char	**dst;
 
 	i = 0;
-	if (!(dst = malloc(sizeof(char*) * ((elst_size(menv) + 1)))))
+	if (!(dst = malloc(sizeof(char*) * ((envlst_size(menv) + 1)))))
 		malloc_exit();
 	while (menv)
 	{
-		if (menv->lcl == 0)
-			dst[i++] = ft_strdup(menv->env);
+//		printf("%p\n", menv);
+//		ft_putendl(menv->keyval);
+		dst[i++] = ft_strdup(menv->keyval);
 		menv = menv->next;
 	}
 	dst[i] = NULL;
@@ -47,8 +61,10 @@ void	unexec_asign(void)
 {
 	if (g_jobcontrol.assi == 1)
 	{
+//		ft_putendl("		ASS STOK");
+//		ft_printtab(g_jobcontrol.ass_stock);
 		unexec_ass(g_jobcontrol.ass);
-		exec_ass(g_jobcontrol.ass_stock, 0);
+		exec_ass(g_jobcontrol.ass_stock, 1);
 		g_jobcontrol.assi = 0;
 	}
 //	else
@@ -64,9 +80,9 @@ int		should_i_exec(void)
 		g_jobcontrol.ao = 0;
 		return (0);
 	}
-	if (g_jobcontrol.stopexe == true)
+	if (g_jobcontrol.stopexe == 1)
 	{
-		g_jobcontrol.stopexe = false;
+		g_jobcontrol.stopexe = 0;
 		return (0);
 	}
 	return (1);

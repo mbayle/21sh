@@ -26,6 +26,22 @@
 #include "lexer.h"
 #include "linedition.h"
 
+typedef struct				s_myenv
+{
+	char					*key;
+	char					*val;
+	char					*keyval;
+	struct s_myenv			*next;
+}							t_myenv;
+
+typedef struct				s_myloc
+{
+	char					*key;
+	char					*val;
+	char					*keyval;
+	struct s_myloc			*next;
+}							t_myloc;
+
 /*a process is a single process*/
 typedef struct				s_process
 {
@@ -40,6 +56,7 @@ typedef struct				s_process
 	int						p_nb;
 
 }							t_process;
+
 
 /*a job is a pipeline of process*/
 typedef struct				s_job
@@ -80,6 +97,8 @@ typedef struct				s_jobcontrol
 	char					**ass;
 	char					*heredoc;
 	t_hash					*h_tab;
+	t_myenv					*myenv;
+	t_myloc					*myloc;
 //	char					**env_cmd;
 	struct termios			term_attr;
 	struct termios			save_attr;
@@ -105,7 +124,9 @@ typedef struct				s_jobcontrol
 	int						index;
 	int						f;
 	int						perm;
-	bool					stopexe;
+	int						nv;
+	int						stopexe;
+	int						fils;
 }							t_jobcontrol;
 
 typedef struct				s_read
@@ -128,6 +149,25 @@ typedef	struct				s_index
 }							t_index;
 
 struct s_jobcontrol				g_jobcontrol;
+
+/**
+ env
+ **/
+int						delete_loc(char *keyval);
+int						replace_loc(char *keyval);
+int						add_loc(char *keyval);
+int						check_env(char *keyval);
+int						check_loc(char *keyval);
+int						replace_env(char *keyval, int ass);
+int						add_env(char *keyval, int ass);
+int						myexport(char **cmd);
+int						myenv(void);
+int						myset(char **cmd);
+int						unsetloc(char **cmd);
+int						myunsetenv(char **cmd);
+int						check_error(char *keyval);
+int						setloc(char **cmd);
+int						mysetenv(char **cmd, int ass);
 
 /**
 assign
@@ -197,10 +237,10 @@ char						**parse_redir(char **line, int exec);
 /**
 Utils
 **/
-int							elst_size(t_lst2 *menv);
+int							elst_size(t_myloc *menv);
 char						**check_opt_env(char **cmd);
 int							is_env_arg(char **cmd);
-char						**env_copy(t_lst2 *menv);
+char						**env_copy(t_myenv *menv);
 void						unexec_asign(void);
 int							should_i_exec(void);
 char						*concat_tab(char **tmp);

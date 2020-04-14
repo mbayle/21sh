@@ -86,9 +86,14 @@ void	exec_ass(char **ass, int env)
 	if (ass)
 	{
 		tmp2 = cpy_env_plus(ass);
-		g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
+		//g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
+		g_jobcontrol.ret = setloc(ass);
 		if (env)
-			g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, tmp2, NULL, 1);
+			//g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, tmp2, NULL, 1);
+			g_jobcontrol.ret = mysetenv(tmp2, 0);
+//		t_myenv
+//		ft_putendl("ASSSSSSSSSSSSSSSSSSSSSSSSSSS");
+//		ft_printtab(ass);
 		ft_freetab(tmp2);
 	}
 }

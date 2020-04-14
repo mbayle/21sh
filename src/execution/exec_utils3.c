@@ -12,7 +12,7 @@
 
 #include "../../includes/projectinclude.h"
 
-int		elst_size(t_lst2 *menv)
+int		elst_size(t_myloc *menv)
 {
 	int nb;
 

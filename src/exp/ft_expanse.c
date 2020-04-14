@@ -41,9 +41,10 @@ char			*ft_expanse_word(char *word)
 	char		*result;
 
 	list = ft_parse_word(word);
+	g_jobcontrol.stopexe = 0;
 	if (ft_exp(list))
 	{
-		g_jobcontrol.stopexe = true; // En cas d'erreur d'expension liee a une faute de syntaxe ou un test ${param:?word} stopexe mis a true
+		g_jobcontrol.stopexe = 1; // En cas d'erreur d'expension liee a une faute de syntaxe ou un test ${param:?word} stopexe mis a true
 		return (NULL);
 	}
 	result = ft_txt_join(list);

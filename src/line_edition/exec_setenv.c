@@ -91,7 +91,7 @@ int		exec_setenv_b(t_struct *s, char **av, int c, int i)
 
 	new = NULL;
 	l = (*s).env;
-	if (av[c][0] == '=')
+	if (av && av[c] && av[c][0] == '=')
 	{
 		ft_eputstr("setenv: "RED);
 		ft_eputstr(av[c]);
