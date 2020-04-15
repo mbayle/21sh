@@ -44,6 +44,7 @@ SRC_PATH	:=	./src/
 OBJ_PATH	:=	./obj/
 
 SRC		:=	main.c \
+			builtins/pwd.c\
 			builtins/type.c\
 			builtins/hash.c\
 			builtins/alias.c\

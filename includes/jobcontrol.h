@@ -155,6 +155,7 @@ struct s_jobcontrol				g_jobcontrol;
 /**
  env
  **/
+int						mypwd(void);
 char						*get_myenv(char *key);
 char						**set_copy(t_myloc *loc);
 void					fill_struct_env(void);

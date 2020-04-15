@@ -52,23 +52,24 @@ int		check_ls(t_struct *s)
 		n = 2;
 		
 	}
-	ft_printtab((*s).av);
 	if (!(*s).av[0] || !(*s).av[n] || lstat((*s).av[n], &st) == -1)
 	{
-	//	perror(strerror(errno));
+		
+		free((*s).av[1]);
+		(*s).av[1] = ft_strdup(tmp);
 		ft_strdel(&tmp);
 		return (0);
 	}
 	if (S_ISLNK(st.st_mode))
 	{
-		tmp[0] = '/';
-		ft_strdel(&tmp);
-		tmp = ft_strnew(PATH_MAX);
-		n = readlink((*s).av[n], tmp, PATH_MAX);
-		tmp[n] = '\0';
+//		tmp[0] = '/';
+//		ft_strdel(&tmp);
+//		tmp = ft_strnew(PATH_MAX);
+//		n = readlink((*s).av[n], tmp, PATH_MAX);
+//		tmp[n] = '\0';
 	}
 	free((*s).av[1]);
-	ft_putendl(tmp);
+//	ft_putendl(tmp);
 	if (tmp && ((*s).av[1] = ft_strdup(tmp)) == NULL)
 		return (0);
 	ft_strdel(&tmp);

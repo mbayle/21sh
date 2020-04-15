@@ -38,6 +38,8 @@ void	exec_b(char **cmd)
 	if (ft_strcmp(cmd[0], "env") == 0)
 //		g_jobcontrol.ret = exec_env(&g_jobcontrol.s);
 		g_jobcontrol.ret = myenv();
+	if (ft_strcmp(cmd[0], "pwd") == 0)
+		g_jobcontrol.ret = mypwd();
 	if (ft_strcmp(cmd[0], "jobs") == 0)
 		g_jobcontrol.ret = ft_jobs(g_jobcontrol.first_mail, cmd);
 	if (ft_strcmp(cmd[0], "set") == 0)

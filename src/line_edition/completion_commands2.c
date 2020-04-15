@@ -70,7 +70,7 @@ t_htr	*create_lst_comp(char ***path, t_htr **bcom, char *line, t_lst *l)
 	c = (int)ft_strlen(line);
 	while (**path)
 	{
-		while (!(dir = opendir(**path)))
+		while (**path && !(dir = opendir(**path)))
 			(*path)++;
 		if (!**path)
 			break ;

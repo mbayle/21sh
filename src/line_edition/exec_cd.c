@@ -57,11 +57,11 @@ char    *mini_strjoin(char *s1, char *s2)
 
 int             create_path_home(t_struct *s, char *new, int i)
 {
-	t_lst2          *l;
+	t_myenv         *l;
 	char            *tmp;
 
-	l = (*s).env;
-	while (l && (ft_strncmp(l->env, "HOME", 4) != 0))
+	l = g_jobcontrol.myenv;
+	while (l && (ft_strncmp(l->keyval, "HOME", 4) != 0))
 		l = l->next;
 	if (!l)
 	{
@@ -72,7 +72,7 @@ int             create_path_home(t_struct *s, char *new, int i)
 	{
 		tmp = (*s).av[i];
 		tmp++;
-		if ((new = mini_strjoin(l->env, tmp)) == NULL)
+		if ((new = mini_strjoin(l->keyval, tmp)) == NULL)
 			return (-1);
 		tmp--;
 		free_char(&tmp);
@@ -87,15 +87,19 @@ int             exec_cd2(t_struct *s, char *cwd, char *ocwd, char *tmp)
 //	if ((*s).av[1])
 //		tmp = ft_strdup((*s).av[1]);
 	g_jobcontrol.s.i = 1;
-	if (g_jobcontrol.p == 0)
+	ft_putendl((*s).av[1]);
+	if (g_jobcontrol.p == 0) //&& (*s).av[1])
 	{
-		cwd = ft_strdup(g_jobcontrol.mypath);
+		if (!(cwd = ft_strdup(g_jobcontrol.mypath)))
+			cwd = getcwd(NULL, 0);
 	}
 	else
 	{
 		ft_strdel(&(*s).av[2]);
 		if (g_jobcontrol.p == 1 && (cwd = getcwd(cwd, PATH_MAX)) == NULL)
 			return (0);
+		else
+			cwd = ft_strdup(g_jobcontrol.mypath);
 	}
 	free((*s).av[1]);
 	if (((*s).av[1] = ft_strjoin("PWD=", cwd)) == NULL)
@@ -104,15 +108,11 @@ int             exec_cd2(t_struct *s, char *cwd, char *ocwd, char *tmp)
 		ft_strdel(&tmp);
 	if (cwd)
 		free(cwd);
-	ft_putendl("PWD :");
-	ft_printtab(s->av);
 	if (mysetenv(s->av, 1))
 		return (0);
 	free((*s).av[1]);
 	if (((*s).av[1] = ft_strjoin("OLDPWD=", ocwd)) == NULL)
 		return (0);
-	ft_putendl("\nOLDPWD :");
-	ft_printtab(s->av);
 	if (mysetenv(s->av, 1))
 		return (0);
 	g_jobcontrol.s.i = 0;
@@ -130,12 +130,10 @@ char    **modif_av(char ***av)
 	{
 		free_dchar(&*av);
 		*av = NULL;
-		ft_putendl("HER");
 		ft_memdel((void**)&new);
 		return (0);
 	}
 	ft_freetab(*av);
-		ft_putendl("THER");
 	*av = NULL;
 	new[1] = NULL;
 	new[2] = NULL;
@@ -214,7 +212,6 @@ int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 		else
 			tmp = ft_strdup(tp->var);
 	}
-	ft_putendl("\nTMP :");
 	ft_putendl(tmp);
 	if (tmp && (r = chdir(tmp)) == -1)
 	{
@@ -237,7 +234,7 @@ int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 	//	fp("mb", NULL);
 		ft_putstr(RED);
 		ft_2eputstr(ocwd, " -X ");
-		ft_eputendl(s->av[1]);
+		ft_eputendl(tmp);
 	}
 	else
 	{
