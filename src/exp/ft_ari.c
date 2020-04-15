@@ -6,11 +6,18 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/07 15:28:31 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 09:59:14 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/15 13:35:25 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/projectinclude.h"
+
+int				ft_ari_ast_free_return(t_ari_ast *ast, int ret)
+{
+	ft_ari_ast_free(ast->begin);
+	ft_ari_ast_free(ast->list);
+	return (ret);
+}
 
 int				ft_ari(char *expr, long *res, int rec)
 {
@@ -23,14 +30,14 @@ int				ft_ari(char *expr, long *res, int rec)
 	ast = (t_ari_ast){expr, NULL, NULL, NULL};
 	ft_ari_convert_lex(&lex, &ast);
 	if (ft_ari_ast(&ast))
-		return (-1);
+		return (ft_ari_ast_free_return(&ast, -1));
 	// ft_ari_ast_print(&ast);
 	*res = 0;
 	if (ast.begin)
 	{
 		if (g_ari_exetab[ast.begin->token](ast.begin, rec))
-			return (-1);
+			return (ft_ari_ast_free_return(&ast, -1));
 		*res = ast.begin->value;
 	}
-	return (0);
+	return (ft_ari_ast_free_return(&ast, 0));
 }

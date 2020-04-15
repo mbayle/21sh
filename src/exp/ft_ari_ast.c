@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:44:45 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 08:25:12 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/15 13:37:29 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,17 @@ void			ft_ari_ast_insert_child(t_ari_ast *ast)
 	ast->list->right = NULL;
 	ast->current = ast->list;
 	ast->list = next;
+}
+
+void			ft_ari_ast_free(t_ari_node *node)
+{
+	if (node)
+	{
+		ft_ari_ast_free(node->left);
+		ft_ari_ast_free(node->right);
+		free(node->text);
+		free(node);
+	}
 }
 
 int				ft_ari_ast(t_ari_ast *ast)
