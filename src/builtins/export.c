@@ -22,13 +22,25 @@ int	do_setenv(char *keyval)
 	if (check_error(keyval))
 		return (1);
 	if (!check_loc(keyval))
+	{
+//		ft_putendl("REPLACE LOC");
 		ret = replace_loc(keyval);
+	}
 	else
+	{
+//		ft_putendl("ADD LOC");
 		ret = add_loc(keyval);
+	}
 	if (!check_env(keyval))
+	{
+//		ft_putendl("RELPCAE ENV");
 		ret = replace_env(keyval, 0);
+	}
 	else
+	{
+//		ft_putendl("ADD ENV");
 		ret = add_env(keyval, 0);
+	}
 	return (ret);
 }
 

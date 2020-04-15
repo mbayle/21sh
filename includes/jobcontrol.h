@@ -160,6 +160,7 @@ char						*get_myenv(char *key);
 char						**set_copy(t_myloc *loc);
 void					fill_struct_env(void);
 int						delete_loc(char *keyval);
+int						delete_env(char *keyval);
 int						replace_loc(char *keyval);
 int						add_loc(char *keyval);
 int						check_env(char *keyval);
