@@ -53,8 +53,8 @@ int	myunsetenv(char **cmd)
 	i = 1;
 	while (cmd[i])
 	{
-		delete_env(cmd[i]);
-		delete_loc(cmd[i]);
+		if (!delete_env(cmd[i]))
+			delete_loc(cmd[i]);
 		i++;	
 	}
 	return (0);
