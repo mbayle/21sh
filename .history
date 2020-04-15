@@ -2,6 +2,28 @@
 0
 <
 exit
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+ls hi "a teur"lol lol
+ls hi"a teur"lol lol
+ls "a" "teur"lol lol
+ls "a uteur"lol lol
+ls "a""teur"lol mdr
+ls "a""teur"lol
+ls "a""teur"
+ls "a"uteur
+ls """"""
+ls "a t"eur"lol lol"
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+exit
+ls "a t"eur"lol lol" lol
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+exit
 ls "a t"eur"lol lol" lol
 exit
 ls "a t"eur"lol lol" lol

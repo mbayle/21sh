@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/15 03:06:19 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/16 00:53:17 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,31 @@ int		match_quote(char *input, int stop)
 	return (nbquote % 2);
 }
 
+static int     test_dquote(char *input)
+{
+    int     dquote;
+    int     i;
+
+    dquote = 0;
+    i = 0;
+    while (input[i])
+    {
+        if (input[i] == 92)
+            i = i + 2;
+        if (input[i] == 34)
+        {
+            if (dquote == 1)
+                dquote = 0;
+            else
+                dquote = 1;
+        }
+        if (dquote == 0 && (input[i] == ' ' || input[i] == ';'))
+            break ;
+        i++;
+    }
+	return (i);
+}
+
 /*
 ** Purpose of the function : Looking for final quote
 ** Return value : return index of last quote (if match) else return -1 (error)
@@ -93,9 +118,12 @@ int		quote_brace_case(int i, char *input)
 	}
 	if (input[i] == '"')
 	{
-		i++;
+		i = test_dquote(input);
+		/*i++;
 		while (input[i] && input[i] != 34)
 		{
+			// Deplacer le if du dessous ici et changer la condition du while
+			// Il faut continuer tant que je n'ai pas une quote fermante et continuer de add si il n'y a pas d'espace ou d'opérateur apres la quote fermante
 			if (input[i] == 92 && input[i + 1])
 				i = i + 2;
 			else
@@ -104,11 +132,10 @@ int		quote_brace_case(int i, char *input)
 		if (input[i] && check_operator(input + i + 1) == 0)
 			while (input[i] && input[i] != ' ')
 				i++;
-		
 		// RAJOUTER UN COMPTEUR DE QUOTE AVEC NEW FONCTION QUI ME RETOURNE L'INDEX DE LA DERNIERE QUOTE
 		//input[i] != 34 ? i = -1 : i++;
 		else
-			i++;
+			i++;*/
 	}
 	if ((input[i] == '$' && input[i + 1] == '{')
 		|| (input[i] == '$' && input[i + 1] == '('))
