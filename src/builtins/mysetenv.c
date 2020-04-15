@@ -22,7 +22,10 @@ int	check_env(char *keyval)
 	while (env)
 	{
 		if (ft_strcmp(env->key, tmp[0]) == 0)
+		{
+			ft_freetab(tmp);
 			return (0);
+		}
 		env = env->next;
 	}
 	ft_freetab(tmp);
@@ -49,11 +52,13 @@ int	replace_env(char *keyval, int ass)
 			g_jobcontrol.myenv->val = ft_strdup(tmp[1]);
 			ft_freetab(tmp);
 			g_jobcontrol.myenv = save;
+			ass ? replace_loc(keyval) : 0;
 			return (0);
 		}
 		env = env->next;
 	}
 	ass ? replace_loc(keyval) : 0;
+	ft_freetab(tmp);
 	return (1);
 }
 
@@ -83,7 +88,11 @@ int	add_env(char *keyval, int ass)
 		g_jobcontrol.myenv = g_jobcontrol.myenv->next;
 	}
 	g_jobcontrol.myenv = env;
-	ass ? add_loc(keyval) : 0;
+	if (ass)
+	{
+		if (replace_loc(keyval))
+			add_loc(keyval);
+	}
 	return (0);
 
 }

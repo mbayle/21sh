@@ -69,7 +69,7 @@ char	**create_path_tab(char *s, char **path)
 			s++;
 		++t;
 	}
-	if ((path[t] = ft_mstrcpy(path[t], "./.builtin_name/")) == NULL)
+	if ((path[t] = ft_strdup("./.builtin_name/")) == NULL)
 		return (NULL);
 	++t;
 	path[t] = 0;

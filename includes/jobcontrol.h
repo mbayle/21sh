@@ -95,6 +95,7 @@ typedef struct				s_jobcontrol
 	char					**av;
 	char					**ass_stock;
 	char					**ass;
+	char					*mypath;
 	char					*heredoc;
 	t_hash					*h_tab;
 	t_myenv					*myenv;
@@ -127,6 +128,7 @@ typedef struct				s_jobcontrol
 	int						nv;
 	int						stopexe;
 	int						fils;
+	int						p;
 }							t_jobcontrol;
 
 typedef struct				s_read
@@ -153,6 +155,8 @@ struct s_jobcontrol				g_jobcontrol;
 /**
  env
  **/
+char						*get_myenv(char *key);
+char						**set_copy(t_myloc *loc);
 void					fill_struct_env(void);
 int						delete_loc(char *keyval);
 int						replace_loc(char *keyval);

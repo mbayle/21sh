@@ -10,7 +10,10 @@ int	check_loc(char *keyval)
 	while (loc)
 	{
 		if (ft_strcmp(loc->key, tmp[0]) == 0)
+		{
+			ft_freetab(tmp);
 			return (0);
+		}
 		loc = loc->next;
 	}
 	ft_freetab(tmp);
@@ -30,6 +33,7 @@ int	replace_loc(char *keyval)
 	{
 		if (ft_strcmp(loc->key, tmp[0]) == 0)
 		{
+			ft_putendl("I FOUND IT");
 			g_jobcontrol.myloc = loc;
 			ft_strdel(&g_jobcontrol.myloc->keyval);
 			ft_strdel(&g_jobcontrol.myloc->val);

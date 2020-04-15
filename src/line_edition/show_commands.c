@@ -52,7 +52,7 @@ int			s_command3(t_htr **l, t_htr **bg, struct dirent **dir_el)
 {
 	if ((*l = malloc(sizeof(**l))) == NULL)
 		return (0);
-	if (((*l)->name = ft_mstrcpy(NULL, (*dir_el)->d_name)) == NULL)
+	if (((*l)->name = ft_strdup((*dir_el)->d_name)) == NULL)
 		return (0);
 	(*l)->next = NULL;
 	(*l)->prev = NULL;
@@ -89,8 +89,7 @@ int			s_command(struct dirent **dir_el, t_htr **l, t_htr **bg)
 	{
 		if (((*l)->next = malloc(sizeof(**l))) == NULL)
 			return (0);
-		if (((*l)->next->name = ft_mstrcpy(NULL
-						, (*dir_el)->d_name)) == NULL)
+		if (((*l)->next->name = ft_strdup((*dir_el)->d_name)) == NULL)
 			return (0);
 		(*l)->next->next = NULL;
 		(*l)->next->prev = *l;

@@ -50,9 +50,9 @@ char			*ft_expanse_word(char *word)
 	}
 	result = ft_txt_join(list);
 //	printf("%p\n", list->data);
-	if (list && list->data)
-		ft_memdel((void**)&list->data);
-	ft_memdel((void**)&list);
+//	if (list && list->data)
+//		ft_memdel((void**)&list->data);
+//	ft_memdel((void**)&list);
 	return (result);
 }
 

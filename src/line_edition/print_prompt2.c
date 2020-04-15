@@ -135,7 +135,8 @@ int			print_prompt_bis(int p, t_struct *s, int i)
 	h = NULL;
 	pw = NULL;
 	sa = st;
-	pw = getcwd(pw, PATH_MAX);
+	if (!(pw = get_myenv("PWD")))
+		pw = getcwd(pw, PATH_MAX);
 	while (st)
 	{
 		if (ft_strcmp(st->varn, "HOME") == 0)

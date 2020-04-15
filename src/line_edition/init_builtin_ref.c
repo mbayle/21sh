@@ -14,23 +14,23 @@
 
 char	**init_builtin_ref2(int c, char **builtin)
 {
-	builtin[c] = ft_mstrcpy(builtin[c], "echo");
+	builtin[c] = ft_strdup("echo");
 	++c;
-	builtin[c] = ft_mstrcpy(builtin[c], "cd");
+	builtin[c] = ft_strdup("cd");
 	++c;
-	builtin[c] = ft_mstrcpy(builtin[c], "setenv");
+	builtin[c] = ft_strdup("setenv");
 	++c;
-	builtin[c] = ft_mstrcpy(builtin[c], "unsetenv");
+	builtin[c] = ft_strdup("unsetenv");
 	++c;
-	builtin[c] = ft_mstrcpy(builtin[c], "env");
+	builtin[c] = ft_strdup("env");
 	++c;
-	builtin[c] = ft_mstrcpy(builtin[c], "exit");
+	builtin[c] = ft_strdup("exit");
 	++c;
-	builtin[c] = ft_mstrcpy(builtin[c], "setcpt");
+	builtin[c] = ft_strdup("setcpt");
 	++c;
-	builtin[c] = ft_mstrcpy(builtin[c], "help");
+	builtin[c] = ft_strdup("help");
 	++c;
-	builtin[c] = ft_mstrcpy(builtin[c], "history");
+	builtin[c] = ft_strdup("history");
 	++c;
 	builtin[c] = 0;
 	c = 0;

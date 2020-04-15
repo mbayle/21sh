@@ -89,7 +89,8 @@ static void	print_prompt2(int p, t_lst2 *s, t_struct *st)
 	h = NULL;
 	pw = NULL;
 	(void)p;
-	pw = getcwd(pw, PATH_MAX);
+	if (!(pw = get_myenv("PWD")))
+		pw = getcwd(pw, PATH_MAX);
 	while (s)
 	{
 		if (ft_strcmp(s->varn, "HOME") == 0)
@@ -110,7 +111,7 @@ int			print_prompt(int p, t_struct *s, int i)
 		return (0);
 	while (tmp)
 	{
-		if (((*s).envi[i] = ft_mstrcpy((*s).envi[i], tmp->env)) == NULL)
+		if (((*s).envi[i] = ft_strdup(tmp->env)) == NULL)
 			return (0);
 		tmp = tmp->next;
 		++i;

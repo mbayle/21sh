@@ -23,7 +23,7 @@ static char	**init_list_poss2(int *i, t_struct *s, int *co,
 	{
 		if ((path = (char**)malloc(sizeof(*path) * 2)) == NULL)
 			return (NULL);
-		if ((*path = ft_mstrcpy(*path, "./")) == NULL)
+		if ((*path = ft_strdup("./")) == NULL)
 			return (NULL);
 		path[1] = NULL;
 	}
@@ -37,8 +37,11 @@ int			check_prec_path(struct stat *st, char **l, char **tmp, int *ind)
 	int		c;
 
 	c = 0;
-	while ((*l)[c + 1])
-		++c;
+	if ((*l) && (*l)[c])
+	{
+		while ((*l)[c + 1])
+			++c;
+	}
 	while (c && (*l)[c] != '/')
 		--c;
 	if (c)

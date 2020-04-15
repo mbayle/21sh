@@ -60,7 +60,7 @@ static void	init_start_pwd(t_struct *s)
 	while (env && ft_strcmp(env->varn, "PWD"))
 		env = env->next;
 	if (env)
-		s->start_pwd = env->var;
+		s->start_pwd = ft_strdup(env->var);
 	else
 		s->start_pwd = NULL;
 	g_lined = s;
@@ -190,6 +190,7 @@ void		init_jc(char **envp)
 	g_jobcontrol.stde = -1;
 	g_jobcontrol.stdo = -1;
 	g_jobcontrol.ass = NULL;
+	g_jobcontrol.mypath = NULL;
 	g_jobcontrol.ass_stock = NULL;
 //	ft_bzero(&g_jobcontrol, sizeof(g_jobcontrol));
 	g_jobcontrol.first_job = NULL;

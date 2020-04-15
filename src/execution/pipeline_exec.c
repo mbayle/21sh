@@ -77,7 +77,7 @@ char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 	if (g_jobcontrol.g_fg && g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	ft_freetab(g_jobcontrol.env);
-	g_jobcontrol.env = env_copy(g_jobcontrol.myenv);
+	g_jobcontrol.env = set_copy(g_jobcontrol.myloc);
 	*mypath = is_b(cmd);
 	if (cmd && cmd[0] && ft_strcmp(cmd[0], "env") == 0)
 	{

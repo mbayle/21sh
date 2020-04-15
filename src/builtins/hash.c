@@ -38,7 +38,7 @@ char				**getpathlist(char *pathvar)
 		tmp++;
 		i++;
 	}
-	if (!(pathlist = (char **)malloc((i + 2) * sizeof(char *))))
+	if (!pathvar || !(pathlist = (char **)malloc((i + 2) * sizeof(char *))))
 		return (NULL);
 	tmp = pathvar;
 	i = 0;

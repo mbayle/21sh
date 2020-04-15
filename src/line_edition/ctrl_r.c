@@ -26,7 +26,7 @@ static int	ctrl_r2(char buf[6], t_htr **t, t_struct *s, char **l)
 	else if (!*l)
 	{
 		sec_free(l, 0);
-		if ((*l = ft_mstrcpy(*l, buf)) == NULL)
+		if ((*l = ft_strdup(buf)) == NULL)
 		{
 			fp("ve", NULL);
 			return (0);

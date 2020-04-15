@@ -71,7 +71,9 @@ t_comp			*attribute_col(int *co, t_comp *cmp)
 
 	j = 1;
 	t = 0;
-	bcmp = cmp;
+//	printf("%p\n", cmp);
+	if (cmp)
+		bcmp = cmp;
 	while (cmp && (j < *co + 1))
 	{
 		cmp->col = j;

@@ -20,7 +20,11 @@ char		*getvar(char *var)
 	while (loc)
 	{
 		if (ft_strcmp(loc->key, var) == 0)
+		{
+			ft_putendl("loc-<val: ");
+			ft_putendl(loc->val);
 			return (loc->val == NULL ? ft_strdup("") : ft_strdup(loc->val));
+		}
 		loc = loc->next;
 	}
 	return (NULL);

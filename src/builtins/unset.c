@@ -37,10 +37,12 @@ int	delete_loc(char *keyval)
 			save = loc->next;
 			loc->next = loc->next->next;
 			ft_memdel((void**)&save);
+			ft_freetab(tmp);
 			return (0);
 		}
 		loc = loc->next;
 	}
+	ft_freetab(tmp);
 	return (1);
 }
 

@@ -91,6 +91,7 @@ SRC		:=	main.c \
 			utils/tab_utils.c\
 			utils/ft_strdupn.c\
 			utils/ft_strlenu.c\
+			utils/ft_fill_struct.c\
 			redirections/redirect_to_fd.c \
 			redirections/redir_utils.c \
 			redirections/exec_redir.c \
@@ -299,7 +300,7 @@ all:
 	@make $(NAME)
 
 $(NAME):  $(LIBFT) $(OBJ)
-	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap
+	@$(LINKER) $(NAME) $(OBJ) $(LDFLAGS) -ltermcap
 	@echo ""
 	@echo "\033[0;32m42sh build done\033[0m"
 	@echo ""

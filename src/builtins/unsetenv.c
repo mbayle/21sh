@@ -37,10 +37,12 @@ int	delete_env(char *keyval)
 			save = env->next;
 			env->next = env->next->next;
 			ft_memdel((void**)&save);
+			ft_freetab(tmp);
 			return (0);
 		}
 		env = env->next;
 	}
+	ft_freetab(tmp);
 	return (1);
 }
 
