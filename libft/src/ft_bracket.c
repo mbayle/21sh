@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bracket.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/12 13:01:32 by frameton         ###   ########.fr       */
+/*   Updated: 2020/04/14 16:15:08 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 		}
 		if (str[a] == ')' || str[a] == '}')
 		{
+			// gérer si backslash ou quote (ignorer char suivant)
 			if (top == -1 || stack[top] == 0)
 				return (str[a] == '}' ? -1 : -2);
 			else if (top == -1 || (stack[top] && !(match(stack[top], str[a]))))
@@ -43,11 +44,12 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 			{
 				stack[top] = 0;
 				top--;
+				if (top == -1)
+					return (a);
+				// METTRE LE IF ICI
 			}
 		}
 		a++;
 	}
-	if (top == -1)
-		return (a);
 	return (0);
 }

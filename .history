@@ -1,6 +1,87 @@
 2
 0
 <
+exit
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+exit
+ls "a t"eur"lol lol" lol
+ls "a t"eur"lol lol"
+exit
+ls "a t"eur"lol lol"
+exit
+ls "a t"eur"lol lol"
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+exit
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+exit
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+ls "a t"eur"lol lol"
+exit
+ls "a t"eur"lol lol"
+exit
+ls "a t"eur"lol lol"
+exit
+ls "a t"eur"lol lol"
+exit
+ls "a t"eur"lol lol"
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+exit
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+exit
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+exit
+echo \${PATH}  ; \"${HOME}\" ;  echo I print
+echo '${PATH}  ; ${HOME} ;  echo I print'
+echo ${PATH}  ; '${HOME}' ;  echo I print
+echo ${PATH}  ; "${HOME}" ;  echo I print
+echo ${PATH}  ; ${HOME} ;  echo I print
+echo ${PATH} ${HOME} && echo I print
+echo ${PATH}__${HOME} && echo I print
+echo ${PATH}__${HOME}
+echo ${PATH} ${HOME}
+ls "a t"eur"lol lol"
+exit
+ls "a t"eur"lol lol"
+echo ${PATH} ${HOME}
+echo ${PATH}__${HOME}
+ls "a t"eur"lol lol"
+exit
+ls "a t"eur"lol lol"
+exit
+ls "a t"eur"lol lol"
+echo ${PATH}__${HOME}
+echo ${PATH} ${HOME}
+exit
+echo ${PATH} ${HOME}
+exit
+echo ${PATH} ${HOME}
+exit
+echo ${PATH} ${HOME}
+exit
+echo ${PATH}__${HOME}
+echo ${PATH} ${HOME}
+exit
+echo ${PATH} ${HOME}
+exit
+echo ${PATH} ${HOME}
+exit
+echo ${PATH} ${HOME}
+exit
+echo ${PATH} ${HOME}
 <<<<<<< HEAD
 $kjkjh | ls
 $kjkjh ; ls

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/12 05:16:38 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/04/15 03:06:19 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,25 @@ int		check_operator(char *input)
 		return (0);
 }
 
+int		match_quote(char *input, int stop)
+{
+	int i;
+	int nbquote;
+
+	i = 0;
+	nbquote = 0;
+	while (stop >= i)
+	{
+		if (input[i] == '\\' && (input[i + 1] && input[i + 1] == '"'))
+			i = i + 2;
+		if (input[i] == '"')
+			nbquote++;
+		i++;
+		ft_2eputendl("DEBUG Value de check nbquote = ", ft_itoa(nbquote % 2));
+	}
+	return (nbquote % 2);
+}
+
 /*
 ** Purpose of the function : Looking for final quote
 ** Return value : return index of last quote (if match) else return -1 (error)
@@ -70,7 +89,7 @@ int		quote_brace_case(int i, char *input)
 		i++;
 		while (input[i] && input[i] != '\'')
 			i++;
-		input[i] != 39 ? i = -1 : i++;
+		i++;
 	}
 	if (input[i] == '"')
 	{
@@ -82,16 +101,26 @@ int		quote_brace_case(int i, char *input)
 			else
 				i++;
 		}
-		input[i] != 34 ? i = -1 : i++;
+		if (input[i] && check_operator(input + i + 1) == 0)
+			while (input[i] && input[i] != ' ')
+				i++;
+		
+		// RAJOUTER UN COMPTEUR DE QUOTE AVEC NEW FONCTION QUI ME RETOURNE L'INDEX DE LA DERNIERE QUOTE
+		//input[i] != 34 ? i = -1 : i++;
+		else
+			i++;
 	}
 	if ((input[i] == '$' && input[i + 1] == '{')
 		|| (input[i] == '$' && input[i + 1] == '('))
 	{
 		ret = ft_bracket(input, -1, 0, stack);
 		if (ret > 0)
-			i = i + ret;
+			i = i + ret + 1;
+		if (input[i] && check_operator(input + i) == 0)
+			while (input[i] && input[i] != ' ' && check_operator(input + i) == 0)
+				i++;
 	}
-	return (i > 0 ? i : -1);
+	return (i);
 }
 
 /*
