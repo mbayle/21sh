@@ -101,6 +101,7 @@ int			check_path_cpt(t_struct *s, t_comp **cmp, t_comp **bcmp, char **l)
 	int				i;
 
 	tmp = NULL;
+	*l = ft_simple_expanse(*l);
 	if (!(i = 0) && lstat(*l, &st) == -1)
 		if (!(i = check_prec_path(&st, l, &tmp, &i)))
 			return (0);

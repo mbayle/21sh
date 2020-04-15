@@ -59,7 +59,8 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 		if (ft_strcmp(path, "b") != -1 && ft_strcmp(path, "b") != 0)
 		{
 			execve(path, cmd, g_jobcontrol.env);
-			ft_putendl_fd("Execve error", 2);
+			ft_putstr_fd("Shell: Execve error: ", 2);
+			ft_putendl_fd(cmd[0], 2);
 			g_jobcontrol.ret = 42;
 			reset_attr();
 			exit(1);
