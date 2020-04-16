@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/16 00:53:17 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/16 16:49:22 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,35 +117,13 @@ int		quote_brace_case(int i, char *input)
 		i++;
 	}
 	if (input[i] == '"')
-	{
 		i = test_dquote(input);
-		/*i++;
-		while (input[i] && input[i] != 34)
-		{
-			// Deplacer le if du dessous ici et changer la condition du while
-			// Il faut continuer tant que je n'ai pas une quote fermante et continuer de add si il n'y a pas d'espace ou d'opérateur apres la quote fermante
-			if (input[i] == 92 && input[i + 1])
-				i = i + 2;
-			else
-				i++;
-		}
-		if (input[i] && check_operator(input + i + 1) == 0)
-			while (input[i] && input[i] != ' ')
-				i++;
-		// RAJOUTER UN COMPTEUR DE QUOTE AVEC NEW FONCTION QUI ME RETOURNE L'INDEX DE LA DERNIERE QUOTE
-		//input[i] != 34 ? i = -1 : i++;
-		else
-			i++;*/
-	}
 	if ((input[i] == '$' && input[i + 1] == '{')
 		|| (input[i] == '$' && input[i + 1] == '('))
 	{
 		ret = ft_bracket(input, -1, 0, stack);
 		if (ret > 0)
 			i = i + ret + 1;
-		if (input[i] && check_operator(input + i) == 0)
-			while (input[i] && input[i] != ' ' && check_operator(input + i) == 0)
-				i++;
 	}
 	return (i);
 }

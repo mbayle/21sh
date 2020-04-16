@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/15 21:48:28 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/16 17:26:27 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 	{
 		if (str[a] == 92)
 			a = a + 2;
+		//if (str[a] == 34)
+		//	a = ft_check_dquote(str + a);
 		if (str[a] == '(' || str[a] == '{')
 		{
 			top++;
@@ -37,7 +39,6 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 		}
 		if (str[a] == ')' || str[a] == '}')
 		{
-			// gérer si backslash ou quote (ignorer char suivant)
 			if (top == -1 || stack[top] == 0)
 				return (str[a] == '}' ? -1 : -2);
 			else if (top == -1 || (stack[top] && !(match(stack[top], str[a]))))
@@ -52,5 +53,10 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 		}
 		a++;
 	}
-	return (0);
+	if (stack[top] == '{')
+		return (-1);
+	if (stack[top] == '(')
+		return (-2);
+	else
+		return (0);
 }

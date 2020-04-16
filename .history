@@ -2,6 +2,20 @@
 0
 <
 exit
+ls hi "a teur"lol lol
+Echo ${PATH:+}
+exit
+Echo ${PATH:+}
+exit
+Echo ${PATH:+"{}}"
+exit
+Echo ${PATH:+"{}}"
+Echo ${PATH:+"{}"}
+exit
+Echo ${PATH:+"{}}"
+exit
+Echo ${PATH:+"{"}}
+exit
 echo \${PATH}  ; \"${HOME}\" ;  echo I print
 ls hi "a teur"lol lol
 ls hi"a teur"lol lol

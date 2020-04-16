@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/14 19:14:03 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/16 16:18:20 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int		find_end(int i, char *input)
 		if (input[i] == '\\')
 			i++;
 		if (input[i] == '\'' || input[i] == '"' || (input[i] == '$'
-				&& input[i + 1] == '{'))
+				&& input[i + 1] == '{') || (input[i] == '$'
+				&& input[i + 1] == '('))
 		{
 			i = quote_brace_case(i, input);
 			if (ft_isalpha(input[i]) || input[i] == '\'' || input[i] == '"')

@@ -6,14 +6,14 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/14 20:18:46 by admin            ###   ########.fr        #
+#    Updated: 2020/04/16 17:28:07 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	42sh
 
-CC			:=	clang
-LINKER		:=	clang -o 
+CC			:=	gcc
+LINKER		:=	gcc -o 
 
 DEBUG		:=	0
 
@@ -33,7 +33,7 @@ INCS		=	./includes/get_next_line.h \
 
 #libft
 INCLUDES	:=	$(INCLUDES) -I$(dir $(LIBFT))includes
-LDFLAGS		:=	-L$(dir $(LIBFT)) -lft  #-fsanitize=address
+LDFLAGS		:=	-L$(dir $(LIBFT)) -lft
 
 CFLAGS		:=	-Wall -Wextra -Werror -g3 -I$(INCLUDES)
 ifeq ($(DEBUG), 1)
