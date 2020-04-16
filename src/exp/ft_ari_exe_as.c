@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 05:00:41 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 10:32:03 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/15 17:02:03 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void						ft_ari_assign(char *varname, long value)
 	ft_strcat(tab[0], text_value);
 	free(text_value);
 	tab[1] = NULL;
-	exec_setenv(&g_jobcontrol.s, tab, NULL, 0);
+	setloc(tab);
 	free(tab[0]);
 }
 

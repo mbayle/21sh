@@ -30,7 +30,7 @@ void	unexec_ass(char **ass)
 	tmp2 = get_key(ass);
 	dst = get_key(ass);
 	g_jobcontrol.ret = unsetloc(dst);
-	g_jobcontrol.ret = myunsetenv(tmp2);
+//	g_jobcontrol.ret = myunsetenv(tmp2);
 	ft_freetab(dst);
 	ft_freetab(tmp2);
 //	t_myloc *loc;

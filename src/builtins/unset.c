@@ -53,11 +53,8 @@ int	unsetloc(char **cmd)
 	i = 1;
 	while (cmd[i])
 	{
-		if (delete_loc(cmd[i]))
-		{
-			ft_putendl_fd("Unsetloc: param unfound", 2);
-			return (1);
-		}
+		delete_loc(cmd[i]);
+		delete_env(cmd[i]);
 		i++;	
 	}
 	return (0);
