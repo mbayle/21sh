@@ -98,7 +98,7 @@ void			print_comp_tab(t_comp *cmp, int c, int i, int *j)
 {
 	while (cmp)
 	{
-		if (!cmp->next || cmp->next->col < cmp->col)
+		if (!cmp->next || cmp->next->col <= cmp->col)
 		{
 			if (cmp->sel)
 				ft_putstr(BWHITE);
