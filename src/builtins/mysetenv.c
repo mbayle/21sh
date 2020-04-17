@@ -23,6 +23,8 @@ int	check_env(char *keyval)
 	{
 		if (ft_strcmp(env->key, tmp[0]) == 0)
 		{
+			ft_putendl("checkenv env->key: ");
+			ft_putendl(env->key);
 			ft_freetab(tmp);
 			return (0);
 		}
@@ -104,6 +106,8 @@ int	mysetenv(char **cmd, int ass)
 
 	i = 1;
 	ret = 0;
+	if (!cmd)
+		return (1);
 	while (cmd[i])
 	{
 		if (check_error(cmd[i]))

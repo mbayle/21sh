@@ -65,6 +65,7 @@ char	**cpy_env_plus(char **ass)
 			tmp2[i++] = ft_strdup(ass[y++]);
 		tmp2[i] = NULL;
 	}
+	i == 1 ? ft_memdel((void**)&tmp2) : 0;
 	return (tmp2);
 }
 
@@ -75,6 +76,7 @@ void	exec_ass(char **ass, int env)
 	char	**tmp2;
 
 	i = 0;
+	tmp2 = NULL;
 	while (ass && ass[i] && ass[i][0] == '\r')
 	{
 		tmp = ft_strdup(ass[i]);
@@ -85,7 +87,10 @@ void	exec_ass(char **ass, int env)
 	}
 	if (ass)
 	{
-		tmp2 = cpy_env_plus(ass);
+		if (env == 1)
+			tmp2 = cpy_env_plus(ass);
+		else if (env == 2)
+			tmp2 = cpy_env_plus(g_jobcontrol.ass_stockenv);
 		//g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		g_jobcontrol.ret = setloc(ass);
 		if (env)

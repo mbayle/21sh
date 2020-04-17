@@ -64,7 +64,7 @@ void	unexec_asign(void)
 //		ft_putendl("		ASS STOK");
 //		ft_printtab(g_jobcontrol.ass_stock);
 		unexec_ass(g_jobcontrol.ass);
-		exec_ass(g_jobcontrol.ass_stock, 1);
+		exec_ass(g_jobcontrol.ass_stock, 2);
 		g_jobcontrol.assi = 0;
 	}
 //	else

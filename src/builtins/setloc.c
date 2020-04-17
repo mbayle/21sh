@@ -85,6 +85,8 @@ int	setloc(char **cmd)
 
 	i = 0;
 	ret = 0;
+	if (!cmd)
+		return (1);
 	while (cmd[i])
 	{
 		if (check_error(cmd[i]))
