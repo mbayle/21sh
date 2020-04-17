@@ -55,13 +55,18 @@ int		dup_fd(char *redir, char *file)
 	else if (is_strdigit(file))
 	{
 		if ((if_digit(file, n)) == -1)
+		{
+			ft_strdel(&file);
 			return (-1);
+		}
 	}
 	else
 	{
+		ft_strdel(&file);
 		ft_putendl_fd("Shell: ambiguous redirect", 2);
 		return (-1);
 	}
+	ft_strdel(&file);
 	return (0);
 }
 

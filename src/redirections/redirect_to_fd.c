@@ -12,6 +12,17 @@
 
 #include "projectinclude.h"
 
+char		*exp_free(char *file)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(file);
+	ft_strdel(&file);
+	file = ft_simple_expanse(tmp);
+	ft_strdel(&tmp);
+	return (file);
+}
+
 int		write_in(int n, char *file, mode_t mode)
 {
 	int	fd;
@@ -21,12 +32,14 @@ int		write_in(int n, char *file, mode_t mode)
 	{
 		if ((fd = open(file, O_CREAT, 0644)) < 0)
 		{
+			ft_strdel(&file);
 			ft_putendl_fd("Failure : error while creating the file", 2);
 			return (-1);
 		}
 		close(fd);
 	}
 	fd = open(file, O_RDWR | mode);
+	ft_strdel(&file);
 	if (check_fd(fd, n))
 		return (-1);
 	if (dup2(fd, n) == -1)
