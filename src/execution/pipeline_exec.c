@@ -19,7 +19,7 @@ char		*is_b(char **cmd)
 
 	mypath = NULL;
 	tmp = my_path(cmd, g_jobcontrol.env);
-	if (!check_b(cmd))
+	if (!check_b(cmd) || (!tmp && g_jobcontrol.cm == 1))
 		mypath = ft_strdup("b");
 	else if (tmp && g_jobcontrol.cm != 1)
 		mypath = ft_strdup("i");
@@ -114,8 +114,10 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	g_jobcontrol.red = 0;
 	ft_freetab(cmd);
 	tmp = concat_tab(av);
-	if (mypath && g_jobcontrol.ret != 42)
+	if (mypath) //&& g_jobcontrol.cm != 1)
+	{
 		pro = fill_jc_struc(pid, tmp, pro);
+	}
 	ft_strdel(&mypath);
 	ft_strdel(&tmp);
 	return (pro);
@@ -163,7 +165,7 @@ int				pipe_exec(char ***av, int fg)
 	else
 		put_in_bg(g_jobcontrol.first_job, 0, NULL,
 				g_jobcontrol.first_job->first_process);
-	ft_freetab(g_jobcontrol.av);
+//	ft_freetab(g_jobcontrol.av);
 	reset_fd();
 	return (0);
 }

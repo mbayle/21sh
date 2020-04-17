@@ -47,7 +47,7 @@ t_process	*process_alloc(t_process *pro)
 	}
 	else
 	{
-		if ((pro->next = ft_memalloc(sizeof(*g_jobcontrol.first_job->first_process))) == NULL)
+		if (!pro || (pro->next = ft_memalloc(sizeof(*g_jobcontrol.first_job->first_process))) == NULL)
 			malloc_exit();
 		pro = pro->next;
 		pro->next = NULL;
