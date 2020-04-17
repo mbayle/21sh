@@ -52,7 +52,7 @@ char			*ft_expanse_word(char *word)
 //	printf("%p\n", list->data);
 //	if (list && list->data)
 //		ft_memdel((void**)&list->data);
-//	ft_memdel((void**)&list);
+////	ft_memdel((void**)&list);
 	return (result);
 }
 
@@ -84,6 +84,6 @@ char			*ft_simple_expanse(char *word)
 
 	if ((new = ft_expanse_word(word)))
 		ft_rmquotes_word(new);
-	ft_strdel(&word);
+//	ft_strdel(&word);
 	return (new);
 }
