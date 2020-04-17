@@ -71,7 +71,7 @@ static int	init_lst_b3(t_struct *s, struct termios *term, int i)
 	if (s->ctrl_d)
 	{
 		sec_free(&s->cmd, 0);
-		if (!(s->cmd = ft_mstrcpy(NULL, "exit")))
+		if (!(s->cmd = ft_strdup("exit")))
 			return (0);
 	}
 	s->ctrl_d = 0;

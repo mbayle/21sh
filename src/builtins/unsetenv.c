@@ -37,10 +37,12 @@ int	delete_env(char *keyval)
 			save = env->next;
 			env->next = env->next->next;
 			ft_memdel((void**)&save);
+			ft_freetab(tmp);
 			return (0);
 		}
 		env = env->next;
 	}
+	ft_freetab(tmp);
 	return (1);
 }
 
@@ -51,11 +53,8 @@ int	myunsetenv(char **cmd)
 	i = 1;
 	while (cmd[i])
 	{
-		if (delete_env(cmd[i]) || delete_loc(cmd[i]) == 23)
-		{
-			ft_putendl_fd("Unsetenv: parman unfound", 2);
-			return (1);
-		}
+		if (!delete_env(cmd[i]))
+			delete_loc(cmd[i]);
 		i++;	
 	}
 	return (0);

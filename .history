@@ -155,7 +155,6 @@ exit
 echo ${PATH} ${HOME}
 exit
 echo ${PATH} ${HOME}
-<<<<<<< HEAD
 $kjkjh | ls
 $kjkjh ; ls
 ls
@@ -681,108 +680,6 @@ env
 set
 setenv A=vat
 echo ${a:=lol}
-=======
-echo "$((a <<= 1))" $a
-echo "$((a >>= 1))" $a
-echo "$((a >>= 2))" $a
-echo "$((a <<= 2))" $a
-echo "$((a ^= 4))" $a
-echo "$((a ^= 2))" $a
-echo "$((a ^= 3))" $a
-echo "$((a &= 0))" $a
-echo "$((a &= 4))" $a
-echo "$((a |= 2))" $a
-echo "$((a |= 0))" $a
-echo "$((a |= 5))" $a
-echo "$((a %= 5))" $a
-echo "$((a /= 2))" $a
-echo "$((a *= -42))" $a
-echo "$((a -= 43))" $a
-echo "$((a += 43))" $a
-echo $((a += 43)) $a
-echo $((a)) $a
-echo $((a--)) $a
-echo $((--a)) $a
-echo $((++a)) $a
-echo $((a++)) $a
-echo $((a))
-echo $a
-echo $((a=42))
-echo "$((a + 10))"
-echo "$((a))"
-a=a
-echo "$((a + 8))"
-echo $((a + 8))
-echo $((a))
-echo $a
-a=42
-echo $((42))
-echo $((2**-3))
-echo $((2**--3))
-echo $((2**3))
-echo $((2**-3))
-echo $((2**3))
-echo $((42))
-echo $((\(\())
-echo $((\(42))
-echo $((\())
-echo "$((++a   --))"
-echo $((++a   --))
-echo $((++a--))
-echo $((3=12))
-echo $((3+a=12))
-make
-echo $((3+a=12))
-echo $((a=12))
-$((a=12))
-ls
-$((6=12))
-$((=12))
-echo $((8+))
-echo $((\(42))
-echo $((\())
-echo \$(("(4"2)))
-echo $(("(4"2)))
-echo $(("(")))
-echo $(("("))
-echo $(("("42))
-ls
-echo $((42+?))
-echo $((42))
-ls
-ls < < >
-ls &&
-echo "$((32 + 10))"
-echo $((32 + 10))
-git pull
-echo $((-9223372036854775809))
-echo $((9223372036854775809))
-echo $((9223372036854775808))
-echo $((-9223372036854775808))
-echo $((2**63))
-echo $((2**62))
-echo $((2**60))
-echo $((2**32))
-echo $((2**2))
-echo $((2**63))
-echo $((()))
-echo $(())
-echo $((42))
-echo $(($PATH))
-echo $(())
-echo "`haha"
-echo "`haha`"
-echo `haha`
-env
-LANG=ok
-env
-a=lol
-env
-export a
-env
-a=lol
-export a=42
->>>>>>> 8533c0e7f5afa2f5442a4be5220e61a3006b02f8
 echo ${a-lol}
 echo ${a:-lol}
 a=

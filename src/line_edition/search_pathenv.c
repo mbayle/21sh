@@ -26,7 +26,7 @@ char	*search_pathenv(t_lst2 *l)
 	while (l)
 	{
 		if (l->varn && (ft_strcmp(s, l->varn)) == 0)
-			return (ft_mstrcpy(new, l->env));
+			return (ft_strdup(l->env));
 		l = l->next;
 	}
 	return (NULL);

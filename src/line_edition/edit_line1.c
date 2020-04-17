@@ -50,6 +50,7 @@ static int	copy_history(t_struct *s, t_lst **lbg, int c, t_htr **t)
 		*t = (*t)->next;
 	else if (*t && (*t)->prev && c == 66)
 		*t = (*t)->prev;
+	ft_memdel((void**)lbg);
 	if ((*lbg = malloc(sizeof(**lbg))) == NULL)
 		return (0);
 	c = 0;

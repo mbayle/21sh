@@ -26,7 +26,7 @@ int			exec_export5(char ***tmp, char **av, t_struct *s, t_lst2 **l)
 		ft_eputendl("export: warning: malloc error.");
 		return (0);
 	}
-	if (((*tmp[0]) = ft_mstrcpy(NULL, av[1])) == NULL)
+	if (((*tmp[0]) = ft_strdup(av[1])) == NULL)
 	{
 		ft_eputendl("export: warning: malloc error");
 		return (0);

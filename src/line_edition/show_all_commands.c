@@ -87,7 +87,7 @@ static int		show2(struct dirent **dir_el, size_t *c, t_htr **l, t_htr **bg)
 	{
 		if ((*l = malloc(sizeof(**l))) == NULL)
 			return (0);
-		if (((*l)->name = ft_mstrcpy((*l)->name, (*dir_el)->d_name)) == NULL)
+		if (((*l)->name = ft_strdup((*dir_el)->d_name)) == NULL)
 			return (0);
 		(*l)->next = NULL;
 		(*l)->prev = NULL;
@@ -97,8 +97,7 @@ static int		show2(struct dirent **dir_el, size_t *c, t_htr **l, t_htr **bg)
 	{
 		if (((*l)->next = malloc(sizeof(**l))) == NULL)
 			return (0);
-		if (((*l)->next->name = ft_mstrcpy((*l)->name
-		, (*dir_el)->d_name)) == NULL)
+		if (((*l)->next->name = ft_strdup((*dir_el)->d_name)) == NULL)
 			return (0);
 		(*l)->next->next = NULL;
 		(*l)->next->prev = *l;

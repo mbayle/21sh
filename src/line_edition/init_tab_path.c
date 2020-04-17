@@ -29,7 +29,7 @@ static char	**create_path_tab2_b(char **path, int t, t_struct st)
 	char	*p;
 
 	p = find_home_path(st);
-	if ((path[t] = ft_mstrcpy(path[t], "./")) == NULL)
+	if ((path[t] = ft_strdup("./")) == NULL)
 		return (NULL);
 	++t;
 	if ((path[t] = ft_strjoin(p, "/.builtin_name/")) == NULL)

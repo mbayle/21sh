@@ -21,7 +21,7 @@ int		is_builtin(char *cmd)
 	!ft_strcmp(cmd, "test") || !ft_strcmp(cmd, "exit") ||
 	!ft_strcmp(cmd, "setenv") || !ft_strcmp(cmd, "unsetenv") ||
 	!ft_strcmp(cmd, "set") || !ft_strcmp(cmd, "unset") ||
-	!ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "type")))
+	!ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "type")|| !ft_strcmp(cmd, "pwd")))
 		return (0);
 	else
 		return (1);

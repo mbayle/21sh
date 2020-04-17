@@ -56,7 +56,7 @@ t_lst2	*exec_export2(t_lst2 *l, char *s, int c, t_struct *st)
 	s++;
 	l->var = NULL;
 	if ((l->nenv = ft_strlen(s)))
-		if ((l->var = ft_mstrcpy(l->var, s)) == NULL)
+		if ((l->var = ft_strdup(s)) == NULL)
 			return (NULL);
 	l->size = ft_strlen(l->env);
 	l->nvar = ft_strlen(l->varn);
@@ -92,7 +92,7 @@ int		exec_export4(t_struct *s, int c, char **av, int i)
 	while (l)
 		if (!ft_strncmp(av[i], l->varn, c))
 		{
-			tm = ft_mstrcpy(NULL, l->varn);
+			tm = ft_strdup(l->varn);
 			exec_setenv(s, tmp, NULL, 0);
 			l = s->env;
 			while (l)

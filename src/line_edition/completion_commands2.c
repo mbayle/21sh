@@ -70,7 +70,7 @@ t_htr	*create_lst_comp(char ***path, t_htr **bcom, char *line, t_lst *l)
 	c = (int)ft_strlen(line);
 	while (**path)
 	{
-		while (!(dir = opendir(**path)))
+		while (**path && !(dir = opendir(**path)))
 			(*path)++;
 		if (!**path)
 			break ;
@@ -93,8 +93,8 @@ char	*create_line_comp(char **line, t_htr *com, t_htr *bcom, int c)
 
 	i = 0;
 	if (!com->next && (sec_free(line, 1)))
-		return (*line = ft_mstrcpy(NULL, com->name));
-	if ((tmp = ft_mstrcpy(NULL, com->name)) == NULL)
+		return (*line = ft_strdup(com->name));
+	if ((tmp = ft_strdup(com->name)) == NULL)
 		return (NULL);
 	while (1)
 	{

@@ -71,7 +71,9 @@ t_comp			*attribute_col(int *co, t_comp *cmp)
 
 	j = 1;
 	t = 0;
-	bcmp = cmp;
+//	printf("%p\n", cmp);
+	if (cmp)
+		bcmp = cmp;
 	while (cmp && (j < *co + 1))
 	{
 		cmp->col = j;
@@ -96,7 +98,7 @@ void			print_comp_tab(t_comp *cmp, int c, int i, int *j)
 {
 	while (cmp)
 	{
-		if (!cmp->next || cmp->next->col < cmp->col)
+		if (!cmp->next || cmp->next->col <= cmp->col)
 		{
 			if (cmp->sel)
 				ft_putstr(BWHITE);

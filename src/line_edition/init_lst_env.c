@@ -68,7 +68,7 @@ t_lst2		*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c)
 	{
 		if ((l = malloc(sizeof(*l))) == NULL)
 			return (NULL);
-		if ((l->env = ft_mstrcpy(l->env, *env)) == NULL)
+		if ((l->env = ft_strdup(*env)) == NULL)
 			return (NULL);
 		while ((*env)[c] && (*env)[c] != '=')
 			++c;
@@ -83,7 +83,7 @@ t_lst2		*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c)
 		l->lcl = 0;
 		l->rv = 0;
 		if ((l->nenv = ft_strlen(*env)))
-			if ((l->var = ft_mstrcpy(l->var, *env)) == NULL)
+			if ((l->var = ft_strdup(*env)) == NULL)
 				return (NULL);
 		init_lst_env3(&l, &bg, &tmp, &env);
 	}

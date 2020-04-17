@@ -59,7 +59,7 @@ t_lst2	*exec_setenv2(t_lst2 *l, char *s, int c, t_struct *st)
 	s++;
 	l->var = NULL;
 	if ((l->nenv = ft_strlen(s)))
-		if ((l->var = ft_mstrcpy(l->var, s)) == NULL)
+		if ((l->var = ft_strdup(s)) == NULL)
 			return (NULL);
 	l->lcl = 0;
 	l->size = ft_strlen(l->env);
@@ -104,7 +104,7 @@ int		exec_setenv_b(t_struct *s, char **av, int c, int i)
 	{
 		if ((new = malloc(sizeof(*new))) == NULL)
 			return (1);
-		if ((new->env = ft_mstrcpy(new->env, av[c])) == NULL)
+		if ((new->env = ft_strdup(av[c])) == NULL)
 			return (1);
 		if ((new = exec_setenv2(new, av[c], 0, &*s)) == NULL)
 			return (1);

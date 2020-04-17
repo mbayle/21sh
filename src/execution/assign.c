@@ -154,6 +154,7 @@ char	**check_assign(char **ass)
 				tmp = ft_strdup(ass[i]);
 				ft_strdel(&ass[i]);
 				ass[i] = ft_strdup(tmp + 1);
+				ft_strdel(&tmp);
 			}
 			i++;
 		}

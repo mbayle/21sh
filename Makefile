@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/17 01:35:12 by admin            ###   ########.fr        #
+#    Updated: 2020/04/17 13:06:51 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRC_PATH	:=	./src/
 OBJ_PATH	:=	./obj/
 
 SRC		:=	main.c \
+			builtins/pwd.c\
 			builtins/type.c\
 			builtins/hash.c\
 			builtins/alias.c\
@@ -91,6 +92,7 @@ SRC		:=	main.c \
 			utils/tab_utils.c\
 			utils/ft_strdupn.c\
 			utils/ft_strlenu.c\
+			utils/ft_fill_struct.c\
 			redirections/redirect_to_fd.c \
 			redirections/redir_utils.c \
 			redirections/exec_redir.c \
@@ -299,7 +301,7 @@ all:
 	@make $(NAME)
 
 $(NAME):  $(LIBFT) $(OBJ)
-	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap -fsanitize=address
+	@$(LINKER) $(NAME) $(OBJ) $(LDFLAGS) -ltermcap
 	@echo ""
 	@echo "\033[0;32m42sh build done\033[0m"
 	@echo ""

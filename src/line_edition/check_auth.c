@@ -30,17 +30,48 @@ int		check_ls(t_struct *s)
 {
 	struct stat		st;
 	int				n;
-	char			tmp[PATH_MAX];
+	char			*tmp;
 
-	if (lstat((*s).av[1], &st) == -1)
+	n = 1;
+	ft_strdel(&g_jobcontrol.mypath);
+	tmp = ft_strdup((*s).av[1]);
+	g_jobcontrol.mypath = ft_strdup((*s).av[1]);
+	g_jobcontrol.p = 0;
+	if ((*s).av[1] && (!ft_strcmp((*s).av[1], "-P") || !ft_strcmp((*s).av[1], "-L")))
+	{
+		g_jobcontrol.p = 2;
+		if (!ft_strcmp((*s).av[1], "-P"))
+			g_jobcontrol.p = 1;
+		ft_strdel(&tmp);
+		if (!(*s).av[2])
+		{
+			ft_strdel(&(*s).av[1]);
+			return (0);
+		}
+		tmp = ft_strdup((*s).av[2]);
+		n = 2;
+		
+	}
+	if (!(*s).av[0] || !(*s).av[n] || lstat((*s).av[n], &st) == -1)
+	{
+		
+		free((*s).av[1]);
+		(*s).av[1] = ft_strdup(tmp);
+		ft_strdel(&tmp);
 		return (0);
+	}
 	if (S_ISLNK(st.st_mode))
 	{
-		n = readlink((*s).av[1], tmp, PATH_MAX);
-		tmp[n] = '\0';
-		free((*s).av[1]);
-		if (((*s).av[1] = ft_mstrcpy((*s).av[1], tmp)) == NULL)
-			return (0);
+//		tmp[0] = '/';
+//		ft_strdel(&tmp);
+//		tmp = ft_strnew(PATH_MAX);
+//		n = readlink((*s).av[n], tmp, PATH_MAX);
+//		tmp[n] = '\0';
 	}
+	free((*s).av[1]);
+//	ft_putendl(tmp);
+	if (tmp && ((*s).av[1] = ft_strdup(tmp)) == NULL)
+		return (0);
+	ft_strdel(&tmp);
 	return (1);
 }

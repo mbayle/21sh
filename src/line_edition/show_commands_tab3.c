@@ -16,7 +16,7 @@ static int	s_command3_tab2(t_comp **l, t_comp **bg, char *str)
 {
 	if ((*l = malloc(sizeof(**l))) == NULL)
 		return (0);
-	if (((*l)->name = ft_mstrcpy((*l)->name, str)) == NULL)
+	if (((*l)->name = ft_strdup(str)) == NULL)
 		return (0);
 	(*l)->next = NULL;
 	(*l)->prev = NULL;
@@ -38,8 +38,7 @@ int			s_command_tab2(char *str, t_comp **l, t_comp **bg,
 	{
 		if (((*l)->next = malloc(sizeof(**l))) == NULL)
 			return (0);
-		if (((*l)->next->name = ft_mstrcpy((*l)->next->name
-						, str)) == NULL)
+		if (((*l)->next->name = ft_strdup(str)) == NULL)
 			return (0);
 		(*l)->next->next = NULL;
 		(*l)->next->prev = *l;

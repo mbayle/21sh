@@ -10,7 +10,10 @@ int	check_loc(char *keyval)
 	while (loc)
 	{
 		if (ft_strcmp(loc->key, tmp[0]) == 0)
+		{
+			ft_freetab(tmp);
 			return (0);
+		}
 		loc = loc->next;
 	}
 	ft_freetab(tmp);
@@ -26,6 +29,8 @@ int	replace_loc(char *keyval)
 	loc = g_jobcontrol.myloc;
 	save = g_jobcontrol.myloc;
 	tmp = ft_strsplit(keyval, '=');
+	if (!check_env(keyval))
+		replace_env(keyval, 0);
 	while (loc)
 	{
 		if (ft_strcmp(loc->key, tmp[0]) == 0)

@@ -38,7 +38,7 @@ static int	putchar_completion_b(char **line, int c, t_struct *s)
 		del++;
 	if (s->cpt == 2 || s->cpt == 3)
 	{
-		if ((s->comp.name = ft_mstrcpy(NULL, del)) == NULL)
+		if ((s->comp.name = ft_strdup(del)) == NULL)
 			return (0);
 		s->comp.sz = ft_strlen(del);
 	}

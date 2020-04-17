@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 12:34:36 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 10:28:55 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/15 13:37:57 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,7 @@ void						*ft_malloc_exit(size_t size);
 **							ft_ari.c
 */
 
+int							ft_ari_ast_free_return(t_ari_ast *ast, int ret);
 int							ft_ari(char *expr, long *res, int rec);
 
 /*
@@ -247,6 +248,7 @@ int							ft_ari(char *expr, long *res, int rec);
 
 void						ft_ari_ast_insert_parent(t_ari_ast *ast);
 void						ft_ari_ast_insert_child(t_ari_ast *ast);
+void						ft_ari_ast_free(t_ari_node *node);
 int							ft_ari_ast(t_ari_ast *ast);
 
 /*

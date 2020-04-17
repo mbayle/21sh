@@ -117,7 +117,7 @@ int		check_expansion(t_struct *s, int i, t_lst2 *env, int c)
 		if (env)
 		{
 			free((*s).av[1]);
-			if (((*s).av[1] = ft_mstrcpy((*s).av[1], env->var)) == NULL)
+			if (((*s).av[1] = ft_strdup(env->var)) == NULL)
 				return (0);
 		}
 		else if (i == 0)
