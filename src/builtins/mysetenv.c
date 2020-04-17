@@ -23,8 +23,8 @@ int	check_env(char *keyval)
 	{
 		if (ft_strcmp(env->key, tmp[0]) == 0)
 		{
-			ft_putendl("checkenv env->key: ");
-			ft_putendl(env->key);
+	//		ft_putendl("checkenv env->key: ");
+	//		ft_putendl(env->key);
 			ft_freetab(tmp);
 			return (0);
 		}

@@ -85,6 +85,7 @@ int		check_if_stop(t_process *p, t_job *job)
 void	set_ret(int status)
 {
 	g_jobcontrol.first_job->first_process->status = status == 2 ? 42 : status;
+	ft_putnbr(status);
 	g_jobcontrol.first_job->first_process->r_value = status + 128;
 	g_jobcontrol.ret = status + 128;
 }

@@ -26,6 +26,8 @@ void	signal_print(int i)
 		ft_putendl_fd("SIGTTOU", 2);
 	else if (i == 2)
 		ft_putendl_fd("SIGQUIT", 2);
+	else if (i == 9)
+		ft_putendl_fd("SIGKILL", 2);
 	else
 	{
 		i > 0 ? ft_putnbr_fd(i, 2) : 0;
@@ -54,7 +56,8 @@ void	if_stp(t_job *job, int i)
 
 t_job	*print_and_del(t_job *job, int i, int check)
 {
-	t_job	*save;
+	t_job		*save;
+	t_process	*save1;
 
 	save = job;
 	if (i != 0 && i == check)
@@ -67,10 +70,15 @@ t_job	*print_and_del(t_job *job, int i, int check)
 	}
 	else if (job && job->fg == 1 && job->stop != 1)
 	{
+		save1 = job->first_process;
+		while (job->first_process && job->first_process->next)
+				job->first_process = job->first_process->next;
 		if (job->first_process && job->first_process->status > 2
 		&& job->first_process->status < 50 &&
-		ft_strcmp(job->command, "fg ") && job->first_process->status != 13)
+		ft_strcmp(job->command, "fg ") && job->first_process->status != 13
+		&& ft_strcmp(job->command, "exit"))
 			if_stp(job, 0);
+		job->first_process = save1;
 		save = delete_link(job->pgid);
 		if (!save && g_jobcontrol.first_mail)
 			save = job;
