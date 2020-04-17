@@ -70,6 +70,7 @@ t_job	*print_and_del(t_job *job, int i, int check)
 	}
 	else if (job && job->fg == 1 && job->stop != 1)
 	{
+//		ft_putendl(job->command);	
 		save1 = job->first_process;
 		while (job->first_process && job->first_process->next)
 				job->first_process = job->first_process->next;

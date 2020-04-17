@@ -59,7 +59,11 @@ t_process	*fill_jc_struc(pid_t pid, char *cmd, t_process *pro)
 {
 	pro = process_alloc(pro);
 	if (pid == -1)
+	{
 		pro->r_value = g_jobcontrol.ret + 2;
+		if (g_jobcontrol.ret == 127)
+			pro->r_value = 127;
+	}
 	pro->lpid = pid;
 	pro->cmd = ft_strdup(cmd);
 	if (g_jobcontrol.shell_is_int)

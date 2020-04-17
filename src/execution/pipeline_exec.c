@@ -19,12 +19,13 @@ char		*is_b(char **cmd)
 
 	mypath = NULL;
 	tmp = my_path(cmd, g_jobcontrol.env);
-	if (!check_b(cmd) || (!tmp && g_jobcontrol.cm == 1))
+	if (!check_b(cmd) || (g_jobcontrol.cm == 1))
 		mypath = ft_strdup("b");
 	else if (tmp && g_jobcontrol.cm != 1)
 		mypath = ft_strdup("i");
 	if (tmp)
 		ft_strdel(&tmp);
+	g_jobcontrol.cm = 0;
 	return (mypath);
 }
 
@@ -34,7 +35,7 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 	pid_t	pid;
 
 	pid = -1;
-	if (((!ft_strcmp(path, "b") && g_jobcontrol.sim) || !ft_strcmp(path, "i"))
+	if (((!ft_strcmp(path, "b") && (g_jobcontrol.sim || g_jobcontrol.first_job->fg == 0)) || !ft_strcmp(path, "i"))
 	&& (pid = fork()) == 0)
 	{
 		do_in_child(oldlink, newlink, g_jobcontrol.arg);
@@ -59,9 +60,10 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 		if (ft_strcmp(path, "b") != -1 && ft_strcmp(path, "b") != 0)
 		{
 			execve(path, cmd, g_jobcontrol.env);
-			ft_putstr_fd("Shell: Execve error: ", 2);
-			ft_putendl_fd(cmd[0], 2);
-			g_jobcontrol.ret = 42;
+			ft_putstr_fd("Shell: ", 2);
+			ft_putstr_fd(cmd[0], 2);
+			ft_putendl_fd(" : is a directory", 2);
+	//		g_jobcontrol.ret = 42;
 			reset_attr();
 			exit(1);
 		}
@@ -104,7 +106,7 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
 	if (!should_i_exec(cmd, mypath))
 		return (NULL);
-	if (g_jobcontrol.sim == 0 && mypath && !ft_strcmp(mypath, "b"))
+	if (g_jobcontrol.sim == 0 && mypath && !ft_strcmp(mypath, "b") && g_jobcontrol.first_job->fg)
 	{
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		execute_builtin(cmd);

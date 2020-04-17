@@ -13,40 +13,69 @@
 #include "../../includes/projectinclude.h"
 #include <sys/mman.h>
 
+void	is_valid(char *str, const char *dst, DIR *ptr)
+{
+	struct stat buf;
+
+	(void)ptr;
+	lstat(str, &buf);
+	if (S_ISDIR(buf.st_mode))
+	{
+		ft_putstr_fd("Shell: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putendl_fd(" : is a directory", 2);
+		g_jobcontrol.cm = 1;
+		g_jobcontrol.ret = 127;
+	}
+	else if (!dst && ft_occur(str, '/'))
+	{
+		ft_putstr_fd("Shell: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putendl_fd(" : no such file or directory", 2);
+		g_jobcontrol.cm = 1;
+		g_jobcontrol.ret = 127;
+	}
+}
+
 char	*local_file(char *str)
 {
 	t_read	read;
 	char	*dst;
+	char	*tmp;
 
 	g_jobcontrol.perm = 0;
 	dst = NULL;
+	tmp = NULL;
 	read.path = ft_strldup(str, '/');
 	read.ptr = read.path ? opendir(read.path) : opendir(".");
-	ft_strdel(&read.path);
 	while (read.ptr && (read.file = readdir(read.ptr)))
 	{
 		read.tmp = ft_strdupn(str, '/');
-	ft_putendl(read.path);
 		if (read.tmp && ft_strcmp(read.tmp, read.file->d_name) == 0)
 		{
 			dst = ft_strdup(str);
 			permissions(&dst);
 			if (dst == NULL)
 				g_jobcontrol.first_job->last_ret = 1;
+			tmp = "yes";
 			ft_strdel(&read.tmp);
 			break ;
 		}
 		ft_strdel(&read.tmp);
 	}
 	read.ptr ? closedir(read.ptr) : 0;
+	is_valid(str, tmp, read.ptr);
+	ft_strdel(&read.path);
 	return (dst);
 }
 
 void	if_not_cmd(char *cmd)
 {
+	if (g_jobcontrol.cm == 1)
+		return ;
 	ft_putstr_fd("Shell : No cmd found: ", 2);
 	ft_putendl_fd(cmd, 2);
-	g_jobcontrol.ret = 1;
+	g_jobcontrol.ret = 127;
 	g_jobcontrol.cm = 1;
 }
 
@@ -60,7 +89,6 @@ int		check_b(char **cmd)
 	!ft_strcmp(cmd[0], "setenv") || !ft_strcmp(cmd[0], "unsetenv") ||
 	!ft_strcmp(cmd[0], "set") || !ft_strcmp(cmd[0], "unset") ||
 	!ft_strcmp(cmd[0], "export") || !ft_strcmp(cmd[0], "type") ||
-	!ft_strcmp(cmd[0], "alias") || !ft_strcmp(cmd[0], "unalias") ||
 	!ft_strcmp(cmd[0], "env") || !ft_strcmp(cmd[0], "echo") ||
 	!ft_strcmp(cmd[0], "setclr") || !ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "pwd")
 	|| cmd[0][0] == '\r'))
@@ -74,7 +102,6 @@ char	*get_hashed_mypath(t_hash *h_tab)
 	char	*mypath;
 
 	mypath = NULL;
-	g_jobcontrol.cm = 0;
 	if (h_tab && h_tab->path)
 		mypath = ft_strdup(h_tab->path);
 	if (mypath && permissions(&mypath))

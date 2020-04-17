@@ -24,6 +24,8 @@ void	update_bg_status(void)
 		pro = cpy->first_process;
 		browse_process(pro, cpy);
 		tmp = ft_strdup(cpy->command);
+//		ft_putendl("cpy command: ");
+//		ft_putendl(cpy->command);
 		cpy = check_bg_status(cpy);
 		if (cpy)
 		{
