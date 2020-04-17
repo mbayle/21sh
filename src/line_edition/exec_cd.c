@@ -87,7 +87,6 @@ int             exec_cd2(t_struct *s, char *cwd, char *ocwd, char *tmp)
 //	if ((*s).av[1])
 //		tmp = ft_strdup((*s).av[1]);
 	g_jobcontrol.s.i = 1;
-	ft_putendl((*s).av[1]);
 	if (g_jobcontrol.p == 0) //&& (*s).av[1])
 	{
 		if (!(cwd = ft_strdup(g_jobcontrol.mypath)))

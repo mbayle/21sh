@@ -94,6 +94,7 @@ typedef struct				s_jobcontrol
 	char					**env;
 	char					**av;
 	char					**ass_stock;
+	char					**ass_stockenv;
 	char					**ass;
 	char					*mypath;
 	char					*heredoc;
