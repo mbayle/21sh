@@ -98,11 +98,6 @@ int		process_status(pid_t pid, int status, t_process *p)
 	if (pid < 0)
 		return (-1);
 	g_jobcontrol.first_job->first_process = p;
-	if (g_jobcontrol.ret == 127)
-	{
-		g_jobcontrol.first_job->first_process->status = 127;
-		return (1);
-	}
 	g_jobcontrol.first_job->first_process->r_value = status;
 	g_jobcontrol.ret = status;
 	if (WIFEXITED(status) == TRUE)
@@ -119,6 +114,8 @@ int		process_status(pid_t pid, int status, t_process *p)
 		g_jobcontrol.first_job->first_process->r_value = status;
 		g_jobcontrol.ret = 128 + WSTOPSIG(status);
 	}
+	if (g_jobcontrol.ret == 127)
+		g_jobcontrol.first_job->first_process->status = 127;
 	g_jobcontrol.first_job->first_process = pro;
 	return (status);
 }
