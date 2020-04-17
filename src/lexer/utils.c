@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/17 03:05:01 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/17 03:27:24 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static int     test_squote(char *input)
     i = 0;
     while (input[i])
     {
-        if (input[i] == 92)
-            i = i + 2;
         if (input[i] == 39)
         {
             if (dquote == 1)

@@ -21,11 +21,11 @@ ls " "ateur"lol" lol
 echo -e '\e[1m\nO ls \e[3;1;36m """"a teur"lol lol" : \e[23;24;0m'
 ls """"a teur"lol lol"
 echo -e '\e[1m\nO ls \e[3;1;36m "a t"eur"lol lol"" : \e[23;24;0m'
-ls "a t"eur"lol lol"                                                            // KO un token en trop
+ls "a t"eur"lol lol"
 echo -e '\e[1m\nO ls \e[3;1;36m "auteur ; ls "no "&" yes : \e[23;24;0m'
 ls "auteur ; ls "no "&" yes
 echo -e '\e[1m\nO ls \e[3;1;36m "aut|eur"lol lol | pwd : \e[23;24;0m'
-ls "aut|eur"lol lol | pwd                                                       // KO PWD fonctionne
+ls "aut|eur"lol lol | pwd
 echo -e '\n        \e[41m --------------  \e[0m'
 echo -e '\e[1m\nO echo \e[3;1;36m'  \\\' ': \e[23;24;0m'
 echo \'

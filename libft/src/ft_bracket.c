@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/17 03:02:32 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/17 03:26:51 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,12 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 	while (str[a])
 	{
 		if (str[a] == 92)
-			a = a + 2;
+		{
+			if (a + 2 > (int)ft_strlen(str))
+				a = a + 2;
+			else
+				break ;
+		}
 		if (str[a] == 34 || str[a] == 39)
 		{
 			int i = 0;

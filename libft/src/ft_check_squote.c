@@ -11,11 +11,6 @@ int     ft_check_squote(char *input)
     len = ft_strlen(input);
     while (i <= len)
     {
-        if (input[i] == 92)
-        {
-            i = i + 2;
-            continue ;
-        }
         if (input[i] == 39)
         {
             if (dquote == 1)
