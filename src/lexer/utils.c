@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/16 16:49:22 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/17 03:05:01 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,31 @@ int		match_quote(char *input, int stop)
 	return (nbquote % 2);
 }
 
+static int     test_squote(char *input)
+{
+    int     dquote;
+    int     i;
+
+    dquote = 0;
+    i = 0;
+    while (input[i])
+    {
+        if (input[i] == 92)
+            i = i + 2;
+        if (input[i] == 39)
+        {
+            if (dquote == 1)
+                dquote = 0;
+            else
+                dquote = 1;
+        }
+        if (dquote == 0 && (input[i] == ' ' || input[i] == ';'))
+            break ;
+        i++;
+    }
+	return (i);
+}
+
 static int     test_dquote(char *input)
 {
     int     dquote;
@@ -110,12 +135,7 @@ int		quote_brace_case(int i, char *input)
 	int		ret;
 
 	if (input[i] == '\'')
-	{
-		i++;
-		while (input[i] && input[i] != '\'')
-			i++;
-		i++;
-	}
+		i = test_squote(input);
 	if (input[i] == '"')
 		i = test_dquote(input);
 	if ((input[i] == '$' && input[i + 1] == '{')

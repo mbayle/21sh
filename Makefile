@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/16 17:28:07 by admin            ###   ########.fr        #
+#    Updated: 2020/04/17 01:35:12 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -299,7 +299,7 @@ all:
 	@make $(NAME)
 
 $(NAME):  $(LIBFT) $(OBJ)
-	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap
+	@$(LINKER) $(NAME) $(LDFLAGS) $(OBJ) -ltermcap -fsanitize=address
 	@echo ""
 	@echo "\033[0;32m42sh build done\033[0m"
 	@echo ""

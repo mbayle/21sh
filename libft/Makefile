@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/16 17:27:52 by admin            ###   ########.fr        #
+#    Updated: 2020/04/17 03:01:59 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = libft.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra -g3 -I$(INC_PATH)
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address -I$(INC_PATH)
 
 INCS	= ./includes/libft.h
 
@@ -132,7 +132,8 @@ SRC = ft_memset.c \
 	  ft_ipbackc.c \
 	  ft_bracket.c \
 	  ft_is_space.c \
-	  ft_check_dquote.c
+	  ft_check_dquote.c \
+	  ft_check_squote.c
 
 OBJ_PATH = ./.obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))

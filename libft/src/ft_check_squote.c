@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int     ft_check_dquote(char *input)
+int     ft_check_squote(char *input)
 {
     int     dquote;
     size_t  i;
@@ -16,7 +16,7 @@ int     ft_check_dquote(char *input)
             i = i + 2;
             continue ;
         }
-        if (input[i] == 34)
+        if (input[i] == 39)
         {
             if (dquote == 1)
                 break ;

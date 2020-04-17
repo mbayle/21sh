@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/16 17:26:27 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/17 03:02:32 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,30 @@ static int	match(char top, char a)
 
 int			ft_bracket(char *str, int top, int a, char *stack)
 {
+	if (!str[a])
+		return (-3);
 	while (str[a])
 	{
 		if (str[a] == 92)
 			a = a + 2;
-		//if (str[a] == 34)
-		//	a = ft_check_dquote(str + a);
-		if (str[a] == '(' || str[a] == '{')
+		if (str[a] == 34 || str[a] == 39)
+		{
+			int i = 0;
+			i = (str[a] == 34 ? ft_check_dquote(str + a) : ft_check_squote(str + a));
+			if (i != -1)
+			{
+				a = a + i + 1;
+				continue ;
+			}
+			else
+				break ;
+		}
+		if (str[a] && (str[a] == '(' || str[a] == '{'))
 		{
 			top++;
 			stack[top] = str[a];
 		}
-		if (str[a] == ')' || str[a] == '}')
+		if (str[a] && (str[a] == ')' || str[a] == '}'))
 		{
 			if (top == -1 || stack[top] == 0)
 				return (str[a] == '}' ? -1 : -2);
