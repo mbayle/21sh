@@ -2005,10 +2005,6 @@ l=r la
 set
 a=b
 set
-=======
-exit
-echo test && echo coucou
->>>>>>> 1675f045ea0deb6d29a0375e72507fa3316575c4
 ls
 echo test && echo coucou
 ls
@@ -2026,3 +2022,30 @@ u
 u
 oucou
 u
+=======
+5
+0
+exit
+erunvreun'       '       '         '
+ls
+exit
+./42sh
+make
+./42sh
+make
+./42sh
+make
+ls
+cd Documents/42sh
+make
+cd
+cd /
+cd
+exit
+cd
+exit
+cd /
+cd
+ls
+setclr
+>>>>>>> c6c2ce7ee804707b69b1479080acfa71fbddd7a8

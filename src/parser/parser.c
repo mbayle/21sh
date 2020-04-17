@@ -75,6 +75,7 @@ t_lex	*check_heredoc(t_lex *lex)
 		if (lex->operator == DLESS)
 		{
 			lex = lex->next;;
+			ft_rmquotes_word(lex->value);
 			tmp = heredoc(lex->value);
 			ft_strdel(&lex->value);
 			lex->value = ft_strdup(tmp);

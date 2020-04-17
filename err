@@ -1,0 +1,2 @@
+42sh(10050,0x108052dc0) malloc: *** error for object 0x7ff9e50040d0: pointer being freed was not allocated
+42sh(10050,0x108052dc0) malloc: *** set a breakpoint in malloc_error_break to debug

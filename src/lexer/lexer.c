@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/17 00:29:13 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/17 13:12:39 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,6 @@ void	ft_lexer(t_lex **lex, char *input)
 
 	if (!lex || !input || ft_is_space(input) == 0)
 		return ;
-    ft_putendl("DEBUG valeur recu par ft_lexer : ");
-    ft_putendl(input);
 	while (*input)
 	{
 		while (ft_is_separator(*input) == 1)

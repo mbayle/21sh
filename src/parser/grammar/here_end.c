@@ -39,7 +39,7 @@ int		here_end(t_lex *lex)
 			if (ft_strlen(lex->value) > 0)
 			{
 				new = ft_memalloc(ft_strlen(lex->value) - 1);
-				strcpy(new, lex->value++);
+				ft_strcpy(new, lex->value++);
 			}
 			else if (ft_strlen(new) > 1)
 				new[ft_strlen(new) - 2] = '\0';
