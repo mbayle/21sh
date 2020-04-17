@@ -186,20 +186,18 @@ int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 	{
 		ft_strdel(&ocwd);
 		ft_freetab(s->av);
-		return (0);
+		return (1);
 	}
 	if (!(*s).av[1])
 	{
-//		printf("%p\n", s->av);
 		if (((*s).av = modif_av(&(*s).av)) == NULL)
 		{
 			ft_putendl("IN TH");
 			ft_strdel(&ocwd);
 			ft_freetab(s->av);
 			ft_strdel(&tmp);
-			return (0);
+			return (1);
 		}
-//		printf("%p\n", s->av);
 		while (tp && ft_strcmp(tp->varn, "HOME"))
 			tp = tp->next;
 		if (!tp)
@@ -212,7 +210,6 @@ int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 		else
 			tmp = ft_strdup(tp->var);
 	}
-	ft_putendl(tmp);
 	if (tmp && (r = chdir(tmp)) == -1)
 	{
 		//ft_eputstr("System chdir call failed.\n");
@@ -225,13 +222,11 @@ int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 			ft_strdel(&ocwd);
 			ft_freetab(s->av);
 			ft_strdel(&tmp);
-			ft_putendl("WHY HE");
-			return (0);
+			return (1);
 		}
 	}
 	if (r == -1)
 	{
-	//	fp("mb", NULL);
 		ft_putstr(RED);
 		ft_2eputstr(ocwd, " -X ");
 		ft_eputendl(tmp);
@@ -243,14 +238,8 @@ int             exec_cd(t_struct *s, t_lst2 *tp, char *tmp, char *ocwd)
 		ft_putendl(tmp);
 	}
 	ft_putstr(WHITE);
-//	printf("%p\n", ocwd);
 	ft_freetab(s->av);
-//	s->av = NULL;
 	ft_strdel(&ocwd);
-//	ocwd = NULL;
-//	free_dchar(&s->av);
 	ft_strdel(&tmp);
-//	printf("%p\n", tmp);
-//	printf("%p\n", s->av);
-	return (1);
+	return (0);
 }
