@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/17 13:07:10 by admin            ###   ########.fr        #
+#    Updated: 2020/04/18 14:07:22 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = libft.a
 
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Werror -Wextra -g3 -I$(INC_PATH)
 
 INCS	= ./includes/libft.h

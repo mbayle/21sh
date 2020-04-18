@@ -6,14 +6,14 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/17 13:06:51 by admin            ###   ########.fr        #
+#    Updated: 2020/04/18 14:07:42 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		:=	42sh
 
-CC			:=	gcc
-LINKER		:=	gcc -o 
+CC			:=	clang
+LINKER		:=	clang -o 
 
 DEBUG		:=	0
 

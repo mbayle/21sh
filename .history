@@ -2,6 +2,36 @@
 0
 <
 exit
+ls "auteur"||cat
+ls "auteur"&&cat
+ls "auteur"&cat
+ls "auteur"|cat
+exit
+ls "auteur"|cat
+exit
+ls "auteur"|cat
+exit
+ls "auteur"|cat
+exit
+ls "auteur"|cat
+exit
+ls "auteur"|cat
+exit
+ls "auteur"|cat
+exit
+ls "auteur"|cat
+exit
+a=hello b=world; b=42 echo ${a}_${b} && echo ${b}
+a=hello b=world; b=42 echo ${a}_${b} && a=hello b=world; b=42 echo ${a}_${b} && echo ${b}
+exit
+a=hello b=world; b=42 echo ${a}_${b} && echo ${b}
+exit
+a=hello b=world; b=42 echo ${a}_${b} && echo ${b}
+a=hello b=world; b=42 echo ${a}__
+a=hello b=world; b=42 echo ${a}_${b} && echo ${b
+exit
+'\''''
+exit
 '\''
 \''\''
 exit

@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/17 03:27:24 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/18 14:05:40 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int		check_redir(char *input)
 
 int		check_operator(char *input)
 {
+	if (!input)
+		return (0);
 	if (!ft_strncmp(input, "<<-", 3))
 		return (3);
 	else if (!ft_strncmp(input, ";;", 2) || !ft_strncmp(input, ">>", 2)
@@ -53,25 +55,6 @@ int		check_operator(char *input)
 		return (1);
 	else
 		return (0);
-}
-
-int		match_quote(char *input, int stop)
-{
-	int i;
-	int nbquote;
-
-	i = 0;
-	nbquote = 0;
-	while (stop >= i)
-	{
-		if (input[i] == '\\' && (input[i + 1] && input[i + 1] == '"'))
-			i = i + 2;
-		if (input[i] == '"')
-			nbquote++;
-		i++;
-		ft_2eputendl("DEBUG Value de check nbquote = ", ft_itoa(nbquote % 2));
-	}
-	return (nbquote % 2);
 }
 
 static int     test_squote(char *input)
@@ -90,7 +73,7 @@ static int     test_squote(char *input)
             else
                 dquote = 1;
         }
-        if (dquote == 0 && (input[i] == ' ' || input[i] == ';'))
+        if (dquote == 0 && (input[i] == ' ' || check_operator(input + i) > 0))
             break ;
         i++;
     }
@@ -115,8 +98,8 @@ static int     test_dquote(char *input)
             else
                 dquote = 1;
         }
-        if (dquote == 0 && (input[i] == ' ' || input[i] == ';'))
-            break ;
+        if (dquote == 0 && (input[i] == ' ' || check_operator(input + i) > 0))
+			break ;
         i++;
     }
 	return (i);
@@ -142,6 +125,9 @@ int		quote_brace_case(int i, char *input)
 		ret = ft_bracket(input, -1, 0, stack);
 		if (ret > 0)
 			i = i + ret + 1;
+		if (input[i] && check_operator(input + i) == 0)		
+ 			while (input[i] && input[i] != ' ' && check_operator(input + i) == 0)		
+ 				i++;
 	}
 	return (i);
 }
