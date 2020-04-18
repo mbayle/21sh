@@ -15,23 +15,23 @@
 void	signal_print(int i)
 {
 	if (i == 42)
-		ft_putendl_fd("SIGINT", 2);
+		ft_putstr_fd("SIGINT", 2);
 	else if (i == 11)
-		ft_putendl_fd("SIGSEGV", 2);
+		ft_putstr_fd("SIGSEGV", 2);
 	else if (i == 17)
-		ft_putendl_fd("SIGSTOP", 2);
+		ft_putstr_fd("SIGSTOP", 2);
 	else if (i == 21)
-		ft_putendl_fd("SIGTTIN", 2);
+		ft_putstr_fd("SIGTTIN", 2);
 	else if (i == 22)
-		ft_putendl_fd("SIGTTOU", 2);
+		ft_putstr_fd("SIGTTOU", 2);
 	else if (i == 2)
-		ft_putendl_fd("SIGQUIT", 2);
+		ft_putstr_fd("SIGQUIT", 2);
 	else if (i == 9)
-		ft_putendl_fd("SIGKILL", 2);
+		ft_putstr_fd("SIGKILL", 2);
 	else
 	{
 		i > 0 ? ft_putnbr_fd(i, 2) : 0;
-		ft_putchar_fd('\n', 2);
+//		ft_putstr_fd("	", 2);
 	}
 }
 
@@ -41,16 +41,20 @@ void	if_stp(t_job *job, int i)
 	{
 		ft_putchar_fd('[', 2);
 		ft_putnbr_fd(job->j_nb, 2);
-		ft_putstr_fd("]  ", 2);
+		ft_putstr_fd("]+	", 2);
 	}
 //	else
-		ft_putstr_fd("  [", 2);
+	ft_putstr_fd("[", 2);
 	ft_putnbr_fd(job->pgid, 2);
-	ft_putstr_fd("]  ", 2);
-	ft_putchar_fd(' ', 2);
-	i ? ft_putstr_fd(job->command, 2) : 0;
-	ft_putstr_fd("  Terminated ", 2);
+	ft_putstr_fd("] ", 2);
+	if (i && job->first_process->status <= 0)
+		ft_putstr_fd(" Done", 2);
+	else
+		ft_putstr_fd(" Terminated ", 2);
 	signal_print(job->first_process->status);
+	ft_putstr_fd(":	", 2);
+	ft_putstr_fd(job->command, 2);
+	ft_putchar_fd('\n', 2);
 	put_last_fg(put_last_stp(job, 2, 1), 1, 0);
 }
 
