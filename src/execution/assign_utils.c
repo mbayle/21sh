@@ -4,11 +4,13 @@ char	*fill_keyval(char *ass)
 {
 	char	**tmp;
 	char	*dst;
+	char	*t;
 
 	tmp = ft_strsplit(ass, '=');
-	tmp[1] = ft_simple_expanse(tmp[1]);
+	t = ft_simple_expanse(tmp[1]);
 	dst = ft_strjoin(tmp[0], "=");
-	dst = ft_strjoinfree(dst, tmp[1]);
+	dst = ft_strjoinfree(dst, t);
+	ft_strdel(&t);
 	ft_strdel(&tmp[0]);
 	ft_strdel(&tmp[1]);
 	ft_memdel((void**)&tmp);

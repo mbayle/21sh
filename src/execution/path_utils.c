@@ -3,10 +3,12 @@
 void	is_valid(char *str, const char *dst, DIR *ptr)
 {
 	struct stat buf;
+	int			i;
 
 	(void)ptr;
-	lstat(str, &buf);
-	if (S_ISDIR(buf.st_mode))
+	i = 0;
+	i = lstat(str, &buf);
+	if (i != -1 && S_ISDIR(buf.st_mode))
 	{
 		ft_putstr_fd("Shell: ", 2);
 		ft_putstr_fd(str, 2);
