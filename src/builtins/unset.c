@@ -52,7 +52,7 @@ int	unsetloc(char **cmd)
 
 	i = 1;
 	if (!cmd)
-		return (1);
+		return (0);
 	while (cmd[i])
 	{
 		delete_loc(cmd[i]);
