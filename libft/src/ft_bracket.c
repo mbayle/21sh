@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/19 03:43:00 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/20 00:21:09 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 	{
 		if (str[a] == 92)
 		{
-			if (a + 2 > (int)ft_strlen(str))
+			if (a + 2 <= (int)ft_strlen(str))
 				a = a + 2;
 			else
 				break ;
@@ -62,6 +62,7 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 				return (str[a] == '}' ? -1 : -2);
 			else
 			{
+				ft_2eputendl("DEBUG Else, match avec une brace find => ", &str[a]);
 				stack[top] = 0;
 				top--;
 				if (top == -1)
