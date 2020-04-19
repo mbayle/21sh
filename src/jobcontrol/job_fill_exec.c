@@ -14,12 +14,10 @@
 
 void		wait_for_job(t_process *pro, t_job *job, int fg)
 {
-//	pid_t		pid;
 	int			status;
 	t_process	*save;
 
 	save = pro;
-//	pid = 0;
 	if (!pro)
 		return ;
 	status = 0;
@@ -41,13 +39,14 @@ t_process	*process_alloc(t_process *pro)
 	{
 		if ((g_jobcontrol.first_job->first_process = ft_memalloc(sizeof(
 					*g_jobcontrol.first_job->first_process))) == NULL)
-				malloc_exit();
+			malloc_exit();
 		pro = g_jobcontrol.first_job->first_process;
 		pro->next = NULL;
 	}
 	else
 	{
-		if (!pro || (pro->next = ft_memalloc(sizeof(*g_jobcontrol.first_job->first_process))) == NULL)
+		if (!(pro->next =
+		ft_memalloc(sizeof(*g_jobcontrol.first_job->first_process))))
 			malloc_exit();
 		pro = pro->next;
 		pro->next = NULL;

@@ -1,6 +1,24 @@
 2
 5
 0
+ls
+set
+coucou=2 byebye=3 set
+byebye=lol
+coucou=lol
+set
+coucou=2 byebye=3 set
+byebye=lol
+coucou=lol
+set
+coucou=lol vou=lol vovo=ol d=2 r=3 set
+set
+coucou=lol vou=lol vovo=ol d=2 r=3 set
+coucou=lol vou=lol vovo=ol 1=2 2=3 set
+set
+coucou=lol vou=lol set
+set
+a=e a=r set
 exit
 erunvreun'       '       '         '
 ls

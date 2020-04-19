@@ -14,7 +14,7 @@
 
 void	sig_handler(int i)
 {
-	if (i == SIGINT || i == SIGTERM)// || i == SIGKILL)
+	if (i == SIGINT || i == SIGTERM)
 	{
 		reset_attr();
 		exit(128 + i);
@@ -31,7 +31,6 @@ void	ign_jb_sign(int i)
 	if (i)
 		func = SIG_DFL;
 	signal(SIGINT, sig_handler);
-//	signal(SIGKILL, sig_handler);
 	signal(SIGTERM, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	signal(SIGTSTP, func);

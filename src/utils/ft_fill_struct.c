@@ -3,7 +3,7 @@
 int		is_loc(char *keyval)
 {
 	t_myenv *env;
-	
+
 	env = g_jobcontrol.myenv;
 	while (env)
 	{
@@ -36,16 +36,9 @@ void	fill_struct_env(void)
 		{
 			g_jobcontrol.s.env->next = ft_memalloc(sizeof(*g_jobcontrol.s.env));
 			g_jobcontrol.s.env->next->next = NULL;
-		}	
+		}
 		g_jobcontrol.s.env = g_jobcontrol.s.env->next;
 		loc = loc->next;
 	}
 	g_jobcontrol.s.env = lst;
-//	while (g_jobcontrol.s.env)
-//	{
-//		ft_putendl(g_jobcontrol.s.env->env);
-//		g_jobcontrol.s.env = g_jobcontrol.s.env->next;
-//	}
-//	g_jobcontrol.s.env = lst;
-
 }

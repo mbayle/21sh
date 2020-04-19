@@ -1,7 +1,0 @@
-setenv
-setloc
-env
-set
-unsetenv
-unset
-export 

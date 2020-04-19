@@ -14,29 +14,29 @@
 
 int		tab_size(char **s)
 {
-		int i;
+	int i;
 
-		i = 0;
-		while (s && s[i])
-			i++;
-		return (i);
+	i = 0;
+	while (s && s[i])
+		i++;
+	return (i);
 }
 
 char	**tab_copy(char **tabl)
 {
-		int		i;
-		int		j;
-		char	**dst;
+	int		i;
+	int		j;
+	char	**dst;
 
-		i = 0;
-		j = 0;
-		if (!(dst = malloc(sizeof(char *) * (tab_size(tabl) + 1))))
-				return (NULL);
-		while (tabl[i])
-		{
-				dst[j] = ft_strdup(tabl[i++]);
-				j++;
-		}
-		dst[j] = NULL;
-		return (dst);
+	i = 0;
+	j = 0;
+	if (!(dst = malloc(sizeof(char *) * (tab_size(tabl) + 1))))
+		return (NULL);
+	while (tabl[i])
+	{
+		dst[j] = ft_strdup(tabl[i++]);
+		j++;
+	}
+	dst[j] = NULL;
+	return (dst);
 }

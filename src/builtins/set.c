@@ -9,7 +9,6 @@ int		myset(char **cmd)
 		return (0);
 	while (loc)
 	{
-		//printf("%p\n", loc);
 		ft_putendl(loc->keyval);
 		loc = loc->next;
 	}

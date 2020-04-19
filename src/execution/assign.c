@@ -12,43 +12,6 @@
 
 #include "projectinclude.h"
 
-
-void	save_ass(char **ass)
-{
-	int	i;
-	int	y;
-
-	i = 0;
-	y = 0;
-	if (g_jobcontrol.ass)
-		ft_freetab(g_jobcontrol.ass);
-	if (!(g_jobcontrol.ass = malloc(sizeof(char *) * (just_ass(ass) + 1))))
-		return (malloc_exit());
-	while (ass[i] && ass[i][0] == '\r')
-		g_jobcontrol.ass[y++] = ft_strdup(ass[i++]);
-	g_jobcontrol.ass[y] = NULL;
-}
-
-int		fill_tab_stock_env(char *ass, int y)
-{
-	t_myenv	*menv;
-	char	*clean_ass;
-	char	**tmp;
-
-	menv = g_jobcontrol.myenv;
-	while (menv)
-	{
-		clean_ass = ft_strdup(ass + 1);
-		tmp = ft_strsplit(clean_ass, '=');
-		if (ft_strcmp(menv->key, tmp[0]) == 0)
-			g_jobcontrol.ass_stockenv[y++] = ft_strdup(menv->keyval);
-		ft_freetab(tmp);
-		ft_strdel(&clean_ass);
-		menv = menv->next;
-	}
-	return (y);
-}
-
 int		fill_tab_stock(char *ass, int y)
 {
 	t_myloc	*menv;
@@ -84,13 +47,13 @@ void	save_ass_stock(char **ass)
 		ft_freetab(g_jobcontrol.ass_stockenv);
 	if (!(g_jobcontrol.ass_stock = malloc(sizeof(char*) * (just_ass(ass) + 1))))
 		return (malloc_exit());
-	if (!(g_jobcontrol.ass_stockenv = malloc(sizeof(char*) * (just_ass(ass) + 1))))
+	if (!(g_jobcontrol.ass_stockenv = malloc(sizeof(char*) *
+		(just_ass(ass) + 1))))
 		return (malloc_exit());
 	while (ass[++i] && i < just_ass(ass))
 	{
 		y = fill_tab_stock(ass[i], y);
 		x = fill_tab_stock_env(ass[i], x);
-		i++;
 	}
 	g_jobcontrol.ass_stock[y] = NULL;
 	g_jobcontrol.ass_stockenv[x] = NULL;
@@ -102,37 +65,26 @@ char	**exp_ass(char **ass)
 {
 	int		i;
 	int		y;
-	char	**tmp;
 	char	**dst;
 
 	i = 0;
 	y = 0;
-	tmp = NULL;
 	if (!(dst = malloc(sizeof(char*) * (tab_size(ass) + 1))))
 		malloc_exit();
 	while (ass[i])
 	{
 		if (ass[i][0] == '\r')
 		{
-			tmp = ft_strsplit(ass[i], '=');
-			tmp[1] = ft_simple_expanse(tmp[1]);
-			dst[y] = ft_strjoin(tmp[0], "=");
-			dst[y] = ft_strjoinfree(dst[y], tmp[1]);
+			dst[y] = fill_keyval(ass[i]);
 			y++;
 			i++;
-			ft_strdel(&tmp[0]);
-			ft_strdel(&tmp[1]);
-			ft_memdel((void**)&tmp);
-			//ft_freetab(tmp);
 		}
 		else
 			dst[y++] = ft_strdup(ass[i++]);
 	}
 	dst[y] = NULL;
-//	ft_printtab(dst);
 	ft_freetab(ass);
 	return (dst);
-
 }
 
 char	**ass_arg(char **ass, int i)
@@ -146,14 +98,12 @@ char	**ass_arg(char **ass, int i)
 		tmp = tab_copy(ass);
 		g_jobcontrol.assi = 0;
 		ass = move_char(ass);
-		//g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		g_jobcontrol.ret = setloc(ass);
 		ft_freetab(ass);
 		return (tmp);
 	}
 	else
 	{
-//		ft_putendl("I DO ITTTTTTTTTT");
 		g_jobcontrol.assi = 1;
 		save_ass_stock(ass);
 		save_ass(ass);
@@ -170,7 +120,6 @@ char	**check_assign(char **ass)
 
 	i = 0;
 	tmp = NULL;
-//		ft_putendl("I GOL ITTTTTTTTTT");
 	if (!ass || !ass[i])
 		return (NULL);
 	if (ass[i][0] == '\r')

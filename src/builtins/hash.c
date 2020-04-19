@@ -46,17 +46,12 @@ char				**getpathlist(char *pathvar)
 	{
 		if (!(pathlist[i] = strndup(pathvar, tmp - pathvar)))
 			return (NULL);
-//		printf("%s %p\n","pathlist[i] : ", pathlist[i]);
 		pathvar = ++tmp;
 		i++;
 	}
-//		printf("%s %p\n","pathvar : ", pathvar);
 	if (!pathvar || !(pathlist[i] = ft_strdup(pathvar)))
 		return (NULL);
-//		printf("%s %p\n","pathvar : ", pathvar);
-//		printf("%s %p\n","pathlist[i] : ", pathlist[i]);
 	pathlist[i + 1] = NULL;
-//	printf("%s %p\n","pathlist[0] : ", pathlist[0]);
 	return (pathlist);
 }
 
@@ -87,8 +82,10 @@ t_hash				*new_hash_entry(char *command, char *path, t_hash **hash)
 	if (!*hash && !(*hash = new_hash_page()))
 		return (NULL);
 	if (*command)
-		return (new_hash_entry(command + 1, path,
-			&((*hash)->next[(int)*command])));
+	{
+		return (new_hash_entry(command + 1,
+		path, &((*hash)->next[(int)*command])));
+	}
 	(*hash)->path = path;
 	(*hash)->hits = 1;
 	return (*hash);
@@ -164,13 +161,8 @@ t_hash				*browse_command(char *command, char *pathvar, t_hash **hash)
 		hashhit->path = NULL;
 	if (!(pathlist = getpathlist(pathvar)))
 		return (MAP_FAILED);
-//	ft_putendl("in hash command: ");
-//	ft_putendl(command);
-//	ft_putendl("in hash pathlist: ");
-	//ft_printtab(pathlist);
-//	printf("%p\n", pathlist);
 	path = browse_command_path(command, pathlist);
-	free_pathlist(pathlist);;
+	free_pathlist(pathlist);
 	if (path == MAP_FAILED || path == NULL)
 		return ((t_hash *)path);
 	if (hashhit)
@@ -215,7 +207,8 @@ void				print_hash(t_hash *hash)
 	}
 }
 
-/*int					main(int argc, char **argv, char **envp)
+/**
+int					main(int argc, char **argv, char **envp)
 {
 	char			*pathvar;
 	t_hash			*hashtable;
@@ -245,7 +238,8 @@ void				print_hash(t_hash *hash)
 	print_hash(hashtable);
 	while (1);
 	return (0);
-}*/
+}
+**/
 
 int					hash_invalid_opt(char opt)
 {
@@ -276,7 +270,6 @@ int					hash_add(t_hash **hash, char *pathvar, char **cmd)
 	}
 	return (ret_value);
 }
-
 
 int					exec_hash(t_hash **hash, char *pathvar, char **cmd)
 {

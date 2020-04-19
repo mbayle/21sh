@@ -17,13 +17,8 @@ int		permissions(char **str)
 	int	i;
 
 	i = 0;
-	int errno;
-	errno = 0;
-//	ft_putendl(*str);
 	if (access(*str, X_OK) == -1)
 	{
-//		ft_putendl("ERRNO ERR");
-//		perror(strerror(errno));
 		ft_putstr_fd("Shell: Permission denied: ", 2);
 		ft_putendl_fd(*str, 2);
 		g_jobcontrol.perm = 1;
@@ -43,10 +38,8 @@ char	*get_line(char **env)
 	i = 0;
 	tmp = NULL;
 	path = NULL;
-//	ft_printtab(env);
 	while (env && env[i])
 	{
-//		ft_putendl(env[i]);
 		tmp = ft_strsplit(env[i], '=');
 		if (tmp[0] && (ft_strcmp(tmp[0], "PATH")) == 0)
 		{
@@ -57,8 +50,6 @@ char	*get_line(char **env)
 		i++;
 		ft_freetab(tmp);
 	}
-//	ft_putendl("path : ");
-//	ft_putendl(path);
 	return (path);
 }
 
@@ -71,12 +62,9 @@ char	**get_line2(char **env)
 	i = 0;
 	tmp = NULL;
 	path = NULL;
-//	ft_putendl("IM A CALLED");
 	while (env && env[i])
 	{
-//		ft_printtab(env);
 		tmp = ft_strsplit(env[i], '=');
-//		ft_putendl(tmp[0]);
 		if (tmp[0] && (ft_strcmp(tmp[0], "PATH")) == 0)
 		{
 			path = ft_strsplit(tmp[1], ':');
@@ -112,7 +100,5 @@ char	*get_pathh(char *nwav, char **path)
 		}
 		ptr ? closedir(ptr) : 0;
 	}
-//	ft_putendl("COMMAND");
-//	ft_putendl(command);
 	return (command);
 }

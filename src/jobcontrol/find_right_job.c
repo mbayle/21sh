@@ -61,7 +61,6 @@ t_job		*if_parser(char **av, t_job *job)
 			break ;
 		job = job->next;
 	}
-//	printf("%p\n", job);
 	return (job);
 }
 

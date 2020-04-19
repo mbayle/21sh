@@ -12,7 +12,7 @@
 
 #include "../../includes/projectinclude.h"
 
-int 	exec_echo(char **cmd)
+int		exec_echo(char **cmd)
 {
 	int	i;
 	int	ret;

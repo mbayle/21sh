@@ -23,8 +23,6 @@ int	check_env(char *keyval)
 	{
 		if (ft_strcmp(env->key, tmp[0]) == 0)
 		{
-	//		ft_putendl("checkenv env->key: ");
-	//		ft_putendl(env->key);
 			ft_freetab(tmp);
 			return (0);
 		}
@@ -38,22 +36,15 @@ int	replace_env(char *keyval, int ass)
 {
 	char	**tmp;
 	t_myenv	*env;
-	t_myenv	*save;
 
 	env = g_jobcontrol.myenv;
-	save = g_jobcontrol.myenv;
 	tmp = ft_strsplit(keyval, '=');
 	while (env)
 	{
 		if (ft_strcmp(env->key, tmp[0]) == 0)
 		{
-			g_jobcontrol.myenv = env;
-			ft_strdel(&g_jobcontrol.myenv->keyval);
-			ft_strdel(&g_jobcontrol.myenv->val);
-			g_jobcontrol.myenv->keyval = ft_strdup(keyval);
-			g_jobcontrol.myenv->val = ft_strdup(tmp[1]);
+			replace_env_bis(keyval, tmp, env);
 			ft_freetab(tmp);
-			g_jobcontrol.myenv = save;
 			ass ? replace_loc(keyval) : 0;
 			return (0);
 		}
@@ -69,22 +60,14 @@ int	add_env(char *keyval, int ass)
 	char	**tmp;
 	t_myenv	*env;
 
-	env  = g_jobcontrol.myenv;
+	env = g_jobcontrol.myenv;
 	tmp = ft_strsplit(keyval, '=');
 	while (g_jobcontrol.myenv)
 	{
 		if (!g_jobcontrol.myenv->next)
 		{
-			g_jobcontrol.myenv->next =
-				ft_memalloc(sizeof(*g_jobcontrol.myenv));
-			g_jobcontrol.myenv->next->keyval =
-				ft_strdup(keyval);
-			g_jobcontrol.myenv->next->key =
-				ft_strdup(tmp[0]);
-			g_jobcontrol.myenv->next->val =
-				ft_strdup(tmp[1]);
+			add_env_bis(keyval, tmp);
 			ft_freetab(tmp);
-			g_jobcontrol.myenv->next->next = NULL;
 			break ;
 		}
 		g_jobcontrol.myenv = g_jobcontrol.myenv->next;
@@ -96,7 +79,6 @@ int	add_env(char *keyval, int ass)
 			add_loc(keyval);
 	}
 	return (0);
-
 }
 
 int	mysetenv(char **cmd, int ass)
@@ -121,5 +103,4 @@ int	mysetenv(char **cmd, int ass)
 		i++;
 	}
 	return (ret);
-
 }

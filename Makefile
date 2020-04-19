@@ -47,10 +47,8 @@ SRC		:=	main.c \
 			builtins/pwd.c\
 			builtins/type.c\
 			builtins/hash.c\
-			builtins/alias.c\
-			builtins/alias_bis.c\
-			builtins/unalias.c\
 			builtins/echo.c\
+			builtins/utils.c\
 			builtins/mysetenv.c\
 			builtins/unsetenv.c\
 			builtins/setloc.c\
@@ -81,14 +79,18 @@ SRC		:=	main.c \
 			execution/assign.c\
 			execution/assign_bis.c\
 			execution/assign_ter.c\
+			execution/assign_utils.c\
 			execution/child_exec.c\
 			execution/manage_path_cmd.c\
 			execution/tab_exec.c\
+			execution/path_utils.c\
 			execution/exec_utils.c\
 			execution/exec_utils2.c\
 			execution/exec_utils3.c\
+			execution/exec_utils5.c\
 			execution/execute_builtin.c\
 			utils/ft_freetab.c\
+			utils/ft_printtab.c\
 			utils/tab_utils.c\
 			utils/ft_strdupn.c\
 			utils/ft_strlenu.c\

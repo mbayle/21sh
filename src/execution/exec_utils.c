@@ -35,8 +35,6 @@ char	**env_copy(t_myenv *menv)
 		malloc_exit();
 	while (menv)
 	{
-//		printf("%p\n", menv);
-//		ft_putendl(menv->keyval);
 		dst[i++] = ft_strdup(menv->keyval);
 		menv = menv->next;
 	}
@@ -61,29 +59,10 @@ void	unexec_asign(void)
 {
 	if (g_jobcontrol.assi == 1)
 	{
-//		ft_putendl("		ASS STOK");
-//		ft_printtab(g_jobcontrol.ass_stock);
 		unexec_ass(g_jobcontrol.ass);
 		exec_ass(g_jobcontrol.ass_stock, 2);
 		g_jobcontrol.assi = 0;
 	}
-//	else
-//	{
-//		unexec_ass(g_jobcontrol.ass);
-//	}
-}
-
-int		should_i_exec(char ** cmd, char *mypath)
-{
-	if (g_jobcontrol.ao  || g_jobcontrol.stopexe)
-	{
-		g_jobcontrol.ao = 0;
-		g_jobcontrol.stopexe = 0;
-		ft_freetab(cmd);
-		ft_strdel(&mypath);
-		return (0);
-	}
-	return (1);
 }
 
 char	**copy_u(char **cmd, int pos)

@@ -20,7 +20,6 @@ void	delete_process(t_process *pro)
 		delete_process(pro->next);
 	ft_strdel(&pro->cmd);
 	ft_memdel((void**)&pro);
-//	printf("%s %p\n", "adreess de pro delete_prp", pro);
 }
 
 void	delete_job(t_job *job)
@@ -59,17 +58,14 @@ t_job	*delete_link(pid_t pgid)
 {
 	t_job	*first;
 	t_job	*tmp;
-	t_job	*save;
 
 	first = g_jobcontrol.first_mail;
-	save = first;
-	if (save && first->pgid == pgid )
+	if (first->pgid == pgid)
 		return (delete_first(first));
 	while (first && first->next)
 	{
 		if (first->next->pgid == pgid)
 		{
-			save = first;
 			ft_strdel(&first->next->command);
 			delete_process(first->next->first_process);
 			tmp = first->next;
@@ -83,6 +79,6 @@ t_job	*delete_link(pid_t pgid)
 	}
 	if (first->next)
 		return (first->next);
-	else 
+	else
 		return (first);
 }

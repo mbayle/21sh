@@ -57,7 +57,7 @@ int	unsetloc(char **cmd)
 	{
 		delete_loc(cmd[i]);
 		delete_env(cmd[i]);
-		i++;	
+		i++;
 	}
 	return (0);
 }

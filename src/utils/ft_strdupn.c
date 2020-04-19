@@ -4,8 +4,8 @@ int		until_c(char *str, char c)
 {
 	int	i;
 
-	i = ft_strlen(str);;
-	while (i >=0 && str[i] != c)
+	i = ft_strlen(str);
+	while (i >= 0 && str[i] != c)
 		i--;
 	return (i);
 }
@@ -17,12 +17,11 @@ int		from_c(char *str, char c)
 
 	i = ft_strlen(str);
 	y = 0;
-	while (i >=0  &&str[i] != c)
+	while (i >= 0 && str[i] != c)
 		i--;
 	while (str[i++])
 		y++;
 	return (y);
-	
 }
 
 char	*ft_strdupn(char *str, char c)
@@ -82,8 +81,8 @@ char	*ft_strdupt(char *str, char c)
 
 	i = 0;
 	y = 0;
-	if(!str || !(dst = malloc(sizeof(char) * (ft_strlen(str) + 1))))
-		return(NULL);
+	if (!str || !(dst = malloc(sizeof(char) * (ft_strlen(str) + 1))))
+		return (NULL);
 	while (str[i] && str[i] != c)
 		dst[y++] = str[i++];
 	dst[y] = '\0';

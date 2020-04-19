@@ -101,7 +101,6 @@ typedef struct				s_jobcontrol
 	t_hash					*h_tab;
 	t_myenv					*myenv;
 	t_myloc					*myloc;
-//	char					**env_cmd;
 	struct termios			term_attr;
 	struct termios			save_attr;
 	struct s_job			*first_job;
@@ -156,6 +155,10 @@ struct s_jobcontrol				g_jobcontrol;
 /**
  env
  **/
+void					add_env_bis(char *keyval, char **tmp);
+void					add_loc_bis(char *keyval, char **tmp);
+void					replace_env_bis(char *keyval, char **tmp, t_myenv *env);
+void					replace_loc_bis(char *keyval, char **tmp, t_myloc *loc);
 int						mypwd(void);
 char						*get_myenv(char *key);
 char						**set_copy(t_myloc *loc);
@@ -180,8 +183,10 @@ int						mysetenv(char **cmd, int ass);
 /**
 assign
 **/
+char					*fill_keyval(char *ass);
+void					save_ass(char **ass);
+int						fill_tab_stock_env(char *ass, int y);
 char					**cpy_env_plus(char **ass);
-//static char	*create_token(char *input, int i);
 void					unexec_ass(char **ass);
 char					**del_one(char **tabl, int pos);
 int						just_ass(char **ass);
@@ -284,6 +289,14 @@ void						delete_job(t_job *job);
 /**
 jocontrol / execution
 **/
+void						print_jc_info(t_job *job);
+void						signal_print(int i);
+char						**set_copy(t_myloc *env);
+int							check_b(char **cmd);
+void						if_not_cmd(char *cmd);
+void						is_valid(char *str, const char *dst, DIR *ptr);
+char						*is_b(char **cmd);
+void						exec_prgrm(char **cmd, char *path);
 void						norme(t_job *comp2, int i, t_job *save);
 int							process_nb(t_process *pro);
 int							execute_builtin(char **cmd);

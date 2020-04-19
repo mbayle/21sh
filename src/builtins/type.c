@@ -21,7 +21,8 @@ int		is_builtin(char *cmd)
 	!ft_strcmp(cmd, "test") || !ft_strcmp(cmd, "exit") ||
 	!ft_strcmp(cmd, "setenv") || !ft_strcmp(cmd, "unsetenv") ||
 	!ft_strcmp(cmd, "set") || !ft_strcmp(cmd, "unset") ||
-	!ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "type")|| !ft_strcmp(cmd, "pwd")))
+	!ft_strcmp(cmd, "export") || !ft_strcmp(cmd, "type")
+	|| !ft_strcmp(cmd, "pwd")))
 		return (0);
 	else
 		return (1);
@@ -50,8 +51,8 @@ int		print_type(char *cmd, char *path, int a)
 
 char	*mypath(char *cmd)
 {
-	char    **tmp;
-	char    *path;
+	char	**tmp;
+	char	*path;
 	char	**tmp2;
 
 	tmp2 = NULL;
@@ -62,10 +63,8 @@ char	*mypath(char *cmd)
 		tmp2 = env_copy(g_jobcontrol.myenv);
 		tmp = get_line2(tmp2);
 		ft_freetab(tmp2);
-		//ft_strdel(&path);
 		path = get_pathh(cmd, tmp);
 		ft_freetab(tmp);
-		//ft_putendl(path);
 		if (path)
 			permissions(&path);
 		else if (!path)
@@ -86,15 +85,10 @@ int		exec_type(char **arg)
 	{
 		if (is_builtin(arg[i]) == 0)
 			print_type(arg[i], NULL, 0);
-		//else if ((path = is_alias(arg[i])) != NULL)
-		//{
-		//		print_type(arg[i], path, 2);
-		//		ft_strdel(&path);
-		//}
 		else if ((path = mypath(arg[i])) != NULL)
 		{
 			print_type(arg[i], path, 1);
-			ft_strdel(&path);;
+			ft_strdel(&path);
 		}
 		else
 			ret = print_type(arg[i], NULL, -1);

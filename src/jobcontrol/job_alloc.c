@@ -20,7 +20,7 @@ char	**quick_tab_cmd(char *line)
 	ft_bzero(&index, sizeof(index));
 	if (!line || !(command = malloc(sizeof(char*) * (ft_occur(line, '|') * 2 +
 	2))) || !(command[index.y] = malloc(sizeof(char) * (ft_strlen(line) + 1))))
-		malloc_exit();;
+		malloc_exit();
 	while (line[index.i])
 	{
 		if (line[index.i] == '|')
@@ -30,7 +30,7 @@ char	**quick_tab_cmd(char *line)
 			command[++index.y] = ft_strdup("|");
 			if (!(command[++index.y] = malloc(sizeof(char) *
 							(ft_strlen(line) + 1))))
-				malloc_exit();;
+				malloc_exit();
 		}
 		else
 			command[index.y][index.x++] = line[index.i];
@@ -46,7 +46,8 @@ void	allocate_job_loop(int repere)
 	if (!g_jobcontrol.first_job)
 	{
 		ft_memdel((void**)g_jobcontrol.first_mail);
-		if ((g_jobcontrol.first_mail = ft_memalloc(sizeof(*g_jobcontrol.first_job))) == NULL)
+		if ((g_jobcontrol.first_mail =
+		ft_memalloc(sizeof(*g_jobcontrol.first_job))) == NULL)
 			malloc_exit();
 		g_jobcontrol.first_mail->pgid = 0;
 		g_jobcontrol.first_mail->last_j = 0;

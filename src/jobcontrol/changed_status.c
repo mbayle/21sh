@@ -12,29 +12,6 @@
 
 #include "projectinclude.h"
 
-void	signal_print(int i)
-{
-	if (i == 42)
-		ft_putstr_fd("SIGINT", 2);
-	else if (i == 11)
-		ft_putstr_fd("SIGSEGV", 2);
-	else if (i == 17)
-		ft_putstr_fd("SIGSTOP", 2);
-	else if (i == 21)
-		ft_putstr_fd("SIGTTIN", 2);
-	else if (i == 22)
-		ft_putstr_fd("SIGTTOU", 2);
-	else if (i == 2)
-		ft_putstr_fd("SIGQUIT", 2);
-	else if (i == 9)
-		ft_putstr_fd("SIGKILL", 2);
-	else
-	{
-		i > 0 ? ft_putnbr_fd(i, 2) : 0;
-//		ft_putstr_fd("	", 2);
-	}
-}
-
 void	if_stp(t_job *job, int i)
 {
 	if (i)
@@ -43,7 +20,6 @@ void	if_stp(t_job *job, int i)
 		ft_putnbr_fd(job->j_nb, 2);
 		ft_putstr_fd("]+	", 2);
 	}
-//	else
 	ft_putstr_fd("[", 2);
 	ft_putnbr_fd(job->pgid, 2);
 	ft_putstr_fd("] ", 2);
@@ -61,7 +37,6 @@ void	if_stp(t_job *job, int i)
 t_job	*print_and_del(t_job *job, int i, int check)
 {
 	t_job		*save;
-	t_process	*save1;
 
 	save = job;
 	if (i != 0 && i == check)
@@ -74,16 +49,7 @@ t_job	*print_and_del(t_job *job, int i, int check)
 	}
 	else if (job && job->fg == 1 && job->stop != 1)
 	{
-//		ft_putendl(job->command);	
-		save1 = job->first_process;
-		while (job->first_process && job->first_process->next)
-				job->first_process = job->first_process->next;
-		if (job->first_process && job->first_process->status > 2
-		&& job->first_process->status < 50 &&
-		ft_strcmp(job->command, "fg ") && job->first_process->status != 13
-		&& ft_strcmp(job->command, "exit"))
-			if_stp(job, 0);
-		job->first_process = save1;
+		print_jc_info(job);
 		save = delete_link(job->pgid);
 		if (!save && g_jobcontrol.first_mail)
 			save = job;
@@ -117,8 +83,6 @@ void	status_builtin(t_process *pro)
 	t_process *p;
 
 	p = pro;
-//	printf("%s %p\n", "ADDR de pro", pro);	
-//	return ; // IF PIPE CRASH
 	while (pro && p)
 	{
 		if (p && p->lpid < 0)
@@ -130,15 +94,12 @@ void	status_builtin(t_process *pro)
 void	browse_process(t_process *pro, t_job *cpy)
 {
 	int		status;
-//	int		b_pid;
 	pid_t	pid;
 
 	status = 0;
 	pid = 0;
-//	b_pid = 0;
 	while (pro)
 	{
-//		b_pid = pro->lpid;
 		if (pro->lpid > 0)
 		{
 			pid = waitpid(pro->lpid, &status, WUNTRACED

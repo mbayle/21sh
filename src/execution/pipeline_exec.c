@@ -12,30 +12,14 @@
 
 #include "../../includes/projectinclude.h"
 
-char		*is_b(char **cmd)
-{
-	char	*mypath;
-	char	*tmp;
-
-	mypath = NULL;
-	tmp = my_path(cmd, g_jobcontrol.env);
-	if (!check_b(cmd) || (g_jobcontrol.cm == 1))
-		mypath = ft_strdup("b");
-	else if (tmp && g_jobcontrol.cm != 1)
-		mypath = ft_strdup("i");
-	if (tmp)
-		ft_strdel(&tmp);
-	g_jobcontrol.cm = 0;
-	return (mypath);
-}
-
 int				child_process(int oldlink[2], int newlink[2], char *path,
-		char **cmd)
+				char **cmd)
 {
 	pid_t	pid;
 
 	pid = -1;
-	if (((!ft_strcmp(path, "b") && (g_jobcontrol.sim || g_jobcontrol.first_job->fg == 0)) || !ft_strcmp(path, "i"))
+	if (((!ft_strcmp(path, "b") && (g_jobcontrol.sim ||
+	g_jobcontrol.first_job->fg == 0)) || !ft_strcmp(path, "i"))
 	&& (pid = fork()) == 0)
 	{
 		do_in_child(oldlink, newlink, g_jobcontrol.arg);
@@ -52,22 +36,7 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 			}
 		}
 		g_jobcontrol.red == -1 ? exit(g_jobcontrol.ret = 1) : 0;
-		if (ft_strcmp(path, "b") == 0)
-		{
-			execute_builtin(cmd);
-			exit(g_jobcontrol.ret);
-		}
-		if (ft_strcmp(path, "b") != -1 && ft_strcmp(path, "b") != 0)
-		{
-			execve(path, cmd, g_jobcontrol.env);
-			ft_putstr_fd("Shell: ", 2);
-			ft_putstr_fd(cmd[0], 2);
-			ft_putendl_fd(" : is a directory", 2);
-	//		g_jobcontrol.ret = 42;
-			reset_attr();
-			exit(1);
-		}
-
+		exec_prgrm(cmd, path);
 	}
 	return (pid);
 }
@@ -106,7 +75,8 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
 	if (!should_i_exec(cmd, mypath))
 		return (NULL);
-	if (g_jobcontrol.sim == 0 && mypath && !ft_strcmp(mypath, "b") && g_jobcontrol.first_job->fg)
+	if (g_jobcontrol.sim == 0 && mypath && !ft_strcmp(mypath, "b")
+	&& g_jobcontrol.first_job->fg)
 	{
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
 		execute_builtin(cmd);
@@ -116,10 +86,8 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	g_jobcontrol.red = 0;
 	ft_freetab(cmd);
 	tmp = concat_tab(av);
-	if (mypath) //&& g_jobcontrol.cm != 1)
-	{
+	if (mypath)
 		pro = fill_jc_struc(pid, tmp, pro);
-	}
 	ft_strdel(&mypath);
 	ft_strdel(&tmp);
 	return (pro);
@@ -167,7 +135,6 @@ int				pipe_exec(char ***av, int fg)
 	else
 		put_in_bg(g_jobcontrol.first_job, 0, NULL,
 				g_jobcontrol.first_job->first_process);
-//	ft_freetab(g_jobcontrol.av);
 	reset_fd();
 	return (0);
 }

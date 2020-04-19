@@ -82,12 +82,21 @@ int		check_if_stop(t_process *p, t_job *job)
 	return (0);
 }
 
-void	set_ret(int status)
+void	set_ret(int status, int i)
 {
-	g_jobcontrol.first_job->first_process->status = status == 2 ? 42 : status;
-	ft_putnbr(status);
-	g_jobcontrol.first_job->first_process->r_value = status + 128;
-	g_jobcontrol.ret = status + 128;
+	if (i == 0)
+	{
+		g_jobcontrol.first_job->first_process->status =
+		status == 2 ? 42 : status;
+		g_jobcontrol.first_job->first_process->r_value = status + 128;
+		g_jobcontrol.ret = status + 128;
+	}
+	else
+	{
+		g_jobcontrol.first_job->first_process->status = 1;
+		g_jobcontrol.first_job->first_process->r_value = status;
+		g_jobcontrol.ret = 128 + WSTOPSIG(status);
+	}
 }
 
 int		process_status(pid_t pid, int status, t_process *p)
@@ -102,18 +111,14 @@ int		process_status(pid_t pid, int status, t_process *p)
 	g_jobcontrol.ret = status;
 	if (WIFEXITED(status) == TRUE)
 	{
-		g_jobcontrol.first_job->first_process->status = status ?50 : -1;
+		g_jobcontrol.first_job->first_process->status = status ? 50 : -1;
 		g_jobcontrol.ret = WEXITSTATUS(status);
 		g_jobcontrol.first_job->first_process->r_value = WEXITSTATUS(status);
 	}
 	else if (WIFSIGNALED(status) == TRUE)
-		set_ret(status);
+		set_ret(status, 0);
 	else if (WIFSTOPPED(status) == TRUE)
-	{
-		g_jobcontrol.first_job->first_process->status = 1;
-		g_jobcontrol.first_job->first_process->r_value = status;
-		g_jobcontrol.ret = 128 + WSTOPSIG(status);
-	}
+		set_ret(status, 1);
 	if (g_jobcontrol.ret == 127)
 		g_jobcontrol.first_job->first_process->status = 127;
 	g_jobcontrol.first_job->first_process = pro;

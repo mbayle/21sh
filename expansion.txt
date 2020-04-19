@@ -1,8 +1,0 @@
-EXPANSION
-
-	pour les command et arguments: apl fonction geoffrey double tab (avec field spliting)
-
-	pour les fichier de redirection : apl finction simple chaine ( sans field splitting)
-	pour les assignation : envoyer simple chaine, (sans field splitting)
-
-

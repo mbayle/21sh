@@ -104,13 +104,6 @@ void		job_param(char **av, t_job *j)
 
 int			ft_jobs(t_job *j, char **av)
 {
-//	int		i;
-//	pid_t	pgid;
-//	t_job	*save;
-
-//	i = 1;
-//	save = j;
-//	pgid = 0;
 	if (g_jobcontrol.first_job && g_jobcontrol.first_job->fg == 0)
 		return (0);
 	if (!av[1])

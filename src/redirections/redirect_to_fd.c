@@ -12,7 +12,7 @@
 
 #include "projectinclude.h"
 
-char		*exp_free(char *file)
+char	*exp_free(char *file)
 {
 	char	*tmp;
 

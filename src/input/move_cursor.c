@@ -15,10 +15,8 @@
 void	go_first_char(int *mainindex, int *prompt, int *pos)
 {
 	int		mark;
-//	int		rep;
 
 	(void)prompt;
-//	rep = 1;
 	mark = *mainindex;
 	if (mark <= 0 || mark > ft_strlenu(g_mainline))
 		return ;
@@ -65,9 +63,6 @@ void	left_arrow(int *mainindex, int *pos)
 
 void	move_with_arrows(char *buf, int *prompt, int *mainindex, int *pos)
 {
-//	int r;
-
-//	r = get_row(0, ft_strlenu(g_mainline), prompt[1]);
 	if (buf[0] == 27 && buf[1] == 91)
 	{
 		if (buf[2] == 68)

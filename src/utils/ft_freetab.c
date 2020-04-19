@@ -1,18 +1,17 @@
 #include "projectinclude.h"
 
-void    ft_freetab(char **s1)
+void	ft_freetab(char **s1)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (s1 && s1[i])
-    {
-        free(s1[i]);
-        s1[i] = NULL;
-        i++;
-    }
-    free(s1);
-    s1 = NULL;
+	i = 0;
+	while (s1 && s1[i])
+	{
+		free(s1[i]);
+		s1[i] = NULL;
+		i++;
+	}
+	free(s1);
+	s1 = NULL;
 	ft_memdel((void**)&s1);
 }
-

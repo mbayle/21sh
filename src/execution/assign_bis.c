@@ -12,7 +12,7 @@
 
 #include "../../includes/projectinclude.h"
 
-char	**del_one(char **tabl, int pos)
+char		**del_one(char **tabl, int pos)
 {
 	int		i;
 	int		j;
@@ -31,9 +31,9 @@ char	**del_one(char **tabl, int pos)
 	return (dst);
 }
 
-int		just_ass(char **ass)
+int			just_ass(char **ass)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (ass && ass[i])
@@ -45,38 +45,13 @@ int		just_ass(char **ass)
 	return (-1);
 }
 
-char	**cpy_env_plus(char **ass)
-{
-	int	i;
-	int	y;
-	char **tmp2;
-
-	i = 1;
-	y = 0;
-	if (!(tmp2 = malloc(sizeof(char*) * (tab_size(ass) + 2))))
-        malloc_exit();
-	tmp2[0] = NULL;
-//	ft_putnbr(tab_size(ass));
-	if (ass)
-	{
-//		ft_putendl("ASS");
-		tmp2[0] = ft_strdup("setenv");
-		while (ass[y])
-			tmp2[i++] = ft_strdup(ass[y++]);
-		tmp2[i] = NULL;
-	}
-	i == 1 ? ft_memdel((void**)&tmp2) : 0;
-	return (tmp2);
-}
-
-void	exec_ass(char **ass, int env)
+void		exec_ass(char **ass, int env)
 {
 	int		i;
 	char	*tmp;
 	char	**tmp2;
 
 	i = 0;
-	tmp2 = NULL;
 	while (ass && ass[i] && ass[i][0] == '\r')
 	{
 		tmp = ft_strdup(ass[i]);
@@ -87,23 +62,18 @@ void	exec_ass(char **ass, int env)
 	}
 	if (ass)
 	{
-		if (env == 1)
-			tmp2 = cpy_env_plus(ass);
-		else if (env == 2)
-			tmp2 = cpy_env_plus(g_jobcontrol.ass_stockenv);
-		//g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, ass, NULL, 0);
 		g_jobcontrol.ret = setloc(ass);
 		if (env)
-			//g_jobcontrol.ret = exec_setenv(&g_jobcontrol.s, tmp2, NULL, 1);
+		{
+			tmp2 = env == 1 ? cpy_env_plus(ass) :
+			cpy_env_plus(g_jobcontrol.ass_stockenv);
 			g_jobcontrol.ret = mysetenv(tmp2, 0);
-//		t_myenv
-//		ft_putendl("ASSSSSSSSSSSSSSSSSSSSSSSSSSS");
-//		ft_printtab(ass);
-		ft_freetab(tmp2);
+			ft_freetab(tmp2);
+		}
 	}
 }
 
-char	**get_key(char **ass)
+char		**get_key(char **ass)
 {
 	int		i;
 	int		y;
@@ -127,7 +97,7 @@ char	**get_key(char **ass)
 	return (dst);
 }
 
-char	**move_char(char **ass)
+char		**move_char(char **ass)
 {
 	int		i;
 	int		y;

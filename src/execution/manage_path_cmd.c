@@ -13,39 +13,8 @@
 #include "../../includes/projectinclude.h"
 #include <sys/mman.h>
 
-void	is_valid(char *str, const char *dst, DIR *ptr)
+char	*loc2(t_read read, char *tmp, char *dst, char *str)
 {
-	struct stat buf;
-
-	(void)ptr;
-	lstat(str, &buf);
-	if (S_ISDIR(buf.st_mode))
-	{
-		ft_putstr_fd("Shell: ", 2);
-		ft_putstr_fd(str, 2);
-		ft_putendl_fd(" : is a directory", 2);
-		g_jobcontrol.cm = 1;
-		g_jobcontrol.ret = 127;
-	}
-	else if (!dst && ft_occur(str, '/'))
-	{
-		ft_putstr_fd("Shell: ", 2);
-		ft_putstr_fd(str, 2);
-		ft_putendl_fd(" : no such file or directory", 2);
-		g_jobcontrol.cm = 1;
-		g_jobcontrol.ret = 127;
-	}
-}
-
-char	*local_file(char *str)
-{
-	t_read	read;
-	char	*dst;
-	char	*tmp;
-
-	g_jobcontrol.perm = 0;
-	dst = NULL;
-	tmp = NULL;
 	read.path = ft_strldup(str, '/');
 	read.ptr = read.path ? opendir(read.path) : opendir(".");
 	while (read.ptr && (read.file = readdir(read.ptr)))
@@ -69,32 +38,18 @@ char	*local_file(char *str)
 	return (dst);
 }
 
-void	if_not_cmd(char *cmd)
+char	*local_file(char *str)
 {
-	if (g_jobcontrol.cm == 1)
-		return ;
-	ft_putstr_fd("Shell : No cmd found: ", 2);
-	ft_putendl_fd(cmd, 2);
-	g_jobcontrol.ret = 127;
-	g_jobcontrol.cm = 1;
-}
+	t_read	read;
+	char	*dst;
+	char	*tmp;
 
-int		check_b(char **cmd)
-{
-	if (cmd && cmd[0] && (!ft_strcmp(cmd[0], "jobs") || !ft_strcmp(cmd[0], "fg")
-	|| !ft_strcmp(cmd[0], "bg") || !ft_strcmp(cmd[0], "setcpt")
-	|| !ft_strcmp(cmd[0], "history") || !ft_strcmp(cmd[0], "help")
-	|| !ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "hash") ||
-	!ft_strcmp(cmd[0], "test") || !ft_strcmp(cmd[0], "exit") ||
-	!ft_strcmp(cmd[0], "setenv") || !ft_strcmp(cmd[0], "unsetenv") ||
-	!ft_strcmp(cmd[0], "set") || !ft_strcmp(cmd[0], "unset") ||
-	!ft_strcmp(cmd[0], "export") || !ft_strcmp(cmd[0], "type") ||
-	!ft_strcmp(cmd[0], "env") || !ft_strcmp(cmd[0], "echo") ||
-	!ft_strcmp(cmd[0], "setclr") || !ft_strcmp(cmd[0], "cd") || !ft_strcmp(cmd[0], "pwd")
-	|| cmd[0][0] == '\r'))
-		return (0);
-	else
-		return (1);
+	dst = NULL;
+	tmp = NULL;
+	ft_bzero(&read, sizeof(read));
+	g_jobcontrol.perm = 0;
+	dst = loc2(read, tmp, dst, str);
+	return (dst);
 }
 
 char	*get_hashed_mypath(t_hash *h_tab)
@@ -107,23 +62,6 @@ char	*get_hashed_mypath(t_hash *h_tab)
 	if (mypath && permissions(&mypath))
 		g_jobcontrol.ret = 1;
 	return (mypath);
-}
-
-char	**set_copy(t_myloc *menv)
-{
-	int     i;
-	char    **dst;
-
-	i = 0;
-	if (!(dst = malloc(sizeof(char*) * ((elst_size(menv) + 1)))))
-		malloc_exit();
-	while (menv)
- 	{
-		dst[i++] = ft_strdup(menv->keyval);
-		menv = menv->next;
-	}
-	dst[i] = NULL;
- 	return (dst);
 }
 
 char	*get_set(char **tenv)
@@ -146,17 +84,11 @@ char	*my_path(char **cmd, char **env)
 	char	*mypath;
 
 	mypath = NULL;
-//	ft_putendl("iam in path");
 	if (cmd && cmd[0] && check_b(cmd) == 1)
 	{
-	//	tmp = get_line(env);
 		tmp = get_set(env);
-		//ft_printtab(env);
 		if (!(mypath = local_file(cmd[0])) && g_jobcontrol.perm != 1)
 		{
-		//	ft_putendl("CMD[0] : ");
-		//	ft_putendl(cmd[0]);
-		//	ft_putendl(tmp);
 			if ((h_tab = browse_command(cmd[0], tmp, &g_jobcontrol.h_tab))
 			== MAP_FAILED)
 			{
@@ -169,6 +101,5 @@ char	*my_path(char **cmd, char **env)
 		}
 		ft_strdel(&tmp);
 	}
-//	ft_putendl(mypath);
 	return (mypath);
 }
