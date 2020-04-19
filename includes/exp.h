@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 12:34:36 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/15 13:37:57 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/18 18:32:51 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,6 +324,7 @@ int							ft_ari_operand_expected(char *input, char *token);
 
 int							ft_ari_recursion_exceeded(char *input, char *token);
 int							ft_ari_syntax_error(char *input, char *token);
+int							ft_ari_zero_divisor(char *input);
 
 /*
 **							ft_ari_exe_as.c
