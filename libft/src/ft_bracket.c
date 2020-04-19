@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/17 23:51:50 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/19 03:43:00 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 				continue ;
 			}
 			else
-				break ;
+				return (-3) ;
 		}
 		if (str[a] && (str[a] == '(' || str[a] == '{'))
 		{

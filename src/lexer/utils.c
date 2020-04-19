@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/18 14:05:40 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/19 04:19:31 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,20 @@ static int     test_squote(char *input)
 {
     int     dquote;
     int     i;
+	char	stack[256];
+	int		ret;
 
     dquote = 0;
     i = 0;
     while (input[i])
     {
+		if ((input[i] == '$' && input[i + 1] == '{')
+		|| (input[i] == '$' && input[i + 1] == '('))
+		{
+			ret = ft_bracket(input + i, -1, 0, stack);
+			if (ret > 0)
+				i = i + ret + 1;
+		}
         if (input[i] == 39)
         {
             if (dquote == 1)
@@ -84,11 +93,22 @@ static int     test_dquote(char *input)
 {
     int     dquote;
     int     i;
+	char	stack[256];
+	int		ret;
 
     dquote = 0;
     i = 0;
     while (input[i])
     {
+		if ((input[i] == '$' && input[i + 1] == '{')
+		|| (input[i] == '$' && input[i + 1] == '('))
+		{
+			ret = ft_bracket(input + i, -1, 0, stack);
+			if (ret > 0)
+				i = i + ret + 1;
+			else
+				return (-1);
+		}
         if (input[i] == 92)
             i = i + 2;
         if (input[i] == 34)
