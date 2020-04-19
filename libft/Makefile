@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/03/25 17:01:38 by admin            ###   ########.fr        #
+#    Updated: 2020/04/18 14:07:22 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = libft.a
 
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Werror -Wextra -g3 -I$(INC_PATH)
 
 INCS	= ./includes/libft.h
@@ -131,7 +131,9 @@ SRC = ft_memset.c \
 	  ft_cswap.c \
 	  ft_ipbackc.c \
 	  ft_bracket.c \
-	  ft_is_space.c
+	  ft_is_space.c \
+	  ft_check_dquote.c \
+	  ft_check_squote.c
 
 OBJ_PATH = ./.obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))

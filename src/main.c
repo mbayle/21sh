@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/12 13:21:21 by frameton         ###   ########.fr       */
+/*   Updated: 2020/04/17 13:12:13 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,9 +216,9 @@ int			main(int ac, char **av, char **envp)
 		{
 //			update_bg_status();
 			g_shell->line = g_jobcontrol.s.cmd;
-			ft_putendl("-----");
-			ft_putendl(g_shell->line);
-			ft_putendl("-----");
+//			ft_putendl("-----");
+//			ft_putendl(g_shell->line);
+//			ft_putendl("-----");
 			update_bg_status();
 			g_shell->line = g_jobcontrol.s.cmd;
 			ft_lexer(&g_shell->lex, g_shell->line);

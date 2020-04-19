@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/25 16:58:57 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/19 04:21:37 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,12 @@ int		find_end(int i, char *input)
 		if (input[i] == '\\')
 			i++;
 		if (input[i] == '\'' || input[i] == '"' || (input[i] == '$'
-				&& input[i + 1] == '{'))
+				&& input[i + 1] == '{') || (input[i] == '$'
+				&& input[i + 1] == '('))
 		{
 			i = quote_brace_case(i, input);
+			if (ft_isalpha(input[i]) || input[i] == '\'' || input[i] == '"')
+				input[i++] && check_operator(input + i++) == 0 && input[i++] != ';' ? i++ : 0;
 			break ;
 		}
 		if (input[i])
@@ -130,8 +133,6 @@ void	ft_lexer(t_lex **lex, char *input)
 
 	if (!lex || !input || ft_is_space(input) == 0)
 		return ;
-    ft_putendl("DEBUG valeur recu par ft_lexer : ");
-    ft_putendl(input);
 	while (*input)
 	{
 		while (ft_is_separator(*input) == 1)
