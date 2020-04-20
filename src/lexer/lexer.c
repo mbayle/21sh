@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/19 04:21:37 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/20 16:20:37 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	ft_lexer(t_lex **lex, char *input)
 		else
 		{
 			lexdel(lex);
-			ft_putendl("[DEBUG] Exception");
+			ft_putendl_col("Shell : Wrong token (missing quote or brace)", RED, WHITE);
 			return ;
 		}
 		input = input + i++;

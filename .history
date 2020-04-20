@@ -2,6 +2,17 @@
 5
 0
 exit
+"$(("
+exit
+"$(("
+exit
+"$(("
+exit
+"$(("
+"$(('))"
+$((\)))
+a=hello b=world; b=42 echo ${a}_${b} && echo lol
+exit
 a=hello b=world; b=42 echo ${a}_${b} && echo lol
 exit
 \'
