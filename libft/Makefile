@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/10 03:26:28 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/18 14:07:22 by admin            ###   ########.fr        #
+#    Updated: 2020/04/20 15:55:46 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -133,7 +133,8 @@ SRC = ft_memset.c \
 	  ft_bracket.c \
 	  ft_is_space.c \
 	  ft_check_dquote.c \
-	  ft_check_squote.c
+	  ft_check_squote.c \
+	  ft_bracket_index.c
 
 OBJ_PATH = ./.obj/
 OBJS = $(addprefix $(OBJ_PATH), $(OBJ))

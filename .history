@@ -2,6 +2,8 @@
 5
 0
 exit
+a=hello b=world; b=42 echo ${a}_${b} && echo lol
+exit
 \'
 '\'
 exit

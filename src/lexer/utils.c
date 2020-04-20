@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/20 00:21:26 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/20 15:54:50 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,9 +142,11 @@ int		quote_brace_case(int i, char *input)
 	if ((input[i] == '$' && input[i + 1] == '{')
 		|| (input[i] == '$' && input[i + 1] == '('))
 	{
-		ret = ft_bracket(input, -1, 0, stack);
+		ret = ft_bracket_index(input, -1, 0, stack);
 		if (ret > 0)
 			i = i + ret + 1;
+		else
+			return (ret);
 		if (input[i] && check_operator(input + i) == 0)		
  			while (input[i] && input[i] != ' ' && check_operator(input + i) == 0)		
  				i++;

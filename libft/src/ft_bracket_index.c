@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bracket.c                                       :+:      :+:    :+:   */
+/*   ft_bracket_index.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/20 15:47:18 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/20 16:02:36 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	match(char top, char a)
 	return (0);
 }
 
-int			ft_bracket(char *str, int top, int a, char *stack)
+int			ft_bracket_index(char *str, int top, int a, char *stack)
 {
 	if (!str[a])
 		return (-3);
@@ -64,12 +64,12 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 			{
 				stack[top] = 0;
 				top--;
+                if (top == -1)
+		            return (a);
 			}
 		}
 		a++;
 	}
-	if (top == -1)
-		return (a);
 	if (stack[top] == '{')
         return (-1);
     if (stack[top] == '(')
