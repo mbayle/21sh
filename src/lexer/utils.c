@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:21:12 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/20 15:54:50 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/20 16:33:41 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int     test_squote(char *input)
 		if ((input[i] == '$' && input[i + 1] == '{')
 		|| (input[i] == '$' && input[i + 1] == '('))
 		{
-			ret = ft_bracket(input + i, -1, 0, stack);
+			ret = ft_bracket_index(input + i, -1, 0, stack);
 			if (ret > 0)
 				i = i + ret + 1;
 		}
@@ -103,7 +103,7 @@ static int     test_dquote(char *input)
 		if ((input[i] == '$' && input[i + 1] == '{')
 		|| (input[i] == '$' && input[i + 1] == '('))
 		{
-			ret = ft_bracket(input + i, -1, 0, stack);
+			ret = ft_bracket_index(input + i, -1, 0, stack);
 			if (ret > 0)
 				i = i + ret + 1;
 			else
