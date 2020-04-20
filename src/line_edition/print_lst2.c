@@ -61,7 +61,7 @@ static int	check_quotes2_b(t_struct st, char **str, int s)
 	r = 0;
 	save = *str;
 	while (*save)
-		if (*save == '\\')
+		if (d && s && *save == '\\')
 			check_bslash(&save);
 		else
 			save = check_quotes3(&d, &s, &c, save);

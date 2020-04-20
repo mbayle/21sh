@@ -1,6 +1,17 @@
 2
+5
 0
-<
+exit
+\'
+'\'
+exit
+'\'
+'\n'
+"a=hello b=world; b=42 echo ${a}_${b} && echo ${b}"
+a=hello b=world; b=42 echo ${a}_${b} && echo ${b}
+"a=hello b=world; b=42 echo ${a}_${b} && echo ${b}"
+ls
+setclr
 exit
 ls "auteur"||cat
 ls "auteur"&&cat
