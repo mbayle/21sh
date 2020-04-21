@@ -40,7 +40,7 @@ void		exec_prgrm(char **cmd, char *path)
 	if (ft_strcmp(path, "b") != -1 && ft_strcmp(path, "b") != 0)
 	{
 		execve(path, cmd, g_jobcontrol.env);
-		ft_putstr_fd("Shell: ", 2);
+		ft_putstr_fd("42sh: ", 2);
 		ft_putstr_fd(cmd[0], 2);
 		ft_putendl_fd(" : is a directory", 2);
 		reset_attr();

@@ -76,7 +76,7 @@ int		if_cont(t_job *tjob, t_job *save)
 {
 	if (tjob->stop != 1 && tjob->fg != 1)
 	{
-		ft_putstr_fd("Shell: bg: job [", 2);
+		ft_putstr_fd("42sh: bg: job [", 2);
 		ft_putnbr_fd(tjob->j_nb, 2);
 		ft_putendl_fd("] already in bg", 2);
 		return (-1);

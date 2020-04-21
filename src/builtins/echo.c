@@ -12,6 +12,12 @@
 
 #include "../../includes/projectinclude.h"
 
+int		echo_error(void)
+{
+	ft_putendl_fd("42sh: echo: write error", 2);
+	return (-1);
+}
+
 int		exec_echo(char **cmd)
 {
 	int	i;
@@ -25,10 +31,11 @@ int		exec_echo(char **cmd)
 		e = 1;
 	while (cmd && cmd[i + e])
 	{
-		if (write(1, (cmd[i + e]), ft_strlen(cmd[i + e])) == -1)
-			return (-1);
+
+		if ( write(1, (cmd[i + e]), ft_strlen(cmd[i + e])) == -1)
+			return (echo_error());
 		if (cmd[i + e + 1] && write(1, " ", 1) == -1)
-			return (-1);
+			return (echo_error());
 		i++;
 	}
 	if (e == 1)

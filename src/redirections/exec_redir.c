@@ -20,7 +20,7 @@ int		exec_heredoc(char *redir, char *file)
 	n = dig_to_io(redir);
 	if (pipe(link) < 0)
 	{
-		write(2, "Shell: pipe error", 17);
+		write(2, "42sh: pipe error", 17);
 		return (-1);
 	}
 	if (check_fd(0, n))
@@ -28,13 +28,13 @@ int		exec_heredoc(char *redir, char *file)
 	file = ft_simple_expanse(file);
 	if (write(link[1], file, (ft_strlen(file))) < 0)
 	{
-		write(2, "Shell: write error", 18);
+		write(2, "42sh: write error", 18);
 		return (-1);
 	}
 	close(link[1]);
 	if (dup2(link[0], n) < 0)
 	{
-		write(2, "Shell: bad fd", 14);
+		write(2, "42sh: bad fd", 14);
 		return (-1);
 	}
 	return (0);
@@ -61,7 +61,7 @@ int		dup_fd(char *redir, char *file)
 	else
 	{
 		ft_strdel(&file);
-		ft_putendl_fd("Shell: ambiguous redirect", 2);
+		ft_putendl_fd("42sh: ambiguous redirect", 2);
 		return (-1);
 	}
 	ft_strdel(&file);
@@ -129,8 +129,8 @@ int		execute_redir(char **cmd)
 		else if (ft_seq_occur(cmd[i], "<") && !ft_seq_occur(cmd[i], "\\<")
 		&& between_quotes(cmd[i]))
 			ret = redirect_to_file(cmd[i], cmd[i + 1], O_RDONLY, 0);
-		if (ret == -1 && (g_jobcontrol.ret = 1) == 1)
-			return (g_jobcontrol.red = -1);
+		if (ret == -1 && (g_jobcontrol.ret = 1) && (g_jobcontrol.red = -1))
+			return (ret);
 	}
 	return (0);
 }

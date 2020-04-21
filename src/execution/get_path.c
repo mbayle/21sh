@@ -19,7 +19,7 @@ int		permissions(char **str)
 	i = 0;
 	if (access(*str, X_OK) == -1)
 	{
-		ft_putstr_fd("Shell: Permission denied: ", 2);
+		ft_putstr_fd("42sh: Permission denied: ", 2);
 		ft_putendl_fd(*str, 2);
 		g_jobcontrol.perm = 1;
 		i = 1;

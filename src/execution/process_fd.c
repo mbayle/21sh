@@ -26,9 +26,9 @@ void	reset_fd(void)
 	dup2(g_jobcontrol.stdi, 0);
 	close(g_jobcontrol.stdi);
 	dup2(g_jobcontrol.stdo, 1);
-	close(g_jobcontrol.stde);
-	dup2(g_jobcontrol.stde, 2);
 	close(g_jobcontrol.stdo);
+	dup2(g_jobcontrol.stde, 2);
+	close(g_jobcontrol.stde);
 }
 
 void	close_fd(void)

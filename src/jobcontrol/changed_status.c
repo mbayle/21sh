@@ -29,7 +29,7 @@ void	if_stp(t_job *job, int i)
 		ft_putstr_fd(" Terminated ", 2);
 	signal_print(job->first_process->status);
 	ft_putstr_fd(":	", 2);
-	ft_putstr_fd(job->command, 2);
+	i ? ft_putstr_fd(job->command, 2) : ft_putstr_fd(job->first_process->cmd, 2);
 	ft_putchar_fd('\n', 2);
 	put_last_fg(put_last_stp(job, 2, 1), 1, 0);
 }
@@ -106,7 +106,7 @@ void	browse_process(t_process *pro, t_job *cpy)
 					| WNOHANG);
 			if (pro && pro->lpid == pid)
 			{
-				process_status(pid, status, pro);
+				process_status(pro->lpid, status, pro);
 				if (pro->status == 1)
 					check_if_stop(pro, cpy);
 				break ;

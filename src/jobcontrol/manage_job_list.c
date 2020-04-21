@@ -30,7 +30,7 @@ void	delete_job(t_job *job)
 		delete_job(job->next);
 	delete_process(job->first_process);
 	ft_strdel(&job->command);
-	if (job->pgid != -1 && job->pgid != 0)
+	if (job->pgid != -1 && job->pgid != 0 && job->pgid != g_jobcontrol.shell_pgid)
 		kill(-(job->pgid), 9);
 	ft_memdel((void**)&job);
 }

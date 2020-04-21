@@ -116,7 +116,8 @@ void		exit_edl(t_struct *s, char **cmd)
 	file_history(s->h, &s->h, s, 0);
 	ft_exit3(&*s);
 	reset_attr();
-	delete_job(g_jobcontrol.first_mail);
+	if (g_jobcontrol.sim == 0)
+		delete_job(g_jobcontrol.first_mail);
 	astdel(&g_shell->ast);
 	//lexdel(&g_shell->lex);
 	

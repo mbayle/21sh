@@ -70,8 +70,10 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	char	**cmd;
 	char	*mypath;
 	char	*tmp;
+	int status;
 
 	cmd = NULL;
+	status = 0;
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
 	if (!should_i_exec(cmd, mypath))
 		return (NULL);
@@ -79,7 +81,7 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	&& g_jobcontrol.first_job->fg)
 	{
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
-		execute_builtin(cmd);
+		g_jobcontrol.red != -1 ? execute_builtin(cmd) : 0;
 	}
 	pid = child_process(oldlink, newlink, mypath, cmd);
 	close_fd_father(oldlink, newlink);

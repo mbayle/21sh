@@ -16,16 +16,17 @@ void		wait_for_job(t_process *pro, t_job *job, int fg)
 {
 	int			status;
 	t_process	*save;
+	pid_t		pid;
 
 	save = pro;
 	if (!pro)
 		return ;
-	status = 0;
-	signal(SIGCHLD, SIG_DFL);
+	pid = 0;
 	while (pro && fg)
 	{
+		status = 0;
 		if (pro->lpid > 0)
-			(waitpid(pro->lpid, &status, WUNTRACED));
+			pid = (waitpid(pro->lpid, &status, WUNTRACED));
 		process_status(pro->lpid, status, pro);
 		pro = pro->next;
 	}

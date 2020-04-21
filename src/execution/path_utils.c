@@ -10,7 +10,7 @@ void	is_valid(char *str, const char *dst, DIR *ptr)
 	i = lstat(str, &buf);
 	if (i != -1 && S_ISDIR(buf.st_mode))
 	{
-		ft_putstr_fd("Shell: ", 2);
+		ft_putstr_fd("42sh: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putendl_fd(" : is a directory", 2);
 		g_jobcontrol.cm = 1;
@@ -18,7 +18,7 @@ void	is_valid(char *str, const char *dst, DIR *ptr)
 	}
 	else if (!dst && ft_occur(str, '/'))
 	{
-		ft_putstr_fd("Shell: ", 2);
+		ft_putstr_fd("42sh: ", 2);
 		ft_putstr_fd(str, 2);
 		ft_putendl_fd(" : no such file or directory", 2);
 		g_jobcontrol.cm = 1;
@@ -30,7 +30,7 @@ void	if_not_cmd(char *cmd)
 {
 	if (g_jobcontrol.cm == 1)
 		return ;
-	ft_putstr_fd("Shell : No cmd found: ", 2);
+	ft_putstr_fd("42sh : No cmd found: ", 2);
 	ft_putendl_fd(cmd, 2);
 	g_jobcontrol.ret = 127;
 	g_jobcontrol.cm = 1;

@@ -51,7 +51,10 @@ char	*concat_tab(char **cmd)
 	if (!(dst = ft_strnew(1)))
 		return (NULL);
 	while (cmd[i])
+	{
+		dst = ft_strjoinfree(dst, " ");
 		dst = ft_strjoinfree(dst, cmd[i++]);
+	}
 	return (dst);
 }
 

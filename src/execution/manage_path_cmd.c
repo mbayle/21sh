@@ -25,7 +25,7 @@ char	*loc2(t_read read, char *tmp, char *dst, char *str)
 			dst = ft_strdup(str);
 			permissions(&dst);
 			if (dst == NULL)
-				g_jobcontrol.first_job->last_ret = 1;
+				g_jobcontrol.ret = 1;
 			tmp = "yes";
 			ft_strdel(&read.tmp);
 			break ;

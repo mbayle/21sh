@@ -78,13 +78,13 @@ int		check_fd(int fd, int n)
 	if (n == g_jobcontrol.stdi || n == g_jobcontrol.stdo ||
 		n == g_jobcontrol.stde)
 	{
-		ft_putendl_fd("Shell: These fd are reserved by 42sh", 2);
+		ft_putendl_fd("42sh: These fd are reserved by 42sh", 2);
 		return (1);
 	}
 	if (fd == g_jobcontrol.stdi || fd == g_jobcontrol.stdo ||
 		fd == g_jobcontrol.stde)
 	{
-		ft_putendl_fd("Shell: fd reserved by 42sh", 2);
+		ft_putendl_fd("42sh: fd reserved by 42sh", 2);
 		return (1);
 	}
 	return (0);
@@ -99,7 +99,7 @@ int		if_digit(char *file, int n)
 		return (-1);
 	if (dup2(fd, n) == -1)
 	{
-		ft_putendl_fd("Shell: Bad file descriptor", 2);
+		ft_putendl_fd("42sh: Bad file descriptor", 2);
 		return (-1);
 	}
 	return (0);

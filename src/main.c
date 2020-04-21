@@ -88,7 +88,7 @@ void		init_struct(t_struct *s, char **envp)
 	envp = save;
 	init_start_pwd(s);
 	if (((*s).env_path = search_pathenv((*s).env)) == NULL)
-		ft_eputstr("Shell "MAGENTA"warning"
+		ft_eputstr("42sh "MAGENTA"warning"
 		WHITE": the PATH environment variable does not exist.\n\0");
 }
 
@@ -216,9 +216,9 @@ int			main(int ac, char **av, char **envp)
 		{
 //			update_bg_status();
 			g_shell->line = g_jobcontrol.s.cmd;
-			ft_putendl("-----");
-			ft_putendl(g_shell->line);
-			ft_putendl("-----");
+//			ft_putendl("-----");
+//			ft_putendl(g_shell->line);
+//			ft_putendl("-----");
 			update_bg_status();
 			g_shell->line = g_jobcontrol.s.cmd;
 			ft_lexer(&g_shell->lex, g_shell->line);

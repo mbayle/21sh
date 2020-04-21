@@ -44,7 +44,7 @@ int		write_in(int n, char *file, mode_t mode)
 		return (-1);
 	if (dup2(fd, n) == -1)
 	{
-		ft_putendl_fd("Shell: Bad file descriptor", 2);
+		ft_putendl_fd("42sh: Bad file descriptor", 2);
 		return (-1);
 	}
 	return (0);
@@ -65,7 +65,7 @@ int		read_from(int n, char *file)
 		return (-1);
 	if (dup2(fd, n) == -1)
 	{
-		ft_putendl_fd("Shell: Bad file descriptor", 2);
+		ft_putendl_fd("42sh: Bad file descriptor", 2);
 		return (-1);
 	}
 	return (0);
@@ -80,7 +80,7 @@ int		redirect_to_file(char *redir, char *file, mode_t mode, int stfd)
 		n = redir[0] == '>' ? 1 : 0;
 	if (fcntl(n, F_GETFD) == -1)
 	{
-		ft_putendl_fd("Shell: bad fd", 2);
+		ft_putendl_fd("42sh: bad fd", 2);
 		return (-1);
 	}
 	if (stfd)
