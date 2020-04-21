@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:01:11 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/19 22:41:13 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/20 16:03:43 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,11 @@ int					ft_atoi(const char *str);
 int					ft_bracket(char *str, int top, int a, char *stack);
 
 /*
+** ft_bracket_index.c
+*/
+int					ft_bracket_index(char *str, int top, int a, char *stack);
+
+/*
 ** ft_bzero.c
 */
 void				ft_bzero(void *s, size_t n);
@@ -111,6 +116,16 @@ void				ft_bzero(void *s, size_t n);
 ** ft_cswap.c
 */
 void				ft_cswap(char *a, char *b);
+
+/*
+** ft_check_dquote.c
+*/
+int					ft_check_dquote(char *input);
+
+/*
+** ft_check_squote.c
+*/
+int					ft_check_squote(char *input);
 
 /*
 ** ft_e2putstr.c

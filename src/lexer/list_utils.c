@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/30 05:17:16 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/25 01:25:54 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/12 20:45:04 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_lex	*lex_last(t_lex *lst)
 ** Return value : no return
 */
 
-#include <stdio.h>
 void	lex_suppr_elem(t_lex **elem)
 {
 	t_lex	*suppr;

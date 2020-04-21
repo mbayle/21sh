@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/25 16:58:57 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/20 16:48:20 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Steps  : 1 - While input exist or input[i] is not : newline, space, tab or
 **				an operator
 **			2 - Special case : Skip backslash
-**			3 - Quote case : Call the dedicated function
+**			3 - Quote or Brace case : Call the dedicated function
 **			4 - Default : increment i
 ** Return value : Token end index
 */
@@ -30,9 +30,12 @@ int		find_end(int i, char *input)
 		if (input[i] == '\\')
 			i++;
 		if (input[i] == '\'' || input[i] == '"' || (input[i] == '$'
-				&& input[i + 1] == '{'))
+				&& input[i + 1] == '{') || (input[i] == '$'
+				&& input[i + 1] == '('))
 		{
 			i = quote_brace_case(i, input);
+			if (ft_isalpha(input[i]) || input[i] == '\'' || input[i] == '"')
+				input[i++] && check_operator(input + i++) == 0 && input[i++] != ';' ? i++ : 0;
 			break ;
 		}
 		if (input[i])
@@ -115,7 +118,7 @@ void	valid(t_lex **lex, char *input, int io, int i)
 /*
 ** Purpose of the function : Split input string in lexemes and add them to my
 **							list.
-** Steps  : 1 - Error case : missing quote (:118) or input == NULL
+** Steps  : 1 - Error case : missing quote/brace or input == NULL
 **			2 - Add last token EOI (End Of Input)
 **			3 - Print debug (if 21sh is launch with "DEBUG" has argument)
 **			4 - Call ft_parse (check posix grammar and create AST)
@@ -143,7 +146,10 @@ void	ft_lexer(t_lex **lex, char *input)
 		else
 		{
 			lexdel(lex);
-			ft_putendl("[DEBUG] Exception");
+			if (i == -1 || i == -2)
+				ft_putendl_col("Shell : Missing brace", RED, WHITE);
+			else
+				ft_putendl_col("Shell : Missing quote", RED, WHITE);
 			return ;
 		}
 		input = input + i++;
