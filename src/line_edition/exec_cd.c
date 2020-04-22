@@ -31,7 +31,6 @@ char		**cpy_tab(char **src)
 	return (dest);
 }
 
-
 char		*mini_strjoin(char *s1, char *s2)
 {
 	char	*dest;
