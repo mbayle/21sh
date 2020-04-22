@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 04:05:42 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/22 16:09:45 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/22 16:17:24 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ static void	init_term(t_struct *s);
 void		init_struct(t_struct *s, char **envp);
 void		init_myenv(char **envp);
 void		init_myloc(char **envp);
+void		init_jc(char **env);
 
 #endif
