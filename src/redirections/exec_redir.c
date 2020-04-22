@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:01:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/13 01:17:56 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:11:38 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ int		execute_redir(char **cmd)
 		else if (ft_seq_occur(cmd[i], "<") && !ft_seq_occur(cmd[i], "\\<")
 		&& between_quotes(cmd[i]))
 			ret = redirect_to_file(cmd[i], cmd[i + 1], O_RDONLY, 0);
-		if (ret == -1 && (g_jobcontrol.ret = 1) && (g_jobcontrol.red = -1))
-			return (ret);
+		if (ret == -1 && (g_jobcontrol.ret = 1))
+			return (g_jobcontrol.red = -1);
 	}
 	return (0);
 }

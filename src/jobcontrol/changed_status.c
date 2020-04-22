@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:14:55 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/25 01:03:22 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/22 15:12:45 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	if_stp(t_job *job, int i)
 		ft_putstr_fd(" Terminated ", 2);
 	signal_print(job->first_process->status);
 	ft_putstr_fd(":	", 2);
-	i ? ft_putstr_fd(job->command, 2) : ft_putstr_fd(job->first_process->cmd, 2);
+	i ? ft_putstr_fd(job->command, 2) :
+		ft_putstr_fd(job->first_process->cmd, 2);
 	ft_putchar_fd('\n', 2);
 	put_last_fg(put_last_stp(job, 2, 1), 1, 0);
 }

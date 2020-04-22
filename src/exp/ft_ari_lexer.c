@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:31:52 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 07:01:59 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:15:00 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void				ft_ari_lex_free(t_ari_toklist *begin)
 	}
 }
 
-int				ft_ari_lexer(t_ari_lex *lex)
+int					ft_ari_lexer(t_ari_lex *lex)
 {
 	int			i;
 	int			ret;

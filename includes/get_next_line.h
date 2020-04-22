@@ -6,11 +6,12 @@
 /*   By: frameton <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/14 23:34:26 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/18 20:59:47 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:55:19 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _GET_NEXT_LINE_H_
+#ifndef _GET_NEXT_LINE_H
+# define _GET_NEXT_LINE_H
 # include <stdio.h>
 # include <sys/stat.h>
 # include <fcntl.h>

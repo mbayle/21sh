@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 12:45:30 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 09:02:55 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:22:20 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,26 +100,3 @@ int			ft_parse_var(char *word, size_t *index,
 	}
 	return (1);
 }
-
-// int			ft_parse_bquote(char *word, size_t *index,
-// 			t_txtlist **current, bool *dquote)
-// {
-// 	char	quote;
-
-// 	quote = 0;
-// 	if (word[*index] == '`')
-// 	{
-// 		ft_add_txtlist(word, CMD_SUB_BQUOTE, current, *dquote);
-// 		(*current)->start = *index;
-// 		(*index)++;
-// 		while (!quote && word[*index] != '`')
-// 		{
-// 			ft_parse_sub_mode(word, index, &quote);
-// 			(*index)++;
-// 		}
-// 		(*index)++;
-// 		(*current)->len = *index - (*current)->start;
-// 		return (0);
-// 	}
-// 	return (1);
-// }
