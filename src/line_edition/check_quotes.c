@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static char	*check_quotes3(int *d, int *s, char *c, char *save)
 {
@@ -94,7 +94,7 @@ static int	check_quotes2(t_struct *st, char **str, char buf[701], int s)
 		check_quotes2_b(st, buf, s, d);
 		return (sec_free(str, 0));
 	}
-	if (check_bracket(st, buf))
+	if (check_bracket(st, buf, 0))
 		return (sec_free(str, 0));
 	return (sec_free(str, 1));
 }

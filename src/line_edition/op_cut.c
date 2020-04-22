@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static int	op_cut2(t_struct *s, t_lst **end, t_lst **bg, int lbg)
 {

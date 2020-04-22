@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static int	init_lst_4_b(char buf[701], t_struct *s)
 {
@@ -50,9 +50,8 @@ static	int	init_lst_4_b2(t_struct *s, char buf[701])
 	return (1);
 }
 
-int			init_lst_4(t_struct *s, char buf[701], int c, t_lst *l)
+int			init_lst_4(t_struct *s, char buf[701], t_lst *l)
 {
-	(void)c;
 	if ((edit_line3(s, buf)) || (buf[0] == 18))
 		return (1);
 	if (buf[0] == 27 && buf[1] == 91 && buf[2] == 49

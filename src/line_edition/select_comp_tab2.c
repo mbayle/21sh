@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 void	left_touch2(t_comp *end, int c, int *j, t_comp **cmp)
 {

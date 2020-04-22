@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static void		set_plc(t_struct *s, int *i, int l)
 {
@@ -42,10 +42,8 @@ static void		set_plc(t_struct *s, int *i, int l)
 
 static int		move_up_down(char buf[6], t_struct *s, int *lbg)
 {
-//	int		i;
 	int		ref;
 
-//	i = s->col;
 	if (buf[0] == 27 && buf[1] == 27 && buf[2] == 91
 			&& (buf[3] == 65))
 	{

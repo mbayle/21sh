@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static void	init_lst_2b(t_struct *s, int *i, t_lst **l, t_htr **t)
 {

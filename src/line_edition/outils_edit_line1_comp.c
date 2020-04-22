@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 int				free_bcmp_tab(t_comp **bcmp, t_comp **cmp, int i)
 {
@@ -98,10 +98,8 @@ int				show_list_poss(t_struct *s)
 	t_comp	*cmp;
 	t_comp	*bcmp;
 	int		co;
-//	int		j;
 	int		row;
 
-//	j = 0;
 	co = 0;
 	cmp = NULL;
 	bcmp = NULL;

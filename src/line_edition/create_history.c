@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static void	create_history2(t_htr **new, char **l, t_htr **bg, t_htr **h)
 {

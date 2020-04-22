@@ -10,15 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 int			set_p_ac(char **p, char *av, t_struct2 *st)
 {
-//	int		size;
-
 	*p = av;
 	st->name = av;
-//	size = ft_strlen(*p);
 	if ((*p)[0] != '/' && ft_strncmp(*p, "./", 2) && ft_strncmp(*p, "../", 3))
 		if ((*p = ft_strjoin("./", *p)) == NULL)
 			return (-1);

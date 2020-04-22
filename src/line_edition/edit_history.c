@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static int	edit_history2(t_lst *bg, int c, t_htr **new, t_htr **h)
 {

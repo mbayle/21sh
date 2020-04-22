@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static void	file_history2(t_htr **tmp, t_htr **del, t_struct *s)
 {
@@ -93,12 +93,6 @@ static void	ft_exit3(t_struct *s)
 	free_dchar(&(*s).builtin_ref);
 }
 
-void		error_exit(char *err)
-{
-	g_jobcontrol.ret = 1;
-	ft_putendl_fd(err, 2);
-}
-
 void		exit_edl(t_struct *s, char **cmd)
 {
 	t_lst	*del;
@@ -119,8 +113,6 @@ void		exit_edl(t_struct *s, char **cmd)
 	if (g_jobcontrol.sim == 0)
 		delete_job(g_jobcontrol.first_mail);
 	astdel(&g_shell->ast);
-	//lexdel(&g_shell->lex);
-	
 	if (cmd[1])
 		exit(ft_atoi(cmd[1]));
 	else

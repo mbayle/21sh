@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static int	move_cur(int i, t_lst **tmp, t_lst **lbg)
 {
@@ -44,12 +44,7 @@ static void	push_back_cur(t_struct *s, int i)
 
 static int	copy_history(t_struct *s, t_lst **lbg, int c, t_htr **t)
 {
-	if (!*t)
-		*t = s->h;
-	else if (*t && (*t)->next && c == 65)
-		*t = (*t)->next;
-	else if (*t && (*t)->prev && c == 66)
-		*t = (*t)->prev;
+	outil_copy_history(t, s, c);
 	ft_memdel((void**)lbg);
 	if ((*lbg = malloc(sizeof(**lbg))) == NULL)
 		return (0);
@@ -92,7 +87,7 @@ int			edit_line(t_struct *s, char buf[6], int *i, t_htr **t)
 			&& (buf[3] == 67 || buf[3] == 68 || buf[3] == 65 || buf[3] == 66))
 		return (move_word(s, buf[3]));
 	if ((buf[0] == 27 && buf[1] == 91) && (buf[2] == 68 || buf[2] == 67
-				|| buf[2] == 65 || buf[2] == 66 || buf[2] == 70 || buf[2] == 72))
+			|| buf[2] == 65 || buf[2] == 66 || buf[2] == 70 || buf[2] == 72))
 	{
 		edi_line_bis(buf, s);
 		if ((((buf[2] == 65 && !s->lbg) || (buf[2] == 65 && *t && (*t)->next))

@@ -12,14 +12,12 @@
 
 #include "../../includes/projectinclude.h"
 
-int		check_bracket(t_struct *s, char buf[701])
+int		check_bracket(t_struct *s, char buf[701], int i)
 {
 	int		c;
-	int		i;
 	char	stack[256];
 	char	*str;
 
-	i = 0;
 	str = NULL;
 	s->l = s->lbg;
 	while (s->l && (i = i + 1))

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_setclr.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/03 23:01:08 by frameton          #+#    #+#             */
+/*   Updated: 2020/03/10 02:52:38 by frameton         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/projectinclude.h"
 
-static int		clr_ws(int *m)
+static int	clr_ws(int *m)
 {
 	struct winsize	sz;
 	int				mh;
@@ -23,7 +35,7 @@ static int		clr_ws(int *m)
 	return (1);
 }
 
-static void		write_anim(int i, int clr)
+static void	write_anim(int i, int clr)
 {
 	tputs(tgetstr("im", NULL), 1, ft_ptchar);
 	clr_shell(clr);
@@ -36,7 +48,7 @@ static void		write_anim(int i, int clr)
 	tputs(tgetstr("rc", NULL), 1, ft_ptchar);
 }
 
-static void		anim_cpt(int m, int lr, int ind, t_struct *st)
+static void	anim_cpt(int m, int lr, int ind, t_struct *st)
 {
 	int		s;
 	int		i;
@@ -89,7 +101,6 @@ int			exec_setclr2(t_struct *s, int *m)
 
 int			exec_setclr(t_struct *s, int i)
 {
-//	int		ret;
 	int		m;
 
 	if (s->clr == 14 && (s->clr = 13))

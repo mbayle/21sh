@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 void	down_touch2(t_comp **cmp, t_comp *bcmp, int c)
 {

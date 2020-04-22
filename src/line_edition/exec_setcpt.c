@@ -53,15 +53,20 @@ void		write_anim(int i, int clr)
 	tputs(tgetstr("rc", NULL), 1, ft_ptchar);
 }
 
+int			anim_cpt_n(int *s, int m, int clr, int lr)
+{
+	*s = lr;
+	ft_marge(m + 42);
+	clr_shell(clr);
+	return (0);
+}
+
 void		anim_cpt(int m, int lr, int c, int clr)
 {
 	int		s;
 	int		i;
 
-	i = 0;
-	ft_marge(m + 42);
-	clr_shell(clr);
-	s = lr;
+	i = anim_cpt_n(&s, m, clr, lr);
 	while (c)
 	{
 		tputs(tgetstr("sc", NULL), 1, ft_ptchar);
@@ -86,7 +91,6 @@ void		anim_cpt(int m, int lr, int c, int clr)
 
 int			exec_setcpt(t_struct *s)
 {
-//	int				ret;
 	int				m;
 
 	m = 0;

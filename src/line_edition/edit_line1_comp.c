@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static char	**init_list_poss2(int *i, t_struct *s, int *co,
 		struct winsize *sz)
@@ -36,12 +36,9 @@ int			check_prec_path(struct stat *st, char **l, char **tmp, int *ind)
 {
 	int		c;
 
-	c = 0;
-	if ((*l) && (*l)[c])
-	{
+	if (!(c = 0) && (*l) && (*l)[c])
 		while ((*l)[c + 1])
 			++c;
-	}
 	while (c && (*l)[c] != '/')
 		--c;
 	if (c)

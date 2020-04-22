@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 int		check_auth(char *s)
 {
@@ -26,6 +26,22 @@ int		check_auth(char *s)
 		return (-3);
 }
 
+int		check_ls2(t_struct *s, int *n, char **tmp, struct stat *st)
+{
+	if (!(*s).av[0] || !(*s).av[*n] || lstat((*s).av[*n], st) == -1)
+	{
+		free((*s).av[1]);
+		(*s).av[1] = ft_strdup(*tmp);
+		ft_strdel(tmp);
+		return (0);
+	}
+	free((*s).av[1]);
+	if (tmp && ((*s).av[1] = ft_strdup(*tmp)) == NULL)
+		return (0);
+	ft_strdel(tmp);
+	return (1);
+}
+
 int		check_ls(t_struct *s)
 {
 	struct stat		st;
@@ -37,7 +53,8 @@ int		check_ls(t_struct *s)
 	tmp = ft_strdup((*s).av[1]);
 	g_jobcontrol.mypath = ft_strdup((*s).av[1]);
 	g_jobcontrol.p = 0;
-	if ((*s).av[1] && (!ft_strcmp((*s).av[1], "-P") || !ft_strcmp((*s).av[1], "-L")))
+	if ((*s).av[1] && (!ft_strcmp((*s).av[1], "-P") ||
+				!ft_strcmp((*s).av[1], "-L")))
 	{
 		g_jobcontrol.p = 2;
 		if (!ft_strcmp((*s).av[1], "-P"))
@@ -50,28 +67,6 @@ int		check_ls(t_struct *s)
 		}
 		tmp = ft_strdup((*s).av[2]);
 		n = 2;
-		
 	}
-	if (!(*s).av[0] || !(*s).av[n] || lstat((*s).av[n], &st) == -1)
-	{
-		
-		free((*s).av[1]);
-		(*s).av[1] = ft_strdup(tmp);
-		ft_strdel(&tmp);
-		return (0);
-	}
-	if (S_ISLNK(st.st_mode))
-	{
-//		tmp[0] = '/';
-//		ft_strdel(&tmp);
-//		tmp = ft_strnew(PATH_MAX);
-//		n = readlink((*s).av[n], tmp, PATH_MAX);
-//		tmp[n] = '\0';
-	}
-	free((*s).av[1]);
-//	ft_putendl(tmp);
-	if (tmp && ((*s).av[1] = ft_strdup(tmp)) == NULL)
-		return (0);
-	ft_strdel(&tmp);
-	return (1);
+	return (check_ls2(s, &n, &tmp, &st));
 }

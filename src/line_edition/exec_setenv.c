@@ -91,13 +91,8 @@ int		exec_setenv_b(t_struct *s, char **av, int c, int i)
 
 	new = NULL;
 	l = (*s).env;
-	if (av && av[c] && av[c][0] == '=')
-	{
-		ft_eputstr("setenv: "RED);
-		ft_eputstr(av[c]);
-		ft_eputendl(WHITE": bad variable name.");
+	if (exec_setenv_b2(av, c))
 		return (1);
-	}
 	else if (!((*s).t = checkenv_setenv(av, &l, c, 0)) || (*s).t == -1)
 		return (exec_setenv3(av, s, l, c));
 	else
