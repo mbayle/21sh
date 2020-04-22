@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static void		set_pos_cur2(t_struct *s, int i, int *pc)
 {

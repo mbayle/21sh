@@ -75,7 +75,7 @@ void	ft_putast(t_ast *ast)
 {
 	if (ast)
 	{
-		ft_putendl_col("AST debug :\n", PURPLE, WHITE);
+		putendcol("AST debug :\n", PURPLE, WHITE);
 		ft_print_ast(ast, "root", 0);
 	}
 }

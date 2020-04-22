@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 void			es7(char *s, int m)
 {
@@ -86,7 +86,6 @@ static void		anim_cpt(int m, int lr, int c, int i)
 
 int				exec_sethelp(void)
 {
-	//int				ret;
 	int				m;
 	char			buf[1];
 

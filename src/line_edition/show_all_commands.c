@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static t_htr	*char_lst_class(t_htr *l, t_htr *s, char ***del)
 {

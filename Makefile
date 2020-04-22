@@ -108,6 +108,8 @@ SRC		:=	main.c \
 			lexer/list_utils.c \
 			lexer/utils.c \
 			lexer/type_token.c \
+			lexer/quote_case.c \
+			lexer/lexer_gestion.c \
 			lexer/print_debug.c \
 			parser/parser.c \
 			parser/grammar/and_or.c \
@@ -142,6 +144,7 @@ SRC		:=	main.c \
 			line_edition/check_command.c \
 			line_edition/check_expansion.c \
 			line_edition/check_input_exist.c \
+			line_edition/clr_shell.c \
 			line_edition/coloration_completion.c \
 			line_edition/completion_commands.c \
 			line_edition/completion_commands2.c \
@@ -161,6 +164,9 @@ SRC		:=	main.c \
 			line_edition/exec_command.c \
 			line_edition/exec_help.c \
 			line_edition/exec_cd.c \
+			line_edition/exec_cd2.c \
+			line_edition/exec_export2.c \
+			line_edition/error_exit.c \
 			line_edition/exec_help2.c \
 			line_edition/exec_history.c \
 			line_edition/exec_setclr2.c \
@@ -168,6 +174,7 @@ SRC		:=	main.c \
 			line_edition/exec_setcpt.c \
 			line_edition/exec_setcpt2.c \
 			line_edition/exec_setcpt3.c \
+			line_edition/exec_setenv2.c \
 			line_edition/exec_unsetenv.c \
 			line_edition/exit.c \
 			line_edition/free_path_tab.c \

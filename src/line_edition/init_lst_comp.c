@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static int	init_lst_comp2(t_struct *s, t_lst **l)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static int	ctrl_r2(char buf[6], t_htr **t, t_struct *s, char **l)
 {

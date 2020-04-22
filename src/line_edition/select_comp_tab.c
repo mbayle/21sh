@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 int		tab_touch(t_comp *cmp, t_comp *bcmp, int *j, int i)
 {

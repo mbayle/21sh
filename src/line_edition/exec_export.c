@@ -80,37 +80,6 @@ int		exec_export3(t_struct *s)
 	return (0);
 }
 
-int		exec_export4(t_struct *s, int c, char **av, int i)
-{
-	char	**tmp;
-	char	*tm;
-	t_lst2	*l;
-
-	l = NULL;
-	if (!(exec_export5(&tmp, av, s, &l)))
-		return (0);
-	while (l)
-		if (!ft_strncmp(av[i], l->varn, c))
-		{
-			tm = ft_strdup(l->varn);
-			exec_setenv(s, tmp, NULL, 0);
-			l = s->env;
-			while (l)
-			{
-				if (!ft_strcmp(tm, l->varn))
-					l->lcl = 0;
-				l = l->next;
-			}
-			free(tm);
-			free_tmp_export5(&tmp);
-			return (0);
-		}
-		else
-			l = l->next;
-	free_tmp_export5(&tmp);
-	return (exec_setenv_b(s, av, i, 1));
-}
-
 int		exec_export_b(t_struct *s, char **av, int i)
 {
 	int		c;

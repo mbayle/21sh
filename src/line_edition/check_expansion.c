@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 char	*change_string2(char *bg, char *t, char *var, int c)
 {
@@ -63,10 +63,8 @@ int		change_string(char **bg, char *t, t_struct s, size_t c)
 
 int		check_expansion3(char **bg, char *t)
 {
-//	int		c;
 	char	*del;
 
-//	c = 0;
 	while (*t && check_whitespaces(*t))
 	{
 		*t = '\0';

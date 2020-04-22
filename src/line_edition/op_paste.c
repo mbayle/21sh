@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static t_lst	*op_paste2(t_lst **end, t_lst *bg, char **l, int *c)
 {

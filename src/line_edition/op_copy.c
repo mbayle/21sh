@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static int	op_copy2(t_lst **sa, t_lst **bg, char **l, int *c)
 {

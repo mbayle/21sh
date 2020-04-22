@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/20 16:48:20 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/20 16:48:20 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int		find_end(int i, char *input)
 		{
 			i = quote_brace_case(i, input);
 			if (ft_isalpha(input[i]) || input[i] == '\'' || input[i] == '"')
-				input[i++] && check_operator(input + i++) == 0 && input[i++] != ';' ? i++ : 0;
+				input[i++] && check_operator(input + i++) == 0
+				&& input[i++] != ';' ? i++ : 0;
 			break ;
 		}
 		if (input[i])
@@ -70,8 +71,7 @@ int		end_case_index(t_lex *lex, char *input, int *io_nbr)
 	{
 		while (ft_isdigit(input[i]) == 1)
 			i++;
-		!ft_strncmp(input + i, ">", 1) || !ft_strncmp(input + i, "<", 1)
-				? *io_nbr = 1 : (i = find_end(i, input));
+		i = io_case(i, io_nbr, input);
 	}
 	else if ((i = check_operator(input)))
 		;
@@ -111,7 +111,7 @@ void	valid(t_lex **lex, char *input, int io, int i)
 		token_type(new, io, aword);
 		list_add(lex, new);
 		g_shell->lex_size++;
-	}	
+	}
 	ft_strdel(&token);
 }
 
@@ -133,23 +133,18 @@ void	ft_lexer(t_lex **lex, char *input)
 
 	if (!lex || !input || ft_is_space(input) == 0)
 		return ;
-//    ft_putendl("DEBUG valeur recu par ft_lexer : ");
-  //  ft_putendl(input);
 	while (*input)
 	{
 		while (ft_is_separator(*input) == 1)
 			input++;
 		io_nbr = 0;
 		i = end_case_index(*lex, input, &io_nbr);
-		if (i != -1)
+		if (i > 0)
 			valid(lex, input, io_nbr, i);
 		else
 		{
 			lexdel(lex);
-			if (i == -1 || i == -2)
-				ft_putendl_col("Shell : Missing brace", RED, WHITE);
-			else
-				ft_putendl_col("Shell : Missing quote", RED, WHITE);
+			i == -1 || i == -2 ? tokerr(1) : tokerr(0);
 			return ;
 		}
 		input = input + i++;

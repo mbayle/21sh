@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static void	init_lst_env2(t_lst2 **bg, t_lst2 **l, t_lst2 **tmp)
 {
@@ -39,6 +39,7 @@ static int	init_lst_env3(t_lst2 **l, t_lst2 **bg, t_lst2 **tmp, char ***env)
 
 	lv = 0;
 	tp = NULL;
+	(*l)->rv = 0;
 	init_lst_env2(&*bg, &*l, &*tmp);
 	if (ft_strcmp("SHLVL", (*l)->varn) == 0)
 	{
@@ -81,7 +82,6 @@ t_lst2		*init_lst_env(t_lst2 *l, char **env, t_lst2 *tmp, int c)
 		(*env)++;
 		l->var = NULL;
 		l->lcl = 0;
-		l->rv = 0;
 		if ((l->nenv = ft_strlen(*env)))
 			if ((l->var = ft_strdup(*env)) == NULL)
 				return (NULL);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static char	*find_home_path(t_struct st)
 {
@@ -73,9 +73,8 @@ char		**init_tab_path2(char *s, t_struct *st)
 	char	*bg;
 	char	**path;
 
-	c = 0;
 	bg = NULL;
-	if (!s)
+	if (!(c = 0) && !s)
 		return (NULL);
 	while (*s && *s != '=')
 		s++;

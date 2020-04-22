@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   wlcm_msg.c                                         :+:      :+:    :+:   */
+/*   exec_export2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,41 +12,39 @@
 
 #include "../../includes/projectinclude.h"
 
-static int		wlcm_ws(int *m, int *s)
+static int	exec_export4b(t_struct *s, char ***tmp, t_lst2 **l)
 {
-	struct winsize	sz;
+	char	*tm;
 
-	ioctl(0, TIOCGWINSZ, &sz);
-	*s = sz.ws_col;
-	if (sz.ws_col < 60)
-		return (0);
-	*m = sz.ws_col - 54;
-	*m = *m / 2;
-	return (1);
+	tm = ft_strdup((*l)->varn);
+	exec_setenv(s, *tmp, NULL, 0);
+	*l = s->env;
+	while (*l)
+	{
+		if (!ft_strcmp(tm, (*l)->varn))
+			(*l)->lcl = 0;
+		*l = (*l)->next;
+	}
+	free(tm);
+	free_tmp_export5(&*tmp);
+	return (0);
 }
 
-void			wlcm_msg(t_struct *st)
+int			exec_export4(t_struct *s, int c, char **av, int i)
 {
-	int		m;
-	int		s;
-	int		c;
+	char	**tmp;
+	t_lst2	*l;
 
-	m = 0;
-	s = 0;
-	c = 0;
-	if (!wlcm_ws(&m, &s))
-		return ;
-	fp("cl", NULL);
-	ft_putchar('\n');
-	clr_shell(st->clr);
-	while (c < s && (c = c + 1))
-		ft_putchar('-');
-	es7(WHITE"Info: enter the help command to know the base commands", m);
-	ft_putchar('\n');
-	c = 0;
-	clr_shell(st->clr);
-	while (c < s && (c = c + 1))
-		ft_putchar('-');
-	ft_putstr("\n\n");
-	print_prompt_bis(st->prompt, st, 0);
+	l = NULL;
+	if (!(exec_export5(&tmp, av, s, &l)))
+		return (0);
+	while (l)
+		if (!ft_strncmp(av[i], l->varn, c))
+		{
+			return (exec_export4b(s, &tmp, &l));
+		}
+		else
+			l = l->next;
+	free_tmp_export5(&tmp);
+	return (exec_setenv_b(s, av, i, 1));
 }

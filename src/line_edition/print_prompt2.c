@@ -10,39 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
-
-void		clr_shell(int i)
-{
-	if (!i)
-		ft_putstr(BLUE);
-	if (i == 1)
-		ft_putstr(FBLUE);
-	if (i == 2)
-		ft_putstr(RED);
-	if (i == 3)
-		ft_putstr(FRED);
-	if (i == 4)
-		ft_putstr(GREEN);
-	if (i == 5)
-		ft_putstr(FGREEN);
-	if (i == 6)
-		ft_putstr(YELLOW);
-	if (i == 7)
-		ft_putstr(FYELLOW);
-	if (i == 8)
-		ft_putstr(MAGENTA);
-	if (i == 9)
-		ft_putstr(FMAGENTA);
-	if (i == 10)
-		ft_putstr(CYAN);
-	if (i == 11)
-		ft_putstr(FCYAN);
-	if (i == 12)
-		ft_putstr(WHITE);
-	if (i == 13)
-		ft_putstr(GREY);
-}
+#include "../../includes/projectinclude.h"
 
 static void	print_prompt_bis4(t_struct st, int i)
 {

@@ -247,7 +247,7 @@ int					init_lst_comp(char buf[5], t_struct *s, t_lst *l,
 int					init_lst_2(t_struct *s, char buf[5], int *i,
 		t_htr **t);
 int					init_lst_3(t_struct *s, char buf[5], int c, t_lst *l);
-int					init_lst_4(t_struct *s, char buf[5], int c, t_lst *l);
+int					init_lst_4(t_struct *s, char buf[5], t_lst *l);
 int					recup_stdin(t_struct *s, char buf[5], int *i, int ret);
 int					create_line(char **line, t_struct *s, int i, int c);
 int					s_command_tab(struct dirent **dir_el, t_comp **l,
@@ -371,7 +371,7 @@ void				free_tmp_export5(char ***tmp);
 int					check_char_ctrl_r(char buf[5], int ret);
 int					bsls(t_struct *s, char buf[701]);
 void				check_bslash(char **save);
-int					check_bracket(t_struct *s, char buf[701]);
+int					check_bracket(t_struct *s, char buf[701], int i);
 void				clr_shell(int i);
 int					exec_setclr(t_struct *s, int i);
 void				exec_clr2(int m, int clr, int ci);
@@ -384,4 +384,14 @@ int					exec_unset_b(t_struct *s, char **av, int i);
 int					exec_unsetenv_b(t_struct *s, char **av, int i);
 int					exec_setenv_b(t_struct *s, char **av, int c, int i);
 char				**cpy_tab(char **src);
+int					exec_setenv_b2(char **av, int c);
+int					exec_export4(t_struct *s, int c, char **av, int i);
+void				error_exit(char *err);
+void				outil_copy_history(t_htr **t, t_struct *s, int c);
+int					exec_cd_n2(int r, char **ocwd, char **tmp, t_struct *s);
+int					exec_cd_n(t_struct *s, char **ocwd, t_lst2 **tp,
+char **tmp);
+int					exec_cd_ex(t_struct *s, char **tmp, char **ocwd);
+char				**modif_av(char ***av);
+int					exec_cd2b(t_struct *s, char *ocwd);
 #endif

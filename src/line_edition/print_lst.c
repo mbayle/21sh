@@ -10,15 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
-static void		print_lst3(t_struct s)
+static void		print_lst4(t_struct s, int q)
 {
-	int		b;
-	int		q;
-
-	b = check_bracket2(s);
-	q = check_quotes_b(s);
 	if (s.l->sel)
 		ft_putstr(BWHITE);
 	if (s.eq || s.edq)
@@ -27,6 +22,16 @@ static void		print_lst3(t_struct s)
 		ft_putstr(SRED);
 	if (!s.eq && s.l->c == '\'' && q == -1)
 		ft_putstr(RED);
+}
+
+static void		print_lst3(t_struct s)
+{
+	int		b;
+	int		q;
+
+	b = check_bracket2(s);
+	q = check_quotes_b(s);
+	print_lst4(s, q);
 	if (s.edq && s.l->c == '"')
 		ft_putstr(SRED);
 	if (!s.edq && s.l->c == '"' && q == -2)

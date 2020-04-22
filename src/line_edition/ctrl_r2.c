@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 int		check_char_ctrl_r(char buf[5], int ret)
 {
@@ -27,10 +27,8 @@ int		check_char_ctrl_r(char buf[5], int ret)
 
 t_htr	*check_htr(t_htr *t, char *l)
 {
-//	int		c;
 	char	*s;
 
-//	c = 0;
 	while (t)
 	{
 		s = t->name;

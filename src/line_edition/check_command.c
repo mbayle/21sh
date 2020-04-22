@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 int		free_tab_path(char ***tab, int c)
 {
@@ -82,9 +82,8 @@ char	**init_tab_path(char *s)
 	char	*bg;
 	char	**path;
 
-	c = 0;
 	bg = NULL;
-	if (!s)
+	if (!(c = 0) && !s)
 		return (NULL);
 	while (*s && *s != '=')
 		s++;

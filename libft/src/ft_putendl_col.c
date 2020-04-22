@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_putendl_col(char *str, char *color, char *colreset)
+void	putendcol(char *str, char *color, char *colreset)
 {
 	ft_putstr(color);
 	ft_putstr(str);

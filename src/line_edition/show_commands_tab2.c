@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projectinclude.h"
+#include "../../includes/projectinclude.h"
 
 static t_comp	*create_lst_comp_tab2(char ***del, char ***path)
 {
@@ -69,10 +69,8 @@ t_comp			*attribute_col(int *co, t_comp *cmp)
 	int		t;
 	t_comp	*bcmp;
 
-	j = 1;
 	t = 0;
-//	printf("%p\n", cmp);
-	if (cmp)
+	if ((j = 1) && cmp)
 		bcmp = cmp;
 	while (cmp && (j < *co + 1))
 	{
