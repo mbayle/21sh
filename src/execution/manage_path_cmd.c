@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 02:00:37 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/22 22:30:52 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/23 00:37:47 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	*my_path(char **cmd, char **env)
 		}
 		ft_strdel(&tmp);
 	}
-	if (cmd && cmd[0] && !cmd[0][0])
+	if (cmd && cmd[0] && !cmd[0][0] && check_b(cmd) == 1)
 		if_not_cmd(cmd[0]);
 	return (mypath);
 }
