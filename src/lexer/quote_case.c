@@ -17,6 +17,7 @@ int		test_bracket(char *input, int i)
 	char	stack[256];
 	int		ret;
 
+	ret = 0;
 	if ((input[i] == '$' && input[i + 1] == '{')
 		|| (input[i] == '$' && input[i + 1] == '('))
 	{
@@ -24,7 +25,7 @@ int		test_bracket(char *input, int i)
 		if (ret > 0)
 			i = i + ret + 1;
 	}
-	return (i);
+	return (ret > 0 ? i : ret);
 }
 
 int		test_squote(char *input)
@@ -36,7 +37,7 @@ int		test_squote(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if ((i = test_bracket(input, i)) < 0)
+		if (test_bracket(input, i) < 0)
 			return (test_bracket(input, i));
 		if (input[i] == 39)
 		{
@@ -61,7 +62,7 @@ int		test_dquote(char *input)
 	i = 0;
 	while (input[i])
 	{
-		if ((i = test_bracket(input, i)) < 0)
+		if (test_bracket(input, i) < 0)
 			return (test_bracket(input, i));
 		if (input[i] == 92)
 			i = i + 2;
