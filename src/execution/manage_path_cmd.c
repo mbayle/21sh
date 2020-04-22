@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 02:00:37 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/13 01:22:54 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/22 22:30:52 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*my_path(char **cmd, char **env)
 	char	*mypath;
 
 	mypath = NULL;
-	if (cmd && cmd[0] && check_b(cmd) == 1)
+	if (cmd && cmd[0] && check_b(cmd) == 1 && cmd[0][0])
 	{
 		tmp = get_set(env);
 		if (!(mypath = local_file(cmd[0])) && g_jobcontrol.perm != 1)
@@ -101,5 +101,7 @@ char	*my_path(char **cmd, char **env)
 		}
 		ft_strdel(&tmp);
 	}
+	if (cmd && cmd[0] && !cmd[0][0])
+		if_not_cmd(cmd[0]);
 	return (mypath);
 }
