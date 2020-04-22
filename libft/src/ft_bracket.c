@@ -65,7 +65,7 @@ int			ft_bracket_3(char *str, int *a)
 
 	i = (str[*a] == 34 ? ft_check_dquote(str + *a) : ft_check_squote(str + *a));
 	if (i != -1)
-		a = a + i + 1;
+		*a = *a + i + 1;
 	else
 		return (str[*a] == 34 ? -3 : -4);
 	return (1);
