@@ -6,22 +6,52 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/22 16:12:21 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/22 16:21:42 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/projectinclude.h"
 
-t_21sh		*init_shell(int debug)
+void		init_jc(char **envp)
 {
-	t_21sh		*shell;
+	init_myenv(envp);
+	init_myloc(envp);
+	g_jobcontrol.env = 0;
+	g_jobcontrol.f = 0;
+	g_jobcontrol.stdi = -1;
+	g_jobcontrol.stde = -1;
+	g_jobcontrol.stdo = -1;
+	g_jobcontrol.ass = NULL;
+	g_jobcontrol.mypath = NULL;
+	g_jobcontrol.ass_stock = NULL;
+	g_jobcontrol.first_job = NULL;
+	g_jobcontrol.alias = NULL;
+}
 
-	shell = ft_memalloc(sizeof(*shell));
-	shell->lex = NULL;
-	shell->lex_size = 0;
-	shell->ast = NULL;
-	shell->debug = debug;
-	return (shell);
+static void	init_term(t_struct *s)
+{
+	s->env_i = 1;
+	tgetent(NULL, getenv("TERM"));
+	s->prompt = 0;
+	s->cpt3 = 0;
+	s->copy = 0;
+	s->eq = 0;
+	s->cpt5 = 0;
+	s->edq = 0;
+	s->cpt_p3 = 0;
+	s->cpt_p = 0;
+	s->b = 0;
+	s->p = 0;
+	s->bs = 0;
+	s->cpt_p2 = 0;
+	s->exit = 0;
+	s->ctrl_d = 0;
+	s->cmd = NULL;
+	s->cpcl = NULL;
+	s->env = NULL;
+	s->l = NULL;
+	s->tmp = NULL;
+	s->lbg = NULL;
 }
 
 static void	init_start_pwd(t_struct *s)
@@ -38,37 +68,29 @@ static void	init_start_pwd(t_struct *s)
 	g_lined = s;
 }
 
-void		tmp_free_struct(t_struct *s)
+void		init_struct(t_struct *s, char **envp)
 {
-	t_lst	*del;
+	char	**save;
 
-	while ((del = (*s).lbg))
-	{
-		(*s).lbg = (*s).lbg->next;
-		free(del);
-	}
-	(*s).l = NULL;
-	(*s).lbg = NULL;
-	(*s).tmp = NULL;
-	free_dchar(&(*s).envi);
-	(*s).av = NULL;
-}
-
-char		**ft_tabdup(char **av)
-{
-	int		i;
-	char	**dst;
-
-	i = 0;
-	while (av[i])
-		i++;
-	if (!(dst = malloc(sizeof(char*) * (i + 1))))
-		return (NULL);
-	i = -1;
-	while (av[++i])
-		dst[i] = ft_strdup(av[i]);
-	dst[i] = NULL;
-	return (dst);
+	init_term(s);
+	(*s).h = NULL;
+	(*s).first = 0;
+	s->set_cpt = 0;
+	(*s).comp.name = NULL;
+	s->bcom = NULL;
+	s->com = NULL;
+	save = envp;
+	if (((*s).builtin_ref = init_builtin_ref(0)) == NULL)
+		ft_exit(0, &*s);
+	if (!*envp)
+		(*s).env = NULL;
+	else if (((*s).env = init_lst_env(NULL, envp, NULL, 0)) == NULL)
+		ft_exit(0, &*s);
+	envp = save;
+	init_start_pwd(s);
+	if (((*s).env_path = search_pathenv((*s).env)) == NULL)
+		ft_eputstr("42sh "MAGENTA"warning"
+		WHITE": the PATH environment variable does not exist.\n\0");
 }
 
 int			main(int ac, char **av, char **envp)

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/20 04:05:42 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/22 16:17:24 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/22 16:20:26 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include "exp.h"
 
 t_21sh		*init_shell(int debug);
-static void	init_term(t_struct *s);
 void		init_struct(t_struct *s, char **envp);
 void		init_myenv(char **envp);
 void		init_myloc(char **envp);
