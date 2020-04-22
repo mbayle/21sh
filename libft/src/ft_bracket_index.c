@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int match(char top, char a)
+static int	match(char top, char a)
 {
 	if (top)
 	{
@@ -24,7 +24,7 @@ static int match(char top, char a)
 	return (0);
 }
 
-int			bracket_return(int top, char *stack)
+static int	bracket_return(int top, char *stack)
 {
 	if (stack[top] == '{')
 		return (-1);
@@ -34,7 +34,7 @@ int			bracket_return(int top, char *stack)
 		return (0);
 }
 
-int		ft_bracket_index2(char **stack, int *top, char *str, int a)
+int			ft_bracket_index2(char **stack, int *top, char *str, int a)
 {
 	if (str[a] && (str[a] == '(' || str[a] == '{'))
 	{
@@ -59,7 +59,7 @@ int		ft_bracket_index2(char **stack, int *top, char *str, int a)
 	return (1);
 }
 
-int		ft_bracket_index3(char *str, int *a)
+int			ft_bracket_index3(char *str, int *a)
 {
 	int		i;
 
@@ -72,13 +72,13 @@ int		ft_bracket_index3(char *str, int *a)
 	return (1);
 }
 
-int		ft_bracket_index(char *str, int top, int a, char *stack)
+int			ft_bracket_index(char *str, int top, int a, char *stack)
 {
 	int		r;
 
 	if (!str[a])
 		return (-3);
-	while (str[a])
+	while (str && str[a])
 	{
 		if (str[a] == 92)
 		{
