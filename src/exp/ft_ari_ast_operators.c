@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:40:53 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 08:55:54 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:25:18 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,16 @@ int				ft_ari_ast_db(t_ari_ast *ast)
 		(g_ari_asttab[ast->current->token].type & ARI_TYPE_VAR))
 	{
 		if (ast->current->parent &&
-			(g_ari_asttab[ast->current->parent->token].type & ARI_TYPE_DB))
+				(g_ari_asttab[ast->current->parent->token].type & ARI_TYPE_DB))
 			return (ft_ari_already_incrdecr(ast->input,
-				ast->current->text, ast->list->text));
-		ft_ari_ast_insert_parent(ast);
-		ast->current = ast->current->left;
+					ast->current->text, ast->list->text));
+		else
+		{
+			ft_ari_ast_insert_parent(ast);
+			ast->current = ast->current->left;
+		}
 	}
 	else
 		ft_ari_ast_insert_child(ast);
 	return (0);
-	
 }

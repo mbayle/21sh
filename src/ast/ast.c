@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/13 01:20:24 by mabayle           #+#    #+#             */
-/*   Updated: 2020/03/25 00:53:20 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/22 15:26:34 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,17 +90,11 @@ t_ast	*beta_ast(t_ast *ast, int priority)
 
 void	do_to_ast(char ***tmp)
 {
-//	char	**tmp;
-//(void)tmp;
-//	tmp = quick_tab_cmd(g_jobcontrol.first_job->command);
 	pipe_exec(tmp, g_jobcontrol.g_fg);
 }
 
 int		build_ast(t_lex *lex, t_ast **ast)
 {
-//	int depth_max;
-
-//	depth_max = 0;
 	if (!ast)
 		return (-1);
 	*ast = NULL;

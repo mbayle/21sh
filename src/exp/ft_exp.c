@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:31:31 by geargenc          #+#    #+#             */
-/*   Updated: 2019/04/12 14:31:37 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:19:57 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				ft_exp_error(t_txtlist *list, t_txtlist *error)
 	return (-1);
 }
 
-int				ft_exp(t_txtlist *list)//, t_42sh *shell)
+int				ft_exp(t_txtlist *list)
 {
 	t_txtlist	*tmp;
 

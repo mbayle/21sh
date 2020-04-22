@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/11 12:43:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/12 05:43:42 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/22 14:45:30 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int		exec_echo(char **cmd)
 		e = 1;
 	while (cmd && cmd[i + e])
 	{
-
-		if ( write(1, (cmd[i + e]), ft_strlen(cmd[i + e])) == -1)
+		if (write(1, (cmd[i + e]), ft_strlen(cmd[i + e])) == -1)
 			return (echo_error());
 		if (cmd[i + e + 1] && write(1, " ", 1) == -1)
 			return (echo_error());

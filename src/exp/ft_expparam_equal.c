@@ -31,7 +31,6 @@ void			ft_expparam_assign(t_expparam *expparam)
 		tmp[0] = ft_strdup(assign);
 		tmp[1] = NULL;
 		setloc(tmp);
-//		check_local_variable(shell, assign);
 		free(assign);
 	}
 }

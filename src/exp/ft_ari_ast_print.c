@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:45:32 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 06:21:29 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:16:49 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ size_t			ft_ari_ast_print_level(t_ari_node *node, unsigned int level,
 	return (written);
 }
 
-void				ft_ari_ast_print(t_ari_ast *ast)
+void			ft_ari_ast_print(t_ari_ast *ast)
 {
 	size_t			total_size;
 	unsigned int	i;

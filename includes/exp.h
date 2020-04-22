@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 12:34:36 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/18 18:32:51 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:50:52 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef enum				e_txttype
 	VAR,
 	BRACE_VAR,
 	CMD_SUB,
-	// CMD_SUB_BQUOTE,
 	ARTH_EXPR
 }							t_txttype;
 
@@ -180,7 +179,6 @@ typedef struct				s_ari_node
 	struct s_ari_node		*parent;
 	struct s_ari_node		*left;
 	struct s_ari_node		*right;
-	//ft_ari_ast_print
 	size_t					size;
 }							t_ari_node;
 
@@ -316,7 +314,6 @@ int							ft_ari_missing_parenthesis(char *input);
 int							ft_ari_negative_exponent(char *input);
 int							ft_ari_non_variable(char *input, char *token);
 int							ft_ari_operand_expected(char *input, char *token);
-
 
 /*
 **							ft_ari_error2.c
@@ -484,7 +481,6 @@ int							ft_exp_brace(t_txtlist *txt);
 */
 
 int							ft_exp_sub(t_txtlist *txt);
-// int							ft_exp_bquote(t_txtlist *txt);
 
 /*
 **							ft_exp_others.c
@@ -492,7 +488,6 @@ int							ft_exp_sub(t_txtlist *txt);
 
 int							ft_exp_text(t_txtlist *txt);
 int							ft_exp_var(t_txtlist *txt);
-// char						*ft_del_ending_spaces(char *str);
 int							ft_exp_expr(t_txtlist *txt);
 
 /*
@@ -541,17 +536,12 @@ int							ft_parse_par_var(char *word, size_t *index,
 		t_txtlist **current);
 int							ft_parse_var(char *word, size_t *index,
 		t_txtlist **current, bool *dquote);
-// int							ft_parse_bquote(char *word, size_t *index,
-// 		t_txtlist **current, bool *dquote);
 
 /*
 **							ft_exp_spparam.c
 */
 
-// char						*ft_spparam_dollar(void);
 char						*ft_spparam_qmark(void);
-// char						*ft_spparam_bang(void);
-// char						*ft_spparam_zero(void);
 typedef char				*(*t_getspparam)(void);
 t_getspparam				ft_get_spparam(char c);
 
@@ -567,7 +557,6 @@ int							ft_exp_tilde(t_txtlist *txt);
 **							ft_expanse.c
 */
 
-// char						**ft_init_args(void);
 char						*ft_expanse_word(char *word);
 char						**ft_command_to_args(char **args);
 char						*ft_simple_expanse(char *word);
@@ -577,8 +566,10 @@ char						*ft_simple_expanse(char *word);
 */
 
 void						ft_expparam_assign(t_expparam *expparam);
-int							ft_expparam_cnequal(t_txtlist *txt, t_expparam *expparam);
-int							ft_expparam_equal(t_txtlist *txt, t_expparam *expparam);
+int							ft_expparam_cnequal(t_txtlist *txt,
+							t_expparam *expparam);
+int							ft_expparam_equal(t_txtlist *txt,
+							t_expparam *expparam);
 
 /*
 **							ft_expparam_minus.c
@@ -631,7 +622,8 @@ int							ft_expparam_qmark(t_txtlist *txt,
 **							ft_expparam_sharp.c
 */
 
-int							ft_expparam_sharp_noparam(t_txtlist *txt, t_expparam *expparam);
+int							ft_expparam_sharp_noparam(t_txtlist *txt,
+							t_expparam *expparam);
 char						*ft_match_rmslprefix(char *param, char *word);
 int							ft_expparam_sharp(t_txtlist *txt,
 		t_expparam *expparam);

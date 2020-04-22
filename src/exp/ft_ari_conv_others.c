@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 04:36:07 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/14 07:32:20 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:19:12 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void			ft_ari_conv_dbp(t_ari_ast *ast, t_ari_toklist *current,
 		ft_ari_node_add(ast, ARI_PS, ft_strdup("+"), 0);
 		if (current->next && current->next->token == ARI_PS &&
 			current->begin + current->len == current->next->begin)
-			{
-				current->next->token = ARI_DB_PS;
-				current->next->begin--;
-				current->next->len++;
-			}
+		{
+			current->next->token = ARI_DB_PS;
+			current->next->begin--;
+			current->next->len++;
+		}
 		else
 			ft_ari_node_add(ast, ARI_PS, ft_strdup("+"), 0);
 	}
@@ -65,11 +65,11 @@ void			ft_ari_conv_dbm(t_ari_ast *ast, t_ari_toklist *current,
 		ft_ari_node_add(ast, ARI_MS, ft_strdup("-"), 0);
 		if (current->next && current->next->token == ARI_MS &&
 			current->begin + current->len == current->next->begin)
-			{
-				current->next->token = ARI_DB_MS;
-				current->next->begin--;
-				current->next->len++;
-			}
+		{
+			current->next->token = ARI_DB_MS;
+			current->next->begin--;
+			current->next->len++;
+		}
 		else
 			ft_ari_node_add(ast, ARI_MS, ft_strdup("-"), 0);
 	}

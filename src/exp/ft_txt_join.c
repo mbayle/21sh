@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:33:14 by geargenc          #+#    #+#             */
-/*   Updated: 2020/03/21 06:55:47 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:21:23 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,9 @@ char			*ft_txt_join(t_txtlist *list)
 		ft_strcpy(word + size, list->data);
 		size = size + list->len;
 		tmp = list;
-//		printf("%s %p\n", "tmp = list", tmp);
 		list = list->next;
 		ft_memdel((void**)&tmp->data);
-		//printf("%p\n", tmp->data);
 		ft_memdel((void**)&tmp);
-//		printf("%s %p\n", "free tmp", tmp);
 	}
 	return (word);
 }
