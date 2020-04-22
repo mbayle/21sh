@@ -95,7 +95,7 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 			r = ft_bracket_2(str, a, &top, &stack);
 			if (r == -1 || r == -2)
 				return (r);
-		a++;
+		a < (int)ft_strlen(str) ? (a = a + 1) : 0;
 	}
 	return (bracket_return(top, a, stack));
 }
