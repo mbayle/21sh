@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/19 22:02:28 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/22 15:09:34 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,8 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 	char	**cmd;
 	char	*mypath;
 	char	*tmp;
-	int status;
 
 	cmd = NULL;
-	status = 0;
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
 	if (!should_i_exec(cmd, mypath))
 		return (NULL);

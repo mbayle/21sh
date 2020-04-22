@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_squote.c                                  :+:      :+:    :+:   */
+/*   lexer_gestion.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 04:48:49 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/20 16:37:50 by admin            ###   ########.fr       */
+/*   Updated: 2020/04/20 16:48:20 by mabayle          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "projectinclude.h"
 
-int		ft_check_squote(char *input)
+void	tokerr(int i)
 {
-	int		dquote;
-	size_t	i;
-	size_t	len;
+	if (i == 1)
+		putendcol("Shell : Missing brace", RED, WHITE);
+	else
+		putendcol("Shell : Missing quote", RED, WHITE);
+}
 
-	dquote = 0;
-	i = 0;
-	len = ft_strlen(input);
-	while (i <= len)
-	{
-		if (input[i] == 39)
-		{
-			if (dquote == 1)
-				break ;
-			else
-				dquote = 1;
-		}
-		i++;
-	}
-	return (i > len ? -1 : i);
+int		io_case(int i, int *io_nbr, char *input)
+{
+	if (!ft_strncmp(input + i, ">", 1) || !ft_strncmp(input + i, "<", 1))
+		*io_nbr = 1;
+	i = find_end(i, input);
+	return (i);
 }

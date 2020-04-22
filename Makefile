@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/18 14:07:42 by admin            ###   ########.fr        #
+#    Updated: 2020/04/22 16:05:43 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,9 +44,13 @@ SRC_PATH	:=	./src/
 OBJ_PATH	:=	./obj/
 
 SRC		:=	main.c \
+			init.c \
 			builtins/pwd.c\
 			builtins/type.c\
 			builtins/hash.c\
+			builtins/hash2.c\
+			builtins/hash3.c\
+			builtins/hash4.c\
 			builtins/echo.c\
 			builtins/utils.c\
 			builtins/mysetenv.c\
@@ -104,6 +108,8 @@ SRC		:=	main.c \
 			lexer/list_utils.c \
 			lexer/utils.c \
 			lexer/type_token.c \
+			lexer/quote_case.c \
+			lexer/lexer_gestion.c \
 			lexer/print_debug.c \
 			parser/parser.c \
 			parser/grammar/and_or.c \

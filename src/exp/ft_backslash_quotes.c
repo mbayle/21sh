@@ -51,6 +51,5 @@ char		*ft_backslash_quotes(char *word, bool dquote)
 		i++;
 	}
 	res[i + quotes] = '\0';
-//	free(word);
 	return (res);
 }

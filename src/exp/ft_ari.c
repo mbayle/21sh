@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/07 15:28:31 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/15 13:35:25 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/22 15:16:16 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int				ft_ari(char *expr, long *res, int rec)
 	ft_ari_convert_lex(&lex, &ast);
 	if (ft_ari_ast(&ast))
 		return (ft_ari_ast_free_return(&ast, -1));
-	// ft_ari_ast_print(&ast);
 	*res = 0;
 	if (ast.begin)
 	{
