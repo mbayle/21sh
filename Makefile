@@ -104,6 +104,8 @@ SRC		:=	main.c \
 			lexer/list_utils.c \
 			lexer/utils.c \
 			lexer/type_token.c \
+			lexer/quote_case.c \
+			lexer/lexer_gestion.c \
 			lexer/print_debug.c \
 			parser/parser.c \
 			parser/grammar/and_or.c \

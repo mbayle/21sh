@@ -425,9 +425,9 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putendl(char const *s);
 
 /*
-** ft_putendl_col.c
+** putendcol.c
 */
-void				ft_putendl_col(char *str, char *color, char *colreset);
+void				putendcol(char *str, char *color, char *colreset);
 
 /*
 ** ft_putendl_fd.c

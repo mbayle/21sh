@@ -43,7 +43,8 @@ void	init_priority(t_lex *lex)
 	{
 		if (lex->operator == PIPE)
 			lex->priority = 1;
-		else if (lex->operator == SEMIC || lex->operator == AND || lex->token == NEW_LINE)
+		else if (lex->operator == SEMIC || lex->operator == AND
+			|| lex->token == NEW_LINE)
 			lex->priority = 3;
 		else if (lex->operator == DAND || lex->operator == DPIPE)
 			lex->priority = 2;

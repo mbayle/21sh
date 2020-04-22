@@ -74,7 +74,7 @@ t_lex	*check_heredoc(t_lex *lex)
 	{
 		if (lex->operator == DLESS)
 		{
-			lex = lex->next;;
+			lex = lex->next;
 			ft_rmquotes_word(lex->value);
 			tmp = heredoc(lex->value);
 			ft_strdel(&lex->value);
@@ -82,13 +82,9 @@ t_lex	*check_heredoc(t_lex *lex)
 			ft_strdel(&tmp);
 		}
 		if (lex)
-			lex = lex->next;  
+			lex = lex->next;
 	}
 	return (lex);
-//	save_fd();
-//	tmp = lex_to_tab(lex);
-//	do_heredoc(tmp);
-//	ft_freetab(tmp);
 }
 
 int		ft_parse(t_lex **lex)
@@ -103,7 +99,7 @@ int		ft_parse(t_lex **lex)
 	if ((error = check_tokenerror(current)) != NULL)
 	{
 		ft_putstr(RED);
-		ft_putstr("42sh: parse error near: '");
+		ft_putstr("Shell: parse error near: '");
 		ft_putstr(error);
 		ft_putendl("'");
 		ft_putstr(WHITE);
@@ -111,11 +107,7 @@ int		ft_parse(t_lex **lex)
 	}
 	current = *lex;
 	if (current && current->token != UNKNOWN && program(current) == 0)
-	{
-		ft_putstr(RED);
-		ft_putendl("42sh: parse error");
-		ft_putstr(WHITE);
-	}
+		putendcol("Shell: parse error", RED, WHITE);
 	else
 	{
 		check_heredoc(g_shell->lex);

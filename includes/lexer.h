@@ -128,6 +128,12 @@ void				valid(t_lex **lex, char *input, int io, int i);
 void				ft_lexer(t_lex **lex, char *input);
 
 /*
+** lexer_gestion.c
+*/
+void				tokerr(int i);
+int					io_case(int i, int *io_nbr, char *input);
+
+/*
 ** list_utils.c
 */
 t_lex				*list_new(char *input);
@@ -144,6 +150,13 @@ void				ft_print_control_op(enum e_operator op);
 void				ft_print_redir_op(enum e_operator op);
 void				ft_print_token(t_lex **lex);
 void				ft_print_debug(t_lex **lex);
+
+/*
+** quote_case.c
+*/
+int					test_bracket(char *input, int i);
+int					test_squote(char *input);
+int					test_dquote(char *input);
 
 /*
 ** type_token.c

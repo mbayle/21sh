@@ -34,7 +34,7 @@ char		**ft_strsplit(char const *s, char c)
 
 	if (!(i1 = ft_create(&z, &tab, s, c)) && s)
 	{
-		tab = (char**)ft_malloc_exit(sizeof(*tab) * 
+		tab = (char**)ft_malloc_exit(sizeof(*tab) *
 			(ft_nbcword((char *)s, c) + 1));
 		while (z--)
 		{

@@ -34,7 +34,8 @@ int		pipeline(t_lex *lex)
 
 int		pipeline1(t_lex *lex)
 {
-	return (lex->value && (lex->value[0] == '!' && pipe_sequence(lex) == 1) ? 1 : 0);
+	return (lex->value && (lex->value[0] == '!'
+		&& pipe_sequence(lex) == 1) ? 1 : 0);
 }
 
 /*
