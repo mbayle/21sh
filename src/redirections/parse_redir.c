@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:05:21 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/13 01:16:48 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/23 08:51:42 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		char_pos(char *str, char c)
 	return (0);
 }
 
-int		between_quotes(char *str)
+int		between_q(char *str)
 {
 	int		i;
 	int		q;
@@ -62,7 +62,8 @@ int		i_val(char **str, int i)
 	if (str[i] && (ft_occur(str[i], '<') || ft_occur(str[i], '>')))
 	{
 		if ((pos > 0 && str[i][pos - 1] == 92) ||
-		(pos2 > 0 && str[i][pos2 - 1] == 92) || !between_quotes(str[i]))
+		(pos2 > 0 && str[i][pos2 - 1] == 92) || !between_q(str[i]) ||
+		 ft_occur(str[i], '$'))
 			return (-1);
 		else if ((ft_occur(str[i], '<')) || (ft_occur(str[i], '>')))
 		{

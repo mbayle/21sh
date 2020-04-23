@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/22 15:48:41 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/23 08:53:25 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ char					**move_char(char **ass);
 ** expansion
 */
 
-int						between_quotes(char *str);
+int						between_q(char *str);
 char					**ft_command_to_args(char **args);
 char					*check_exp_hashper(char *exp, char c);
 char					*simple_hash_word(char *exp, char c);
@@ -268,6 +268,7 @@ int						if_digit(char *file, int n);
 int						dup_fd(char *redir, char *file);
 int						out_err_redir(char *file);
 int						redir_to_file(char **cmd, int i, int ret);
+int						ie(char *str);
 int						execute_redir(char **cmd);
 int						redirect_to_file(char *redir, char *file,
 						mode_t mode, int stfd);

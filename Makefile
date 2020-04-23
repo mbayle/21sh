@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/08/13 18:51:58 by mabayle           #+#    #+#              #
-#    Updated: 2020/04/22 16:05:43 by ymarcill         ###   ########.fr        #
+#    Updated: 2020/04/23 08:55:23 by ymarcill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,6 +101,7 @@ SRC		:=	main.c \
 			utils/ft_fill_struct.c\
 			redirections/redirect_to_fd.c \
 			redirections/redir_utils.c \
+			redirections/redir_utils2.c \
 			redirections/exec_redir.c \
 			redirections/parse_redir.c \
 			redirections/heredoc.c \
