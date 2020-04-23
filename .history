@@ -1,6 +1,11 @@
 2
 5
 0
+unset foo 2>&-; echo ${#foo}
+foo=foo; echo ${foo:=bar} ${foo}
+unset foo 2>&-; echo ${foo:+bar} ${foo}
+foo=foo; echo ${foo:?bar}
+echo $((2<3>0<=1>=2==0!=1))
 exit
 "ls"
 exit
