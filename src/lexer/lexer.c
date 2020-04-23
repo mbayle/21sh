@@ -139,7 +139,7 @@ void	ft_lexer(t_lex **lex, char *input)
 			input++;
 		io_nbr = 0;
 		i = end_case_index(*lex, input, &io_nbr);
-		if (i > 0)
+		if (i >= 0)
 			valid(lex, input, io_nbr, i);
 		else
 		{
