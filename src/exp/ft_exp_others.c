@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 14:29:55 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/22 15:20:22 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/23 10:04:08 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_exp_expr(t_txtlist *txt)
 	char	*exp;
 
 	txt->data = ft_strsub(txt->data, txt->start + 3, txt->len - 5);
-	if (!(exp = ft_simple_expanse(txt->data)) ||
+	if (!(exp = ft_simple_expanse_free(txt->data)) ||
 		ft_ari(exp, &res, 0))
 	{
 		free(exp);

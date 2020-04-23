@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 12:34:36 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/22 15:50:52 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/23 10:04:22 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -560,6 +560,7 @@ int							ft_exp_tilde(t_txtlist *txt);
 char						*ft_expanse_word(char *word);
 char						**ft_command_to_args(char **args);
 char						*ft_simple_expanse(char *word);
+char						*ft_simple_expanse_free(char *word);
 
 /*
 **							ft_expparam_equal.c

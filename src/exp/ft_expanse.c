@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:26:39 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/22 15:18:13 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/23 10:04:21 by geargenc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,21 @@ char			**ft_command_to_args(char **args)
 	return (args);
 }
 
-char			*ft_simple_expanse(char *word)
+char			*ft_simple_expanse_free(char *word)
 {
 	char		*new;
 
 	if ((new = ft_expanse_word(word)))
 		ft_rmquotes_word(new);
+	return (new);
+}
+
+char			*ft_simple_expanse_free_free(char *word)
+{
+	char		*new;
+
+	if ((new = ft_expanse_word(word)))
+		ft_rmquotes_word(new);
+	free(word);
 	return (new);
 }
