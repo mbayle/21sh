@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 04:00:43 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/27 19:30:07 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/27 19:39:34 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_lex	*check_heredoc(t_lex *lex)
 			lex = lex->next;
 			ft_rmquotes_word(lex->value);
 			tmp = heredoc(lex->value);
+			ft_strdel(&lex->value);
 			lex->value = ft_strdup(tmp);
 			ft_strdel(&tmp);
 		}
