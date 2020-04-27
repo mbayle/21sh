@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 22:55:09 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/10 18:48:45 by frameton         ###   ########.fr       */
+/*   Updated: 2020/04/27 20:03:10 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int			exec_cd2(t_struct *s, char *cwd, char *ocwd, char *tmp)
 		ft_strdel(&(*s).av[2]);
 		if (g_jobcontrol.p == 1 && (cwd = getcwd(cwd, PATH_MAX)) == NULL)
 			return (0);
-		else
+		else if (g_jobcontrol.p != 1)
 			cwd = ft_strdup(g_jobcontrol.mypath);
 	}
 	free((*s).av[1]);
