@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 19:32:14 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/27 18:43:06 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/27 18:56:26 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	fill_struct_env(void)
 	t_lst2	*lst;
 	t_myloc	*loc;
 
-	ft_putendl("IM YAELLE FT");
 	loc = g_jobcontrol.myloc;
 	ft_fenv_free(&g_jobcontrol.s);
 	g_jobcontrol.s.env = ft_memalloc(sizeof(*g_jobcontrol.s.env));

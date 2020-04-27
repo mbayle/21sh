@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 05:07:46 by mabayle           #+#    #+#             */
-/*   Updated: 2020/01/21 06:00:46 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/04/27 19:29:40 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int		here_end(t_lex *lex)
 		{
 			if (ft_strlen(lex->value) > 0)
 			{
-				new = ft_memalloc(ft_strlen(lex->value) - 1);
+				new = ft_memalloc(ft_strlen(lex->value) + 1);
 				ft_strcpy(new, lex->value++);
 			}
 			else if (ft_strlen(new) > 1)
 				new[ft_strlen(new) - 2] = '\0';
-			lex->value = new;
+			ft_strdel(&new);
 			return (1);
 		}
 	}
