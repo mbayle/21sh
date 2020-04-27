@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 19:32:14 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/22 19:32:16 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/27 18:43:06 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,31 +26,49 @@ int		is_loc(char *keyval)
 	return (1);
 }
 
+static void	ft_fenv_free(t_struct *s)
+{
+	t_lst2	*del;
+	t_lst2	*save;
+	
+	del = NULL;
+	save = (*s).env;
+	while ((del = (*s).env))
+	{
+		(*s).env = (*s).env->next;
+		free(del->env);
+		free(del->varn);
+		free(del->var);
+		free(del);
+	}
+	(*s).env = save;
+}
+
 void	fill_struct_env(void)
 {
 	t_lst2	*lst;
 	t_myloc	*loc;
 
+	ft_putendl("IM YAELLE FT");
 	loc = g_jobcontrol.myloc;
+	ft_fenv_free(&g_jobcontrol.s);
+	g_jobcontrol.s.env = ft_memalloc(sizeof(*g_jobcontrol.s.env));
+	g_jobcontrol.s.env->next = NULL;
 	lst = g_jobcontrol.s.env;
 	while (loc)
 	{
-		ft_strdel(&g_jobcontrol.s.env->env);
-		ft_strdel(&g_jobcontrol.s.env->varn);
-		ft_strdel(&g_jobcontrol.s.env->var);
-		g_jobcontrol.s.env->env = ft_strdup(loc->keyval);
-		g_jobcontrol.s.env->varn = ft_strdup(loc->key);
-		g_jobcontrol.s.env->var = ft_strdup(loc->val);
-		g_jobcontrol.s.env->lcl = 0;
+		lst->env = ft_strdup(loc->keyval);
+		lst->varn = ft_strdup(loc->key);
+		lst->var = ft_strdup(loc->val);
+		lst->lcl = 0;
 		if (is_loc(loc->keyval))
-			g_jobcontrol.s.env->lcl = 1;
-		if (loc->next && !g_jobcontrol.s.env->next)
+			lst->lcl = 1;
+		if (loc->next)
 		{
-			g_jobcontrol.s.env->next = ft_memalloc(sizeof(*g_jobcontrol.s.env));
-			g_jobcontrol.s.env->next->next = NULL;
+			lst->next = ft_memalloc(sizeof(*g_jobcontrol.s.env));
+			lst->next->next = NULL;
+			lst = lst->next;
 		}
-		g_jobcontrol.s.env = g_jobcontrol.s.env->next;
 		loc = loc->next;
 	}
-	g_jobcontrol.s.env = lst;
 }

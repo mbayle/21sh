@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 14:44:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/22 14:44:04 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/27 17:58:20 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	replace_loc(char *keyval)
 		}
 		loc = loc->next;
 	}
+	ft_freetab(tmp);
 	return (1);
 }
 
