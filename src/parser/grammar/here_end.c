@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/26 05:07:46 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/27 19:29:40 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/27 19:34:21 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,7 @@ int		here_end(t_lex *lex)
 	new = NULL;
 	if (lex->token == WORD)
 	{
-		if (ft_strcmp(lex->value, """") == 0)
-		{
-			lex->value = "\n";
-			return (1);
-		}
-		else if (lex->value[0] == '"')
+		if (lex->value[0] == '"')
 		{
 			if (ft_strlen(lex->value) > 0)
 			{
