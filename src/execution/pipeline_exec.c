@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/22 15:09:34 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/27 20:44:53 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_process		*father_process(char **av, t_process *pro, int oldlink[2],
 
 	cmd = NULL;
 	cmd = do_red_ass_exp_quo(cmd, av, &mypath);
-	if (!should_i_exec(cmd, mypath))
+	if (!should_i_exec(cmd, mypath, oldlink, newlink))
 		return (NULL);
 	if (g_jobcontrol.sim == 0 && mypath && !ft_strcmp(mypath, "b")
 	&& g_jobcontrol.first_job->fg)
@@ -112,9 +112,10 @@ void			exec_process(char ***av, int i)
 			if (av && av[i] && av[i + 1] && av[i + 1][0] &&
 				ft_strcmp(av[i + 1][0], "|") == 0)
 				if (pipe(newlink) < 0)
-					ft_putendl_fd("Could not create the pipe", 2);
+					ft_putendl_fd("42sh: Could not create the pipe", 2);
 			g_jobcontrol.i = i;
 			pro = father_process(av[i], pro, oldlink, newlink);
+			g_jobcontrol.cm = 0;
 			i++;
 		}
 		unexec_asign();

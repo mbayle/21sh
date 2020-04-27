@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/23 08:53:25 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/27 20:44:17 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,8 @@ char					**check_opt_env(char **cmd);
 int						is_env_arg(char **cmd);
 char					**env_copy(t_myenv *menv);
 void					unexec_asign(void);
-int						should_i_exec(char **cmd, char *mypath);
+int						should_i_exec(char **cmd, char *mypath,
+						int oldlink[2], int newlink[2]);
 char					*concat_tab(char **tmp);
 char					**copy_u(char **cmd, int pos);
 char					*ft_strdupt(char *str, char c);
