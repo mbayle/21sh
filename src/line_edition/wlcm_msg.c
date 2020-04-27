@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 23:01:08 by frameton          #+#    #+#             */
-/*   Updated: 2020/03/10 02:52:38 by frameton         ###   ########.fr       */
+/*   Updated: 2020/04/27 20:09:54 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void			wlcm_msg(t_struct *st)
 	clr_shell(st->clr);
 	while (c < s && (c = c + 1))
 		ft_putchar('-');
-	es7(WHITE"Info: enter the help command to know the base commands", m);
+	es7(WHITE"Info: enter the help command to know the basic commands", m);
 	ft_putchar('\n');
 	c = 0;
 	clr_shell(st->clr);
