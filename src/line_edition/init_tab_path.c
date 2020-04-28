@@ -28,7 +28,11 @@ static char	**create_path_tab2_b(char **path, int t, t_struct st)
 {
 	char	*p;
 
-	p = find_home_path(st);
+	if (!(p = find_home_path(st)))
+	{
+		path[t] = 0;
+		return (path);
+	}
 	if ((path[t] = ft_strdup("./")) == NULL)
 		return (NULL);
 	++t;
