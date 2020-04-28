@@ -12,6 +12,13 @@
 
 #include "../../includes/projectinclude.h"
 
+int			ft_myisascii(int c)
+{
+	if (c >= 32 && c <= 0177)
+		return (1);
+	return (0);
+}
+
 static int	check_op_4_b2(char **av)
 {
 	if (!ft_strcmp(av[2], "="))

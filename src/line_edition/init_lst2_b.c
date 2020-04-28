@@ -81,7 +81,7 @@ int			e_cpt(t_struct *s, t_comp **cmp, t_comp **bcmp)
 
 int			init_lst2_b4(char buf[701], t_lst **l, int *c)
 {
-	if (ft_isascii(buf[*c]) == 0)
+	if (ft_myisascii(buf[*c]) == 0)
 		return (1);
 	if ((*l = malloc(sizeof(**l))) == NULL)
 		return (-1);
