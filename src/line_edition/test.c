@@ -46,7 +46,6 @@ int		ft_test(char **av, int ac, char *p)
 	t_struct2	st;
 	struct stat	s;
 
-	puts("9");
 	while (av[ac])
 		++ac;
 	if (ac > 4)
