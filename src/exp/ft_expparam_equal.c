@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:47:58 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/23 10:04:08 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/29 00:49:08 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void			ft_expparam_assign(t_expparam *expparam)
 		tmp[1] = NULL;
 		setloc(tmp);
 		free(assign);
+		ft_freetab(tmp);
 	}
 }
 
