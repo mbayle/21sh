@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 23:38:57 by mabayle           #+#    #+#             */
-/*   Updated: 2020/04/22 16:21:42 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/29 12:18:15 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int			main(int ac, char **av, char **envp)
 		fill_struct_env();
 		tmp_free_struct(&g_jobcontrol.s);
 		update_bg_status();
+		g_jobcontrol.stopexe = 0;
 		if (isatty(0) == 0)
 			break ;
 	}

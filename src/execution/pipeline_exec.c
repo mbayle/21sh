@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/27 20:44:53 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/29 12:18:06 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 	{
 		do_in_child(oldlink, newlink, g_jobcontrol.arg);
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
+		cmd = ft_command_to_args(cmd);
+		if (!should_i_exec(cmd, path, oldlink, newlink))
+			exit(g_jobcontrol.ret = 1);
 		if (ft_strcmp(path, "i") == 0)
 			path = my_path(cmd, g_jobcontrol.env);
 		if (g_jobcontrol.sim == 1 && g_jobcontrol.g_fg)
 		{
 			cmd = check_assign(cmd);
 			if ((path = is_b(cmd)) && !ft_strcmp(path, "i"))
-			{
-				ft_strdel(&path);
 				path = my_path(cmd, g_jobcontrol.env);
-			}
 		}
 		g_jobcontrol.red == -1 ? exit(g_jobcontrol.ret = 1) : 0;
 		exec_prgrm(cmd, path);
@@ -45,7 +45,8 @@ char			**do_red_ass_exp_quo(char **cmd, char **av, char **mypath)
 {
 	*mypath = NULL;
 	cmd = parse_redir(av, 0);
-	cmd = ft_command_to_args(cmd);
+	if (g_jobcontrol.sim == 0 && g_jobcontrol.g_fg)
+		cmd = ft_command_to_args(cmd);
 	if (g_jobcontrol.g_fg && g_jobcontrol.sim == 0)
 		cmd = check_assign(cmd);
 	ft_freetab(g_jobcontrol.env);
@@ -127,6 +128,8 @@ int				pipe_exec(char ***av, int fg)
 	int	i;
 
 	i = 0;
+	if (g_jobcontrol.stopexe)
+		return (0);
 	save_fd();
 	g_jobcontrol.first_job->first_process = NULL;
 	g_jobcontrol.first_job->fg = fg;
