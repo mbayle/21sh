@@ -63,7 +63,7 @@ int		i_val(char **str, int i)
 	{
 		if ((pos > 0 && str[i][pos - 1] == 92) ||
 		(pos2 > 0 && str[i][pos2 - 1] == 92) || !between_q(str[i]) ||
-		 ft_occur(str[i], '$'))
+		ft_occur(str[i], '$'))
 			return (-1);
 		else if ((ft_occur(str[i], '<')) || (ft_occur(str[i], '>')))
 		{

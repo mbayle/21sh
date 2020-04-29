@@ -12,9 +12,9 @@
 
 #include "../../includes/projectinclude.h"
 
-int		is_loc(char *keyval)
+int			is_loc(char *keyval)
 {
-	t_myenv *env;
+	t_myenv		*env;
 
 	env = g_jobcontrol.myenv;
 	while (env)
@@ -30,7 +30,7 @@ static void	ft_fenv_free(t_struct *s)
 {
 	t_lst2	*del;
 	t_lst2	*save;
-	
+
 	del = NULL;
 	save = (*s).env;
 	while ((del = (*s).env))
@@ -44,7 +44,7 @@ static void	ft_fenv_free(t_struct *s)
 	(*s).env = save;
 }
 
-void	fill_struct_env(void)
+void		fill_struct_env(void)
 {
 	t_lst2	*lst;
 	t_myloc	*loc;
