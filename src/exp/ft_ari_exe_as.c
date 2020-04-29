@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 05:00:41 by geargenc          #+#    #+#             */
-/*   Updated: 2020/04/15 17:02:03 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/29 00:58:52 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void						ft_ari_assign(char *varname, long value)
 
 	text_value = ft_lgtoa(value);
 	tab[0] = (char *)ft_malloc_exit((ft_strlen(varname) +
-		ft_strlen(text_value) + 1) * sizeof(char));
+		ft_strlen(text_value) + 2) * sizeof(char));
 	ft_strcpy(tab[0], varname);
 	ft_strcat(tab[0], "=");
 	ft_strcat(tab[0], text_value);

@@ -6,7 +6,7 @@
 /*   By: geargenc <geargenc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/12 13:38:50 by geargenc          #+#    #+#             */
-/*   Updated: 2019/04/12 14:51:31 by geargenc         ###   ########.fr       */
+/*   Updated: 2020/04/29 00:35:19 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ char				*ft_tilde_alone(void)
 {
 	char			*path;
 	struct passwd	*pw;
+	char			*tmp;
 
-	path = ft_getvar("HOME");
+	path = get_myenv("HOME");
 	if (!path)
 	{
-		pw = getpwnam(getlogin());
-		if (pw)
-			path = ft_strdup(pw->pw_dir);
+		tmp = getlogin();
+		if (tmp)
+		{
+			pw = getpwnam(getlogin());
+			if (pw)
+				path = ft_strdup(pw->pw_dir);
+		}
 	}
 	return (path);
 }
