@@ -57,7 +57,7 @@ void	linux_mac(char (*buf)[701], int *ret, int *sret)
 			(*buf)[0] = -49;
 			(*buf)[1] = -128;
 		}
-			*sret = *ret;
+		*sret = *ret;
 	}
 	else
 		linux_mac2(&*ret, &*sret, &*buf);

@@ -99,7 +99,6 @@ int			init_lst(t_struct *s, int i, int r, int ret)
 	init_lst_b(&term, s);
 	while (!s->ctrl_d && r != 3 && (ret = read(0, buf, 700)))
 	{
-		sret = ret;
 		linux_mac(&buf, &ret, &sret);
 		while (sret < 701)
 			buf[sret++] = '\0';

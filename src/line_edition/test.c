@@ -53,7 +53,7 @@ int		ft_test(char **av, int ac, char *p)
 	if (ac == 3 || ac == 2)
 	{
 		if (ac == 3 && (set_p_ac(&p, av[2], &st)) == -1)
-			return (sec_free(&p ,1));
+			return (sec_free(&p, 1));
 		if (ac == 2 && (!ft_strcmp(av[1], "!") || !ft_strcmp(av[1], "-z")))
 			return (sec_free(&p, 0));
 		if (ac == 3 && !ft_strcmp(av[1], "!"))
@@ -61,7 +61,7 @@ int		ft_test(char **av, int ac, char *p)
 		if (ac == 2 && (set_p_ac(&p, av[1], &st)) == -1)
 			return (sec_free(&p, 1));
 		if ((lstat(p, &s)) == -1)
-			return (sec_free(&p ,1));
+			return (sec_free(&p, 1));
 		set_s(&st, s, &p);
 		sec_free(&p, 0);
 		if (ac == 3 && (st.av = av[1]))
