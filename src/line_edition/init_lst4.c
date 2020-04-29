@@ -63,7 +63,7 @@ int			init_lst_4(t_struct *s, char buf[701], t_lst *l)
 		return (cpc(s, buf[1], 1));
 	if (buf[0] == 27 && buf[1] == 79 && (buf[2] == 80 || buf[2] == 81))
 		return (init_lst_4_b(buf, s));
-	if (ft_isascii(buf[0]) == 0)
+	if (ft_myisascii(buf[0]) == 0)
 		return (1);
 	if ((l = malloc(sizeof(*l))) == NULL)
 		return (-1);
