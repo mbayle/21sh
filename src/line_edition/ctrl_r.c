@@ -43,6 +43,7 @@ static int	ctrl_r2(char buf[6], t_htr **t, t_struct *s, char **l)
 
 static void	ctrl_r3(char **l, t_htr **t, t_htr **st)
 {
+	*st = NULL;
 	if (*l)
 		*t = check_htr(*t, *l);
 	if (*t && *l)
