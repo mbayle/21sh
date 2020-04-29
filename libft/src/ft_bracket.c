@@ -85,16 +85,16 @@ int			ft_bracket(char *str, int top, int a, char *stack)
 			if (a + 2 <= (int)ft_strlen(str))
 				a = a + 2;
 			else
-				break;
+				break ;
 		}
 		if (str[a] == 34 || str[a] == 39)
 		{
 			if ((t = ft_bracket_3(str, &a)) == -3 || t == -4)
 				return (t);
 		}
-			r = ft_bracket_2(str, a, &top, &stack);
-			if (r == -1 || r == -2)
-				return (r);
+		r = ft_bracket_2(str, a, &top, &stack);
+		if (r == -1 || r == -2)
+			return (r);
 		a < (int)ft_strlen(str) ? (a = a + 1) : 0;
 	}
 	return (bracket_return(top, a, stack));

@@ -85,7 +85,7 @@ int			ft_bracket_index(char *str, int top, int a, char *stack)
 			if (a + 2 <= (int)ft_strlen(str))
 				a = a + 2;
 			else
-				break;
+				break ;
 		}
 		if (str[a] == 34 || str[a] == 39)
 			if (ft_bracket_index3(str, &a) == -3)
