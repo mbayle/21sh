@@ -395,4 +395,5 @@ int					exec_cd_ex(t_struct *s, char **tmp, char **ocwd);
 char				**modif_av(char ***av);
 int					exec_cd2b(t_struct *s, char *ocwd);
 int					ft_myisascii(int c);
+void				linux_mac(char (*buf)[701], int *ret, int *sret);
 #endif

@@ -189,6 +189,7 @@ SRC		:=	main.c \
 			line_edition/init_lst_comp.c \
 			line_edition/init_lst_env.c \
 			line_edition/init_tab_path.c \
+			line_edition/linux_mac.c \
 			line_edition/multiple_line.c \
 			line_edition/op_copy.c \
 			line_edition/op_cut.c \
