@@ -19,16 +19,16 @@ void	linux_mac2(int *ret, int *sret, char (*buf)[701])
 	== 57))
 	{
 		(*buf)[4] = '\0';
-		if ((*buf)[3] == 53 && (*ret = 3))
+		if ((*buf)[3] == 53 && (*ret = 4))
 			(*buf)[3] = 68;
-		if ((*buf)[3] == 55 && (*ret = 3))
+		if ((*buf)[3] == 55 && (*ret = 4))
 			(*buf)[3] = 67;
-		if ((*buf)[3] == 56 && (*ret = 3))
+		if ((*buf)[3] == 56 && (*ret = 4))
 			(*buf)[3] = 65;
-		if ((*buf)[3] == 57 && (*ret = 3))
+		if ((*buf)[3] == 57 && (*ret = 4))
 			(*buf)[3] = 66;
-		(*buf)[2] = (*buf)[1];
-		(*buf)[1] = (*buf)[0];
+		(*buf)[2] = 91;
+		(*buf)[1] = 27;
 		*sret = *ret;
 	}
 }
