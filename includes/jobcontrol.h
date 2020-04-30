@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 11:30:26 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/27 20:44:17 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/29 19:20:47 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -284,6 +284,7 @@ char					**parse_redir(char **line, int exec);
 ** Utils
 */
 
+size_t					number_size(int n);
 int						elst_size(t_myloc *menv);
 char					**check_opt_env(char **cmd);
 int						is_env_arg(char **cmd);

@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/21 00:25:35 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 02:16:50 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/04/29 20:01:14 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int		check_ls(t_struct *s)
 	n = 1;
 	ft_strdel(&g_jobcontrol.mypath);
 	tmp = ft_strdup((*s).av[1]);
-	g_jobcontrol.mypath = ft_strdup((*s).av[1]);
 	g_jobcontrol.p = 0;
 	if ((*s).av[1] && (!ft_strcmp((*s).av[1], "-P") ||
 				!ft_strcmp((*s).av[1], "-L")))
@@ -68,5 +67,6 @@ int		check_ls(t_struct *s)
 		tmp = ft_strdup((*s).av[2]);
 		n = 2;
 	}
+	g_jobcontrol.mypath = ft_strdup(tmp);
 	return (check_ls2(s, &n, &tmp, &st));
 }

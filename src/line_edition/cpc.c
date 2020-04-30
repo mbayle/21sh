@@ -6,7 +6,7 @@
 /*   By: mabayle <mabayle@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/25 01:17:41 by frameton          #+#    #+#             */
-/*   Updated: 2020/02/16 02:16:50 by mabayle          ###   ########.fr       */
+/*   Updated: 2020/05/01 00:08:18 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ int		cpc(t_struct *s, char b, int i)
 	if (i == 3 && !s->lbg && b != -128)
 		return (1);
 	if (b == -120)
+	{
+		ft_strdel(&s->cpcl);
 		if (!op_copy(s, i, &s->cpcl))
 			return (0);
+	}
 	if (b == -82)
 		op_cut(s, i);
 	if (b == -128)

@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 17:11:48 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/29 12:18:06 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/29 18:54:48 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int				child_process(int oldlink[2], int newlink[2], char *path,
 	{
 		do_in_child(oldlink, newlink, g_jobcontrol.arg);
 		parse_redir(g_jobcontrol.arg[g_jobcontrol.i], 1);
-		cmd = ft_command_to_args(cmd);
+		if (g_jobcontrol.sim == 1 || g_jobcontrol.g_fg == 0)
+			cmd = ft_command_to_args(cmd);
 		if (!should_i_exec(cmd, path, oldlink, newlink))
 			exit(g_jobcontrol.ret = 1);
 		if (ft_strcmp(path, "i") == 0)

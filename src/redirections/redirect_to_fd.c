@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:14:15 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/03/13 01:20:00 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/29 19:43:33 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		write_in(int n, char *file, mode_t mode)
 		if ((fd = open(file, O_CREAT, 0644)) < 0)
 		{
 			ft_strdel(&file);
-			ft_putendl_fd("Failure : error while creating the file", 2);
+			ft_putendl_fd("42sh: Error while creating the file", 2);
 			return (-1);
 		}
 		close(fd);

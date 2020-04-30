@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/22 14:58:57 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/22 14:59:25 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/29 19:52:00 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ void				rec_print_hash(t_hash *hash)
 	int				i;
 
 	if (hash->path)
-		printf("%4d    %s\n", hash->hits, hash->path);
+	{
+		if (number_size(hash->hits) <= 4)
+			write(1, "    ", (4 - number_size(hash->hits)));
+		ft_putnbr(hash->hits);
+		ft_putstr("    ");
+		ft_putendl(hash->path);
+	}
 	i = 0;
 	while (i < 256)
 	{
@@ -33,20 +39,24 @@ void				print_hash(t_hash *hash)
 {
 	if (hash)
 	{
-		printf("hits    command\n");
+		ft_putendl("hits    command");
 		rec_print_hash(hash);
 	}
 }
 
 int					hash_invalid_opt(char opt)
 {
-	printf("shell: hash: -%c: invalid option\n", opt);
+	ft_putstr_fd("42sh: hash: -", 2);
+	ft_putchar_fd(opt, 2);
+	ft_putendl_fd(": invalid option", 2);
 	return (2);
 }
 
 int					hash_not_found(char *cmd)
 {
-	printf("shell: hash: %s: not found\n", cmd);
+	ft_putstr_fd("42sh: hash: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(": not found", 2);
 	return (1);
 }
 

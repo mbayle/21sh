@@ -6,7 +6,7 @@
 /*   By: ymarcill <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 00:01:03 by ymarcill          #+#    #+#             */
-/*   Updated: 2020/04/23 08:55:39 by ymarcill         ###   ########.fr       */
+/*   Updated: 2020/04/29 19:43:06 by ymarcill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		out_err_redir(char *file)
 	{
 		if ((fd = open(file, O_CREAT, 0644)) < 0)
 		{
-			write(2, "Failure : error while creating the file", 39);
+			write(2, "42sh: Error while creating the file", 39);
 			return (-1);
 		}
 	}
